@@ -1,9 +1,8 @@
 
 public class Map {
-	int quad = 10;
 	
 	
-	char[][] map = new char [10][10];
+	static char[][] map = new char [10][10];
 	
 	public Map() {
 		
@@ -20,8 +19,19 @@ public class Map {
 			System.out.print('\n');
 		}
 	}
-	public void setMap(int x, int y) {
+	
+	boolean checkNextPosition(Integer x, Integer y) {
+		if (map[x][y] != ' ') {
+			return false;
+		}
+			
+		map[x][y] = 'H';
 		
+		return true;
+	}
+	
+	void deleteCell(Integer x, Integer y) {
+		map[x][y] = ' ';
 		
 	}
 	
