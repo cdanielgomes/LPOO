@@ -19,7 +19,10 @@ public class Guard {
 		switch(ret) {
 		case 'a':
 		this.x -= 1;
+<<<<<<< HEAD
 		
+=======
+>>>>>>> master
 			break;
 		case 'w':
 			this.y -= 1;

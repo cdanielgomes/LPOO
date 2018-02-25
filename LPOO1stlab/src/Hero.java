@@ -7,7 +7,10 @@ public class Hero {
 	private Scanner move = new Scanner(System.in);
 
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> master
 	void improveMove(int x, int y) {	
 		this.newy = this.y + y;
 		this.newx = this.x + x;

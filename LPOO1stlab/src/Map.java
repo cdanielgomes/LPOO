@@ -16,6 +16,7 @@ public class Map {
 	};
 	public Map() {
 
+<<<<<<< HEAD
 	}
 
 	char getMapSymbol(int x, int y) {
@@ -29,6 +30,20 @@ public class Map {
 	public void printmap() {
 
 		
+=======
+	}
+
+	char getMapSymbol(int x, int y) {
+		return map[y][x];
+	}
+
+	void setMapSymbol(int x, int y, char symbol) {
+		map[y][x] = symbol;
+	}
+
+	public void printmap() {
+
+>>>>>>> master
 		for(int a = 0 ; a < 10  ; a++ ) {
 
 			for(int b = 0 ; b < 10 ; b++) {

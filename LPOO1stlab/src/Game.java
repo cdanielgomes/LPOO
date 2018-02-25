@@ -8,7 +8,10 @@ public class Game {
 	
 		kapa.printmap();
 		
+<<<<<<< HEAD
 		
+=======
+>>>>>>> master
 		while(!(h.key && ((h.getx() == 0 && h.gety() == 5) || (h.getx() == 0 && h.gety() == 6))) && g.nextToMe(h.getx(), h.gety())) {
 			//condição do while esta errada
 	
