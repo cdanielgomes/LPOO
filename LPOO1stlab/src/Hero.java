@@ -1,28 +1,29 @@
 import java.util.Scanner;
 
 public class Hero {
+	boolean key = false;
+	private int x = 1, y = 1;
+	private int newx ,newy;
+	private Scanner move = new Scanner(System.in);
 
-	Integer x = 1, y = 1;
-	Integer newx ,newy;
-	Scanner move = new Scanner(System.in);
-
+	
 	void improveMove(int x, int y) {	
 		this.newy = this.y + y;
 		this.newx = this.x + x;
 	}
 
-	Integer getx() {
+	int getx() {
 		return x;
 	}
 
-	Integer gety() {
+	int gety() {
 		return y;		
 	}
-	Integer getnx() {
+	int getnx() {
 		return newx;
 	}
 	
-	Integer getny() {
+	int getny() {
 		return newy;
 	}
 
@@ -36,16 +37,16 @@ public class Hero {
 		char s = move.next().charAt(0);
 		switch(s) {
 		case 'a':
-			improveMove(0, -1);
-			break;
-		case 'w':
 			improveMove(-1, 0);
 			break;
+		case 'w':
+			improveMove(0, -1);
+			break;
 		case 's':
-			improveMove(1, 0);
+			improveMove(0, 1);
 			break;
 		case 'd':
-			improveMove(0,1);
+			improveMove(1,0);
 			break;
 		default:
 			break;
