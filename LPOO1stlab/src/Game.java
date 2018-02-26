@@ -8,12 +8,13 @@ public class Game {
 	
 		kapa.printmap();
 		
-<<<<<<< HEAD
-		
-=======
->>>>>>> master
-		while(!(h.key && ((h.getx() == 0 && h.gety() == 5) || (h.getx() == 0 && h.gety() == 6))) && g.nextToMe(h.getx(), h.gety())) {
-			//condição do while esta errada
+		while(!h.key && !((h.getx() == 0 && h.gety() == 5) || (h.getx() == 0 && h.gety() == 6))) {
+			
+			if(g.nextToMe(h.getx(), h.gety()))
+			{
+				System.out.println("GAME OVER!");
+				return ;
+			}
 	
 			h.getMove();
 			
@@ -39,5 +40,8 @@ public class Game {
 			kapa.printmap();
 
 		}
+		
+		kapa.fillSndMap();
+		kapa.printmap();
 	}
 }

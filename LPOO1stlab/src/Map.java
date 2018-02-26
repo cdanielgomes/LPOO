@@ -14,10 +14,7 @@ public class Map {
 					{'X','X','X','X','X','X','X','X','X','X'}
 
 	};
-	public Map() {
-
-<<<<<<< HEAD
-	}
+	
 
 	char getMapSymbol(int x, int y) {
 		return map[y][x];
@@ -28,22 +25,6 @@ public class Map {
 	}
 
 	public void printmap() {
-
-		
-=======
-	}
-
-	char getMapSymbol(int x, int y) {
-		return map[y][x];
-	}
-
-	void setMapSymbol(int x, int y, char symbol) {
-		map[y][x] = symbol;
-	}
-
-	public void printmap() {
-
->>>>>>> master
 		for(int a = 0 ; a < 10  ; a++ ) {
 
 			for(int b = 0 ; b < 10 ; b++) {
@@ -66,6 +47,18 @@ public class Map {
 
 	}
 
-
-
+	
+	void fillSndMap() {
+		for (int i = 1; i < 9; i++) {
+			for (int k = 1; k < 9; k++)
+				map[i][k] = ' ';
+		}
+	
+	map[1][0] = 'I';
+	map[5][0] = 'X';
+	map[6][0] = 'X';
+	map[1][4] = 'O';
+	map[1][8] = 'k';
+	map[8][1] = 'H';
+	}
 }

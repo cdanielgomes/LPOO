@@ -19,10 +19,6 @@ public class Guard {
 		switch(ret) {
 		case 'a':
 		this.x -= 1;
-<<<<<<< HEAD
-		
-=======
->>>>>>> master
 			break;
 		case 'w':
 			this.y -= 1;
@@ -44,10 +40,10 @@ public class Guard {
 		int diferencex = this.x - x, diferencey = this.y - y;
 		
 		if ((diferencex == 1 || diferencex == -1) && diferencey == 0)
-			return false;
+			return true;
 		if ((diferencey == 1 || diferencey == -1) && diferencex == 0)
-			return false;
-		return true;	
+			return true;
+		return false;
 	}
 	
 }
