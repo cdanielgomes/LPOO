@@ -52,7 +52,9 @@ public class Game {
 		while(!(h.getx() == 0 && h.gety() == 1))
 		{
 			kapa.deleteCell(o.getx(), o.gety());
-			if(o.nextToMe(h.getx(), h.gety()))
+			kapa.deleteCell(o.getWeaponx(), o.getWeapony());
+			
+			if(o.nextToMe(h.getx(), h.gety()) || o.nextToWeapon(h.getx(), h.gety()))
 			{
 				System.out.println("GAME OVER!");
 				return ;
@@ -64,6 +66,7 @@ public class Game {
 
 	
 			o.setSymbol('O');
+			o.setWeaponSymbol('*');
 
 
 
@@ -99,10 +102,14 @@ public class Game {
 				kapa.setMapSymbol(8, 1, 'k');
 			}
 
-			if(kapa.getMapSymbol(o.getx(), o.gety()) == 'k') {
+			if(kapa.getMapSymbol(o.getx(), o.gety()) == 'k' ) {
 				o.setSymbol('$');
-			}			
+			}
+			if(kapa.getMapSymbol(o.getWeaponx(), o.getWeapony()) == 'k' ) {
+				o.setWeaponSymbol('$');
+			}
 			
+			kapa.setMapSymbol(o.getWeaponx(), o.getWeapony(), o.getweponSymbol());
 			kapa.setMapSymbol(o.getx(), o.gety(), o.getSymbol());
 			kapa.printmap();
 		}

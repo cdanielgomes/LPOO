@@ -2,11 +2,25 @@ import java.util.Random;
 
 public class Ogre {
 	Random rand = new Random();
+	Random weaponpos = new Random();
 	int x = 4, y = 1;
-	char moviment[] = {'a','w','d','s'};
+	int weaponx, weapony;
 	int index;
+	char moviment[] = {'a','w','d','s'};
 	char symbol = 'O';
+	char weaponSymbol = '*';
 	
+	
+	char getweponSymbol() {
+		return this.weaponSymbol;	
+	}
+	
+	int getWeaponx() {
+		return weaponx;
+	}
+	int getWeapony() {
+		return weapony;
+	}
 	
 	char getSymbol() {
 		return this.symbol;
@@ -14,6 +28,9 @@ public class Ogre {
 	
 	void setSymbol(char k) {
 		this.symbol = k;
+	}
+	void setWeaponSymbol(char k) {
+		this.weaponSymbol = k;
 	}
 	
 	int getx() {
@@ -23,8 +40,35 @@ public class Ogre {
 		return this.y;
 	}
 	
+	void weaponPos() {
+		index = weaponpos.nextInt(4);
+		switch(index) {
+		case 0:
+			this.weaponx = this.x;
+			this.weapony = this.y - 1;
+			
+			break;
+		case 1: 
+			this.weaponx = this.x - 1;
+			this.weapony = this.y;
+			
+			break;
+		case 2:
+			this.weapony = this.y + 1;
+			
+			this.weaponx = this.x;
+			break;
+		case 3:
+			this.weaponx = this.x + 1;
+			this.weapony = this.y;
+			break;
+		}
+	
+	}
+	
 	void ogreMove() {
 		index = rand.nextInt(4);	
+		
 		switch(index) {
 		case 1:
 			if (this.x - 1 == 0)
@@ -49,6 +93,11 @@ public class Ogre {
 		default:
 			break;
 		}
+		
+		do {
+			weaponPos();
+			
+		}while(weaponx == 0 || weapony == 0 || weaponx == 9 || weapony == 9  );
 	}
 	
 	boolean nextToMe(int x, int y) {
@@ -61,5 +110,16 @@ public class Ogre {
 		return false;
 	}	
 
+
+	boolean nextToWeapon(int x, int y) {
+		int diferencex = this.weaponx - x, diferencey = this.weapony - y;
+		
+		if ((diferencex == 1 || diferencex == -1) && diferencey == 0)
+			return true;
+		if ((diferencey == 1 || diferencey == -1) && diferencex == 0)
+			return true;
+		
+		return false;
+	}	
 
 }
