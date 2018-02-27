@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class Ogre {
 	Random rand = new Random();
-	int x = 4, y = 2;
+	int x = 4, y = 1;
 	char moviment[] = {'a','w','d','s'};
 	int index;
 	char symbol = 'O';
@@ -37,12 +37,12 @@ public class Ogre {
 			this.y -= 1;
 			break;
 		case 3:
-			if (this.y + 1 == 0)
+			if (this.y + 1 == 9)
 				break;
 			this.y += 1;
 			break;
 		case 0:
-			if (this.x + 1 == 0)
+			if (this.x + 1 == 9)
 				break;
 			this.x += 1;
 			break;

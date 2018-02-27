@@ -7,7 +7,7 @@ public class Game {
 		Guard g = new Guard();
 		Ogre o = new Ogre();
 
-			kapa.printmap();
+			/*kapa.printmap();
 
 		while(!h.key && !((h.getx() == 0 && h.gety() == 5) || (h.getx() == 0 && h.gety() == 6))) {
 
@@ -40,7 +40,7 @@ public class Game {
 
 			kapa.printmap();
 
-		}
+		}*/
 
 		kapa.fillSndMap();
 		kapa.printmap();
@@ -49,7 +49,7 @@ public class Game {
 		h.setkey(false);
 
 
-		while((h.getx() != 0 && h.gety() != 1) || ((h.getx() == 0 && h.gety() == 1) && !h.key))
+		while(!(h.getx() == 0 && h.gety() == 1))
 		{
 			kapa.deleteCell(o.getx(), o.gety());
 			if(o.nextToMe(h.getx(), h.gety()))
@@ -87,8 +87,8 @@ public class Game {
 
 
 				if (kapa.getMapSymbol(h.getnx(),h.getny()) == 'I' && h.key) {
-					h.setn(h.getx(), h.gety()); //set the next position as the old position
 					kapa.setMapSymbol(h.getnx(), h.getny(), ' ');
+					h.setn(h.getx(), h.gety()); //set the next position as the old position
 				}
 
 
@@ -106,5 +106,6 @@ public class Game {
 			kapa.setMapSymbol(o.getx(), o.gety(), o.getSymbol());
 			kapa.printmap();
 		}
+		System.out.print("You have finished the game ! Congrats\n");
 	}
 }
