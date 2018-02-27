@@ -50,6 +50,7 @@ public class Hero {
 	}
 
 	public void getMove() {
+		System.out.print("Direction : ");
 		char s = move.next().charAt(0);
 		switch(s) {
 		case 'a':

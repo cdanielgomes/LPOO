@@ -7,7 +7,7 @@ public class Game {
 		Guard g = new Guard();
 		Ogre o = new Ogre();
 
-		/*	kapa.printmap();
+			kapa.printmap();
 
 		while(!h.key && !((h.getx() == 0 && h.gety() == 5) || (h.getx() == 0 && h.gety() == 6))) {
 
@@ -40,7 +40,7 @@ public class Game {
 
 			kapa.printmap();
 
-		}*/
+		}
 
 		kapa.fillSndMap();
 		kapa.printmap();
