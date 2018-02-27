@@ -35,14 +35,14 @@ public class Map {
 		}
 	}
 
-	boolean checkNextPosition(Integer x, Integer y) {
+	boolean checkNextPosition(int x, int y) {
 		if (!(map[y][x] == ' ' || map[y][x] == 'k' || map[y][x] == 'S')) { 
 			return false;
 		}
 		return true;
 	}
 
-	void deleteCell(Integer x, Integer y) {
+	void deleteCell(int x, int y) {
 		map[y][x] = ' ';
 
 	}

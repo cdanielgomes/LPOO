@@ -5,12 +5,21 @@ public class Hero {
 	private int x = 1, y = 1;
 	private int newx ,newy;
 	private Scanner move = new Scanner(System.in);
+	private char symbol = 'H';
 
 	void improveMove(int x, int y) {	
 		this.newy = this.y + y;
 		this.newx = this.x + x;
 	}
 
+	char getSymbol() {
+		return this.symbol;
+	}
+
+	void setSymbol(char s) {
+		this.symbol = s;
+	}
+	
 	int getx() {
 		return x;
 	}
@@ -21,15 +30,23 @@ public class Hero {
 	int getnx() {
 		return newx;
 	}
-	
+
 	int getny() {
 		return newy;
 	}
 
 
-	void set() {
-		x = newx;
-		y = newy;
+	void set(int x , int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	void setn(int x, int y) {
+		this.newy = y;
+		this.newx = x;
+	}
+	void setkey(boolean k) {
+		this.key = k;
 	}
 
 	public void getMove() {
