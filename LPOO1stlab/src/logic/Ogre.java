@@ -1,6 +1,8 @@
+package logic;
 import java.util.Random;
 
 public class Ogre {
+	
 	Random rand = new Random();
 	Random weaponpos = new Random();
 	int x = 4, y = 1;
@@ -9,7 +11,12 @@ public class Ogre {
 	char moviment[] = {'a','w','d','s'};
 	char symbol = 'O';
 	char weaponSymbol = '*';
+	boolean weaponFlag = true;
 	
+	void setWeaponFlag(boolean s) {
+		weaponFlag = s;
+		
+	}
 	
 	char getweponSymbol() {
 		return this.weaponSymbol;	

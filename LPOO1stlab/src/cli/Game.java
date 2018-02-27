@@ -1,3 +1,5 @@
+package cli;
+import logic;
 
 public class Game {
 
@@ -7,7 +9,7 @@ public class Game {
 		Guard g = new Guard();
 		Ogre o = new Ogre();
 
-			kapa.printmap();
+	/*		kapa.printmap();
 
 		while(!h.key && !((h.getx() == 0 && h.gety() == 5) || (h.getx() == 0 && h.gety() == 6))) {
 
@@ -41,7 +43,7 @@ public class Game {
 			kapa.printmap();
 
 		}
-
+*/
 		kapa.fillSndMap();
 		kapa.printmap();
 		h.set(1, 8);
@@ -102,15 +104,31 @@ public class Game {
 				kapa.setMapSymbol(8, 1, 'k');
 			}
 
+			if(!h.key && o.nextToWeapon(8, 1)){
+				kapa.setMapSymbol(8, 1, 'k');
+				
+			}
+			
 			if(kapa.getMapSymbol(o.getx(), o.gety()) == 'k' ) {
 				o.setSymbol('$');
 			}
+			
 			if(kapa.getMapSymbol(o.getWeaponx(), o.getWeapony()) == 'k' ) {
 				o.setWeaponSymbol('$');
+				o.setWeaponFlag(false);
+			}
+			 
+			if(!o.weaponFlag && !h.key) {
+				o.setWeaponFlag(true);
+				kapa.setMapSymbol(8,1, 'k');
 			}
 			
 			kapa.setMapSymbol(o.getWeaponx(), o.getWeapony(), o.getweponSymbol());
 			kapa.setMapSymbol(o.getx(), o.gety(), o.getSymbol());
+			if(!o.weaponFlag && !h.key) {
+				o.setWeaponFlag(true);
+				kapa.setMapSymbol(8,1, 'k');
+			}
 			kapa.printmap();
 		}
 		System.out.print("You have finished the game ! Congrats\n");
