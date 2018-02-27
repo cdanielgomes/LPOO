@@ -4,7 +4,7 @@ public class Ogre {
 	Random rand = new Random();
 	Random weaponpos = new Random();
 	int x = 4, y = 1;
-	int weaponx, weapony;
+	int weaponx = 3 , weapony = 3;
 	int index;
 	char moviment[] = {'a','w','d','s'};
 	char symbol = 'O';
