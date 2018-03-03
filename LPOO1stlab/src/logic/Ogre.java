@@ -11,43 +11,45 @@ public class Ogre {
 	char moviment[] = {'a','w','d','s'};
 	char symbol = 'O';
 	char weaponSymbol = '*';
-	boolean weaponFlag = true;
+	public boolean weaponFlag = true;
 	
-	void setWeaponFlag(boolean s) {
+	public void setWeaponFlag(boolean s) {
 		weaponFlag = s;
 		
 	}
 	
-	char getweponSymbol() {
+	public char getweponSymbol() {
 		return this.weaponSymbol;	
 	}
 	
-	int getWeaponx() {
+	public int getWeaponx() {
 		return weaponx;
 	}
-	int getWeapony() {
+	
+	public int getWeapony() {
 		return weapony;
 	}
 	
-	char getSymbol() {
+	public char getSymbol() {
 		return this.symbol;
 	}
 	
-	void setSymbol(char k) {
+	public void setSymbol(char k) {
 		this.symbol = k;
 	}
-	void setWeaponSymbol(char k) {
+	
+	public void setWeaponSymbol(char k) {
 		this.weaponSymbol = k;
 	}
 	
-	int getx() {
+	public int getx() {
 		return this.x;
 	}
-	int gety() {
+	public int gety() {
 		return this.y;
 	}
 	
-	void weaponPos() {
+	public void weaponPos() {
 		index = weaponpos.nextInt(4);
 		switch(index) {
 		case 0:
@@ -73,7 +75,7 @@ public class Ogre {
 	
 	}
 	
-	void ogreMove() {
+	public void ogreMove() {
 		index = rand.nextInt(4);	
 		
 		switch(index) {
@@ -107,7 +109,7 @@ public class Ogre {
 		}while(weaponx == 0 || weapony == 0 || weaponx == 9 || weapony == 9  );
 	}
 	
-	boolean nextToMe(int x, int y) {
+	public boolean nextToMe(int x, int y) {
 		int diferencex = this.x - x, diferencey = this.y - y;
 		
 		if ((diferencex == 1 || diferencex == -1) && diferencey == 0)
@@ -118,7 +120,7 @@ public class Ogre {
 	}	
 
 
-	boolean nextToWeapon(int x, int y) {
+	public boolean nextToWeapon(int x, int y) {
 		int diferencex = this.weaponx - x, diferencey = this.weapony - y;
 		
 		if ((diferencex == 1 || diferencex == -1) && diferencey == 0)

@@ -2,51 +2,53 @@ package logic;
 import java.util.Scanner;
 
 public class Hero {
-	boolean key = false;
+	
+	public boolean key = false;
 	private int x = 1, y = 1;
 	private int newx ,newy;
 	private Scanner move = new Scanner(System.in);
 	private char symbol = 'H';
 
-	void improveMove(int x, int y) {	
+	public void improveMove(int x, int y) {	
 		this.newy = this.y + y;
 		this.newx = this.x + x;
 	}
 
-	char getSymbol() {
+	public char getSymbol() {
 		return this.symbol;
 	}
 
-	void setSymbol(char s) {
+	public void setSymbol(char s) {
 		this.symbol = s;
 	}
 	
-	int getx() {
+	public int getx() {
 		return x;
 	}
 
-	int gety() {
+	public int gety() {
 		return y;		
 	}
-	int getnx() {
+	
+	public int getnx() {
 		return newx;
 	}
 
-	int getny() {
+	public int getny() {
 		return newy;
 	}
 
 
-	void set(int x , int y) {
+	public void set(int x , int y) {
 		this.x = x;
 		this.y = y;
 	}
 
-	void setn(int x, int y) {
+	public void setn(int x, int y) {
 		this.newy = y;
 		this.newx = x;
 	}
-	void setkey(boolean k) {
+	public void setkey(boolean k) {
 		this.key = k;
 	}
 

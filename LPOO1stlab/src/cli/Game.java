@@ -1,19 +1,23 @@
 package cli;
-import logic;
+import logic.*;
+import java.util.Random;
 
 public class Game {
 
 	public static void main(String[] args) {
+		
 		Map kapa = new Map(); 
 		Hero h = new Hero();
 		Guard g = new Guard();
 		Ogre o = new Ogre();
-
-	/*		kapa.printmap();
+		 
+		
+		System.out.println(g.TypeOfGuard + " is the chosen guard\n\n");
+		kapa.printmap();
 
 		while(!h.key && !((h.getx() == 0 && h.gety() == 5) || (h.getx() == 0 && h.gety() == 6))) {
 
-			if(g.nextToMe(h.getx(), h.gety()))
+			if(g.nextToMe(h.getx(), h.gety()) && (!g.getasleep()))
 			{
 				System.out.println("GAME OVER!");
 				return ;
@@ -22,8 +26,13 @@ public class Game {
 			h.getMove();
 
 			kapa.deleteCell(g.getx(), g.gety());
-			g.guardMoves();
-			kapa.setMapSymbol(g.getx(), g.gety(), 'G');
+			
+			///// para teste 
+			
+			g.movement();
+			
+			///// para teste
+			kapa.setMapSymbol(g.getx(), g.gety(), g.getsymbol());
 
 			if(kapa.checkNextPosition(h.getnx(), h.getny())) {
 
@@ -43,7 +52,7 @@ public class Game {
 			kapa.printmap();
 
 		}
-*/
+
 		kapa.fillSndMap();
 		kapa.printmap();
 		h.set(1, 8);

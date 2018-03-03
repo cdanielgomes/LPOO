@@ -17,11 +17,11 @@ public class Map {
 	};
 	
 
-	char getMapSymbol(int x, int y) {
+	public char getMapSymbol(int x, int y) {
 		return map[y][x];
 	}
 
-	void setMapSymbol(int x, int y, char symbol) {
+	public void setMapSymbol(int x, int y, char symbol) {
 		map[y][x] = symbol;
 	}
 
@@ -36,20 +36,20 @@ public class Map {
 		}
 	}
 
-	boolean checkNextPosition(int x, int y) {
+	public boolean checkNextPosition(int x, int y) {
 		if (!(map[y][x] == ' ' || map[y][x] == 'k' || map[y][x] == 'S')) { 
 			return false;
 		}
 		return true;
 	}
 
-	void deleteCell(int x, int y) {
+	public void deleteCell(int x, int y) {
 		map[y][x] = ' ';
 
 	}
 
 	
-	void fillSndMap() {
+	public void fillSndMap() {
 		for (int i = 1; i < 9; i++) {
 			for (int k = 1; k < 9; k++)
 				map[i][k] = ' ';
