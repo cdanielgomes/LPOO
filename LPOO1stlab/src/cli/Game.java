@@ -1,23 +1,29 @@
 package cli;
-import logic.*;
-import java.util.Random;
+import logic.Guard;
+import logic.Guard.*;
+import logic.Hero;
+import logic.Hero.*;
+import logic.Lever;
+import logic.Map;
+import logic.Map.*;
+import logic.Ogre;
+import logic.Ogre.*;
 
 public class Game {
 
 	public static void main(String[] args) {
-		
 		Map kapa = new Map(); 
-		Hero h = new Hero();
-		Guard g = new Guard();
-		Ogre o = new Ogre();
-		 
-		
-		System.out.println(g.TypeOfGuard + " is the chosen guard\n\n");
+		Guard g = new Guard(8,1,kapa);
+		Ogre o = new Ogre(4,1, kapa);
+		Lever l = new Lever(7,8, kapa);
+		Hero h = new Hero(1,1, kapa,l);
+
+		System.out.println(g.getTypeOfGuard() + " is the chosen guard\n\n");
 		kapa.printmap();
 
-		while(!h.key && !((h.getx() == 0 && h.gety() == 5) || (h.getx() == 0 && h.gety() == 6))) {
+		while(!(l.getKey() && h.isOnStairs() )) {
 
-			if(g.nextToMe(h.getx(), h.gety()) && (!g.getasleep()))
+			if(g.nextToMe(h.getX(), h.getY()) && (!g.getasleep()))
 			{
 				System.out.println("GAME OVER!");
 				return ;
@@ -25,57 +31,44 @@ public class Game {
 
 			h.getMove();
 
-			kapa.deleteCell(g.getx(), g.gety());
-			
 			///// para teste 
-			
+
 			g.movement();
-			
+
 			///// para teste
-			kapa.setMapSymbol(g.getx(), g.gety(), g.getsymbol());
+			kapa.setMapSymbol(g.getX(), g.getY(), g.getsymbol());
 
-			if(kapa.checkNextPosition(h.getnx(), h.getny())) {
+			if (h.equals(l)) { //change the doors when the Hero push the lever
 
-				kapa.deleteCell(h.getx(),h.gety());
-
-				if (kapa.getMapSymbol(h.getnx(),h.getny()) == 'k') { //change the doors when the Hero push the lever
-					h.key = false;
-					kapa.setMapSymbol(0, 5, 'S');
-					kapa.setMapSymbol(0, 6, 'S');
-				}
-
-				kapa.setMapSymbol(h.getnx(), h.getny(), 'H');
-				h.set(h.getnx(),h.getny());	
-
+				kapa.setMapSymbol(0, 5, 'S');
+				kapa.setMapSymbol(0, 6, 'S');
 			}
 
 			kapa.printmap();
 
 		}
 
-		kapa.fillSndMap();
+		/*kapa.fillSndMap();
 		kapa.printmap();
 		h.set(1, 8);
-		h.setn(1, 8);
-		h.setkey(false);
+		l.setKey(false);
 
-
-		while(!(h.getx() == 0 && h.gety() == 1))
+		while(!(h.getX() == 0 && h.getY() == 1))
 		{
-			kapa.deleteCell(o.getx(), o.gety());
+			kapa.deleteCell(o.getX(), o.getY());
 			kapa.deleteCell(o.getWeaponx(), o.getWeapony());
-			
-			if(o.nextToMe(h.getx(), h.gety()) || o.nextToWeapon(h.getx(), h.gety()))
+
+			if(o.nextToMe(h.getX(), h.getY()) || o.nextToWeapon(h.getX(), h.getY()))
 			{
 				System.out.println("GAME OVER!");
 				return ;
 			}
 
 			h.getMove();
-			
+
 			o.ogreMove();
 
-	
+
 			o.setSymbol('O');
 			o.setWeaponSymbol('*');
 
@@ -83,7 +76,7 @@ public class Game {
 
 			if(kapa.checkNextPosition(h.getnx(), h.getny())) {
 
-				kapa.deleteCell(h.getx(),h.gety());
+				kapa.deleteCell(h.getX(),h.getY());
 
 				if (kapa.getMapSymbol(h.getnx(),h.getny()) == 'k') { 
 					h.setkey(true);
@@ -102,12 +95,12 @@ public class Game {
 
 				if (kapa.getMapSymbol(h.getnx(),h.getny()) == 'I' && h.key) {
 					kapa.setMapSymbol(h.getnx(), h.getny(), ' ');
-					h.setn(h.getx(), h.gety()); //set the next position as the old position
+					h.setn(h.getX(), h.getY()); //set the next position as the old position
 				}
 
 
 			}
-			
+
 
 			if(!h.key && o.nextToMe(8, 1)) {
 				kapa.setMapSymbol(8, 1, 'k');
@@ -115,31 +108,31 @@ public class Game {
 
 			if(!h.key && o.nextToWeapon(8, 1)){
 				kapa.setMapSymbol(8, 1, 'k');
-				
+
 			}
-			
-			if(kapa.getMapSymbol(o.getx(), o.gety()) == 'k' ) {
+
+			if(kapa.getMapSymbol(o.getX(), o.getY()) == 'k' ) {
 				o.setSymbol('$');
 			}
-			
+
 			if(kapa.getMapSymbol(o.getWeaponx(), o.getWeapony()) == 'k' ) {
 				o.setWeaponSymbol('$');
 				o.setWeaponFlag(false);
 			}
-			 
-			if(!o.weaponFlag && !h.key) {
+
+			if(!o.getWeaponFlag() && !h.key) {
 				o.setWeaponFlag(true);
 				kapa.setMapSymbol(8,1, 'k');
 			}
-			
+
 			kapa.setMapSymbol(o.getWeaponx(), o.getWeapony(), o.getweponSymbol());
-			kapa.setMapSymbol(o.getx(), o.gety(), o.getSymbol());
-			if(!o.weaponFlag && !h.key) {
+			kapa.setMapSymbol(o.getX(), o.getY(), o.getNormalSymbol());
+			if(!o.getWeaponFlag() && !h.key) {
 				o.setWeaponFlag(true);
 				kapa.setMapSymbol(8,1, 'k');
 			}
 			kapa.printmap();
-		}
+		}*/
 		System.out.print("You have finished the game ! Congrats\n");
 	}
 }

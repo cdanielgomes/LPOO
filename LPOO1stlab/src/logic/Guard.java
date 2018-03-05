@@ -2,25 +2,27 @@ package logic;
 
 import java.util.Random;
 
-public class Guard {
+public class Guard extends Character{
 
-	int x = 8, y = 1;
-	char symbol = 'G';
-	String[] guard_types = {"Rookie" , "Drunken" , "Suspicious"};
-	Random randomGuard = new Random(); 
-	public String TypeOfGuard = guard_types[randomGuard.nextInt(3)] ;
-	boolean reverse = false;
-	boolean asleep = false;
-	public char moves[]= {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
-	public int m = 0;
-	int sleepCounter= 4;
 	
-	public int getx() {
-		return this.x;
+	private char symbol = 'G';
+	private String[] guard_types = {"Rookie" , "Drunken" , "Suspicious"};
+	private Random randomGuard = new Random(); 
+	//public String TypeOfGuard = guard_types[randomGuard.nextInt(3)] ;
+	private String TypeOfGuard = guard_types[0] ;
+	private boolean reverse = false;
+	private boolean asleep = false;
+	private char moves[]= {'a','s','s','s','s','a','a','a','a','a','a','s','d','d','d','d','d','d','d','w','w','w','w','w'};
+	private int m = 0;
+	private int sleepCounter= 4;
+	
+	public Guard(int x, int y, Map map) {
+		super(x, y, map);
+		
 	}
 	
-	public int gety() {
-		return this.y;
+	public String getTypeOfGuard() {
+		return TypeOfGuard;
 	}
 	
 	public char getsymbol() {
@@ -36,23 +38,7 @@ public class Guard {
 	}
 	public void guardMoves() {
 		
-		
-		switch(moves[m]) {
-		case 'a':
-		this.x -= 1;
-			break;
-		case 'w':
-			this.y -= 1;
-			break;
-		case 's':
-			this.y += 1;
-			break;
-		case 'd':
-			this.x += 1;
-			break;
-		default:
-			break;
-		}
+		move(moves[m]);
 		m++;
 		if (m == moves.length)
 			m = 0;
@@ -65,23 +51,7 @@ public class Guard {
 			m = moves.length - 1;
 		else
 			m --;
-		
-		switch(moves[m]) {
-		case 'a':
-		this.x += 1;
-			break;
-		case 'w':
-			this.y += 1;
-			break;
-		case 's':
-			this.y -= 1;
-			break;
-		case 'd':
-			this.x -= 1;
-			break;
-		default:
-			break;
-		}
+		move(moves[m]);
 		
 	}
 	
@@ -158,6 +128,7 @@ public class Guard {
 		
 		Random r = new Random();
 		
+		map.setMapSymbol(this.x, this.y, symbol);
 		
 		switch(TypeOfGuard) {
 		case "Rookie":
