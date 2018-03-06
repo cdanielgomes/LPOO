@@ -87,7 +87,7 @@ public class GameState {
 
 
 	public void setEnemies() {
-		
+
 		if (map.getCharcX('G') == -1) {
 			this.hasGuard = false;
 		}
@@ -112,10 +112,11 @@ public class GameState {
 
 
 
+	@SuppressWarnings("unlikely-arg-type")
 	public void updateGame() {
 
 		hero.getMove();
-
+		System.out.println(hero.getX() + " y = " + hero.getY());
 		if(hero.isOnStairs()) {
 			map.setLevel(map.getLevel() +1);
 			this.nextLevel = 1;
@@ -129,6 +130,9 @@ public class GameState {
 
 		if(hasOgre) {
 			ogre.ogreMove();
+			if(!ogre.getKeyFlag() && !lever.getKey()) {
+				map.setMapSymbol(lever.getX(), lever.getY(), lever.getSymbol());
+			}
 		}
 
 		if (checkColisions()) {
@@ -147,7 +151,7 @@ public class GameState {
 			this.gameWon = 1;
 		}
 		
-		
+
 	}
 
 	private boolean checkColisions() {
