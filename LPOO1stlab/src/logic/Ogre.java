@@ -11,7 +11,7 @@ public class Ogre extends Character {
 
 	Random rand = new Random();
 	Random weaponpos = new Random();
-	private int weaponx = 3 , weapony = 3;
+	private int weaponx = this.x, weapony = this.y;
 	private	char moviment[] = {'a','w','d','s'};
 	private char normalsymbol = 'O';
 	private char weaponSymbol = '*';
@@ -74,13 +74,34 @@ public class Ogre extends Character {
 	}
 
 	public void ogreMove() {
-		int index = rand.nextInt(4);	
+
+		int index = rand.nextInt(4);
+		int x = this.x;
+		int y = this.y;
+		
+		map.deleteCell(weaponx, weapony);
+		map.deleteCell(this.x, this.y);
 		move(moviment[index]);
+		
+		if (map.inWall(this.x, this.y, 'X'))
+		{
+			this.x = x;
+			this.y = y;
+		}
 
 		do {
-			weaponPos();
 
-		}while(map.inWall(weaponx, weapony, 'X')  );
+			
+			weaponPos();
+			if(map.inWall(weaponx, weapony, 'k')) {
+				this.setWeaponSymbol('$');
+			}
+
+
+		}while(map.inWall(weaponx, weapony, 'X'));
+
+		map.setMapSymbol(weaponx, weapony, weaponSymbol);
+		map.setMapSymbol(this.x,this.y, normalsymbol);
 	}
 
 	public boolean nextToMe(int x, int y) {

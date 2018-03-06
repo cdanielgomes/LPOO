@@ -55,7 +55,7 @@ public class Hero extends Character{
 		map.setMapSymbol(this.x, this.y, symbol);
 	}
 
-	public boolean isOnStairs() {
+	public boolean isOnStairs() { //in the first level
 		return onStairs;
 	}
 

@@ -8,47 +8,38 @@ import logic.Map;
 import logic.Map.*;
 import logic.Ogre;
 import logic.Ogre.*;
+import logic.GameState;
 
 public class Game {
 
 	public static void main(String[] args) {
-		Map kapa = new Map(); 
-		Guard g = new Guard(8,1,kapa);
-		Ogre o = new Ogre(4,1, kapa);
-		Lever l = new Lever(7,8, kapa);
-		Hero h = new Hero(1,1, kapa,l);
+		
+		GameState game = new GameState();
+		//	System.out.println(g.getTypeOfGuard() + " is the chosen guard\n\n");
 
-		System.out.println(g.getTypeOfGuard() + " is the chosen guard\n\n");
-		kapa.printmap();
+		
+		
+		do {
+			game.setEnemies();
+			game.display();
 
-		while(!(l.getKey() && h.isOnStairs() )) {
-
-			if(g.nextToMe(h.getX(), h.getY()) && (!g.getasleep()))
-			{
-				System.out.println("GAME OVER!");
-				return ;
+			while(game.getGameEnd() != 1 && game.getGameWon() == 0 && game.getGameOver() == 0) {
+				
+				game.updateGame();
+				game.display();
+				
+				if (game.getNextLevel() == 1) {
+					break;
+				}
+				
+				
 			}
+			
+			
+		}while(game.getGameEnd() != 1 && game.getGameWon() == 0 && game.getGameOver() == 0);
 
-			h.getMove();
 
-			///// para teste 
-
-			g.movement();
-
-			///// para teste
-			kapa.setMapSymbol(g.getX(), g.getY(), g.getsymbol());
-
-			if (h.equals(l)) { //change the doors when the Hero push the lever
-
-				kapa.setMapSymbol(0, 5, 'S');
-				kapa.setMapSymbol(0, 6, 'S');
-			}
-
-			kapa.printmap();
-
-		}
-
-		/*kapa.fillSndMap();
+		/*	kapa.fillSndMap();
 		kapa.printmap();
 		h.set(1, 8);
 		l.setKey(false);
@@ -133,6 +124,5 @@ public class Game {
 			}
 			kapa.printmap();
 		}*/
-		System.out.print("You have finished the game ! Congrats\n");
 	}
 }

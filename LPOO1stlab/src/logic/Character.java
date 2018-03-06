@@ -3,9 +3,16 @@ package logic;
 public abstract class Character {
 
 	protected int x, y;
+	protected char symbol;
 	protected Map map;
 	
 	
+	Character(int x, int y, Map map){
+		setX(x);
+		setY(y);
+		this.map = map;
+
+	}
 	
 	void move(char c) {
 
@@ -29,12 +36,7 @@ public abstract class Character {
 		}
 	}
 
-	Character(int x, int y, Map map){
-		setX(x);
-		setY(y);
-		this.map = map;
 
-	}
 
 	/**
 	 * @return the x
