@@ -29,8 +29,10 @@ public class GameState {
 
 
 	public void chooseGuard() {
+		this.guard = new Drunken(map.getCharcX('G'), map.getCharcY('G'),map , "Drunken");
+		
 		Random r = new Random();
-		int i = r.nextInt(2);
+		int i = r.nextInt(3);
 		switch(i) {
 		case 0 : 
 			this.guard = new Drunken(map.getCharcX('G'), map.getCharcY('G'),map , "Drunken");
@@ -42,6 +44,7 @@ public class GameState {
 			this.guard = new Rookie(map.getCharcX('G'), map.getCharcY('G'),map , "Rookie");
 			break;
 		}
+		
 	}
 
 

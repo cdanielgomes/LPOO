@@ -24,15 +24,18 @@ public class Drunken extends Guard {
 				asleep = false;
 				this.setsymbol('G');
 			}
+			map.setMapSymbol(this.x, this.y, symbol);
 		}
 		else {
 			if (n == 2) {
 				asleep = true;
 				this.setsymbol('g');
-				if (reverse) {        // change direction everytime he goes sleeping
-					reverse = false;  // 
+				map.setMapSymbol(this.x, this.y, symbol); 
+				if (reverse) {                 // change direction everytime he goes sleeping
+					reverse = false;           // 
 				}
 				else reverse = true;
+				
 			}
 			else {
 				if (reverse)

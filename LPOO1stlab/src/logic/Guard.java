@@ -6,11 +6,11 @@ public abstract class Guard extends Character{
 	
 	public Guard(int x, int y, Map map , String name) {
 		super(x, y, map);
+		this.symbol = 'G';
 		
 	}
 	
 	private String name;
-	private char symbol = 'G';
 	private char moves[] = { 'a', 's', 's', 's', 's', 'a', 'a', 'a', 'a', 'a', 'a', 's', 'd', 'd', 'd', 'd', 'd', 'd',
 			'd', 'w', 'w', 'w', 'w', 'w' };
 	protected boolean reverse = false;
