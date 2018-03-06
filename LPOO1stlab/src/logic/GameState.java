@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.Random;
+
 public class GameState {
 
 	private	int gameOver;
@@ -26,7 +28,21 @@ public class GameState {
 	}
 
 
-
+	public void chooseGuard() {
+		Random r = new Random();
+		int i = r.nextInt(2);
+		switch(i) {
+		case 0 : 
+			this.guard = new Drunken(map.getCharcX('G'), map.getCharcY('G'),map , "Drunken");
+			break;
+		case 1 : 
+			this.guard = new Suspicious(map.getCharcX('G'), map.getCharcY('G'),map , "Suspicious");
+			break;
+		case 2 :
+			this.guard = new Rookie(map.getCharcX('G'), map.getCharcY('G'),map , "Rookie");
+			break;
+		}
+	}
 
 
 	/**
@@ -92,7 +108,7 @@ public class GameState {
 			this.hasGuard = false;
 		}
 		else {
-			guard = new Guard(map.getCharcX('G'), map.getCharcY('G'),map);
+			this.chooseGuard();
 			this.hasGuard = true;
 		}
 
@@ -163,6 +179,7 @@ public class GameState {
 
 
 	public void display() {
+		
 		map.printmap();
 	}
 
@@ -183,7 +200,9 @@ public class GameState {
 	}
 
 
-
+	public Guard getGuard() {
+		return this.guard;
+	}
 
 
 }

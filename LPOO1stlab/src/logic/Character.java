@@ -35,6 +35,27 @@ public abstract class Character {
 			break;
 		}
 	}
+	
+	void reversemove(char c) {
+		map.deleteCell(this.x, this.y);
+		
+		switch(c) {
+		case 'a':
+		this.x += 1;
+			break;
+		case 'w':
+			this.y += 1;
+			break;
+		case 's':
+			this.y -= 1;
+			break;
+		case 'd':
+			this.x -= 1;
+			break;
+		default:
+			break;
+		}
+	}
 
 
 
