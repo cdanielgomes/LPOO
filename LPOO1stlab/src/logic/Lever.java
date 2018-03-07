@@ -3,10 +3,10 @@ package logic;
 public class Lever extends Character {
 
 	private char symbol = 'k';
-	private boolean key = false;
+	private boolean key;
 	public Lever(int x, int y, Map map) {
 		super(x, y, map);
-		
+		this.key = false;
 	}
 	public boolean getKey() {
 		return key;

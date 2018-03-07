@@ -3,22 +3,27 @@ import java.util.Random;
 
 public class Ogre extends Character {
 
+
+	Random rand = new Random();
+	Random weaponpos = new Random();
+	private int weaponx; 
+	private int weapony;
+	private	char moviment[] = {'a','w','d','s'};
+	private char weaponSymbol = '*';
+	private boolean keyFlag;
+	
+	
 	public Ogre(int x, int y, Map map) {
 		super(x, y, map);
+		this.weaponx = x;
+		this.weapony = y;
+		this.keyFlag = false;
 
 	}
 
 
-	Random rand = new Random();
-	Random weaponpos = new Random();
-	private int weaponx = this.x, weapony = this.y;
-	private	char moviment[] = {'a','w','d','s'};
-	private char normalsymbol = 'O';
-	private char weaponSymbol = '*';
-	private boolean weaponFlag = true;
-
-	public void setWeaponFlag(boolean s) {
-		weaponFlag = s;
+	public void setKeyFlag(boolean s) {
+		keyFlag = s;
 
 	}
 
@@ -33,15 +38,6 @@ public class Ogre extends Character {
 	public int getWeapony() {
 		return weapony;
 	}
-
-	public char getNormalSymbol() {
-		return this.normalsymbol;
-	}
-
-	public void setSymbol(char k) {
-		this.normalsymbol = k;
-	}
-
 	public void setWeaponSymbol(char k) {
 		this.weaponSymbol = k;
 	}
@@ -49,6 +45,8 @@ public class Ogre extends Character {
 
 	public void weaponPos() {
 		int index = weaponpos.nextInt(4);
+		map.deleteCell(this.weaponx, this.weapony);
+		
 		switch(index) {
 		case 0:
 			this.weaponx = this.x;
@@ -62,9 +60,9 @@ public class Ogre extends Character {
 			break;
 		case 2:
 			this.weapony = this.y + 1;
-
 			this.weaponx = this.x;
 			break;
+			
 		case 3:
 			this.weaponx = this.x + 1;
 			this.weapony = this.y;
@@ -74,13 +72,13 @@ public class Ogre extends Character {
 	}
 
 	public void ogreMove() {
-
 		int index = rand.nextInt(4);
 		int x = this.x;
 		int y = this.y;
 		
-		map.deleteCell(weaponx, weapony);
-		map.deleteCell(this.x, this.y);
+		this.setWeaponSymbol('*');
+		this.setSymbol('O');
+		
 		move(moviment[index]);
 		
 		if (map.inWall(this.x, this.y, 'X'))
@@ -88,21 +86,30 @@ public class Ogre extends Character {
 			this.x = x;
 			this.y = y;
 		}
+		
+		if(map.inWall(this.weaponx, this.weapony, 'k')) {
+			this.setWeaponSymbol('$');	
+			this.keyFlag = true;
+		}
+		
 
 		do {
-
-			
 			weaponPos();
-			if(map.inWall(weaponx, weapony, 'k')) {
+			if(map.inWall(this.weaponx, this.weapony, 'k')) {
 				this.setWeaponSymbol('$');
+				this.keyFlag = true;
 			}
+			
+		}while(map.inWall(this.weaponx, this.weapony, 'X'));
 
-
-		}while(map.inWall(weaponx, weapony, 'X'));
-
-		map.setMapSymbol(weaponx, weapony, weaponSymbol);
-		map.setMapSymbol(this.x,this.y, normalsymbol);
+		map.setMapSymbol(this.weaponx, this.weapony, this.weaponSymbol);
+		map.setMapSymbol(this.x,this.y, this.symbol);
 	}
+
+	private void setSymbol(char c) {
+		this.symbol = c;
+	}
+
 
 	public boolean nextToMe(int x, int y) {
 		int diferencex = this.x - x, diferencey = this.y - y;
@@ -126,8 +133,8 @@ public class Ogre extends Character {
 		return false;
 	}
 
-	public boolean getWeaponFlag() {
-		return weaponFlag;
+	public boolean getKeyFlag() {
+		return keyFlag;
 	}	
 
 }

@@ -7,12 +7,13 @@ public class Hero extends Character{
 	private Scanner move = new Scanner(System.in);
 	private char symbol = 'H';
 	private char keySymbol = 'K';
-	private boolean onStairs = false;
+	private boolean onStairs;
 	
 	
 	public Hero(int x, int y, Map map, Lever key) {
 		super(x, y, map);
 		this.key = key;
+		this.onStairs = false;
 	}
 
 	public char getSymbol() {
