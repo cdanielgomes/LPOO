@@ -15,10 +15,7 @@ public class Game {
 		do {
 			game.setEnemies();
 			game.display();
-<<<<<<< HEAD
-=======
 
->>>>>>> b88b62605deefae710e7ff481563bbdc7f3e0d10
 			while(game.getGameEnd() != 1 && game.getGameWon() == 0 && game.getGameOver() == 0) {
 				System.out.print("Direction : ");
 				s = move.next().charAt(0);

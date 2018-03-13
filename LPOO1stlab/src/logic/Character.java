@@ -115,5 +115,9 @@ public abstract class Character {
 		return x == ((Character)obj).x && y == ((Character)obj).y ;
 	}
 
+	public void setSymbol(char c) {
+		this.symbol = c;
+	}
+
 
 }

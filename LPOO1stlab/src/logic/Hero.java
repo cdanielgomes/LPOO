@@ -35,6 +35,14 @@ public class Hero extends Character{
 		move(s);
 
 
+		if(this.map.inWall(this.x, this.y, 'I') && key.getKey()) {
+			this.x = x;
+			this.y = y;
+
+			map.deleteCell(0, 1);
+		}
+
+
 		if(this.map.inWall(this.x, this.y, 'X') || this.map.inWall(this.x, this.y, 'I')) {
 			this.x = x;
 			this.y = y;
