@@ -25,7 +25,6 @@ public class Game {
 		do {
 			game.setEnemies();
 			game.display();
-			System.out.println("ola");
 			while(game.getGameEnd() != 1 && game.getGameWon() == 0 && game.getGameOver() == 0) {
 				
 				game.updateGame();
