@@ -12,7 +12,7 @@ public class Labirinths {
 		int[] x = {0,5,0,6};
 		addMap(new Map(map, true, false, x));
 		int[] y = {0,1};
-		addMap(new Map(map, false, true, y));
+		addMap(new Map(map2, false, true, y));
 	}
 	
 
