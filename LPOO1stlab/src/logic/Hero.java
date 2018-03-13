@@ -7,6 +7,7 @@ public class Hero extends Character{
 	private char symbol = 'H';
 	private char keySymbol = 'K';
 	private boolean onStairs;
+	private boolean hasWeapon = false;
 
 
 	public Hero(int x, int y, Map map, Lever key) {
@@ -69,6 +70,8 @@ public class Hero extends Character{
 		this.door = door;
 	}
 
-
+	public void setWeapon(boolean b) {
+		this.hasWeapon = b;
+	}
 
 }

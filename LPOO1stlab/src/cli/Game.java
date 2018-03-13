@@ -6,19 +6,19 @@ import logic.GameState;
 public class Game {
 	private static Scanner move = new Scanner(System.in);
 	private static char s;
-	
-	
+
+
 	public static void main(String[] args) {
 
+		
+		
 		GameState game = new GameState();		
-
+		
+		game.chooseGuard(userChooseGuardType());
+		
 		do {
 			game.setEnemies();
 			game.display();
-<<<<<<< HEAD
-=======
-
->>>>>>> b88b62605deefae710e7ff481563bbdc7f3e0d10
 			while(game.getGameEnd() != 1 && game.getGameWon() == 0 && game.getGameOver() == 0) {
 				System.out.print("Direction : ");
 				s = move.next().charAt(0);
@@ -29,23 +29,26 @@ public class Game {
 					game.setNextLevel(0);
 					break;
 				}
-				
 
-				
+
+
 
 
 			}
 
 
 		}while(game.getGameEnd() != 1 && game.getGameWon() == 0 && game.getGameOver() == 0);
-		
-	move.close();
+
+		move.close();
 	}
 
-	public int userChooseGuardType() {
+	public static int userChooseGuardType() {
 		System.out.println("1 - Drunken\n2 - Rookie\n3 - Suspicious\nSelect the guard : ");
 		Scanner scan = new Scanner(System.in);
 		int num = scan.nextInt();
+		if (num > 3 || num < 1) {
+			return userChooseGuardType();
+		}
 		return num;
 	}
 
@@ -74,4 +77,6 @@ public class Game {
 
 	}
 	 */
+
+
 }

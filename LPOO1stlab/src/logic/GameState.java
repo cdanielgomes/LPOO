@@ -30,16 +30,12 @@ public class GameState {
 	}
 
 
-	public void chooseGuard() {
-		this.guard = new Drunken(currentMap.getCharcX('G'), currentMap.getCharcY('G'),currentMap , "Drunken");
-		
-		Random r = new Random();
-		int i = r.nextInt(3);
+	public void chooseGuard(int i) {	
 		switch(i) {
-		case 0 : 
+		case 1 : 
 			this.guard = new Drunken(currentMap.getCharcX('G'), currentMap.getCharcY('G'),currentMap , "Drunken");
 			break;
-		case 1 : 
+		case 3 : 
 			this.guard = new Suspicious(currentMap.getCharcX('G'), currentMap.getCharcY('G'),currentMap , "Suspicious");
 			break;
 		case 2 :
@@ -115,7 +111,6 @@ public class GameState {
 			this.hasGuard = false;
 		}
 		else {
-			this.chooseGuard();
 			this.hasGuard = true;
 		}
 
