@@ -1,5 +1,6 @@
 package logic;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class GameState {
@@ -13,7 +14,7 @@ public class GameState {
 	private Lever lever;// = new Lever(currentMap.getCharcX('k'), currentMap.getCharcY('k'), currentMap);
 	private Hero hero;// = new Hero(currentMap.getCharcX('H'), currentMap.getCharcY('H'), currentMap, lever);
 	private Guard guard;
-	private Ogre ogre;
+	private ArrayList<Ogre> hordOfOgres = new ArrayList<Ogre>();
 	private boolean hasGuard, hasOgre;
 
 
@@ -30,7 +31,15 @@ public class GameState {
 	}
 
 
+<<<<<<< HEAD
 	public void chooseGuard(int i) {	
+=======
+	public void chooseGuard() {
+		this.guard = new Drunken(currentMap.getCharcX('G'), currentMap.getCharcY('G'),currentMap , "Drunken");
+
+		Random r = new Random();
+		int i = r.nextInt(3);
+>>>>>>> d9128d0905635c3d6f787e1175a9d03703b57f65
 		switch(i) {
 		case 1 : 
 			this.guard = new Drunken(currentMap.getCharcX('G'), currentMap.getCharcY('G'),currentMap , "Drunken");
@@ -42,7 +51,7 @@ public class GameState {
 			this.guard = new Rookie(currentMap.getCharcX('G'), currentMap.getCharcY('G'),currentMap , "Rookie");
 			break;
 		}
-		
+
 	}
 
 
@@ -89,9 +98,6 @@ public class GameState {
 	}
 
 
-
-
-
 	/**
 	 * @param gameEnd the gameEnd to set
 	 */
@@ -105,8 +111,8 @@ public class GameState {
 
 	public void setEnemies() {
 
-	
-		
+
+
 		if (currentMap.getCharcX('G') == -1) {
 			this.hasGuard = false;
 		}
@@ -118,7 +124,10 @@ public class GameState {
 			this.hasOgre = false;
 		}
 		else{
-			ogre = new Ogre(currentMap.getCharcX('O'), currentMap.getCharcY('O'),currentMap);
+			for (int i = 0; i < 3; i++) {
+				hordOfOgres.add(new Ogre(currentMap.getCharcX('O'), currentMap.getCharcY('O'),currentMap));
+
+			}
 			this.hasOgre = true;
 		}
 
@@ -133,10 +142,8 @@ public class GameState {
 	@SuppressWarnings("unlikely-arg-type")
 	public void updateGame(char heroMove) {
 
-		System.out.println(""+ map.getLevel());
-		
 		hero.getMove(heroMove);
-		
+
 		if(hero.isOnStairs()) {
 			map.setLevel(map.getLevel() + 1);
 			this.nextLevel = 1;
@@ -145,14 +152,17 @@ public class GameState {
 			return;
 		}
 
+
 		if(hasGuard) {
 			guard.movement();
 		}
 
 		if(hasOgre) {
-			ogre.ogreMove();
-			if(!ogre.getKeyFlag() && !lever.getKey()) {
-				currentMap.setMapSymbol(lever.getX(), lever.getY(), lever.getSymbol());
+			for(Ogre i : hordOfOgres) {
+				i.ogreMove();
+				if(!i.getKeyFlag() && !lever.getKey()) {
+					currentMap.setMapSymbol(lever.getX(), lever.getY(), lever.getSymbol());
+				}
 			}
 		}
 
@@ -167,11 +177,10 @@ public class GameState {
 			currentMap.setMapSymbol(0, 6, 'S');
 		}
 
-		if(hero.getY() == 0 && map.getLevel() == 1) {
+		if(hero.getX() == 0 && hero.getY() == 1 && map.getLevel() == (map.getMaps().size() - 1)) {
 			System.out.print("You have finished the game ! Congrats\n");
 			this.gameWon = 1;
-		}
-		
+		}   
 
 	}
 
@@ -180,7 +189,11 @@ public class GameState {
 			return guard.nextToMe(hero.getX(), hero.getY()) && (!guard.getasleep());
 
 		if (hasOgre) {
-			return ogre.nextToMe(hero.getX(), hero.getY()) || ogre.nextToWeapon(hero.getX(), hero.getY());
+			for(Ogre index : hordOfOgres) {
+				if(index.nextToMe(hero.getX(), hero.getY()) || index.nextToWeapon(hero.getX(), hero.getY())) {
+					return true;
+				}
+			}
 		}
 
 		return false;
@@ -188,12 +201,9 @@ public class GameState {
 
 
 	public void display() {
-		
+
 		currentMap.printmap();
 	}
-
-
-
 
 
 	public int getNextLevel() {

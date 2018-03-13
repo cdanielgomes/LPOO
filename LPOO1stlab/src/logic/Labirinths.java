@@ -64,9 +64,11 @@ public class Labirinths {
 	public Map getMap() {
 
 		return this.maps.get(this.level);
-
 	}
 
+	public ArrayList<Map> getMaps(){
+		return maps;
+	}
 
 
 }

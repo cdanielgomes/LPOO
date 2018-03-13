@@ -19,6 +19,10 @@ public class Game {
 		do {
 			game.setEnemies();
 			game.display();
+<<<<<<< HEAD
+=======
+
+>>>>>>> d9128d0905635c3d6f787e1175a9d03703b57f65
 			while(game.getGameEnd() != 1 && game.getGameWon() == 0 && game.getGameOver() == 0) {
 				System.out.print("Direction : ");
 				s = move.next().charAt(0);
