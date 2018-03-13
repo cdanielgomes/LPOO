@@ -45,7 +45,7 @@ public class Ogre extends Character {
 
 	public void weaponPos() {
 		int index = weaponpos.nextInt(4);
-		map.deleteCell(this.weaponx, this.weapony);
+
 		
 		switch(index) {
 		case 0:
@@ -87,14 +87,10 @@ public class Ogre extends Character {
 			this.y = y;
 		}
 		
-		if(map.inWall(this.weaponx, this.weapony, 'k')) {
-			this.setWeaponSymbol('$');	
-			this.keyFlag = true;
-		}
-		
-
+		map.deleteCell(this.weaponx, this.weapony);
 		do {
 			weaponPos();
+			
 			if(map.inWall(this.weaponx, this.weapony, 'k')) {
 				this.setWeaponSymbol('$');
 				this.keyFlag = true;
