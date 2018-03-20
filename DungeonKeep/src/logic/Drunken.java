@@ -26,11 +26,11 @@ public class Drunken extends Guard {
 			}
 		}
 		else {
-			if (n == 2) {
+			if (n == 2) {  // it is a 10 % chance 
 				asleep = true;
 				this.setSymbol('g');
 				
-				if (reverse) {                 // change direction everytime he goes sleeping
+				if (reverse) {                 // change direction every-time he goes sleeping
 					reverse = false;           // 
 				}
 				else reverse = true;

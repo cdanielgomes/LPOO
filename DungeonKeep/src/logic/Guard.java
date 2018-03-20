@@ -44,7 +44,7 @@ public abstract class Guard extends Character{
 			m = moves.length - 1;
 		else
 			m--;
-		reversemove(moves[m]);
+		this.position =reversemove(moves[m]);
 	}
 	
 	public abstract void movement();
