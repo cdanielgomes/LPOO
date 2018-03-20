@@ -21,6 +21,9 @@ public class Character {
 		return this.symbol;
 	}
 	
+	public Position getPos() {
+		return this.position;
+	}
 	public Position move(char c) {		
 
 		Position pos = new Position();
@@ -73,11 +76,13 @@ public class Character {
 		
 		int diferencex = position.getX() - obj.position.getX(), diferencey = position.getY()- obj.position.getY();
 
-		if ((diferencex == 1 || diferencex == -1) && diferencey == 0)
+		if ((diferencex == 1 || diferencex == -1 || diferencex == 0) && diferencey == 0)
 			return true;
-		if ((diferencey == 1 || diferencey == -1) && diferencex == 0)
+		if ((diferencey == 1 || diferencey == -1 || diferencey == 0) && diferencex == 0)
 			return true;
 		return false;
 	}
+
+	
 	
 }

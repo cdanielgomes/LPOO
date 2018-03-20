@@ -17,7 +17,7 @@ public class Hero extends Character{
 
 		Position newPos = super.move(move);
 		char symbol = map.getMapSymbol(newPos);
-		
+
 		switch(symbol) {
 		case 'X':
 			break;
@@ -35,8 +35,10 @@ public class Hero extends Character{
 		case 'I':
 			if (map.getDoor().equals(newPos) && this.lever)
 				this.kickDoor = true;
+			map.getDoor().setSymbol(' ');
+			map.setMapSymbol(map.getDoor());
 			break;
-			
+
 		case '*':
 			if(!hasLever()) {
 				this.setSymbol('A');

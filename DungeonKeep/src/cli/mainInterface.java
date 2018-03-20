@@ -18,17 +18,21 @@ public class mainInterface {
 		GameState game = new GameState(numberOfOgres(),userChooseGuardType());		
 		game.start_game();
 		game.display();
-		
+
 		while(!game.over()) {
-			
+
 			System.out.println("Insert your play with wasd");
 			s = move.next().charAt(0);
-		
+
 			game.moviment(s);
 			game.display();
 		}
 
-
+		if(game.hasWon()) {
+			System.out.println("YOU WON!!!!!");
+		}
+		else
+			System.out.println("YOU LOOSE!!");
 	}
 
 
