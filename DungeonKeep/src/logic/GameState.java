@@ -42,8 +42,8 @@ public class GameState {
 
 	public void start_game() {
 
-	//	map = new Dungeon(map1,guard);
-		map = new Keep(map2,nOgres);
+		map = new Dungeon(map1,guard);
+		//map = new Keep(map2,nOgres);
 
 	}
 

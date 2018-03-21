@@ -27,7 +27,7 @@ public class Dungeon extends GameMap {
 
 	@Override
 	boolean endOfGame() {
-		return guard.checkProximity(hero);
+		return guard.checkProximity(hero) && !guard.asleep;
 	}
 
 	@Override
