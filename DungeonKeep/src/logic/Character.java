@@ -85,8 +85,6 @@ public class Character {
 
 	
 	
-	public Position getPos() {
-		return this.position;
-	}
+	
 	
 }

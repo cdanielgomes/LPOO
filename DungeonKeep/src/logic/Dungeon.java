@@ -25,14 +25,11 @@ public class Dungeon extends GameMap {
 	}
 
 
-	@Override
-<<<<<<< HEAD
+	
+
 	public boolean endOfGame() {
-		return guard.checkProximity(hero);
-=======
-	boolean endOfGame() {
 		return guard.checkProximity(hero) && !guard.asleep;
->>>>>>> d755e7479985fa23e9b472facb81a45955d13846
+
 	}
 
 	@Override
@@ -58,6 +55,5 @@ public class Dungeon extends GameMap {
 		}
 	}
 	
-	x
 
 }

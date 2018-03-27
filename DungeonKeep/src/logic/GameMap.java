@@ -91,7 +91,7 @@ public abstract class GameMap implements MapLogic {
 	public Door getDoor() {
 		return this.door;
 	}
-<<<<<<< HEAD
+
 	
 	public Hero getHero() {
 		return this.hero;
@@ -99,14 +99,7 @@ public abstract class GameMap implements MapLogic {
 	
 	 public abstract void autoMoves(char heromove);
 	 public abstract boolean endOfGame();
-	 abstract void deleteOldPositions();
 	 abstract void setNewPositions();
-=======
-
-	abstract void autoMoves(char heromove);
-	abstract boolean endOfGame();
 	abstract void deleteOldPositions();
-	abstract void setNewPositions();
->>>>>>> d755e7479985fa23e9b472facb81a45955d13846
 
 }

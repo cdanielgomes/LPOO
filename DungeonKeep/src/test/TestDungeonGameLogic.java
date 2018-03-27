@@ -24,7 +24,7 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testMoveHeroIntoFreeCell() {
-		GameMap newmap = new Dungeon(map , 2);
+		GameMap newmap = new Dungeon(map , "Rookie");
 		assertEquals(new Position(1,1) , newmap.getHeroPos());
 		//newmap.autoMoves('s');
 		//newmap.getHero().calculateNextPos(newmap, 's');
@@ -34,7 +34,7 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testMoveHeroIntoWall() {
-		GameMap newmap = new Dungeon(map , 2);
+		GameMap newmap = new Dungeon(map , "Rookie");
 		assertEquals(new Position(1,1) , newmap.getHeroPos());
 		newmap.hero.calculateNextPos(newmap, 'a');
 		assertEquals(new Position(1,1) , newmap.getHeroPos());
@@ -42,7 +42,7 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testHeroCapturedByGuard() {
-		GameMap newmap = new Dungeon(map , 2);
+		GameMap newmap = new Dungeon(map , "Rookie");
 		assertFalse(newmap.endOfGame());
 		newmap.hero.calculateNextPos(newmap, 'd');
 		assertTrue(newmap.endOfGame());
@@ -50,7 +50,7 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testHeroMovesIntoClosedDoor() {
-		GameMap newmap = new Dungeon(map , 2);
+		GameMap newmap = new Dungeon(map , "Rookie");
 		assertEquals(new Position(1,1) , newmap.getHeroPos());
 		newmap.hero.calculateNextPos(newmap, 's');
 		newmap.hero.calculateNextPos(newmap, 'a');
@@ -59,7 +59,7 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testHeroMovesIntoLeverAndDoorsOpen() {
-		GameMap newmap = new Dungeon(map , 2);
+		GameMap newmap = new Dungeon(map , "Rookie");
 		assertEquals('I' , newmap.getMapSymbol(new Position(0,2)));
 		newmap.hero.calculateNextPos(newmap, 's');
 		newmap.hero.calculateNextPos(newmap, 's');
@@ -69,7 +69,7 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testHeroMovesToKeep() {
-		GameMap newmap = new Dungeon(map , 2);
+		GameMap newmap = new Dungeon(map ,"Rookie");
 		newmap.hero.calculateNextPos(newmap, 's');
 		newmap.hero.calculateNextPos(newmap, 's');
 		newmap.hero.calculateNextPos(newmap, 'a');
