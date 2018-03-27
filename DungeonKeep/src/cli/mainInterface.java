@@ -36,9 +36,9 @@ public class mainInterface {
 	}
 
 
-	public static int userChooseGuardType() {
+	public static String userChooseGuardType() {
 		System.out.println("1 - Drunken\n2 - Rookie\n3 - Suspicious\nSelect the guard : ");
-		int num = move.nextInt();
+		String num = move.next();
 		return num;
 	}
 

@@ -3,7 +3,7 @@ package logic;
 public class GameState {
 
 	private GameMap map;
-	private int guard;
+	private String guard;
 	private int nOgres;
 	private boolean won = false;
 
@@ -34,7 +34,7 @@ public class GameState {
 	};	
 
 
-	public GameState(int numogres, int guard) {
+	public GameState(int numogres, String guard) {
 		this.nOgres = numogres;
 		this.guard = guard;
 	};
