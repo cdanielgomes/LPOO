@@ -8,7 +8,7 @@ public class Ogre extends Character {
 	private Random rand = new Random();
 	private	char moviment[] = {'a','w','d','s'};
 	private boolean stun = false;
-	private int countdown;
+	private int countdown = 2;
 
 	public Ogre(Position position) {
 		super(position);
@@ -27,24 +27,26 @@ public class Ogre extends Character {
 		Position newPos = move(moviment[indexMove]);
 
 		char symbol = map.getMapSymbol(newPos);
+
 		this.setSymbol('O');
 		this.weapon.setSymbol('*');
 
 		if (!this.stun) {
-
-			switch(symbol) {
-			case 'X':
-				break;
-			case ' ':
+			
+			if(symbol == 'k' || symbol == ' ')
 				setPosition(newPos);
-				break;
-			case 'I':
-				break;
-			default:
-				break;
+			
+		}
+		else {
+			this.setSymbol('8');
+			countdown--;
+			if (countdown == 0) {
+				countdown = 2;
+				this.stun = false;
 			}
 		}
-
+			
+			
 		if(this.position.equals(map.leverPos())) {
 			this.setSymbol('$');
 		}
@@ -57,26 +59,17 @@ public class Ogre extends Character {
 			indexMove = rand.nextInt(4);
 			newPos = weapon.move(moviment[indexMove]);
 			symbol = map.getMapSymbol(newPos);
-			
-			switch(symbol) {
-			case 'X':
-				c = true;
-				break;
-			case ' ':
-				setPosition(newPos);
-				break;
-			case 'I':
-				c = true;
-				break;
-			default:
-				break;
-			}
 
-			if(this.weapon.position.equals(map.leverPos())) {
-				this.weapon.setSymbol('$');
-			}
+			if(symbol == ' ' || symbol == 'k')
+				weapon.setPosition(newPos);
+			else 
+				c = true;
 
 		}while(c);
+
+		if(this.weapon.position.equals(map.leverPos())) {
+			this.weapon.setSymbol('$');
+		}
 	}
 
 	public Character getWeapon() {
@@ -85,5 +78,9 @@ public class Ogre extends Character {
 
 	public boolean isStun() {
 		return this.stun;
+	}
+	
+	public void setStun(boolean s) {
+		this.stun = s;
 	}
 }

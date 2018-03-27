@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Keep extends GameMap{
 
 	private ArrayList<Ogre> hordOfOgres = new ArrayList<Ogre>();
-	
+
 	public Keep(char[][] map, int numberofogres) {
 		super(map);
 		this.door = new Door(new Position(0,1));
@@ -24,8 +24,12 @@ public class Keep extends GameMap{
 		}
 		for (Ogre i : hordOfOgres)
 			i.calculateNextPos(this);
+		
+		if(door.position.equals(hero.getPos())) {
+			hero.setNextLevel(true);
+		}
 	}
-	
+
 	/*
 	 * check if hero is dead -> next to a ogre or his weapon
 	 * */
@@ -33,16 +37,22 @@ public class Keep extends GameMap{
 	@Override
 	public boolean endOfGame() {
 		for (Ogre i : hordOfOgres) {
+			
+			if(i.checkProximity(hero) && hero.isArmed()) {
+				i.setStun(true);
+			}
 			if (i.checkProximity(hero) && !i.isStun())
 				return true;
+			
 			if (i.getWeapon().checkProximity(hero)) {
 				return true;
 			}
+		
 		}
 		return false;
 	}
 
-	
+
 	/*
 	 * Delete all position in the map
 	 * */
@@ -53,18 +63,19 @@ public class Keep extends GameMap{
 			deleteCell(i);
 			deleteCell(i.getWeapon());
 		}
-		deleteCell(lever);
 	}
-	
-	
-/*
- * set the map symbols in the positions
- * */
+
+
+	/*
+	 * set the map symbols in the positions
+	 * */
 	@Override
 	void setNewPositions() {
 
 		setMapSymbol(hero);
-		setMapSymbol(lever);
+		if(!hero.hasLever())
+			setMapSymbol(lever);
+		
 		for (Ogre i : hordOfOgres) {
 			setMapSymbol(i);
 			setMapSymbol(i.getWeapon());

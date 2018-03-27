@@ -3,10 +3,10 @@ package logic;
 public class GameState {
 
 	private GameMap map;
-	private int guard;
+	private String guard;
 	private int nOgres;
 	private boolean won = false;
-	
+
 	char[][] map1 = {{'X','X','X','X','X','X','X','X','X','X'},
 			{'X','H',' ',' ','I',' ','X',' ','G','X'},
 			{'X','X','X',' ','X','X','X',' ',' ','X'},
@@ -29,39 +29,53 @@ public class GameState {
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'X','H',' ',' ',' ',' ',' ',' ',' ','X'},
+			{'X','H',' ',' ','*',' ',' ',' ',' ','X'},
 			{'X','X','X','X','X','X','X','X','X','X'}
-
 	};	
-	
-	
-	public GameState(int numogres, int guard) {
+
+
+	public GameState(int numogres, String guard) {
 		this.nOgres = numogres;
 		this.guard = guard;
 	};
-	
+
 	public void start_game() {
-		
+
 		map = new Dungeon(map1,guard);
-		
+		//map = new Keep(map2,nOgres);
+
 	}
-	
+
 	public void moviment(char hero) {
-	
+
 		map.deleteOldPositions();
 		map.autoMoves(hero);
 		map.setNewPositions();
 		if (map.hero.nextLevel()) {
-			map = new Keep(map2,nOgres);
+			if (map instanceof Dungeon)
+				map = new Keep(map2,nOgres);
+			else 
+				won = true;
 		}
 	}
+
 	
 	public void display() {
 		map.printmap();
 	}
-	
+
 	public boolean over() {
-		return map.endOfGame();
+		return map.endOfGame() || won;
+	}
+	
+	public boolean hasWon() {
+		return this.won;
 	}
 
+	/**
+	 * @return the map
+	 */
+	public GameMap getMap() {
+		return map;
+	}
 }

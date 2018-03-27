@@ -5,19 +5,19 @@ public class Dungeon extends GameMap {
 	private Guard guard;
 	private Door door1;
 	
-	public Dungeon(char[][] map, int i ) {
+	public Dungeon(char[][] map, String i ) {
 		super(map);
 		this.door = new Door(new Position(0,5));
 		this.door1 = new Door(new Position(0,6));
 	
 		switch(i) {
-		case 2:
+		case "Rookie":
 			guard = new Rookie(this.getCharc('G'), "Rookie");
 			break;
-		case 3:
+		case "Suspicious":
 			guard = new Suspicious(this.getCharc('G'), "Suspicious");
 			break;
-		case 1:
+		case "Drunken":
 			guard = new Drunken(this.getCharc('G'), "Drunken");
 			break;
 		}
@@ -26,8 +26,13 @@ public class Dungeon extends GameMap {
 
 
 	@Override
+<<<<<<< HEAD
 	public boolean endOfGame() {
 		return guard.checkProximity(hero);
+=======
+	boolean endOfGame() {
+		return guard.checkProximity(hero) && !guard.asleep;
+>>>>>>> d755e7479985fa23e9b472facb81a45955d13846
 	}
 
 	@Override
