@@ -13,7 +13,7 @@ public class Hero extends Character{
 
 	}
 
-	void calculateNextPos(GameMap map , char move) {
+	public void calculateNextPos(GameMap map , char move) {
 
 		Position newPos = super.move(move);
 		char symbol = map.getMapSymbol(newPos);

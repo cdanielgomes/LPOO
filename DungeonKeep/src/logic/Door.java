@@ -17,4 +17,6 @@ public class Door extends Character {
 			map.setMapSymbol(this);
 		}
 	}
+	
+	
 }

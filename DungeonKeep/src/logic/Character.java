@@ -80,4 +80,8 @@ public class Character {
 		return false;
 	}
 	
+	public Position getPos() {
+		return this.position;
+	}
+	
 }

@@ -16,7 +16,7 @@ public class Keep extends GameMap{
 
 
 	@Override
-	void autoMoves(char heromove) {
+	public	void autoMoves(char heromove) {
 
 		hero.calculateNextPos(this, heromove);
 		if(hero.kickDoor) {
@@ -31,7 +31,7 @@ public class Keep extends GameMap{
 	 * */
 
 	@Override
-	boolean endOfGame() {
+	public boolean endOfGame() {
 		for (Ogre i : hordOfOgres) {
 			if (i.checkProximity(hero) && !i.isStun())
 				return true;

@@ -26,7 +26,7 @@ public class Dungeon extends GameMap {
 
 
 	@Override
-	boolean endOfGame() {
+	public boolean endOfGame() {
 		return guard.checkProximity(hero);
 	}
 
@@ -43,7 +43,7 @@ public class Dungeon extends GameMap {
 	}
 
 	@Override
-	void autoMoves(char heromove) {
+	public	void autoMoves(char heromove) {
 		hero.calculateNextPos(this, heromove);
 		guard.movement();
 
@@ -52,5 +52,7 @@ public class Dungeon extends GameMap {
 			door.openDoor(this);
 		}
 	}
+	
+	x
 
 }

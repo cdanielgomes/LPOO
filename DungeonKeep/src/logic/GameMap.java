@@ -6,7 +6,7 @@ public abstract class GameMap implements MapLogic {
 	protected int collum;
 	protected int lines;
 
-	protected Hero hero;
+	public Hero hero;
 	protected Lever lever;
 	protected Door door;
 
@@ -80,8 +80,12 @@ public abstract class GameMap implements MapLogic {
 		return this.door;
 	}
 	
-	 abstract void autoMoves(char heromove);
-	 abstract boolean endOfGame();
+	public Hero getHero() {
+		return this.hero;
+	}
+	
+	 public abstract void autoMoves(char heromove);
+	 public abstract boolean endOfGame();
 	 abstract void deleteOldPositions();
 	 abstract void setNewPositions();
 
