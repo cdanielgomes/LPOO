@@ -113,7 +113,7 @@ public class GameWindow {
 		JButton btnUp = new JButton("Up");
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.moviment('w');
+				game.movement('w');
 				board.replaceSelection(game.getMap().totring());
 				board.setText(game.getMap().totring());
 
@@ -125,7 +125,7 @@ public class GameWindow {
 		JButton btnLeft = new JButton("Left");
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.moviment('a');
+				game.movement('a');
 				board.setText(game.getMap().totring());
 
 			}
@@ -136,7 +136,7 @@ public class GameWindow {
 		JButton btnRigth = new JButton("Rigth");
 		btnRigth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.moviment('d');
+				game.movement('d');
 				board.setText(game.getMap().totring());
 			}
 		});
@@ -146,7 +146,7 @@ public class GameWindow {
 		JButton btnDown = new JButton("Down");
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				game.moviment('s');
+				game.movement('s');
 				board.setText(game.getMap().totring());
 			}
 		});

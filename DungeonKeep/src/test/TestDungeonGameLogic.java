@@ -73,6 +73,7 @@ public class TestDungeonGameLogic {
 		newmap.hero.calculateNextPos(newmap, 's');
 		newmap.hero.calculateNextPos(newmap, 's');
 		newmap.hero.calculateNextPos(newmap, 'a');
+		newmap.hero.calculateNextPos(newmap, 'a');
 		assertTrue(newmap.hero.nextLevel());
 	}
 	

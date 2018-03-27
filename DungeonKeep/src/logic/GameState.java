@@ -46,7 +46,7 @@ public class GameState {
 
 	}
 
-	public void moviment(char hero) {
+	public void movement(char hero) {
 
 		map.deleteOldPositions();
 		map.autoMoves(hero);
