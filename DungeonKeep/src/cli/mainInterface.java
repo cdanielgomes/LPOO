@@ -24,7 +24,7 @@ public class mainInterface {
 			System.out.println("Insert your play with wasd");
 			s = move.next().charAt(0);
 
-			game.moviment(s);
+			game.movement(s);
 			game.display();
 		}
 
