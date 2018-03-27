@@ -150,6 +150,7 @@ public class GameWindow {
 				board.setText(game.getMap().totring());
 			}
 		});
+		
 		btnDown.setBounds(353, 167, 80, 20);
 		frmDungeonKeep.getContentPane().add(btnDown);
 
