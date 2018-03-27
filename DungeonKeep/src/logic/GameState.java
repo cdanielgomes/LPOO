@@ -59,6 +59,7 @@ public class GameState {
 		}
 	}
 
+	
 	public void display() {
 		map.printmap();
 	}
@@ -71,4 +72,10 @@ public class GameState {
 		return this.won;
 	}
 
+	/**
+	 * @return the map
+	 */
+	public GameMap getMap() {
+		return map;
+	}
 }

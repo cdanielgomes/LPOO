@@ -44,8 +44,8 @@ public abstract class GameMap implements MapLogic {
 		}
 		return new Position(-1,-1);
 	}
-	
-	
+
+
 	public char getMapSymbol(Position symbol) {
 
 		return this.map[symbol.getY()][symbol.getX()];
@@ -55,17 +55,17 @@ public abstract class GameMap implements MapLogic {
 	public void deleteCell(Character pos) {
 		this.map[pos.position.getY()][pos.position.getX()] = ' ';
 	}
-	
+
 	public void setMapSymbol(Character pos) {
 		this.map[pos.position.getY()][pos.position.getX()] = pos.getSymbol();
 	}
-	
+
 	public Position leverPos() {
 		return lever.position;
 	}
-	
+
 	public void printmap() {
-		 
+
 		for(int a = 0 ; a < collum  ; a++ ) {
 			System.out.print("|");
 			for(int b = 0 ; b < lines ; b++) {
@@ -76,13 +76,25 @@ public abstract class GameMap implements MapLogic {
 		}
 	}
 
+	public String totring() {
+		String map = "";
+		for(int a = 0 ; a < collum  ; a++ ) {
+			//System.out.print("|");
+			for(int b = 0 ; b < lines ; b++) {
+				//System.out.print(this.map[a][b] + "|");
+				map += this.map[a][b];
+			}		
+			map += "\n";
+		}
+		return map;
+	}
 	public Door getDoor() {
 		return this.door;
 	}
-	
-	 abstract void autoMoves(char heromove);
-	 abstract boolean endOfGame();
-	 abstract void deleteOldPositions();
-	 abstract void setNewPositions();
+
+	abstract void autoMoves(char heromove);
+	abstract boolean endOfGame();
+	abstract void deleteOldPositions();
+	abstract void setNewPositions();
 
 }
