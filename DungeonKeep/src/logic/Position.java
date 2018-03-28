@@ -30,9 +30,9 @@ public class Position {
 		if (this == obj)
 			return true;
 		if (obj == null)
-			return false;
+		return false;
 		if (getClass() != obj.getClass())
-			return false;
+		return false;
 		Position other = (Position) obj;
 		if (x != other.x)
 			return false;

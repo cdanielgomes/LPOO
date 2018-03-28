@@ -53,7 +53,7 @@ public abstract class GameMap {
 		return lever.position;
 	}
 
-	public void printmap() {
+/*	public void printmap() {
 		for(int a = 0 ; a < collum  ; a++ ) {
 			System.out.print("|");
 			for(int b = 0 ; b < lines ; b++) {
@@ -62,7 +62,7 @@ public abstract class GameMap {
 			}
 			System.out.print('\n');
 		}
-	}
+	}*/
 
 	public String totring() {
 		String map = "";

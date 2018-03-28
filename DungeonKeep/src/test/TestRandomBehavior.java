@@ -48,7 +48,7 @@ public class TestRandomBehavior {
 				+ "X        X\n"
 				+ "X        X\n"
 				+ "X        X\n"
-				+ "XH   *   X\n"
+				+ "XH *     X\n"
 				+ "XXXXXXXXXX\n");
 	}
 
@@ -93,7 +93,7 @@ public class TestRandomBehavior {
 
 			if( Down(newPos, oldPos))
 				down = true;
-			
+
 			if(g.getMap().getHero().checkProximity(((Keep)g.getMap()).getHordOfOgres().get(0))) {
 				assertEquals('O', ((Keep)g.getMap()).getHordOfOgres().get(0).getSymbol());
 				heroWeapon = true;
@@ -104,12 +104,12 @@ public class TestRandomBehavior {
 				key = true;
 
 			}
-			
+
 
 		}
 	}
-	
-	@Test(timeout =1000)
+
+	@Test(timeout =3000)
 	public void testWeaponRandomPositions() {
 		GameState g = new GameState(1,"Rookie");
 		ArrayList<Door> j = new ArrayList<Door>();
@@ -122,10 +122,10 @@ public class TestRandomBehavior {
 		boolean down = false;
 		boolean key =false;
 		boolean over = false;
-		
+
 		Position ogrePos;
 		Position weaponPos;
-		
+
 
 		while(!left || !right || !up || !down || !key || !over)  {
 
@@ -145,7 +145,7 @@ public class TestRandomBehavior {
 
 			if( Down(weaponPos, ogrePos))
 				down = true;
-			
+
 			if(g.over()) {
 				over = true;
 			}
@@ -155,7 +155,7 @@ public class TestRandomBehavior {
 				key = true;
 
 			}
-			
+
 
 		}
 	}

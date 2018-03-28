@@ -56,6 +56,7 @@ public class GameState {
 		map.deleteOldPositions();
 		map.autoMoves(hero);
 		map.setNewPositions();
+		
 		if (map.hero.nextLevel()) {
 
 			if (map instanceof Dungeon) {
@@ -70,7 +71,7 @@ public class GameState {
 
 
 	public void display() {
-		map.printmap();
+		System.out.println(map.totring());
 	}
 
 	public boolean over() {
