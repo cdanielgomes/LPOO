@@ -28,10 +28,12 @@ public class mainInterface {
 			System.out.println("Insert your play with wasd");
 			s = move.next().charAt(0);
 
-			game.movement(s);
-			game.display();
+			if(s == 'a' ||s == 'w' || s == 's' ||s == 'd' ) {
+				game.movement(s);
+				game.display();
+			}
 		}
-
+		
 		if(game.hasWon()) {
 			System.out.println("YOU WON!!!!!");
 		}
@@ -47,7 +49,7 @@ public class mainInterface {
 			System.out.println("Choose a available guard");
 			num = move.nextInt();
 		}
-		
+
 		switch(num) {
 		case 1:
 			return "Drunken";
@@ -56,12 +58,12 @@ public class mainInterface {
 		case 3: 
 			return "Suspicious";
 		}
-		
+
 		return "Rookie";
 	}
 
 	public static int numberOfOgres()  {
-		
+
 		System.out.println("How many ogres do you want?");
 		int num;
 		do {
@@ -69,7 +71,7 @@ public class mainInterface {
 			if (num >= 5 && num <= 0)
 				System.out.println("Insert a number between 0 and 5\n");
 		}while (num <= 0 && num >= 5);
-		
+
 		return num;
 	}
 
