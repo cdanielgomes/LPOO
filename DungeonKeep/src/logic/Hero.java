@@ -30,13 +30,15 @@ public class Hero extends Character{
 			this.setNextLevel(true);
 			break;
 		case ' ':
+			if(map.getDoor().getPos().equals(newPos)){
+				this.setNextLevel(true);
+			}
 			setPosition(newPos);
 			break;
 		case 'I':
 			if (map.getDoor().getPos().equals(newPos) && this.lever) {
 				this.kickDoor = true;
-				map.getDoor().setSymbol(' ');
-				map.setMapSymbol(map.getDoor());
+				map.getDoor().openDoor(map);
 			}
 			break;
 
@@ -48,6 +50,7 @@ public class Hero extends Character{
 			setPosition(newPos);
 			break;
 		default:
+			setPosition(newPos);
 			break;
 		}
 

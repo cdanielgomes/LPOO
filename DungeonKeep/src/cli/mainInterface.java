@@ -2,7 +2,11 @@ package cli;
 
 import java.util.Scanner;
 
+import logic.Door;
+import logic.Dungeon;
 import logic.GameState;
+import logic.Keep;
+import logic.Position;
 
 
 public class mainInterface {

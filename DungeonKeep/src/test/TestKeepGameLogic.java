@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import logic.Door;
 import logic.GameMap;
 import logic.Keep;
 import logic.Position;
@@ -20,54 +21,59 @@ public class TestKeepGameLogic {
 
 	
 	@Test
-	public void testHeroNextToOgre() {
-		GameMap newmap = new Keep(map , 1);
+	public void testgetHeroNextToOgre() {
+		GameMap newmap = new Keep(map ,1, new Door(new Position(1,0)));
 		assertEquals(new Position(1,1) , newmap.getHeroPos());
 		assertFalse(newmap.endOfGame());
-		newmap.hero.calculateNextPos(newmap, 'd');
+		newmap.getHero().calculateNextPos(newmap, 'd');
 		assertTrue(newmap.endOfGame());
 	}
 	
 	@Test
-	public void testHeroHasKey() {
-		GameMap newmap = new Keep(map , 1);
-		assertEquals(new Position(1,1) , newmap.getHeroPos());
-		newmap.hero.calculateNextPos(newmap, 's');
-		newmap.hero.calculateNextPos(newmap, 's');
+	public void testgetHeroHasKey() {
+		GameMap newmap = new Keep(map ,1, new Door(new Position(1,0)));
+		assertEquals(new Position(1,1) , newmap.getHero().getPos());
+		newmap.getHero().calculateNextPos(newmap, 's');
+		newmap.getHero().calculateNextPos(newmap, 's');
+		newmap.getHero().calculateNextPos(newmap, 'w');
 		assertEquals('K', newmap.getHero().getSymbol());
 	}
 	
 	@Test
-	public void testHeroMoveToDoorsAndFailsToLeave() {
-		GameMap newmap = new Keep(map , 1);
-		assertEquals(new Position(1,1) , newmap.getHeroPos());
-		newmap.hero.calculateNextPos(newmap, 'w');
+	public void testgetHeroMoveToDoorsAndFailsToLeave() {
+		GameMap newmap = new Keep(map ,1, new Door(new Position(1,0)));
+		assertEquals(new Position(1,1) , newmap.getHero().getPos());
+		newmap.getHero().calculateNextPos(newmap, 'w');
 		assertEquals(new Position(1,1),newmap.getHero().getPos());
 		assertFalse(newmap.endOfGame());
 	}
 	
 	@Test
-	public void testHeroMoveToDoorsAndDoorsOpen() {
-		GameMap newmap = new Keep(map , 1);
-		assertEquals(new Position(1,1) , newmap.getHeroPos());
-		newmap.hero.calculateNextPos(newmap, 's');
-		newmap.hero.calculateNextPos(newmap, 's');
-		newmap.hero.calculateNextPos(newmap, 'w');
-		newmap.hero.calculateNextPos(newmap, 'w');
-		newmap.hero.calculateNextPos(newmap, 'w');
-		assertTrue(newmap.endOfGame());
+	public void testgetHeroMoveToDoorsAndDoorsOpen() {
+		GameMap newmap = new Keep(map ,1, new Door(new Position(1,0)));
+		assertEquals(new Position(1,1) , newmap.getHero().getPos());
+		newmap.getHero().calculateNextPos(newmap, 's');
+		newmap.getHero().calculateNextPos(newmap, 's');
+		newmap.getHero().calculateNextPos(newmap, 'w');
+		newmap.getHero().calculateNextPos(newmap, 'w');
+		newmap.getHero().calculateNextPos(newmap, 'w');
+		newmap.getHero().calculateNextPos(newmap, 'w');
+		assertEquals(' ', newmap.getMapSymbol(new Position(1,0)));
+		
+		
 	}
 	
 	@Test
-	public void testHeroWinsKeep() {
-		GameMap newmap = new Keep(map , 1);
+	public void testgetHeroWinsKeep() {
+		GameMap newmap = new Keep(map ,1, new Door(new Position(1,0)));
 		assertEquals(new Position(1,1) , newmap.getHeroPos());
-		newmap.hero.calculateNextPos(newmap, 's');
-		newmap.hero.calculateNextPos(newmap, 's');
-		newmap.hero.calculateNextPos(newmap, 'w');
-		newmap.hero.calculateNextPos(newmap, 'w');
-		newmap.hero.calculateNextPos(newmap, 'w');
-		assertTrue(newmap.endOfGame());
+		newmap.getHero().calculateNextPos(newmap, 's');
+		newmap.getHero().calculateNextPos(newmap, 's');
+		newmap.getHero().calculateNextPos(newmap, 'w');
+		newmap.getHero().calculateNextPos(newmap, 'w');
+		newmap.getHero().calculateNextPos(newmap, 'w');
+		newmap.getHero().calculateNextPos(newmap, 'w');
+		assertTrue(newmap.getHero().getPos().equals(newmap.getDoor().getPos()));
 	}
 	
 	

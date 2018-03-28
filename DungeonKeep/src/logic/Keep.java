@@ -19,15 +19,9 @@ public class Keep extends GameMap{
 	public	void autoMoves(char heromove) {
 
 		hero.calculateNextPos(this, heromove);
-		if(hero.kickDoor) {
-			this.door.openDoor(this);
-		}
+		
 		for (Ogre i : hordOfOgres)
 			i.calculateNextPos(this);
-		
-		if(door.position.equals(hero.getPos())) {
-			hero.setNextLevel(true);
-		}
 	}
 
 	/*
@@ -49,6 +43,7 @@ public class Keep extends GameMap{
 			}
 		
 		}
+		
 		return false;
 	}
 
