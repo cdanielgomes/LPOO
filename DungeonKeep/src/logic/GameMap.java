@@ -53,16 +53,7 @@ public abstract class GameMap {
 		return lever.position;
 	}
 
-/*	public void printmap() {
-		for(int a = 0 ; a < collum  ; a++ ) {
-			System.out.print("|");
-			for(int b = 0 ; b < lines ; b++) {
-				System.out.print(this.map[a][b] + "|");
-
-			}
-			System.out.print('\n');
-		}
-	}*/
+	
 
 	public String totring() {
 		String map = "";

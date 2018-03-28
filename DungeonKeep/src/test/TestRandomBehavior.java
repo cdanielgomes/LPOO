@@ -23,10 +23,10 @@ public class TestRandomBehavior {
 
 	private char[][] map = { 
 			{ 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X' },
-			{ 'I', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'O', 'X' }, 
-			{ 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '*', 'X' },
-			{ 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X' }, 
-			{ 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'k', 'X' },
+			{ 'I', ' ', ' ', ' ', 'O', ' ', ' ', ' ', ' ', 'X' }, 
+			{ 'X', ' ', ' ', ' ', '*', ' ', ' ', ' ', ' ', 'X' },
+			{ 'X', 'k', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X' }, 
+			{ 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X' },
 			{ 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X' }, 
 			{ 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X' },
 			{ 'X', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'X' }, 
@@ -41,10 +41,10 @@ public class TestRandomBehavior {
 		game.setMap(new Keep(map, 1, j));
 
 		assertEquals(game.getMap().totring(),"XXXXXXXXXX\n"
-				+ "I       OX\n"
-				+ "X       *X\n"
+				+ "I   O    X\n"
+				+ "X   *    X\n"
+				+ "Xk       X\n"
 				+ "X        X\n"
-				+ "X       kX\n"
 				+ "X        X\n"
 				+ "X        X\n"
 				+ "X        X\n"
@@ -109,7 +109,7 @@ public class TestRandomBehavior {
 		}
 	}
 
-	@Test(timeout =3000)
+	@Test(timeout = 3000)
 	public void testWeaponRandomPositions() {
 		GameState g = new GameState(1,"Rookie");
 		ArrayList<Door> j = new ArrayList<Door>();
