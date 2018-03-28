@@ -1,6 +1,9 @@
 package test;
 
 import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import logic.Character;
@@ -26,31 +29,37 @@ public class TestDungeonGameLogic {
 	@Test
 	public void testMoveHeroIntoFreeCell() {
 		char[] moves = {'s', 's','a','w','w','d'};
-		GameMap newmap = new Dungeon(map , "Rookie", new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
-		assertEquals(new Position(1,1) , newmap.getHeroPos());
+		ArrayList<Door> j = new ArrayList<Door>();
+		j.add(new Door(new Position(0,2)));
+		j.add(new Door(new Position(0,3)));
+		GameMap newmap = new Dungeon(map , "Rookie", j,moves);
+		assertEquals(new Position(1,1) , newmap.getHero().getPos());
 		assertEquals(' ', newmap.getMapSymbol(newmap.getHero().move('s')));
-		assertEquals('H' , newmap.getMapSymbol(newmap.getHeroPos()));
+		newmap.getHero().calculateNextPos(newmap, 's');
+		assertEquals(new Position(1,2), newmap.getHero().getPos());
 	}
 	
 	@Test
 	public void testMoveHeroIntoWall() {
 		char[] moves = {'s', 's','a','w','w','d'};
-		GameMap newmap = new Dungeon(map , "Rookie",new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
+		ArrayList<Door> j = new ArrayList<Door>();
+		j.add(new Door(new Position(0,2)));
+		j.add(new Door(new Position(0,3)));
+		GameMap newmap = new Dungeon(map , "Suspicious", j,moves);
 		assertEquals('X', newmap.getMapSymbol(newmap.getHero().move('a')));
-		assertEquals(new Position(1,1) , newmap.getHeroPos());
-		newmap.autoMoves('a');
-		assertEquals(new Position(1,1) , newmap.getHeroPos());
+		assertEquals(new Position(1,1) , newmap.getHero().getPos());
+		newmap.getHero().calculateNextPos(newmap,'a');
+		assertEquals(new Position(1,1) , newmap.getHero().getPos());
 	}
 	
 	@Test
 	public void testHeroCapturedByGuard() {
 		char[] moves = {'s', 's','a','w','w','d'};
-		GameMap newmap = new Dungeon(map , "Rookie",new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
-		assertFalse(newmap.endOfGame());
-		newmap.autoMoves('a');
-		newmap.autoMoves('a');
-		newmap.autoMoves('a');
-		newmap.autoMoves('s');
+		ArrayList<Door> j = new ArrayList<Door>();
+		j.add(new Door(new Position(0,2)));
+		j.add(new Door(new Position(0,3)));
+		GameMap newmap = new Dungeon(map , "Drunken", j,moves);
+		newmap.getHero().calculateNextPos(newmap,'d');
 		assertTrue(newmap.getHero().checkProximity(((Dungeon)newmap).getGuard()));
 		assertTrue(newmap.endOfGame());
 	}
@@ -58,21 +67,27 @@ public class TestDungeonGameLogic {
 	@Test
 	public void testHeroMovesIntoClosedDoor() {
 		char[] moves = {'s', 's','a','w','w','d'};
-		GameMap newmap = new Dungeon(map , "Rookie",new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
-		assertEquals(new Position(1,1) , newmap.getHeroPos());
-		newmap.autoMoves('s');
-		newmap.autoMoves('a');
+		ArrayList<Door> j = new ArrayList<Door>();
+		j.add(new Door(new Position(0,2)));
+		j.add(new Door(new Position(0,3)));
+		GameMap newmap = new Dungeon(map , "Rookie", j,moves);
+		assertEquals(new Position(1,1) , newmap.getHero().getPos());
+		newmap.getHero().calculateNextPos(newmap,'s');
+		newmap.getHero().calculateNextPos(newmap,'a');
 		assertFalse(newmap.endOfGame());
 	}
 	
 	@Test
 	public void testHeroMovesIntoLeverAndDoorsOpen() {
 		char[] moves = {'s', 's','a','w','w','d'};
-		GameMap newmap = new Dungeon(map , "Rookie",new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
+		ArrayList<Door> j = new ArrayList<Door>();
+		j.add(new Door(new Position(0,2)));
+		j.add(new Door(new Position(0,3)));
+		GameMap newmap = new Dungeon(map , "Rookie", j,moves);
 		assertEquals('I' , newmap.getMapSymbol(new Position(0,2)));
-		newmap.autoMoves('s');
+		newmap.getHero().calculateNextPos(newmap,'s');
 		assertEquals('k', newmap.getMapSymbol(newmap.getHero().move('s')));
-		newmap.autoMoves('s');
+		newmap.getHero().calculateNextPos(newmap,'s');
 		assertEquals('K', newmap.getHero().getSymbol());
 		assertTrue(newmap.getHero().hasLever());
 		assertEquals('S' , newmap.getMapSymbol(new Position(0,2)));
@@ -82,11 +97,14 @@ public class TestDungeonGameLogic {
 	@Test
 	public void testHeroMovesToKeep() {
 		char[] moves = {'a','s','d','w'};
-		GameMap newmap = new Dungeon(map ,"Rookie",new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
-		newmap.autoMoves('s');
-		newmap.autoMoves('s');
+		ArrayList<Door> j = new ArrayList<Door>();
+		j.add(new Door(new Position(0,2)));
+		j.add(new Door(new Position(0,3)));
+		GameMap newmap = new Dungeon(map , "Rookie", j,moves);
+		newmap.getHero().calculateNextPos(newmap,'s');
+		newmap.getHero().calculateNextPos(newmap,'s');
 		assertEquals('K', newmap.getHero().getSymbol());
-		newmap.autoMoves('a');
+		newmap.getHero().calculateNextPos(newmap,'a');
 		assertTrue(newmap.getHero().nextLevel());
 	}
 	

@@ -1,14 +1,14 @@
 package logic;
 
+import java.util.ArrayList;
+
 public class Dungeon extends GameMap {
 
 	private Guard guard;
-	private Door door1;
 	
-	public Dungeon(char[][] map, String i, Door door1, Door door2, char[] guardMove) {
+	public Dungeon(char[][] map, String i, ArrayList<Door> door, char[] guardMove) {
 		super(map);
-		this.door = door1;
-		this.door1 = door2;
+		this.door = door;
 	
 		switch(i) {
 		case "Rookie":
@@ -52,12 +52,8 @@ public class Dungeon extends GameMap {
 	public	void autoMoves(char heromove) {
 		hero.calculateNextPos(this, heromove);
 		guard.movement();
-
-		if(hero.hasLever()) {
-			door1.openDoor(this);
-			door.openDoor(this);
-		}
 	}
-	
+
+
 
 }
