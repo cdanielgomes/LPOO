@@ -2,8 +2,8 @@ package logic;
 
 public class Rookie extends Guard{
 
-	public Rookie(Position position, String name) {
-		super(position, name);
+	public Rookie(Position position, String name, char[] moves) {
+		super(position, name, moves);
 	}
 
 	@Override

@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class Suspicious extends Guard{
 
-	public Suspicious(Position pos , String name) {
-		super(pos , name);
+	public Suspicious(Position pos , String name, char[] moves) {
+		super(pos , name, moves);
 	}
 	
 	@Override

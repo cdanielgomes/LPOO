@@ -38,13 +38,34 @@ public class mainInterface {
 
 	public static String userChooseGuardType() {
 		System.out.println("1 - Drunken\n2 - Rookie\n3 - Suspicious\nSelect the guard : ");
-		String num = move.next();
-		return num;
+		int num = move.nextInt();
+		while(num >= 4 && num <= 0) {
+			System.out.println("Choose a available guard");
+			num = move.nextInt();
+		}
+		
+		switch(num) {
+		case 1:
+			return "Drunken";
+		case 2:
+			return "Rookie";
+		case 3: 
+			return "Suspicious";
+		}
+		
+		return "Rookie";
 	}
 
-	public static int numberOfOgres() {
+	public static int numberOfOgres()  {
+		
 		System.out.println("How many ogres do you want?");
-		int num = move.nextInt();
+		int num;
+		do {
+			num = move.nextInt();
+			if (num >= 5 && num <= 0)
+				System.out.println("Insert a number between 0 and 5\n");
+		}while (num <= 0 && num >= 5);
+		
 		return num;
 	}
 

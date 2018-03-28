@@ -7,17 +7,17 @@ public abstract class Guard extends Character{
 	
 
 	private String name;
-	private char moves[] = { 'a', 's', 's', 's', 's', 'a', 'a', 'a', 'a', 'a', 'a', 's', 'd', 'd', 'd', 'd', 'd', 'd',
-			'd', 'w', 'w', 'w', 'w', 'w' };
+	private char[] moves;
 	protected boolean reverse = false;
 	protected boolean asleep = false;
 	private int m = 0;
 	
 	
-	public Guard(Position position, String name) {
+	public Guard(Position position, String name, char[] moves) {
 		super(position);
 		this.symbol = 'G';
 		this.name = name;
+		this.moves = moves;
 		
 		
 	}

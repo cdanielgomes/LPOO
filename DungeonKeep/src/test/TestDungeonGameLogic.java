@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import logic.Character;
+import logic.Door;
 import logic.Dungeon;
 import logic.GameState;
 import logic.GameMap;
@@ -24,57 +25,69 @@ public class TestDungeonGameLogic {
 	
 	@Test
 	public void testMoveHeroIntoFreeCell() {
-		GameMap newmap = new Dungeon(map , "Rookie");
+		char[] moves = {'s', 's','a','w','w','d'};
+		GameMap newmap = new Dungeon(map , "Rookie", new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
 		assertEquals(new Position(1,1) , newmap.getHeroPos());
-		//newmap.autoMoves('s');
-		//newmap.getHero().calculateNextPos(newmap, 's');
-		newmap.hero.calculateNextPos(newmap, 's');
-		assertEquals(new Position(2,1) , newmap.getHeroPos());
+		assertEquals(' ', newmap.getMapSymbol(newmap.getHero().move('s')));
+		assertEquals('H' , newmap.getMapSymbol(newmap.getHeroPos()));
 	}
 	
 	@Test
 	public void testMoveHeroIntoWall() {
-		GameMap newmap = new Dungeon(map , "Rookie");
+		char[] moves = {'s', 's','a','w','w','d'};
+		GameMap newmap = new Dungeon(map , "Rookie",new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
+		assertEquals('X', newmap.getMapSymbol(newmap.getHero().move('a')));
 		assertEquals(new Position(1,1) , newmap.getHeroPos());
-		newmap.hero.calculateNextPos(newmap, 'a');
+		newmap.autoMoves('a');
 		assertEquals(new Position(1,1) , newmap.getHeroPos());
 	}
 	
 	@Test
 	public void testHeroCapturedByGuard() {
-		GameMap newmap = new Dungeon(map , "Rookie");
+		char[] moves = {'s', 's','a','w','w','d'};
+		GameMap newmap = new Dungeon(map , "Rookie",new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
 		assertFalse(newmap.endOfGame());
-		newmap.hero.calculateNextPos(newmap, 'd');
+		newmap.autoMoves('a');
+		newmap.autoMoves('a');
+		newmap.autoMoves('a');
+		newmap.autoMoves('s');
+		assertTrue(newmap.getHero().checkProximity(((Dungeon)newmap).getGuard()));
 		assertTrue(newmap.endOfGame());
 	}
 	
 	@Test
 	public void testHeroMovesIntoClosedDoor() {
-		GameMap newmap = new Dungeon(map , "Rookie");
+		char[] moves = {'s', 's','a','w','w','d'};
+		GameMap newmap = new Dungeon(map , "Rookie",new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
 		assertEquals(new Position(1,1) , newmap.getHeroPos());
-		newmap.hero.calculateNextPos(newmap, 's');
-		newmap.hero.calculateNextPos(newmap, 'a');
+		newmap.autoMoves('s');
+		newmap.autoMoves('a');
 		assertFalse(newmap.endOfGame());
 	}
 	
 	@Test
 	public void testHeroMovesIntoLeverAndDoorsOpen() {
-		GameMap newmap = new Dungeon(map , "Rookie");
+		char[] moves = {'s', 's','a','w','w','d'};
+		GameMap newmap = new Dungeon(map , "Rookie",new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
 		assertEquals('I' , newmap.getMapSymbol(new Position(0,2)));
-		newmap.hero.calculateNextPos(newmap, 's');
-		newmap.hero.calculateNextPos(newmap, 's');
+		newmap.autoMoves('s');
+		assertEquals('k', newmap.getMapSymbol(newmap.getHero().move('s')));
+		newmap.autoMoves('s');
+		assertEquals('K', newmap.getHero().getSymbol());
+		assertTrue(newmap.getHero().hasLever());
 		assertEquals('S' , newmap.getMapSymbol(new Position(0,2)));
 		
 	}
 	
 	@Test
 	public void testHeroMovesToKeep() {
-		GameMap newmap = new Dungeon(map ,"Rookie");
-		newmap.hero.calculateNextPos(newmap, 's');
-		newmap.hero.calculateNextPos(newmap, 's');
-		newmap.hero.calculateNextPos(newmap, 'a');
-		newmap.hero.calculateNextPos(newmap, 'a');
-		assertTrue(newmap.hero.nextLevel());
+		char[] moves = {'a','s','d','w'};
+		GameMap newmap = new Dungeon(map ,"Rookie",new Door(new Position(0,2)),new Door(new Position(0,3)),moves);
+		newmap.autoMoves('s');
+		newmap.autoMoves('s');
+		assertEquals('K', newmap.getHero().getSymbol());
+		newmap.autoMoves('a');
+		assertTrue(newmap.getHero().nextLevel());
 	}
 	
 

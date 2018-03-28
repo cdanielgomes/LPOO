@@ -6,9 +6,9 @@ public class Keep extends GameMap{
 
 	private ArrayList<Ogre> hordOfOgres = new ArrayList<Ogre>();
 
-	public Keep(char[][] map, int numberofogres) {
+	public Keep(char[][] map, int numberofogres, Door door) {
 		super(map);
-		this.door = new Door(new Position(0,1));
+		this.door = door;
 		for (int i = 0 ; i < numberofogres; i++) {
 			hordOfOgres.add(new Ogre(getCharc('O')));
 		}

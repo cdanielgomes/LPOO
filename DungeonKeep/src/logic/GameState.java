@@ -40,10 +40,9 @@ public class GameState {
 	};
 
 	public void start_game() {
-
-		map = new Dungeon(map1,guard);
-		//map = new Keep(map2,nOgres);
-
+		char[] moves = { 'a', 's', 's', 's', 's', 'a', 'a', 'a', 'a', 'a', 'a', 's', 'd', 'd', 'd', 'd', 'd', 'd',
+				'd', 'w', 'w', 'w', 'w', 'w' };
+		map = new Dungeon(map1,guard, new Door(new Position(0,5)), new Door(new Position(0,6)), moves);
 	}
 
 	public void movement(char hero) {
@@ -53,13 +52,13 @@ public class GameState {
 		map.setNewPositions();
 		if (map.hero.nextLevel()) {
 			if (map instanceof Dungeon)
-				map = new Keep(map2,nOgres);
+				map = new Keep(map2,nOgres,new Door(new Position(0,1)));
 			else 
 				won = true;
 		}
 	}
 
-	
+
 	public void display() {
 		map.printmap();
 	}
@@ -67,7 +66,7 @@ public class GameState {
 	public boolean over() {
 		return map.endOfGame() || won;
 	}
-	
+
 	public boolean hasWon() {
 		return this.won;
 	}

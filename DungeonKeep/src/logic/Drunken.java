@@ -7,8 +7,8 @@ public class Drunken extends Guard {
 	private int sleepCounter= 4;
 	
 	
-	public Drunken(Position pos , String name) {
-		super(pos, name);
+	public Drunken(Position pos , String name, char[] moves) {
+		super(pos, name, moves);
 	}
 
 	@Override

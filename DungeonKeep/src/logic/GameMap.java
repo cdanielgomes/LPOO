@@ -6,7 +6,7 @@ public abstract class GameMap implements MapLogic {
 	protected int collum;
 	protected int lines;
 
-	public Hero hero;
+	protected Hero hero;
 	protected Lever lever;
 	protected Door door;
 
