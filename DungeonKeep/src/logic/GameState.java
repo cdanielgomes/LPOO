@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.ArrayList;
+
 public class GameState {
 
 	private GameMap map;
@@ -42,7 +44,11 @@ public class GameState {
 	public void start_game() {
 		char[] moves = { 'a', 's', 's', 's', 's', 'a', 'a', 'a', 'a', 'a', 'a', 's', 'd', 'd', 'd', 'd', 'd', 'd',
 				'd', 'w', 'w', 'w', 'w', 'w' };
-		map = new Dungeon(map1,guard, new Door(new Position(0,5)), new Door(new Position(0,6)), moves);
+		ArrayList<Door> i = new ArrayList<Door>(); 
+		i.add(new Door(new Position(0,5)));
+		i.add(new Door(new Position(0,6)));
+		
+		map = new Dungeon(map1,guard, i, moves);
 	}
 
 	public void movement(char hero) {
@@ -50,9 +56,14 @@ public class GameState {
 		map.deleteOldPositions();
 		map.autoMoves(hero);
 		map.setNewPositions();
+		
 		if (map.hero.nextLevel()) {
-			if (map instanceof Dungeon)
-				map = new Keep(map2,nOgres,new Door(new Position(0,1)));
+
+			if (map instanceof Dungeon) {
+				ArrayList<Door> s = new ArrayList<Door>();
+				s.add(new Door(new Position(0,1)));
+				map = new Keep(map2,nOgres,s);
+			}
 			else 
 				won = true;
 		}
@@ -60,7 +71,7 @@ public class GameState {
 
  
 	public void display() {
-		map.printmap();
+		System.out.println(map.totring());
 	}
 
 	public boolean over() {
@@ -71,10 +82,12 @@ public class GameState {
 		return this.won;
 	}
 
-	/**
-	 * @return the map
-	 */
+	
 	public GameMap getMap() {
 		return map;
+	}
+	
+	public void setMap(GameMap map) {
+		this.map = map;
 	}
 }

@@ -25,20 +25,28 @@ public class Hero extends Character{
 			setPosition(newPos);
 			this.symbol = 'K';
 			setLever(true);
+			if(map instanceof Dungeon) {
+				for(Door i : map.getDoor())
+					i.openDoor(map);
+			}
 			break;
 		case 'S':
 			this.setNextLevel(true);
 			break;
 		case ' ':
-			if(map.getDoor().getPos().equals(newPos)){
-				this.setNextLevel(true);
+			for (Door i: map.getDoor()) {
+				if(i.getPos().equals(newPos)){
+					this.setNextLevel(true);
+				}
 			}
 			setPosition(newPos);
 			break;
 		case 'I':
-			if (map.getDoor().getPos().equals(newPos) && this.lever) {
-				this.kickDoor = true;
-				map.getDoor().openDoor(map);
+			for (Door i: map.getDoor()) {
+				if (i.getPos().equals(newPos) && this.lever) {
+					this.kickDoor = true;
+					i.openDoor(map);
+				}
 			}
 			break;
 

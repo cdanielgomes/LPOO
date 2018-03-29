@@ -1,37 +1,26 @@
 package logic;
 
-public abstract class GameMap implements MapLogic {
+import java.util.ArrayList;
 
+public abstract class GameMap {
 	protected char[][] map;
 	protected int collum;
 	protected int lines;
 
 	protected Hero hero;
 	protected Lever lever;
-	protected Door door;
+	protected ArrayList<Door> door = new ArrayList<Door>();
 
 
 	public GameMap(char[][] map) {
 		this.map = map;
 		this.collum = map.length;
 		this.lines = map[0].length;
-		this.hero = new Hero(getHeroPos());
-		this.lever = new Lever(getKeyPosition());
+		this.hero = new Hero(getCharc('H'));
+		this.lever = new Lever(getCharc('k'));
 
 	}
 
-
-	@Override
-	public Position getKeyPosition() {
-
-		return getCharc('k');
-	}
-
-	@Override
-	public Position getHeroPos() {
-
-		return getCharc('H');
-	}
 
 
 	public Position getCharc(char charac) {
@@ -64,6 +53,7 @@ public abstract class GameMap implements MapLogic {
 		return lever.position;
 	}
 
+<<<<<<< HEAD
 	public void printmap() {
 
 		for(int a = 0 ; a < collum  ; a++ ) {
@@ -75,6 +65,9 @@ public abstract class GameMap implements MapLogic {
 			System.out.print('\n');
 		}
 	}
+=======
+	
+>>>>>>> b947613db0596bfc933c50b08cdb36683b327ea7
 
 	public String tostring() {
 		String map = "";
@@ -88,7 +81,13 @@ public abstract class GameMap implements MapLogic {
 		}
 		return map;
 	}
-	public Door getDoor() {
+	
+	public Lever getLever() {
+		return lever;
+	}
+
+
+	public ArrayList<Door> getDoor() {
 		return this.door;
 	}
 
