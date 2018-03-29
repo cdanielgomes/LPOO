@@ -12,3 +12,4 @@ public class Rookie extends Guard{
 	}
 
 }
+ 

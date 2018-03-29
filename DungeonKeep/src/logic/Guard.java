@@ -22,7 +22,7 @@ public abstract class Guard extends Character{
 		
 	}
 	
-	
+	 
 	public String getName() {
 		return name;
 	}

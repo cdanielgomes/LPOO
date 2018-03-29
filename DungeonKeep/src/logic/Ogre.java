@@ -17,7 +17,7 @@ public class Ogre extends Character {
 		weapon.symbol = '*';
 	}	
 
-	/* 
+	/*  
 	 * Calculate the next position of the weapon and of the ogre 
 	 * 
 	 * */

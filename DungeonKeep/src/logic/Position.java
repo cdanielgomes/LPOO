@@ -14,7 +14,7 @@ public class Position {
 
 	void setPosition(int x, int y) {
 		this.x = x;
-		this.y = y;
+		this.y = y; 
 	}
 	
 	public int getX() {

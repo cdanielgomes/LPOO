@@ -9,7 +9,7 @@ public class Character {
 		this.position = position;
 	}
 
-	public void setSymbol(char symbol) {
+	public void setSymbol(char symbol) { 
 		this.symbol = symbol;
 	}
 
@@ -74,7 +74,7 @@ public class Character {
 	
 	public boolean checkProximity(Character obj) {
 		
-		int diferencex = position.getX() - obj.position.getX(), diferencey = position.getY()- obj.position.getY();
+		int diferencex = (position.getX() - obj.position.getX()), diferencey = position.getY()- obj.position.getY();
 
 		if ((diferencex == 1 || diferencex == -1 || diferencex == 0) && diferencey == 0)
 			return true;

@@ -19,13 +19,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 
+
 public class GameWindow {
 
 	private JFrame frmDungeonKeep;
 	private JTextField textField;
 	private GameState game;
 
-	/**
+	/** 
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -44,7 +45,7 @@ public class GameWindow {
 	/**
 	 * Create the application.
 	 */
-	public GameWindow() {
+	public GameWindow() { 
 		initialize();
 	}
 
@@ -62,6 +63,7 @@ public class GameWindow {
 		frmDungeonKeep.getContentPane().setLayout(null);
 
 		textField = new JTextField();
+		textField.setFont(new Font("Courier", Font.PLAIN, 12));
 		textField.setBounds(170, 2, 50, 19);
 		frmDungeonKeep.getContentPane().add(textField);
 		textField.setColumns(10);
@@ -72,18 +74,25 @@ public class GameWindow {
 		frmDungeonKeep.getContentPane().add(lblNewLabel);
 
 
+		JLabel lblgameover = new JLabel("GAME OVER !!");
+		lblgameover.setBounds(200, 400, 130, 15);
+		frmDungeonKeep.getContentPane().add(lblgameover);
+		lblgameover.setVisible(false);
+
+
+
+
 		JLabel lblGuardPersonality = new JLabel("Guard Personality");
 		lblGuardPersonality.setBounds(10, 30, 130, 15);
 		frmDungeonKeep.getContentPane().add(lblGuardPersonality);; 
 
-		JComboBox guardSelec = new JComboBox();
-		guardSelec.setModel(new DefaultComboBoxModel(new String[] {"Suspicious", "Drunken", "Rookie"}));
+		JComboBox<String> guardSelec = new JComboBox<String>();
+		guardSelec.setModel(new DefaultComboBoxModel<String>(new String[] {"Suspicious", "Drunken", "Rookie"}));
 		guardSelec.setBounds(170, 33, 120, 20);
 		frmDungeonKeep.getContentPane().add(guardSelec);
 
 		JTextArea board = new JTextArea();
-		board.setFont(new Font("Century Schoolbook L", Font.PLAIN, 14));
-		board.setEditable(false);
+		board.setFont(new Font("Courier", Font.PLAIN, 14));
 		board.setBounds(11, 62, 281, 285);
 		frmDungeonKeep.getContentPane().add(board);
 
@@ -92,9 +101,17 @@ public class GameWindow {
 			public void actionPerformed(ActionEvent e) {
 				String nOgres = textField.getText(); 
 				String guardPersonality = guardSelec.getSelectedItem().toString();
+				int nogres = Integer.parseInt(nOgres);
+				if (nogres <= 5 && nogres >= 0){
 				game = new GameState(Integer.parseInt(nOgres),guardPersonality);
 				game.start_game();
-				board.setText(game.getMap().totring());
+				lblgameover.setVisible(false);
+				board.setVisible(true);
+				board.setText(game.getMap().tostring());
+				}
+				else {
+					board.setVisible(false);
+				}
 			}
 		});
 
@@ -114,11 +131,19 @@ public class GameWindow {
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.movement('w');
-				board.replaceSelection(game.getMap().totring());
-				board.setText(game.getMap().totring());
+				if(game.getMap().endOfGame()){
+					board.setText(game.getMap().tostring());
+					board.setVisible(false);
+					lblgameover.setVisible(true);
+				}
+				else{
+					board.replaceSelection(game.getMap().tostring());
+					board.setText(game.getMap().tostring());
+				}
 
 			}
 		});
+ 
 		btnUp.setBounds(356, 103, 60, 20);
 		frmDungeonKeep.getContentPane().add(btnUp);
 
@@ -126,10 +151,18 @@ public class GameWindow {
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.movement('a');
-				board.setText(game.getMap().totring());
-
+				if(game.getMap().endOfGame()){
+					board.setText(game.getMap().tostring());
+					board.setVisible(false);
+					lblgameover.setVisible(true);
+				}
+				else{
+					board.replaceSelection(game.getMap().tostring());
+					board.setText(game.getMap().tostring());
+				}
 			}
 		});
+
 		btnLeft.setBounds(298, 135, 70, 20);
 		frmDungeonKeep.getContentPane().add(btnLeft);
 
@@ -137,9 +170,18 @@ public class GameWindow {
 		btnRigth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.movement('d');
-				board.setText(game.getMap().totring());
+				if(game.getMap().endOfGame()){
+					board.setText(game.getMap().tostring());
+					board.setVisible(false);	
+					lblgameover.setVisible(true);
+				}
+				else{
+					board.replaceSelection(game.getMap().tostring());
+					board.setText(game.getMap().tostring());
+				}
 			}
 		});
+		
 		btnRigth.setBounds(398, 135, 80, 20);
 		frmDungeonKeep.getContentPane().add(btnRigth);
 
@@ -147,7 +189,15 @@ public class GameWindow {
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.movement('s');
-				board.setText(game.getMap().totring());
+				if(game.getMap().endOfGame()){
+					board.setText(game.getMap().tostring());
+					board.setVisible(false);	
+					lblgameover.setVisible(true);
+				}
+				else{
+					//board.replaceSelection(game.getMap().tostring());
+					board.setText(game.getMap().tostring());
+				}
 			}
 		});
 		

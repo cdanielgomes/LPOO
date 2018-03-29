@@ -16,7 +16,7 @@ public class Suspicious extends Guard{
 		if (n < 3) {
 			if (reverse) {
 				reverse = false;
-			} else {
+			} else { 
 				reverse = true;
 			}
 

@@ -20,7 +20,7 @@ public class Hero extends Character{
 
 		switch(symbol) {
 		case 'X':
-			break;
+			break; 
 		case 'k':
 			setPosition(newPos);
 			this.symbol = 'K';

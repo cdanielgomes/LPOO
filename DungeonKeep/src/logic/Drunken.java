@@ -13,7 +13,7 @@ public class Drunken extends Guard {
 
 	@Override
 	public void movement() {
-
+		
 		Random random = new Random();
 		int n = random.nextInt(10) + 1;
 		

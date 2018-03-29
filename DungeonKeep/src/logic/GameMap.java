@@ -67,16 +67,16 @@ public abstract class GameMap implements MapLogic {
 	public void printmap() {
 
 		for(int a = 0 ; a < collum  ; a++ ) {
-			System.out.print("|");
+			//System.out.print("|");
 			for(int b = 0 ; b < lines ; b++) {
-				System.out.print(this.map[a][b] + "|");
+				System.out.print(this.map[a][b] );
 
 			}
 			System.out.print('\n');
 		}
 	}
 
-	public String totring() {
+	public String tostring() {
 		String map = "";
 		for(int a = 0 ; a < collum  ; a++ ) {
 			//System.out.print("|");

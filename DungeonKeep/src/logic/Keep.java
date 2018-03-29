@@ -74,7 +74,7 @@ public class Keep extends GameMap{
 		for (Ogre i : hordOfOgres) {
 			setMapSymbol(i);
 			setMapSymbol(i.getWeapon());
-		}
+		} 
 
 	}
 

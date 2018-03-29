@@ -46,7 +46,7 @@ public class Dungeon extends GameMap {
 	void setNewPositions() {
 		setMapSymbol(guard);
 		setMapSymbol(hero);
-	}
+	} 
 
 	@Override
 	public	void autoMoves(char heromove) {
