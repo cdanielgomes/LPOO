@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import java.awt.Color;
 
 import logic.GameState;
 
@@ -14,17 +17,29 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
+import java.awt.GridLayout;
 
 
 public class GameWindow {
 
-	private JFrame frmDungeonKeep;
-	private JTextField textField;
+	static JFrame frmDungeonKeep;
+	static JTextField textField;
 	private GameState game;
+
+	static JLayeredPane MultiplePane;
+
+
+
+
+
+
 
 	/** 
 	 * Launch the application.
@@ -53,6 +68,7 @@ public class GameWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
 		frmDungeonKeep = new JFrame();
 		frmDungeonKeep.setTitle("Dungeon Keep");
 		frmDungeonKeep.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,6 +77,13 @@ public class GameWindow {
 		frmDungeonKeep.setResizable(false);
 		frmDungeonKeep.setBounds(100, 100, 490, 450);
 		frmDungeonKeep.getContentPane().setLayout(null);
+
+		MultiplePane = new JLayeredPane();
+		MultiplePane.setBounds(11 , 62 , 281 , 288);
+		frmDungeonKeep.getContentPane().add(MultiplePane);
+		MultiplePane.setLayout(null);
+
+	
 
 		textField = new JTextField();
 		textField.setFont(new Font("Courier", Font.PLAIN, 12));
@@ -86,15 +109,26 @@ public class GameWindow {
 		lblGuardPersonality.setBounds(10, 30, 130, 15);
 		frmDungeonKeep.getContentPane().add(lblGuardPersonality);; 
 
+
+
 		JComboBox<String> guardSelec = new JComboBox<String>();
 		guardSelec.setModel(new DefaultComboBoxModel<String>(new String[] {"Suspicious", "Drunken", "Rookie"}));
 		guardSelec.setBounds(170, 33, 120, 20);
 		frmDungeonKeep.getContentPane().add(guardSelec);
 
+		/*
+
 		JTextArea board = new JTextArea();
 		board.setFont(new Font("Courier", Font.PLAIN, 14));
 		board.setBounds(11, 62, 281, 285);
 		frmDungeonKeep.getContentPane().add(board);
+
+		*/
+
+		MapRend mapa = new MapRend();
+		mapa.setBounds(0, 0, 281, 288);
+		MultiplePane.add(mapa);
+		//mapa.setBackground(Color.BLACK);
 
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
@@ -103,14 +137,19 @@ public class GameWindow {
 				String guardPersonality = guardSelec.getSelectedItem().toString();
 				int nogres = Integer.parseInt(nOgres);
 				if (nogres <= 5 && nogres >= 0){
-				game = new GameState(Integer.parseInt(nOgres),guardPersonality);
+				game = new GameState(nogres,guardPersonality);
 				game.start_game();
+				mapa.setBorder(new EmptyBorder(5, 5, 5, 5));
+				mapa.setLayout(new GridLayout(game.getMap().getmap().length, game.getMap().getmap()[0].length));
+				mapa.setBackground(java.awt.Color.BLACK);
+				mapa.setVisible(true);
+				mapa.getImages(game.getMap().getmap());
+				mapa.paintMap(game.getMap().getmap());
 				lblgameover.setVisible(false);
-				board.setVisible(true);
-				board.setText(game.getMap().tostring());
-				}
+				
+				}  
 				else {
-					board.setVisible(false);
+					//board.setVisible(false);
 				}
 			}
 		});
@@ -131,14 +170,15 @@ public class GameWindow {
 		btnUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.movement('w');
+				mapa.repaintMap(game.getMap().getmap());  
 				if(game.getMap().endOfGame()){
-					board.setText(game.getMap().tostring());
-					board.setVisible(false);
+					//board.setText(game.getMap().tostring());
+					//board.setVisible(false);
 					lblgameover.setVisible(true);
 				}
 				else{
-					board.replaceSelection(game.getMap().tostring());
-					board.setText(game.getMap().tostring());
+					//board.replaceSelection(game.getMap().tostring());
+					//board.setText(game.getMap().tostring());
 				}
 
 			}
@@ -151,14 +191,15 @@ public class GameWindow {
 		btnLeft.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.movement('a');
+				mapa.repaintMap(game.getMap().getmap());
 				if(game.getMap().endOfGame()){
-					board.setText(game.getMap().tostring());
-					board.setVisible(false);
+					//board.setText(game.getMap().tostring());
+					//board.setVisible(false);
 					lblgameover.setVisible(true);
 				}
 				else{
-					board.replaceSelection(game.getMap().tostring());
-					board.setText(game.getMap().tostring());
+					//board.replaceSelection(game.getMap().tostring());
+					//board.setText(game.getMap().tostring());
 				}
 			}
 		});
@@ -170,14 +211,15 @@ public class GameWindow {
 		btnRigth.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.movement('d');
+				mapa.repaintMap(game.getMap().getmap());
 				if(game.getMap().endOfGame()){
-					board.setText(game.getMap().tostring());
-					board.setVisible(false);	
+					//board.setText(game.getMap().tostring());
+					//board.setVisible(false);	
 					lblgameover.setVisible(true);
 				}
 				else{
-					board.replaceSelection(game.getMap().tostring());
-					board.setText(game.getMap().tostring());
+					//board.replaceSelection(game.getMap().tostring());
+					//board.setText(game.getMap().tostring());
 				}
 			}
 		});
@@ -189,23 +231,20 @@ public class GameWindow {
 		btnDown.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				game.movement('s');
+				mapa.repaintMap(game.getMap().getmap());
 				if(game.getMap().endOfGame()){
-					board.setText(game.getMap().tostring());
-					board.setVisible(false);	
+					//board.setText(game.getMap().tostring());
+					//board.setVisible(false);	
 					lblgameover.setVisible(true);
 				}
 				else{
 					//board.replaceSelection(game.getMap().tostring());
-					board.setText(game.getMap().tostring());
+					//board.setText(game.getMap().tostring());
 				}
 			}
 		});
 		
 		btnDown.setBounds(353, 167, 80, 20);
 		frmDungeonKeep.getContentPane().add(btnDown);
-
-		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(12, 373, 210, 15);
-		frmDungeonKeep.getContentPane().add(lblNewLabel_1);
 	}
 }

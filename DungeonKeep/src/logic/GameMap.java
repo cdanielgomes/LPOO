@@ -53,7 +53,6 @@ public abstract class GameMap {
 		return lever.position;
 	}
 
-<<<<<<< HEAD
 	public void printmap() {
 
 		for(int a = 0 ; a < collum  ; a++ ) {
@@ -65,9 +64,6 @@ public abstract class GameMap {
 			System.out.print('\n');
 		}
 	}
-=======
-	
->>>>>>> b947613db0596bfc933c50b08cdb36683b327ea7
 
 	public String tostring() {
 		String map = "";
@@ -94,6 +90,10 @@ public abstract class GameMap {
 	
 	public Hero getHero() {
 		return this.hero;
+	}
+	
+	public char[][] getmap(){
+		return this.map;
 	}
 	
 	 public abstract void autoMoves(char heromove);

@@ -21,7 +21,7 @@ public class GameState {
 					 {'X','X','X','X','X','X','X','X','X','X'}
 					};
 
-
+ 
 
 	char[][] map2 = {{'X','X','X','X','X','X','X','X','X','X'},
 			{'I',' ',' ','O',' ',' ',' ',' ','k','X'},
@@ -71,7 +71,7 @@ public class GameState {
 
  
 	public void display() {
-		System.out.println(map.totring());
+		System.out.println(map.tostring());
 	}
 
 	public boolean over() {

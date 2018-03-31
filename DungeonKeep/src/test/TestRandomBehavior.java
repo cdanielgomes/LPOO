@@ -40,7 +40,7 @@ public class TestRandomBehavior {
 		j.add(new Door(new Position(0,1)));
 		game.setMap(new Keep(map, 1, j));
 
-		assertEquals(game.getMap().totring(),"XXXXXXXXXX\n"
+		assertEquals(game.getMap().tostring(),"XXXXXXXXXX\n"
 				+ "I   O    X\n"
 				+ "X   *    X\n"
 				+ "Xk       X\n"
