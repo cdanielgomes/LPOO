@@ -7,7 +7,7 @@ public class Suspicious extends Guard{
 	public Suspicious(Position pos , String name, char[] moves) {
 		super(pos , name, moves);
 	}
-	
+
 	@Override
 	public void movement() {
 		Random random = new Random();
@@ -21,11 +21,7 @@ public class Suspicious extends Guard{
 			}
 
 		}
-
-		if (reverse) {
-			guardReverseMoves();
-		} else {
-			guardMoves();
-		}
+		guardMoves();
 	}
 }
+

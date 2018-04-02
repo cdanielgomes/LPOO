@@ -24,7 +24,7 @@ public class Ogre extends Character {
 	void calculateNextPos(GameMap map) {
 
 		int indexMove = rand.nextInt(4);
-		Position newPos = move(moviment[indexMove]);
+		Position newPos = move(moviment[indexMove], false);
 
 		char symbol = map.getMapSymbol(newPos);
 
@@ -57,7 +57,7 @@ public class Ogre extends Character {
 		do {
 			c = false;
 			indexMove = rand.nextInt(4);
-			newPos = weapon.move(moviment[indexMove]);
+			newPos = weapon.move(moviment[indexMove], false);
 			symbol = map.getMapSymbol(newPos);
 
 			if(symbol == ' ' || symbol == 'k')

@@ -37,9 +37,6 @@ public class Drunken extends Guard {
 				
 			}
 			else {
-				if (reverse)
-					guardReverseMoves();
-				else 
 					guardMoves();
 			}
 		}
