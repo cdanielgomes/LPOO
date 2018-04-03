@@ -37,19 +37,19 @@ public class Dungeon extends GameMap {
 	}
 
 	@Override
-	void deleteOldPositions() {
+	public void deleteOldPositions() {
 		deleteCell(hero);
 		deleteCell(guard);
 	}
 
 	@Override
-	void setNewPositions() {
+	public void setNewPositions() {
 		setMapSymbol(guard);
 		setMapSymbol(hero);
 	} 
 
 	@Override
-	public	void autoMoves(char heromove) {
+	public void autoMoves(char heromove) {
 		hero.calculateNextPos(this, heromove);
 		guard.movement();
 	}

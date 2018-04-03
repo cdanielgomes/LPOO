@@ -25,37 +25,25 @@ public class Character {
 		return this.position;
 	}
 	public Position move(char c, boolean reverse) {		
-
 		Position pos = new Position();
 		switch(c) {
 		case 'a':
-			if(reverse)
-				pos.setPosition(this.position.getX()+1, this.position.getY());
-			else
-				pos.setPosition(this.position.getX()-1, this.position.getY());
+			if(reverse) pos.setPosition(this.position.getX()+1, this.position.getY());
+			else pos.setPosition(this.position.getX()-1, this.position.getY());
 			break;
 		case 'w':
-			if(reverse)
-				pos.setPosition(this.position.getX(), this.position.getY()+1);
-			else
-				pos.setPosition(this.position.getX(), this.position.getY()-1);
+			if(reverse) pos.setPosition(this.position.getX(), this.position.getY()+1);
+			else	pos.setPosition(this.position.getX(), this.position.getY()-1);
 			break;
 		case 's':
-			if(reverse)
-				pos.setPosition(this.position.getX(), this.position.getY()-1);
-			else
-				pos.setPosition(this.position.getX(), this.position.getY()+1);
+			if(reverse)	pos.setPosition(this.position.getX(), this.position.getY()-1);
+			else pos.setPosition(this.position.getX(), this.position.getY()+1);
 			break;
 		case 'd':
-			if(reverse)
-				pos.setPosition(this.position.getX()-1, this.position.getY());
-			else
-				pos.setPosition(this.position.getX()+1, this.position.getY());
-			break;
-		default:
+			if(reverse)	pos.setPosition(this.position.getX()-1, this.position.getY());
+			else pos.setPosition(this.position.getX()+1, this.position.getY());
 			break;
 		}
-
 		return pos;
 	}
 

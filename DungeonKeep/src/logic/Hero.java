@@ -12,24 +12,15 @@ public class Hero extends Character{
 		this.symbol = 'H';
 
 	}
-
+	
 	public void calculateNextPos(GameMap map , char move) {
-
 		Position newPos = super.move(move, false);
 		char symbol = map.getMapSymbol(newPos);
-
 		switch(symbol) {
 		case 'X':
 			break;
 		case 'k':
-			setPosition(newPos);
-			this.symbol = 'K';
-			setLever(true);
-			if(map instanceof Dungeon) {
-				for(Door i : map.getDoor()) {
-					i.openDoor(map);
-				}
-			}
+			kCompund(map, newPos);
 			break;
 		case 'S':
 			this.setPosition(newPos);
@@ -39,12 +30,7 @@ public class Hero extends Character{
 			setPosition(newPos);
 			break;
 		case 'I':
-			for (Door i: map.getDoor()) {
-				if (i.getPos().equals(newPos) && this.lever) {
-					this.kickDoor = true;
-					i.openDoor(map);
-				}
-			}
+			ICompound(map, newPos);
 			break;
 		case '*':
 			if(!hasLever()) this.setSymbol('A');
@@ -57,6 +43,25 @@ public class Hero extends Character{
 		}
 	}
 
+	
+	public void ICompound(GameMap map, Position newPos ) {
+		for (Door i: map.getDoor()) {
+			if (i.getPos().equals(newPos) && this.lever) {
+				this.kickDoor = true;
+				i.openDoor(map);
+			}
+		}
+	}
+	public void kCompund(GameMap map, Position newPos) {
+		setPosition(newPos);
+		this.symbol = 'K';
+		setLever(true);
+		if(map instanceof Dungeon) {
+			for(Door i : map.getDoor()) {
+				i.openDoor(map);
+			}
+		}
+	}
 	public boolean isArmed() {
 		return arm;
 	}
@@ -75,7 +80,4 @@ public class Hero extends Character{
 	public void setNextLevel(boolean nextLevel) {
 		this.nextLevel = nextLevel;
 	}
-
-
-
 }
