@@ -47,7 +47,7 @@ public class MenuWindow extends JPanel {
 		createNewGameButton();
 		createExitButton();
 		
-		//MenuImageSet();
+		MenuImageSet();
 
 
 	}
@@ -85,7 +85,6 @@ public class MenuWindow extends JPanel {
 			GameWindow.menuPanel.setVisible(false);
 
 
-			
 			GameWindow.play.setVisible(true);
 			GameWindow.play.playPanel.paintMap(GameWindow.getGame().getMap().getmap());
 			
@@ -121,12 +120,9 @@ public class MenuWindow extends JPanel {
 		JPanel p = new JPanel();
 		p.setBackground(Color.DARK_GRAY);
 		p.setBounds(20,40 ,300,300);
-		ImageIcon i = new ImageIcon(this.getClass().getResource("img/menu.png"));
-		p.add(new JLabel(i));
+		p.add(new JLabel(new ImageIcon(MenuWindow.class.getResource("/dkeep/gui/img/menu.jpg"))));
 		add(p);
-		
-		
-		
+			
 	}
 
 

@@ -18,6 +18,8 @@ import javax.swing.border.EmptyBorder;
 import logic.GameState;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import java.awt.Rectangle;
@@ -33,7 +35,7 @@ import java.awt.Component;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-public class PlayAux extends JPanel {
+public class PlayAux extends JPanel implements KeyListener{
 	
 	public PlayWindow playPanel;
 	private JPanel Epanel;
@@ -53,6 +55,7 @@ public class PlayAux extends JPanel {
 		Epanel.setLayout(new BorderLayout(0,0));
 		
 		Npanel = new JPanel();
+		Npanel.setBackground(Color.GRAY);
 		Npanel.setInheritsPopupMenu(true);
 		add(Npanel , BorderLayout.NORTH);
 
@@ -63,29 +66,8 @@ public class PlayAux extends JPanel {
 
 		createMenuButton(Npanel);
 		createExitButton(Npanel);
-		/*
-		JLabel label = new JLabel("");
 		
-		JLabel label_1 = new JLabel("");
-		
-		JLabel label_2 = new JLabel("");
-		
-		JLabel label_3 = new JLabel("");
-		
-		JLabel label_4 = new JLabel("");
-		
-		JLabel label_5 = new JLabel("");
-		
-		JLabel label_6 = new JLabel("");
-		
-		JLabel label_7 = new JLabel("");
-		
-		JLabel label_8 = new JLabel("");
-		
-		JLabel label_9 = new JLabel("");
-		*/
-		//playPanel.paintMap(GameWindow.getGame().getMap().getmap());
-
+		addKeyListener(this);
 
 
 	}
@@ -101,6 +83,10 @@ public class PlayAux extends JPanel {
 				if(GameWindow.getGame().getMap().endOfGame()){
 					GameWindow.play.setVisible(false);
 					GameWindow.losePanel.setVisible(true);
+				}
+				else if (GameWindow.getGame().hasWon()) {
+					GameWindow.play.setVisible(false);
+					GameWindow.winPanel.setVisible(true);
 				}
 				else{
 					//
@@ -125,6 +111,10 @@ public class PlayAux extends JPanel {
 					GameWindow.play.setVisible(false);
 					GameWindow.losePanel.setVisible(true);
 				}
+				else if (GameWindow.getGame().hasWon()) {
+					GameWindow.play.setVisible(false);
+					GameWindow.winPanel.setVisible(true);
+				}
 				else{
 					//
 				}
@@ -146,6 +136,10 @@ public class PlayAux extends JPanel {
 				if(GameWindow.getGame().getMap().endOfGame()){
 					GameWindow.play.setVisible(false);
 					GameWindow.losePanel.setVisible(true);
+				}
+				else if (GameWindow.getGame().hasWon()) {
+					GameWindow.play.setVisible(false);
+					GameWindow.winPanel.setVisible(true);
 				}
 				else{
 					//
@@ -169,6 +163,10 @@ public class PlayAux extends JPanel {
 					GameWindow.play.setVisible(false);
 					GameWindow.losePanel.setVisible(true);
 				}
+				else if (GameWindow.getGame().hasWon()) {
+					GameWindow.play.setVisible(false);
+					GameWindow.winPanel.setVisible(true);
+				}
 				else{
 					//
 				}
@@ -186,7 +184,7 @@ public class PlayAux extends JPanel {
 		//add icon
 		Menubutton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
-				GameWindow.losePanel.setVisible(false);
+				GameWindow.play.setVisible(false);
 				GameWindow.menuPanel.setVisible(true);
 			}
 
@@ -207,6 +205,75 @@ public class PlayAux extends JPanel {
 		});
 
 		p.add(Exitbutton);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		
+		switch(arg0.getKeyCode()){
+		case KeyEvent.VK_UP: 
+			GameWindow.getGame().movement('w');
+			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
+			if(GameWindow.getGame().getMap().endOfGame()){
+				GameWindow.play.setVisible(false);
+				GameWindow.losePanel.setVisible(true);
+			}
+			else if (GameWindow.getGame().hasWon()) {
+				GameWindow.play.setVisible(false);
+				GameWindow.winPanel.setVisible(true);
+			} 
+			break;
+		case KeyEvent.VK_DOWN:
+			GameWindow.getGame().movement('s');
+			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
+			if(GameWindow.getGame().getMap().endOfGame()){
+				GameWindow.play.setVisible(false);
+				GameWindow.losePanel.setVisible(true);
+			}
+			else if (GameWindow.getGame().hasWon()) {
+				GameWindow.play.setVisible(false);
+				GameWindow.winPanel.setVisible(true);
+			} 
+			break;
+		case KeyEvent.VK_RIGHT: 
+			GameWindow.getGame().movement('d');
+			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
+			if(GameWindow.getGame().getMap().endOfGame()){
+				GameWindow.play.setVisible(false);
+				GameWindow.losePanel.setVisible(true);
+			}
+			else if (GameWindow.getGame().hasWon()) {
+				GameWindow.play.setVisible(false);
+				GameWindow.winPanel.setVisible(true);
+			}
+			break;
+		case KeyEvent.VK_LEFT: 
+			GameWindow.getGame().movement('a');
+			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
+			if(GameWindow.getGame().getMap().endOfGame()){
+				GameWindow.play.setVisible(false);
+				GameWindow.losePanel.setVisible(true);
+			}
+			else if (GameWindow.getGame().hasWon()) {
+				GameWindow.play.setVisible(false);
+				GameWindow.winPanel.setVisible(true);
+			} 
+			break;
+		 }
+
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

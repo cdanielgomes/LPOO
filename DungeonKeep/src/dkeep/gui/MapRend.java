@@ -32,9 +32,9 @@ public class MapRend extends JPanel{
 	public MapRend() {
 		super();
 	}
-
+ 
 	protected  void getImages(){
-
+ 
 		hero = new ImageIcon(this.getClass().getResource("img/hero.png"));
 		guard = new ImageIcon(this.getClass().getResource("img/guard.png"));
 		heroWithKey = new ImageIcon(this.getClass().getResource("img/heroKey.png"));
