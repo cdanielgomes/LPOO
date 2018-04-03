@@ -14,10 +14,7 @@ public class mainInterface {
 	private static Scanner move = new Scanner(System.in);
 	private static char s;
 
-
 	public static void main(String[] args) {
-
-
 
 		GameState game = new GameState(numberOfOgres(),userChooseGuardType());		
 		game.start_game();
@@ -34,22 +31,23 @@ public class mainInterface {
 			}
 		}
 		
-		if(game.hasWon()) {
-			System.out.println("YOU WON!!!!!");
-		}
-		else
-			System.out.println("YOU LOOSE!!");
+		if(game.hasWon()) System.out.println("YOU WON!!!!!");
+		else System.out.println("YOU LOOSE!!");
 	}
 
+public static int chosen() {
 
+	System.out.println("1 - Drunken\n2 - Rookie\n3 - Suspicious\nSelect the guard : ");
+	int num = move.nextInt();
+	while(num >= 4 && num <= 0) {
+		System.out.println("Choose a available guard");
+		num = move.nextInt();
+	}
+	return num;	
+}
+	
 	public static String userChooseGuardType() {
-		System.out.println("1 - Drunken\n2 - Rookie\n3 - Suspicious\nSelect the guard : ");
-		int num = move.nextInt();
-		while(num >= 4 && num <= 0) {
-			System.out.println("Choose a available guard");
-			num = move.nextInt();
-		}
-
+	int num = chosen();
 		switch(num) {
 		case 1:
 			return "Drunken";
@@ -63,7 +61,6 @@ public class mainInterface {
 	}
 
 	public static int numberOfOgres()  {
-
 		System.out.println("How many ogres do you want?");
 		int num;
 		do {

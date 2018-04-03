@@ -16,64 +16,41 @@ public class Character {
 	public void setPosition(Position newPosition) {
 		this.position = newPosition;
 	}
-	
+
 	public char getSymbol() {
 		return this.symbol;
 	}
-	
+
 	public Position getPos() {
 		return this.position;
 	}
-	public Position move(char c) {		
-
+	public Position move(char c, boolean reverse) {		
 		Position pos = new Position();
 		switch(c) {
 		case 'a':
-			pos.setPosition(this.position.getX()-1, this.position.getY());
+			if(reverse) pos.setPosition(this.position.getX()+1, this.position.getY());
+			else pos.setPosition(this.position.getX()-1, this.position.getY());
 			break;
 		case 'w':
-			pos.setPosition(this.position.getX(), this.position.getY()-1);
-
+			if(reverse) pos.setPosition(this.position.getX(), this.position.getY()+1);
+			else	pos.setPosition(this.position.getX(), this.position.getY()-1);
 			break;
 		case 's':
-			pos.setPosition(this.position.getX(), this.position.getY()+1);
+			if(reverse)	pos.setPosition(this.position.getX(), this.position.getY()-1);
+			else pos.setPosition(this.position.getX(), this.position.getY()+1);
 			break;
 		case 'd':
-			pos.setPosition(this.position.getX()+1, this.position.getY());
-			break;
-		default:
-			break;
-		}
-		
-		return pos;
-	}
-	
-	public Position reversemove(char c) {		
-
-		Position pos = new Position();
-		switch(c) {
-		case 'a':
-			pos.setPosition(this.position.getX()+1, this.position.getY());
-			break;
-		case 'w':
-			pos.setPosition(this.position.getX(), this.position.getY()+1);
-
-			break;
-		case 's':
-			pos.setPosition(this.position.getX(), this.position.getY()-1);
-			break;
-		case 'd':
-			pos.setPosition(this.position.getX()-1, this.position.getY());
-			break;
-		default:
+			if(reverse)	pos.setPosition(this.position.getX()-1, this.position.getY());
+			else pos.setPosition(this.position.getX()+1, this.position.getY());
 			break;
 		}
-		
 		return pos;
 	}
+
 	
+
 	public boolean checkProximity(Character obj) {
-		
+
 		int diferencex = (position.getX() - obj.position.getX()), diferencey = position.getY()- obj.position.getY();
 
 		if ((diferencex == 1 || diferencex == -1 || diferencex == 0) && diferencey == 0)
@@ -83,8 +60,8 @@ public class Character {
 		return false;
 	}
 
-	
-	
-	
-	
+
+
+
+
 }

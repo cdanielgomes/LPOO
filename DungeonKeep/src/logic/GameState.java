@@ -35,7 +35,6 @@ public class GameState {
 			{'X','X','X','X','X','X','X','X','X','X'}
 	};	
 
-
 	public GameState(int numogres, String guard) {
 		this.nOgres = numogres;
 		this.guard = guard;

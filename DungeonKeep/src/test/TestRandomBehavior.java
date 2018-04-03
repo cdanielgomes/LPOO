@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.awt.Point;
 import java.lang.reflect.GenericSignatureFormatError;
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.junit.Test;
 
@@ -59,6 +60,9 @@ public class TestRandomBehavior {
 		ArrayList<Door> j = new ArrayList<Door>();
 		j.add(new Door(new Position(0,1)));
 		g.setMap(new Keep(map,1, j));
+		int x;
+		char[] moving = {'a', 's', 'd', 'w'};
+
 
 		boolean left= false;
 		boolean right= false;
@@ -67,15 +71,16 @@ public class TestRandomBehavior {
 		boolean key =false;
 		boolean wall = false;
 		boolean heroWeapon = false;
-
+		Random rand = new Random();
 		Position oldPos;
 		Position newPos;
-
 		while(!left || !right || !up || !down || !key || !wall || !heroWeapon)  {
+
+			x = rand.nextInt(4);
 
 			oldPos = ((Keep) g.getMap()).getHordOfOgres().get(0).getPos();
 
-			g.movement('d');
+			g.movement(moving[x]);
 
 			newPos = ((Keep) g.getMap()).getHordOfOgres().get(0).getPos();
 
@@ -115,21 +120,23 @@ public class TestRandomBehavior {
 		ArrayList<Door> j = new ArrayList<Door>();
 		j.add(new Door(new Position(0,1)));
 		g.setMap(new Keep(map,1, j));
-
+		Random rand = new Random();
+		char[] moving = {'a', 's', 'd', 'w'};
 		boolean left= false;
 		boolean right= false;
 		boolean up = false;
 		boolean down = false;
 		boolean key =false;
 		boolean over = false;
-
+		int x;
 		Position ogrePos;
 		Position weaponPos;
 
 
 		while(!left || !right || !up || !down || !key || !over)  {
+			x = rand.nextInt(4);
 
-			g.movement('d');
+			g.movement(moving[x]);
 
 			ogrePos = ((Keep) g.getMap()).getHordOfOgres().get(0).getPos();
 			weaponPos = ((Keep) g.getMap()).getHordOfOgres().get(0).getWeapon().getPos();

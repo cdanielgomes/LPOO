@@ -69,7 +69,9 @@ public class TestKeepGameLogic {
 		newmap.getHero().calculateNextPos(newmap, 'w');
 		newmap.getHero().calculateNextPos(newmap, 'w');
 		newmap.getHero().calculateNextPos(newmap, 'w');
-		assertEquals(' ', newmap.getMapSymbol(new Position(1,0)));
+		
+		System.out.println("mama"+newmap.getMapSymbol(new Position(1,0))+"f\n" + newmap.tostring());
+		assertEquals('S', newmap.getMapSymbol(new Position(1,0)));
 		
 		
 	}
@@ -81,12 +83,19 @@ public class TestKeepGameLogic {
 		GameMap newmap = new Keep(map ,1, j);
 		assertEquals(new Position(1,1) , newmap.getHero().getPos());
 		newmap.getHero().calculateNextPos(newmap, 's');
+		assertEquals(new Position(1,2) , newmap.getHero().getPos());
 		newmap.getHero().calculateNextPos(newmap, 's');
+		assertEquals(new Position(1,3) , newmap.getHero().getPos());
 		newmap.getHero().calculateNextPos(newmap, 'w');
+		assertEquals(new Position(1,2) , newmap.getHero().getPos());
 		newmap.getHero().calculateNextPos(newmap, 'w');
+		assertEquals(new Position(1,1) , newmap.getHero().getPos());
 		newmap.getHero().calculateNextPos(newmap, 'w');
+		assertEquals(new Position(1,1) , newmap.getHero().getPos());
 		newmap.getHero().calculateNextPos(newmap, 'w');
+		assertEquals(new Position(1,0) , newmap.getHero().getPos());
 		assertTrue(newmap.getHero().getPos().equals(newmap.getDoor().get(0).getPos()));
+	
 	}
 	
 	
