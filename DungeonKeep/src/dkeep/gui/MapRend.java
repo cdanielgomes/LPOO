@@ -27,11 +27,13 @@ public class MapRend extends JPanel{
 	protected ImageIcon asleep;
 	protected ImageIcon ogrestun;
 
+	protected int defaultMapLength = 10;
+
 	public MapRend() {
 		super();
 	}
 
-	protected  void getImages(char[][] map){
+	protected  void getImages(){
 
 		hero = new ImageIcon(this.getClass().getResource("img/hero.png"));
 		guard = new ImageIcon(this.getClass().getResource("img/guard.png"));
@@ -47,33 +49,32 @@ public class MapRend extends JPanel{
 	    asleep = new ImageIcon(this.getClass().getResource("img/asleep.png"));
 	    ogrestun = new ImageIcon(this.getClass().getResource("img/stunned.png"));
 
-		scaleAll(map);
+		scaleAll();
 		
 
 	}
 
-	private ImageIcon scaleImage(ImageIcon previous , char[][] map) {
+	private ImageIcon scaleImage(ImageIcon previous ) {
 
 		Image img = previous.getImage();
-		Image newimg = img.getScaledInstance(this.getWidth() / map.length, this.getHeight() / map.length, Image.SCALE_FAST);
-
+		Image newimg = img.getScaledInstance(this.getWidth() / defaultMapLength, this.getHeight() / defaultMapLength, Image.SCALE_FAST);
 		return new ImageIcon(newimg);
-	}
+	} 
 	
-	private void scaleAll(char[][] map) {
-		wall = scaleImage(wall,map);
-		guard = scaleImage(guard,map);
-		heroWithKey = scaleImage(heroWithKey,map);
-		key = scaleImage(key,map); 
-		blank_cell = scaleImage(blank_cell,map);
-		exit_door = scaleImage(exit_door,map); 
-		door = scaleImage(door,map);
-		hero = scaleImage(hero,map);
-		ogre = scaleImage(ogre , map);
-		club = scaleImage(club , map);
-		heroArmed = scaleImage(heroArmed , map);
-		asleep =  scaleImage(asleep, map);
-		ogrestun =  scaleImage(ogrestun, map);
+	private void scaleAll() {
+		wall = scaleImage(wall);
+		guard = scaleImage(guard);
+		heroWithKey = scaleImage(heroWithKey);
+		key = scaleImage(key); 
+		blank_cell = scaleImage(blank_cell);
+		exit_door = scaleImage(exit_door); 
+		door = scaleImage(door);
+		hero = scaleImage(hero);
+		ogre = scaleImage(ogre );
+		club = scaleImage(club );
+		heroArmed = scaleImage(heroArmed);
+		asleep =  scaleImage(asleep);
+		ogrestun =  scaleImage(ogrestun);
 			
 	}
 

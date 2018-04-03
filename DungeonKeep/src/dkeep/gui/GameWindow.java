@@ -30,23 +30,23 @@ import java.awt.GridLayout;
 public class GameWindow {
 
 	static JFrame frmDungeonKeep;
-	static JTextField textField;
-	private GameState game;
+	static MenuWindow menuPanel;
+	static WinWindow winPanel;
+	static PlayWindow playPanel;
+	static PlayAux play;
+
+	private static GameState game;
 
 	static JLayeredPane MultiplePane;
-
-
-
-
-
 
 
 	/** 
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+
 		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+			public  void run() {
 				try {
 					GameWindow window = new GameWindow();
 					window.frmDungeonKeep.setVisible(true);
@@ -78,58 +78,46 @@ public class GameWindow {
 		frmDungeonKeep.setBounds(100, 100, 490, 450);
 		frmDungeonKeep.getContentPane().setLayout(null);
 
+		
+		
+		
 		MultiplePane = new JLayeredPane();
-		MultiplePane.setBounds(11 , 62 , 281 , 288);
+		MultiplePane.setBounds(0 , -11 , 488 , 424);
 		frmDungeonKeep.getContentPane().add(MultiplePane);
 		MultiplePane.setLayout(null);
-
 	
-
-		textField = new JTextField();
-		textField.setFont(new Font("Courier", Font.PLAIN, 12));
-		textField.setBounds(170, 2, 50, 19);
-		frmDungeonKeep.getContentPane().add(textField);
-		textField.setColumns(10);
-
-
-		JLabel lblNewLabel = new JLabel("Number of ogres");
-		lblNewLabel.setBounds(10, 2, 120, 15);
-		frmDungeonKeep.getContentPane().add(lblNewLabel);
-
-
-		JLabel lblgameover = new JLabel("GAME OVER !!");
-		lblgameover.setBounds(200, 400, 130, 15);
-		frmDungeonKeep.getContentPane().add(lblgameover);
-		lblgameover.setVisible(false);
-
-
-
-
-		JLabel lblGuardPersonality = new JLabel("Guard Personality");
-		lblGuardPersonality.setBounds(10, 30, 130, 15);
-		frmDungeonKeep.getContentPane().add(lblGuardPersonality);; 
-
-
-
-		JComboBox<String> guardSelec = new JComboBox<String>();
-		guardSelec.setModel(new DefaultComboBoxModel<String>(new String[] {"Suspicious", "Drunken", "Rookie"}));
-		guardSelec.setBounds(170, 33, 120, 20);
-		frmDungeonKeep.getContentPane().add(guardSelec);
-
-		/*
-
-		JTextArea board = new JTextArea();
-		board.setFont(new Font("Courier", Font.PLAIN, 14));
-		board.setBounds(11, 62, 281, 285);
-		frmDungeonKeep.getContentPane().add(board);
-
+		menuPanel = new MenuWindow();
+		menuPanel.setBounds(0, 12, 488, 412);
+		MultiplePane.add(menuPanel);
+		
+		
+		winPanel = new WinWindow();
+		winPanel.setBounds(0, 0, 488, 424);
+		winPanel.setVisible(false);
+		MultiplePane.add(winPanel);
+		
+		
+		
+		/*playPanel = new PlayWindow(game.getMap().getmap());
+		playPanel.setBounds(0, 0, 488, 424);
+		MultiplePane.add(playPanel);
+		playPanel.setVisible(true);
+		playPanel.getImages(game.getMap().getmap());
+		playPanel.paintMap(game.getMap().getmap());
 		*/
+	
+		play = new PlayAux();
+		play.setBounds(0, 12, 488, 412);
+		play.setVisible(false);
+		MultiplePane.add(play);
+ 		
+		
+		
 
-		MapRend mapa = new MapRend();
-		mapa.setBounds(0, 0, 281, 288);
-		MultiplePane.add(mapa);
+		
+				
 		//mapa.setBackground(Color.BLACK);
-
+		/*
 		JButton btnNewGame = new JButton("New Game");
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -165,6 +153,8 @@ public class GameWindow {
 		});
 		btnExit.setBounds(347, 233, 100, 20);
 		frmDungeonKeep.getContentPane().add(btnExit);
+
+		
 
 		JButton btnUp = new JButton("Up");
 		btnUp.addActionListener(new ActionListener() {
@@ -247,4 +237,18 @@ public class GameWindow {
 		btnDown.setBounds(353, 167, 80, 20);
 		frmDungeonKeep.getContentPane().add(btnDown);
 	}
+	*/
+	}
+	public static void createGame(GameState g){
+		game = g;
+	}
+	
+	public static void startTheGame() {
+		game.start_game();
+	}
+
+	public static GameState getGame(){
+		return game;
+	}
 }
+
