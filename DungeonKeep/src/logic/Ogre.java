@@ -16,12 +16,11 @@ public class Ogre extends Character {
 		weapon = new Character(position);
 		weapon.symbol = '*';
 	}	
-
+	
 	int randomTo4(GameMap map) {
 		int indexMove = rand.nextInt(4);
 		return indexMove;
 	}
-
 	
 	void calculateNextPos(GameMap map) {
 		Position newPos = move(moviment[randomTo4(map)], false);
@@ -56,7 +55,6 @@ public class Ogre extends Character {
 			else 
 				c = true;
 		}while(c);
-		
 		if(this.weapon.position.equals(map.leverPos())) this.weapon.setSymbol('$');
 	}
 

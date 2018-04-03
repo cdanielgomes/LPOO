@@ -130,4 +130,6 @@ public class TestDungeonGameLogic {
 	}
 	
 
+	//testing guard Moving
+	
 }

@@ -54,7 +54,7 @@ public class TestRandomBehavior {
 	}
 
 
-	@Test(timeout =1000)
+	@Test(timeout =3000)
 	public void testOgreRandomPositions() {
 		GameState g = new GameState(1,"Rookie");
 		ArrayList<Door> j = new ArrayList<Door>();
@@ -135,7 +135,6 @@ public class TestRandomBehavior {
 
 		while(!left || !right || !up || !down || !key || !over)  {
 			x = rand.nextInt(4);
-
 			g.movement(moving[x]);
 
 			ogrePos = ((Keep) g.getMap()).getHordOfOgres().get(0).getPos();
