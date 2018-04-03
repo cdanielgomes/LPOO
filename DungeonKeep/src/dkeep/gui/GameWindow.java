@@ -34,6 +34,7 @@ public class GameWindow {
 	static WinWindow winPanel;
 	static PlayWindow playPanel;
 	static PlayAux play;
+	static LoseWindow losePanel;
 
 	private static GameState game;
 
@@ -92,9 +93,16 @@ public class GameWindow {
 		
 		
 		winPanel = new WinWindow();
-		winPanel.setBounds(0, 0, 488, 424);
+		winPanel.setBounds(0, 12, 488, 412);
 		winPanel.setVisible(false);
 		MultiplePane.add(winPanel);
+
+		losePanel = new LoseWindow();
+		losePanel.setBounds(0, 12, 488, 412);
+		losePanel.setVisible(false);
+		MultiplePane.add(losePanel);
+
+
 		
 		
 		

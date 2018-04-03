@@ -9,10 +9,12 @@ import java.awt.Point;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
 import logic.GameState;
@@ -34,6 +36,8 @@ import java.awt.GridBagConstraints;
 public class MenuWindow extends JPanel {
 
 	static PlayAux play;
+	private JFrame frmMazeGame = GameWindow.frmDungeonKeep;
+
 	
 	public MenuWindow() {
 
@@ -42,7 +46,8 @@ public class MenuWindow extends JPanel {
 
 		createNewGameButton();
 		createExitButton();
-
+		
+		//MenuImageSet();
 
 
 	}
@@ -55,33 +60,25 @@ public class MenuWindow extends JPanel {
 					// add icon
 		NGbutton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
-			/*JTextField textField = new JTextField();
-			textField.setFont(new Font("Courier", Font.PLAIN, 12));
-			textField.setBounds(170, 2, 50, 19);
-			add(textField);
-			textField.setColumns(10);
+			
+			String Guard;
+			String nogres;
 
-            JLabel lblNewLabel = new JLabel("Number of ogres");
-			lblNewLabel.setBounds(10, 2, 120, 15);
-		    add(lblNewLabel);
 
-		    JLabel lblGuardPersonality = new JLabel("Guard Personality");
-			lblGuardPersonality.setBounds(10, 30, 130, 15);
-			add(lblGuardPersonality);
+			String[] guardTypes = { "Rookie", "Drunken", "Suspicious" };
 
-		    JComboBox<String> guardSelec = new JComboBox<String>();
-			guardSelec.setModel(new DefaultComboBoxModel<String>(new String[] {"Suspicious", "Drunken", "Rookie"}));
-			guardSelec.setBounds(170, 33, 120, 20);
-			add(guardSelec);
+			String[] Onumber = { "1", "2", "3", "4", "5" };
 
-	 		String guardPersonality = guardSelec.getSelectedItem().toString();
-		    int nogres = Integer.parseInt(textField.getText());
+			Guard = (String) JOptionPane.showInputDialog(frmMazeGame, "             Guard's Personality",
+					"", JOptionPane.PLAIN_MESSAGE, null, guardTypes, "Rookie");
 
-			if ( nogres < 1 || nogres > 5	|| guardPersonality == null){
+			nogres = (String) JOptionPane.showInputDialog(frmMazeGame,
+					"             Number of Ogres", "", JOptionPane.PLAIN_MESSAGE, null, Onumber, "1");
+			
+			if(Guard== null || 	nogres== null)
 				return;
-			}
-	*/ 
-			GameWindow.createGame(new GameState(1,"Rookie"));
+	
+			GameWindow.createGame(new GameState(Integer.parseInt(nogres),Guard));
 			GameWindow.startTheGame();
 			
 			
@@ -119,7 +116,18 @@ public class MenuWindow extends JPanel {
 	}
 
 
-
+	public void MenuImageSet() {
+		
+		JPanel p = new JPanel();
+		p.setBackground(Color.DARK_GRAY);
+		p.setBounds(20,40 ,300,300);
+		ImageIcon i = new ImageIcon(this.getClass().getResource("img/menu.png"));
+		p.add(new JLabel(i));
+		add(p);
+		
+		
+		
+	}
 
 
 

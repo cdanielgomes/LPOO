@@ -13,22 +13,17 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
- 
 
-public class WinWindow extends JPanel{
+public class LoseWindow extends JPanel {
 
 
-	public WinWindow(){
+	public LoseWindow(){
 
 		super();
-
 		createMenuButton();
 		createExitButton();
-
-
-
-
 	}
+
 
 	public void createMenuButton(){
 
@@ -36,7 +31,7 @@ public class WinWindow extends JPanel{
 		//add icon
 		Menubutton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
-				GameWindow.winPanel.setVisible(false);
+				GameWindow.losePanel.setVisible(false);
 				GameWindow.menuPanel.setVisible(true);
 			}
 
@@ -58,7 +53,6 @@ public class WinWindow extends JPanel{
 
 		add(Exitbutton);
 	}
-
 
 
 

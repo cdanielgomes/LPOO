@@ -33,35 +33,181 @@ import java.awt.Component;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-public class PlayAux extends JPanel{
-
-	static PlayWindow playPanel;
+public class PlayAux extends JPanel {
 	
-
+	public PlayWindow playPanel;
+	private JPanel Epanel;
+	private JPanel Npanel;
+	
 	public PlayAux(){
 
-		setBackground(Color.BLUE);
-		playPanel = new PlayWindow();
-		playPanel.setBounds(0, 0,400, 300);
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(playPanel, GroupLayout.PREFERRED_SIZE, 202, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(98, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(playPanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
 		
-		playPanel.setLayout(new GridLayout(10,10));
-		setLayout(groupLayout);
+		setLayout(new BorderLayout(0, 0));
+		
+		playPanel = new PlayWindow();
+		add(playPanel, BorderLayout.CENTER);
+		
+		Epanel = new JPanel();
+		Epanel.setInheritsPopupMenu(true);
+		add(Epanel, BorderLayout.EAST);
+		Epanel.setLayout(new BorderLayout(0,0));
+		
+		Npanel = new JPanel();
+		Npanel.setInheritsPopupMenu(true);
+		add(Npanel , BorderLayout.NORTH);
+
+		createUpButton(Epanel);
+		createRightButton(Epanel);
+		createLeftButton(Epanel);
+		createDownButton(Epanel);
+
+		createMenuButton(Npanel);
+		createExitButton(Npanel);
+		/*
+		JLabel label = new JLabel("");
+		
+		JLabel label_1 = new JLabel("");
+		
+		JLabel label_2 = new JLabel("");
+		
+		JLabel label_3 = new JLabel("");
+		
+		JLabel label_4 = new JLabel("");
+		
+		JLabel label_5 = new JLabel("");
+		
+		JLabel label_6 = new JLabel("");
+		
+		JLabel label_7 = new JLabel("");
+		
+		JLabel label_8 = new JLabel("");
+		
+		JLabel label_9 = new JLabel("");
+		*/
 		//playPanel.paintMap(GameWindow.getGame().getMap().getmap());
 
 
 
 	}
+
+	public void createUpButton(JPanel p){
+
+		JButton button = new JButton("UP");
+		button.setBounds(200,200,50,50);
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameWindow.getGame().movement('w');
+				GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
+				if(GameWindow.getGame().getMap().endOfGame()){
+					GameWindow.play.setVisible(false);
+					GameWindow.losePanel.setVisible(true);
+				}
+				else{
+					//
+				}
+
+			}
+		});
+		
+		p.add(button , BorderLayout.NORTH);
+
+
+	}
+
+	public void createRightButton(JPanel p){
+
+		JButton button = new JButton("RIGHT");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameWindow.getGame().movement('d');
+				GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
+				if(GameWindow.getGame().getMap().endOfGame()){
+					GameWindow.play.setVisible(false);
+					GameWindow.losePanel.setVisible(true);
+				}
+				else{
+					//
+				}
+
+			}
+		});
+		p.add(button, BorderLayout.EAST);
+
+
+	}
+
+	public void createLeftButton(JPanel p){
+
+		JButton button = new JButton("LEFT");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameWindow.getGame().movement('a');
+				GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
+				if(GameWindow.getGame().getMap().endOfGame()){
+					GameWindow.play.setVisible(false);
+					GameWindow.losePanel.setVisible(true);
+				}
+				else{
+					//
+				}
+
+			}
+		});
+		p.add(button, BorderLayout.WEST);
+
+
+	}
+
+	public void createDownButton(JPanel p){
+
+		JButton button = new JButton("DOWN");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameWindow.getGame().movement('s');
+				GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
+				if(GameWindow.getGame().getMap().endOfGame()){
+					GameWindow.play.setVisible(false);
+					GameWindow.losePanel.setVisible(true);
+				}
+				else{
+					//
+				}
+
+			}
+		});
+		p.add(button, BorderLayout.SOUTH);
+
+
+	}
+
+	public void createMenuButton(JPanel p){
+
+		JButton Menubutton = new JButton("MENU");
+		//add icon
+		Menubutton.addActionListener(new ActionListener (){
+			public void actionPerformed(ActionEvent e){
+				GameWindow.losePanel.setVisible(false);
+				GameWindow.menuPanel.setVisible(true);
+			}
+
+		});
+
+		p.add(Menubutton);
+
+	}
+
+	public void createExitButton(JPanel p){
+
+		JButton Exitbutton = new JButton("EXIT");
+		//add icon
+		Exitbutton.addActionListener(new ActionListener (){
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+
+		p.add(Exitbutton);
+	}
+
+
 }
