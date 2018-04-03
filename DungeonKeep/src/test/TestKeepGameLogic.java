@@ -14,15 +14,14 @@ import logic.Position;
 
 
 public class TestKeepGameLogic {
-	
-	char [][] map = {{'X','I','X','X','X'},
-	         		 {'X','H',' ','O','X'},
-	         	     {'X',' ',' ','*','X'},
-	         	     {'X','k',' ',' ','X'},
-	         	     {'X','X','X','X','X'}
-					};
 
-	
+	char [][] map = {{'X','I','X','X','X'},
+			{'X','H',' ','O','X'},
+			{'X',' ',' ','*','X'},
+			{'X','k',' ',' ','X'},
+			{'X','X','X','X','X'}
+	};
+
 	@Test
 	public void testgetHeroNextToOgre() {
 		ArrayList<Door> j = new ArrayList<Door>();
@@ -33,7 +32,7 @@ public class TestKeepGameLogic {
 		newmap.getHero().calculateNextPos(newmap, 'd');
 		assertTrue(newmap.endOfGame());
 	}
-	
+
 	@Test
 	public void testgetHeroHasKey() {
 		ArrayList<Door> j = new ArrayList<Door>();
@@ -45,7 +44,7 @@ public class TestKeepGameLogic {
 		newmap.getHero().calculateNextPos(newmap, 'w');
 		assertEquals('K', newmap.getHero().getSymbol());
 	}
-	
+
 	@Test
 	public void testgetHeroMoveToDoorsAndFailsToLeave() {
 		ArrayList<Door> j = new ArrayList<Door>();
@@ -56,7 +55,7 @@ public class TestKeepGameLogic {
 		assertEquals(new Position(1,1),newmap.getHero().getPos());
 		assertFalse(newmap.endOfGame());
 	}
-	
+
 	@Test
 	public void testgetHeroMoveToDoorsAndDoorsOpen() {
 		ArrayList<Door> j = new ArrayList<Door>();
@@ -69,13 +68,12 @@ public class TestKeepGameLogic {
 		newmap.getHero().calculateNextPos(newmap, 'w');
 		newmap.getHero().calculateNextPos(newmap, 'w');
 		newmap.getHero().calculateNextPos(newmap, 'w');
-		
-		System.out.println("mama"+newmap.getMapSymbol(new Position(1,0))+"f\n" + newmap.tostring());
+
 		assertEquals('S', newmap.getMapSymbol(new Position(1,0)));
-		
-		
+
+
 	}
-	
+
 	@Test
 	public void testgetHeroWinsKeep() {
 		ArrayList<Door> j = new ArrayList<Door>();
@@ -95,10 +93,10 @@ public class TestKeepGameLogic {
 		newmap.getHero().calculateNextPos(newmap, 'w');
 		assertEquals(new Position(1,0) , newmap.getHero().getPos());
 		assertTrue(newmap.getHero().getPos().equals(newmap.getDoor().get(0).getPos()));
-	
+
 	}
-	
-	
-	
+
+
+
 
 }
