@@ -71,7 +71,7 @@ public class Hero extends Character{
 	public boolean nextLevel() {
 		return nextLevel;
 	}
-
+	
 	public void setNextLevel(boolean nextLevel) {
 		this.nextLevel = nextLevel;
 	}
