@@ -20,25 +20,22 @@ public class Hero extends Character{
 
 		switch(symbol) {
 		case 'X':
-			break; 
+			break;
 		case 'k':
 			setPosition(newPos);
 			this.symbol = 'K';
 			setLever(true);
 			if(map instanceof Dungeon) {
-				for(Door i : map.getDoor())
+				for(Door i : map.getDoor()) {
 					i.openDoor(map);
+				}
 			}
 			break;
 		case 'S':
+			this.setPosition(newPos);
 			this.setNextLevel(true);
 			break;
 		case ' ':
-			for (Door i: map.getDoor()) {
-				if(i.getPos().equals(newPos)){
-					this.setNextLevel(true);
-				}
-			}
 			setPosition(newPos);
 			break;
 		case 'I':
@@ -49,11 +46,8 @@ public class Hero extends Character{
 				}
 			}
 			break;
-
 		case '*':
-			if(!hasLever()) {
-				this.setSymbol('A');
-			}
+			if(!hasLever()) this.setSymbol('A');
 			this.arm = true;
 			setPosition(newPos);
 			break;
@@ -61,8 +55,6 @@ public class Hero extends Character{
 			setPosition(newPos);
 			break;
 		}
-
-
 	}
 
 	public boolean isArmed() {

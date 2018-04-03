@@ -17,26 +17,22 @@ public class Ogre extends Character {
 		weapon.symbol = '*';
 	}	
 
-	/*  
-	 * Calculate the next position of the weapon and of the ogre 
-	 * 
-	 * */
+	int randomTo4(GameMap map) {
+		int indexMove = rand.nextInt(4);
+		return indexMove;
+	}
+
+	
 	void calculateNextPos(GameMap map) {
 
-		int indexMove = rand.nextInt(4);
-		Position newPos = move(moviment[indexMove], false);
-
+		Position newPos = move(moviment[randomTo4(map)], false);
 		char symbol = map.getMapSymbol(newPos);
-
 		this.setSymbol('O');
 		this.weapon.setSymbol('*');
-
 		if (!this.stun) {
-			
-			if(symbol == 'k' || symbol == ' ')
-				setPosition(newPos);
-			
+			if(symbol == 'k' || symbol == ' ' || symbol == '*') setPosition(newPos);
 		}
+
 		else {
 			this.setSymbol('8');
 			countdown--;
@@ -45,31 +41,26 @@ public class Ogre extends Character {
 				this.stun = false;
 			}
 		}
-			
-			
-		if(this.position.equals(map.leverPos())) {
-			this.setSymbol('$');
-		}
+		if(this.position.equals(map.leverPos())) this.setSymbol('$');
+		calculateNextPosWeapon(map);
 
+	}
+
+
+	void calculateNextPosWeapon(GameMap map) {
+		boolean c = false;	
 		weapon.setPosition(this.position);
-		boolean c = false;
 
 		do {
 			c = false;
-			indexMove = rand.nextInt(4);
-			newPos = weapon.move(moviment[indexMove], false);
-			symbol = map.getMapSymbol(newPos);
-
-			if(symbol == ' ' || symbol == 'k')
-				weapon.setPosition(newPos);
+			Position newPos = weapon.move(moviment[randomTo4(map)], false);
+			char symbol = map.getMapSymbol(newPos);
+			if(symbol == ' ' || symbol == 'k') weapon.setPosition(newPos);
 			else 
 				c = true;
-
 		}while(c);
-
-		if(this.weapon.position.equals(map.leverPos())) {
-			this.weapon.setSymbol('$');
-		}
+		
+		if(this.weapon.position.equals(map.leverPos())) this.weapon.setSymbol('$');
 	}
 
 	public Character getWeapon() {

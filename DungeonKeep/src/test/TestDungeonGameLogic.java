@@ -34,7 +34,7 @@ public class TestDungeonGameLogic {
 		j.add(new Door(new Position(0,3)));
 		GameMap newmap = new Dungeon(map , "Rookie", j,moves);
 		assertEquals(new Position(1,1) , newmap.getHero().getPos());
-		assertEquals(' ', newmap.getMapSymbol(newmap.getHero().move('s')));
+		assertEquals(' ', newmap.getMapSymbol(newmap.getHero().move('s', false)));
 		newmap.getHero().calculateNextPos(newmap, 's');
 		assertEquals(new Position(1,2), newmap.getHero().getPos());
 	}
@@ -46,10 +46,11 @@ public class TestDungeonGameLogic {
 		j.add(new Door(new Position(0,2)));
 		j.add(new Door(new Position(0,3)));
 		GameMap newmap = new Dungeon(map , "Suspicious", j,moves);
-		assertEquals('X', newmap.getMapSymbol(newmap.getHero().move('a')));
+		assertEquals('X', newmap.getMapSymbol(newmap.getHero().move('a', false)));
 		assertEquals(new Position(1,1) , newmap.getHero().getPos());
 		newmap.getHero().calculateNextPos(newmap,'a');
 		assertEquals(new Position(1,1) , newmap.getHero().getPos());
+
 	}
 	
 	@Test
@@ -86,7 +87,7 @@ public class TestDungeonGameLogic {
 		GameMap newmap = new Dungeon(map , "Rookie", j,moves);
 		assertEquals('I' , newmap.getMapSymbol(new Position(0,2)));
 		newmap.getHero().calculateNextPos(newmap,'s');
-		assertEquals('k', newmap.getMapSymbol(newmap.getHero().move('s')));
+		assertEquals('k', newmap.getMapSymbol(newmap.getHero().move('s', false)));
 		newmap.getHero().calculateNextPos(newmap,'s');
 		assertEquals('K', newmap.getHero().getSymbol());
 		assertTrue(newmap.getHero().hasLever());

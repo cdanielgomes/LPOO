@@ -14,7 +14,6 @@ public class mainInterface {
 	private static Scanner move = new Scanner(System.in);
 	private static char s;
 
-
 	public static void main(String[] args) {
 
 
