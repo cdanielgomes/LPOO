@@ -1,40 +1,23 @@
 package dkeep.gui;
 
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Point;
-
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.border.EmptyBorder;
-
-import logic.GameState;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
-import java.awt.Rectangle;
-import java.awt.Color;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.SpringLayout;
-import java.awt.CardLayout;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-
+import logic.GameState;
 
 public class MenuWindow extends JPanel {
 
+	private static final long serialVersionUID = 2261208719927717162L;
+	
 	static PlayAux play;
 	private JFrame frmMazeGame = GameWindow.frmDungeonKeep;
 
@@ -46,7 +29,7 @@ public class MenuWindow extends JPanel {
 
 		createNewGameButton();
 		createExitButton();
-		
+		createMEButton();
 		MenuImageSet();
 
 
@@ -116,12 +99,13 @@ public class MenuWindow extends JPanel {
 		
 	}
 
+	public void createMEButton() {
+		JButton EMbutton = new JButton("Edit Map");
+		add(EMbutton);
+	
+	}
 
 	public void MenuImageSet() {
-		{
-			JButton EMbutton = new JButton("Edit Map");
-			add(EMbutton);
-		}
 		
 		JPanel p = new JPanel();
 		p.setBackground(Color.DARK_GRAY);
@@ -130,9 +114,6 @@ public class MenuWindow extends JPanel {
 		add(p);
 			
 	}
-
-
-
 
 
 
