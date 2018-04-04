@@ -1,6 +1,7 @@
 package dkeep.gui; 
 
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
@@ -24,7 +25,7 @@ public class WinWindow extends JPanel{
 
 		createMenuButton();
 		createExitButton();
-
+		 WinImageSet();
 
 
 
@@ -57,6 +58,18 @@ public class WinWindow extends JPanel{
 		});
 
 		add(Exitbutton);
+	}
+	
+	public void WinImageSet() {
+
+		JPanel p = new JPanel();
+		p.setBorder(null);
+		p.setBackground(Color.DARK_GRAY);
+		p.setBounds(20,40 ,300,300);
+		add(p);
+		JLabel label = new JLabel(new ImageIcon(WinWindow.class.getResource("/dkeep/gui/img/victory.png")));
+		p.add(label);
+
 	}
 
 

@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 
 import java.awt.BorderLayout;
+import java.awt.ComponentOrientation;
 public class PlayAux extends JPanel{
 	
 	
