@@ -22,6 +22,7 @@ public class WinWindow extends JPanel{
 	public WinWindow(){
 
 		super();
+		setBackground(Color.DARK_GRAY);
 
 		createMenuButton();
 		createExitButton();
