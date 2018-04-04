@@ -119,7 +119,7 @@ public class MenuWindow extends JPanel {
 		JPanel p = new JPanel();
 		p.setBackground(Color.DARK_GRAY);
 		p.setBounds(20,40 ,300,300);
-		p.add(new JLabel(new ImageIcon(MenuWindow.class.getResource("/dkeep/gui/img/menu.jpg"))));
+		p.add(new JLabel(new ImageIcon(MenuWindow.class.getResource("/dkeep/gui/img/menu2.jpg"))));
 		add(p);
 			
 	}
