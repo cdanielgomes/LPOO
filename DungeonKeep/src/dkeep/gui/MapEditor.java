@@ -2,13 +2,17 @@ package dkeep.gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 
 public class MapEditor {
 
@@ -42,8 +46,9 @@ public class MapEditor {
 	 */
 	private void initialize() {
 		MapEditorframe = new JFrame();
-		MapEditorframe.setBounds(100, 100, 450, 300);
+		MapEditorframe.setBounds(100, 100, 650, 350);
 		MapEditorframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		MapEditorframe.setResizable(false);
 		
 		MapEditorframe.getContentPane().setLayout(null);
 		
@@ -57,6 +62,11 @@ public class MapEditor {
 		createSaveButton();
 		createDoorButton();
 		
+		readWidth();
+		readHeight();
+		
+		
+		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.BLACK);
 		panel.setForeground(Color.BLACK);
@@ -66,31 +76,41 @@ public class MapEditor {
 	
 	public void createOgreButton() {
 		JButton OgreButton = new JButton("");
-		OgreButton.setBounds(394, 49, 28, 25);
+		OgreButton.setBounds(580, 60, 35, 35);
+		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/ogre.png"))).getImage();
+		OgreButton.setIcon(new ImageIcon(img.getScaledInstance(OgreButton.getWidth() , OgreButton.getHeight() , Image.SCALE_FAST)));
 		MapEditorframe.getContentPane().add(OgreButton);
 		
 	}
 
 	public void createWallButton() {
 		JButton WallButton = new JButton("");
-		WallButton.setBounds(372, 160, 28, 25);
+		WallButton.setBounds(540, 210, 35, 35);
+		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/wall.png"))).getImage();
+		WallButton.setIcon(new ImageIcon(img.getScaledInstance(WallButton.getWidth() , WallButton.getHeight() , Image.SCALE_FAST)));
 		MapEditorframe.getContentPane().add(WallButton);
 		
 	}
 	public void createHeroClubButton() {
 		JButton HeroClub = new JButton("");
-		HeroClub.setBounds(394, 123, 28, 25);
+		HeroClub.setBounds(580, 160, 35, 35);
+		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/club.png"))).getImage();
+		HeroClub.setIcon(new ImageIcon(img.getScaledInstance(HeroClub.getWidth() , HeroClub.getHeight() , Image.SCALE_FAST)));
 		MapEditorframe.getContentPane().add(HeroClub);
 	}
 	public void createFloorButton() {
 		JButton FloorButton = new JButton("");
-		FloorButton.setBounds(348, 123,  28, 25);
+		FloorButton.setBounds(500, 160,  35, 35);
+		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/cell.png"))).getImage();
+		FloorButton.setIcon(new ImageIcon(img.getScaledInstance(FloorButton.getWidth() , FloorButton.getHeight() , Image.SCALE_FAST)));
 		MapEditorframe.getContentPane().add(FloorButton);	
 	}
 	
 	public void createHeroButton() {
 		JButton Herobutton = new JButton("");
-		Herobutton.setBounds(348, 49, 28, 25);
+		Herobutton.setBounds(500, 60, 35, 35);
+		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/hero1.png"))).getImage();
+		Herobutton.setIcon(new ImageIcon(img.getScaledInstance(Herobutton.getWidth() , Herobutton.getHeight() , Image.SCALE_FAST)));
 		MapEditorframe.getContentPane().add(Herobutton);
 		
 	}
@@ -98,7 +118,9 @@ public class MapEditor {
 	
 	public void createKeyButton() {
 		JButton KeyButton = new JButton("");
-		KeyButton.setBounds(348, 86,  28, 25);
+		KeyButton.setBounds(500, 110,  35, 35);
+		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/key.png"))).getImage();
+		KeyButton.setIcon(new ImageIcon(img.getScaledInstance(KeyButton.getWidth() , KeyButton.getHeight() , Image.SCALE_FAST)));
 		MapEditorframe.getContentPane().add(KeyButton);
 		
 		
@@ -106,7 +128,9 @@ public class MapEditor {
 	
 	public void createDoorButton() {
 		JButton DoorButton = new JButton("");
-		DoorButton.setBounds(394, 86,  28, 25);
+		DoorButton.setBounds(580, 110,  35, 35);
+		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/door.png"))).getImage();
+		DoorButton.setIcon(new ImageIcon(img.getScaledInstance(DoorButton.getWidth() , DoorButton.getHeight() , Image.SCALE_FAST)));
 		MapEditorframe.getContentPane().add(DoorButton);
 		
 		
@@ -121,7 +145,7 @@ public class MapEditor {
 	public void createMenuButton(){
 
 		JButton Menubutton = new JButton("MENU");
-		Menubutton.setBounds(321, 12, 117, 25);
+		Menubutton.setBounds(500, 20, 117, 25);
 		Menubutton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
 				System.out.println("1");
@@ -141,7 +165,7 @@ public class MapEditor {
 	public void createSaveButton(){
 
 		JButton SaveButton = new JButton("SAVE");
-		SaveButton.setBounds(321, 197, 117, 25);
+		SaveButton.setBounds(500, 250, 117, 25);
 		SaveButton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
 				
@@ -152,6 +176,26 @@ public class MapEditor {
 
 		MapEditorframe.getContentPane().add(SaveButton);
 
+	}
+	
+	public void readWidth() {
+		JLabel width = new JLabel("Width");
+		width.setBounds(10 , 5 , 100,20);
+		MapEditorframe.getContentPane().add(width);
+		
+		JTextField widthValue = new JTextField();
+		widthValue.setBounds(105 , 5 , 100 , 20);
+		MapEditorframe.getContentPane().add(widthValue);
+	}
+	
+	public void readHeight() {
+		JLabel height = new JLabel("Heigth");
+		height.setBounds(10 , 25 , 100,20);
+		MapEditorframe.getContentPane().add(height);
+		
+		JTextField heightValue = new JTextField();
+		heightValue.setBounds(105 , 25 , 100 , 20);
+		MapEditorframe.getContentPane().add(heightValue);
 	}
 
 }
