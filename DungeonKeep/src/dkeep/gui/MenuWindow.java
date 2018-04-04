@@ -88,6 +88,8 @@ public class MenuWindow extends JPanel {
 			GameWindow.play.setVisible(true);
 			GameWindow.play.playPanel.paintMap(GameWindow.getGame().getMap().getmap());
 			
+			GameWindow.play.playPanel.requestFocusInWindow();
+			
 			} 
 
 		}); 
@@ -116,6 +118,10 @@ public class MenuWindow extends JPanel {
 
 
 	public void MenuImageSet() {
+		{
+			JButton EMbutton = new JButton("Edit Map");
+			add(EMbutton);
+		}
 		
 		JPanel p = new JPanel();
 		p.setBackground(Color.DARK_GRAY);

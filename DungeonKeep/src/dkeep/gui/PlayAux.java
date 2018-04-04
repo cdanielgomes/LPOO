@@ -35,7 +35,7 @@ import java.awt.Component;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
-public class PlayAux extends JPanel implements KeyListener{
+public class PlayAux extends JPanel{
 	
 	public PlayWindow playPanel;
 	private JPanel Epanel;
@@ -67,8 +67,6 @@ public class PlayAux extends JPanel implements KeyListener{
 		createMenuButton(Npanel);
 		createExitButton(Npanel);
 		
-		addKeyListener(this);
-
 
 	}
 
@@ -78,19 +76,8 @@ public class PlayAux extends JPanel implements KeyListener{
 		button.setBounds(200,200,50,50);
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameWindow.getGame().movement('w');
-				GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-				if(GameWindow.getGame().getMap().endOfGame()){
-					GameWindow.play.setVisible(false);
-					GameWindow.losePanel.setVisible(true);
-				}
-				else if (GameWindow.getGame().hasWon()) {
-					GameWindow.play.setVisible(false);
-					GameWindow.winPanel.setVisible(true);
-				}
-				else{
-					//
-				}
+				GameWindow.update('w');
+				GameWindow.play.playPanel.requestFocusInWindow();
 
 			}
 		});
@@ -105,19 +92,9 @@ public class PlayAux extends JPanel implements KeyListener{
 		JButton button = new JButton("RIGHT");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameWindow.getGame().movement('d');
-				GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-				if(GameWindow.getGame().getMap().endOfGame()){
-					GameWindow.play.setVisible(false);
-					GameWindow.losePanel.setVisible(true);
-				}
-				else if (GameWindow.getGame().hasWon()) {
-					GameWindow.play.setVisible(false);
-					GameWindow.winPanel.setVisible(true);
-				}
-				else{
-					//
-				}
+				GameWindow.update('d');
+				GameWindow.play.playPanel.requestFocusInWindow();
+
 
 			}
 		});
@@ -131,19 +108,9 @@ public class PlayAux extends JPanel implements KeyListener{
 		JButton button = new JButton("LEFT");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameWindow.getGame().movement('a');
-				GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-				if(GameWindow.getGame().getMap().endOfGame()){
-					GameWindow.play.setVisible(false);
-					GameWindow.losePanel.setVisible(true);
-				}
-				else if (GameWindow.getGame().hasWon()) {
-					GameWindow.play.setVisible(false);
-					GameWindow.winPanel.setVisible(true);
-				}
-				else{
-					//
-				}
+				GameWindow.update('a');
+				GameWindow.play.playPanel.requestFocusInWindow();
+
 
 			}
 		});
@@ -157,19 +124,9 @@ public class PlayAux extends JPanel implements KeyListener{
 		JButton button = new JButton("DOWN");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameWindow.getGame().movement('s');
-				GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-				if(GameWindow.getGame().getMap().endOfGame()){
-					GameWindow.play.setVisible(false);
-					GameWindow.losePanel.setVisible(true);
-				}
-				else if (GameWindow.getGame().hasWon()) {
-					GameWindow.play.setVisible(false);
-					GameWindow.winPanel.setVisible(true);
-				}
-				else{
-					//
-				}
+				GameWindow.update('s');
+				GameWindow.play.playPanel.requestFocusInWindow();
+
 
 			}
 		});
@@ -206,75 +163,5 @@ public class PlayAux extends JPanel implements KeyListener{
 
 		p.add(Exitbutton);
 	}
-
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		
-		switch(arg0.getKeyCode()){
-		case KeyEvent.VK_UP: 
-			GameWindow.getGame().movement('w');
-			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-			if(GameWindow.getGame().getMap().endOfGame()){
-				GameWindow.play.setVisible(false);
-				GameWindow.losePanel.setVisible(true);
-			}
-			else if (GameWindow.getGame().hasWon()) {
-				GameWindow.play.setVisible(false);
-				GameWindow.winPanel.setVisible(true);
-			} 
-			break;
-		case KeyEvent.VK_DOWN:
-			GameWindow.getGame().movement('s');
-			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-			if(GameWindow.getGame().getMap().endOfGame()){
-				GameWindow.play.setVisible(false);
-				GameWindow.losePanel.setVisible(true);
-			}
-			else if (GameWindow.getGame().hasWon()) {
-				GameWindow.play.setVisible(false);
-				GameWindow.winPanel.setVisible(true);
-			} 
-			break;
-		case KeyEvent.VK_RIGHT: 
-			GameWindow.getGame().movement('d');
-			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-			if(GameWindow.getGame().getMap().endOfGame()){
-				GameWindow.play.setVisible(false);
-				GameWindow.losePanel.setVisible(true);
-			}
-			else if (GameWindow.getGame().hasWon()) {
-				GameWindow.play.setVisible(false);
-				GameWindow.winPanel.setVisible(true);
-			}
-			break;
-		case KeyEvent.VK_LEFT: 
-			GameWindow.getGame().movement('a');
-			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-			if(GameWindow.getGame().getMap().endOfGame()){
-				GameWindow.play.setVisible(false);
-				GameWindow.losePanel.setVisible(true);
-			}
-			else if (GameWindow.getGame().hasWon()) {
-				GameWindow.play.setVisible(false);
-				GameWindow.winPanel.setVisible(true);
-			} 
-			break;
-		 }
-
-		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }

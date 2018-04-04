@@ -258,5 +258,21 @@ public class GameWindow {
 	public static GameState getGame(){
 		return game;
 	}
+
+	
+	public static void  update(char move) {
+		
+		game.movement(move);
+		play.playPanel.repaintMap(game.getMap().getmap());
+		if(game.getMap().endOfGame()){
+			play.setVisible(false);
+			losePanel.setVisible(true);
+		}
+		else if (GameWindow.game.hasWon()) {
+			play.setVisible(false);
+			winPanel.setVisible(true);
+		} 
+	}
+
 }
 

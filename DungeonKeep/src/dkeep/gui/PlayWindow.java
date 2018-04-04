@@ -48,57 +48,24 @@ public class PlayWindow extends MapRend implements KeyListener{
 		addKeyListener(this);
 		//paintMap(map);
 	}
+	
+	
+	
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()){
 		case KeyEvent.VK_UP: 
-			GameWindow.getGame().movement('w');
-			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-			if(GameWindow.getGame().getMap().endOfGame()){
-				GameWindow.play.setVisible(false);
-				GameWindow.losePanel.setVisible(true);
-			}
-			else if (GameWindow.getGame().hasWon()) {
-				GameWindow.play.setVisible(false);
-				GameWindow.winPanel.setVisible(true);
-			} 
+			GameWindow.update('w');
 			break;
 		case KeyEvent.VK_DOWN:
-			GameWindow.getGame().movement('s');
-			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-			if(GameWindow.getGame().getMap().endOfGame()){
-				GameWindow.play.setVisible(false);
-				GameWindow.losePanel.setVisible(true);
-			}
-			else if (GameWindow.getGame().hasWon()) {
-				GameWindow.play.setVisible(false);
-				GameWindow.winPanel.setVisible(true);
-			} 
+			GameWindow.update('s');
 			break;
 		case KeyEvent.VK_RIGHT: 
-			GameWindow.getGame().movement('d');
-			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-			if(GameWindow.getGame().getMap().endOfGame()){
-				GameWindow.play.setVisible(false);
-				GameWindow.losePanel.setVisible(true);
-			}
-			else if (GameWindow.getGame().hasWon()) {
-				GameWindow.play.setVisible(false);
-				GameWindow.winPanel.setVisible(true);
-			}
+			GameWindow.update('d');
 			break;
 		case KeyEvent.VK_LEFT: 
-			GameWindow.getGame().movement('a');
-			GameWindow.play.playPanel.repaintMap(GameWindow.getGame().getMap().getmap());  
-			if(GameWindow.getGame().getMap().endOfGame()){
-				GameWindow.play.setVisible(false);
-				GameWindow.losePanel.setVisible(true);
-			}
-			else if (GameWindow.getGame().hasWon()) {
-				GameWindow.play.setVisible(false);
-				GameWindow.winPanel.setVisible(true);
-			} 
+			GameWindow.update('a');
 			break;
 		 }
 		requestFocus();
