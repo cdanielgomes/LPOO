@@ -101,7 +101,16 @@ public class MenuWindow extends JPanel {
 
 	public void createMEButton() {
 		JButton EMbutton = new JButton("Edit Map");
+		EMbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GameWindow.frmDungeonKeep.setVisible(false);
+				GameWindow.mapE.getFrame().setVisible(true);
+
+				
+			}
+		});
 		add(EMbutton);
+		
 	
 	}
 

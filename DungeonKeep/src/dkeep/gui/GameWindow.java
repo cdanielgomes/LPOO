@@ -35,6 +35,7 @@ public class GameWindow {
 	static PlayWindow playPanel;
 	static PlayAux play;
 	static LoseWindow losePanel;
+	static MapEditor mapE;
 
 	private static GameState game;
 
@@ -79,6 +80,8 @@ public class GameWindow {
 		frmDungeonKeep.setBounds(100, 100, 490, 450);
 		frmDungeonKeep.getContentPane().setLayout(null);
 
+		mapE = new MapEditor();
+		
 		
 		
 		
