@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
 public class MapEditor implements MouseListener{
 							
 	private JFrame MapEditorframe;
-	
+	private JTextField w, h;
 	private char[][] mapEditing;
 	
 	public static void main(String[] args) {
@@ -61,8 +61,9 @@ public class MapEditor implements MouseListener{
 		createMenuButton();
 		createSaveButton();
 		createDoorButton();
-		readWidth();
-		readHeight();
+		w = readWidth();
+		h = readHeight();
+		checkTextFields();
 	}
 
 	public void createOgreButton() {
@@ -214,7 +215,7 @@ public class MapEditor implements MouseListener{
 
 	}
 	
-	public void readWidth() {
+	public JTextField  readWidth() {
 		JLabel width = new JLabel("Width");
 		width.setBounds(10 , 5 , 100,20);
 		MapEditorframe.getContentPane().add(width);
@@ -222,9 +223,11 @@ public class MapEditor implements MouseListener{
 		JTextField widthValue = new JTextField();
 		widthValue.setBounds(105 , 5 , 100 , 20);
 		MapEditorframe.getContentPane().add(widthValue);
+		
+		return widthValue;
 	}
 	
-	public void readHeight() {
+	public JTextField readHeight() {
 		JLabel height = new JLabel("Heigth");
 		height.setBounds(10 , 25 , 100,20);
 		MapEditorframe.getContentPane().add(height);
@@ -232,6 +235,9 @@ public class MapEditor implements MouseListener{
 		JTextField heightValue = new JTextField();
 		heightValue.setBounds(105 , 25 , 100 , 20);
 		MapEditorframe.getContentPane().add(heightValue);
+		
+		return heightValue;
+	
 	}
 
 	@Override
@@ -264,9 +270,21 @@ public class MapEditor implements MouseListener{
 		// TODO Auto-generated method stub
 
 	}
-
+	
+	
+	public boolean fields(String l) {
+		
+		if(l.equals(""))return true;
+		int s= Integer.parseInt(l);
+		if (s < 0 || s > 10) return true;
+		
+		return false;
+	}
 	
 	public void checkTextFields() {
-		if(MapEditorframe.getContentPane().get)
+		/*while(fields(w.getText()) || fields(h.getText()) )  {
+			
+		}*/
+		createPanel(2, 4);
 	}
 }
