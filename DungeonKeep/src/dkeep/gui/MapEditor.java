@@ -16,11 +16,11 @@ import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 
 public class MapEditor implements MouseListener{
-
+							
 	private JFrame MapEditorframe;
-	private int mouseY;
-	private int mouseX;	
+	
 	private char[][] mapEditing;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,7 +39,7 @@ public class MapEditor implements MouseListener{
 	 */
 	public MapEditor() {
 		initialize();
-	}
+	}		
 
 	/**
 	 * Initialize the contents of the frame.
@@ -61,18 +61,8 @@ public class MapEditor implements MouseListener{
 		createMenuButton();
 		createSaveButton();
 		createDoorButton();
-		
 		readWidth();
 		readHeight();
-		
-		
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
-		panel.setForeground(Color.BLACK);
-		panel.setBounds(12, 60, 256, 214);
-		MapEditorframe.getContentPane().add(panel);
-	
 	}
 
 	public void createOgreButton() {
@@ -87,6 +77,14 @@ public class MapEditor implements MouseListener{
 			
 			}
 		});
+	}
+	
+	public void createPanel(int x, int y) {
+		Mapping panel = new Mapping(x,y);
+		panel.setBackground(Color.BLACK);
+		panel.setForeground(Color.BLACK);
+		panel.setBounds(12, 60, 256, 214);
+		MapEditorframe.getContentPane().add(panel);
 	}
 
 	public void createWallButton() {
@@ -124,7 +122,6 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(FloorButton);	
 		FloorButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			
 			
 			}
 		});
@@ -245,8 +242,8 @@ public class MapEditor implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		mouseY =  e.getY();
-		mouseX = e.getX();
+	int mouseY =  e.getY();
+	int mouseX = e.getX();
 
 	}
 
@@ -268,4 +265,8 @@ public class MapEditor implements MouseListener{
 
 	}
 
+	
+	public void checkTextFields() {
+		if(MapEditorframe.getContentPane().get)
+	}
 }

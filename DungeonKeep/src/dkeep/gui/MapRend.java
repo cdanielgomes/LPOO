@@ -27,14 +27,17 @@ public class MapRend extends JPanel{
 	protected ImageIcon asleep;
 	protected ImageIcon ogrestun;
 
-	protected int defaultMapLength = 10;
-
-	public MapRend() {
+	protected int defaultMapHeight;
+	protected int defaultMapWidth; 
+	
+	public MapRend(int width, int height) {
 		super();
+		defaultMapHeight = height;
+		defaultMapWidth = width;
 	}
- 
+
 	protected  void getImages(){
- 
+
 		hero = new ImageIcon(this.getClass().getResource("img/hero1.png"));
 		guard = new ImageIcon(this.getClass().getResource("img/guard.png"));
 		heroWithKey = new ImageIcon(this.getClass().getResource("img/heroKey.png"));
@@ -42,25 +45,25 @@ public class MapRend extends JPanel{
 		blank_cell = new ImageIcon(this.getClass().getResource("img/cell.png"));
 		exit_door = new ImageIcon(this.getClass().getResource("img/exit_door.png"));
 		door = new ImageIcon(this.getClass().getResource("img/door.png"));
-	    wall = new ImageIcon(this.getClass().getResource("img/wall.png"));
-	    ogre = new ImageIcon(this.getClass().getResource("img/ogre.png"));
-	    club = new ImageIcon(this.getClass().getResource("img/club.png"));
-	    heroArmed = new ImageIcon(this.getClass().getResource("img/heroArmed.png"));
-	    asleep = new ImageIcon(this.getClass().getResource("img/asleep.png"));
-	    ogrestun = new ImageIcon(this.getClass().getResource("img/stunned.png"));
+		wall = new ImageIcon(this.getClass().getResource("img/wall.png"));
+		ogre = new ImageIcon(this.getClass().getResource("img/ogre.png"));
+		club = new ImageIcon(this.getClass().getResource("img/club.png"));
+		heroArmed = new ImageIcon(this.getClass().getResource("img/heroArmed.png"));
+		asleep = new ImageIcon(this.getClass().getResource("img/asleep.png"));
+		ogrestun = new ImageIcon(this.getClass().getResource("img/stunned.png"));
 
 		scaleAll();
-		
+
 
 	}
 
 	private ImageIcon scaleImage(ImageIcon previous ) {
 
 		Image img = previous.getImage();
-		Image newimg = img.getScaledInstance(this.getWidth() / defaultMapLength, this.getHeight() / defaultMapLength, Image.SCALE_FAST);
+		Image newimg = img.getScaledInstance(this.getWidth() / defaultMapWidth, this.getHeight() / defaultMapHeight, Image.SCALE_FAST);
 		return new ImageIcon(newimg);
 	} 
-	
+
 	private void scaleAll() {
 		wall = scaleImage(wall);
 		guard = scaleImage(guard);
@@ -75,7 +78,7 @@ public class MapRend extends JPanel{
 		heroArmed = scaleImage(heroArmed);
 		asleep =  scaleImage(asleep);
 		ogrestun =  scaleImage(ogrestun);
-			
+
 	}
 
 	public void paintMap(char[][] map){
@@ -84,61 +87,63 @@ public class MapRend extends JPanel{
 			for (int u = 0 ; u < map[i].length ; u++){
 
 				switch ( map[i][u]){
-					case 'X':
-						this.add(new JLabel(wall));
-						break;
-					case 'H':
-						this.add(new JLabel(hero)); 
-						break;
-					case 'G':
-						this.add(new JLabel(guard));
-						break;
-					case 'K':
-						this.add(new JLabel(heroWithKey));
-						break;
-					case 'I':
-						this.add(new JLabel(door));
-						break;
-					case 'S':
-						this.add(new JLabel(exit_door));
-						break;
-					case 'k':  
-						this.add(new JLabel(key));
-						break;
-					case '*':
-						this.add(new JLabel(club));
-						break;			
-					case 'O':
-						this.add(new JLabel(ogre));
-						break;
-					case 'A':
-						this.add(new JLabel(heroArmed));
-						break;
-					case 'g':
-						this.add(new JLabel(asleep));
-						break;
-					case '8':
-						this.add(new JLabel(ogrestun));
-						break;
-					default:
-						this.add(new JLabel(blank_cell));
-						break;
+				case 'X':
+					this.add(new JLabel(wall));
+					break;
+				case 'H':
+					this.add(new JLabel(hero)); 
+					break;
+				case 'G':
+					this.add(new JLabel(guard));
+					break;
+				case 'K':
+					this.add(new JLabel(heroWithKey));
+					break;
+				case 'I':
+					this.add(new JLabel(door));
+					break;
+				case 'S':
+					this.add(new JLabel(exit_door));
+					break;
+				case 'k':  
+					this.add(new JLabel(key));
+					break;
+				case '*':
+					this.add(new JLabel(club));
+					break;			
+				case 'O':
+					this.add(new JLabel(ogre));
+					break;
+				case 'A':
+					this.add(new JLabel(heroArmed));
+					break;
+				case 'g':
+					this.add(new JLabel(asleep));
+					break;
+				case '8':
+					this.add(new JLabel(ogrestun));
+					break;
+				default:
+					this.add(new JLabel(blank_cell));
+					break;
 				}
 			}
 		}
 
 	}
+	
+	
 
- public void repaintMap(char[][] map){
- 		removeAll();
+	public void repaintMap(char[][] map){
+		removeAll();
 
 		repaint();
-		
+
 		paintMap(map);
-		
+
 		revalidate();
- 		
- }
+
+	}
 
 
 
