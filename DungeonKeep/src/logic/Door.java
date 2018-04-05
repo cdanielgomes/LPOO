@@ -13,4 +13,6 @@ public class Door extends Character {
 	}
 
 	
+	
+	
 }

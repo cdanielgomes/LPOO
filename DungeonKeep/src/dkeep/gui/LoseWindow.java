@@ -1,6 +1,7 @@
 package dkeep.gui; 
 
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
@@ -20,8 +21,13 @@ public class LoseWindow extends JPanel {
 	public LoseWindow(){
 
 		super();
+
+		setBackground(Color.DARK_GRAY);
 		createMenuButton();
 		createExitButton();
+
+		LooseImageSet();
+		
 	}
 
 
@@ -54,6 +60,17 @@ public class LoseWindow extends JPanel {
 		add(Exitbutton);
 	}
 
+	public void LooseImageSet() {
+		JLabel label = new JLabel(new ImageIcon(WinWindow.class.getResource("/dkeep/gui/img/defeat1.jpg")));
+		add(label);
+
+		JPanel p = new JPanel();
+		p.setBorder(null);
+		p.setBackground(Color.DARK_GRAY);
+		p.setBounds(0,40 ,300,300);
+		add(p);
+
+	}
 
 
 

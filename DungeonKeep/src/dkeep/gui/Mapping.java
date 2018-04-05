@@ -3,14 +3,19 @@ package dkeep.gui;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.border.EmptyBorder;
+
+import logic.Door;
+import logic.Position;
 
 public class Mapping extends MapRend  implements MouseListener{
 
 	private static final long serialVersionUID = 7637590126641479471L;
 	private char[][] mapEditing;
 	private char k = 'X';
+	private ArrayList<Door> doors = new ArrayList<Door>();
 	public Mapping(int x, int y) {
 		super(x,y);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -28,7 +33,10 @@ public class Mapping extends MapRend  implements MouseListener{
 		char[][] p = new char[defaultMapHeight][defaultMapWidth];
 		for(int i = 0; i < defaultMapHeight; i++) {
 			for(int k = 0; k < defaultMapWidth; k++)
-				p[i][k] = ' ';
+				if(i == 0 || i == defaultMapHeight - 1 || k == 0|| k == defaultMapWidth-1)
+					p[i][k] = 'X';
+				else 
+					p[i][k] = ' ';
 		}
 		mapEditing = p;
 
@@ -36,32 +44,55 @@ public class Mapping extends MapRend  implements MouseListener{
 	}
 
 
-	void setPositions(int x, int y, char l) {	
-		//if(checkInsertion()) { 
-		//System.out.println("merda");
-			mapEditing[y][x] = l;
-	//	}
+	void updateDoors(int x, int y) {
+		Door p = new Door(new Position(x,y));
+		if(doors.contains(p)) {
+			
+		}
+		
 	}
 	
+	void setPositions(int x, int y, char l) {	
+		if((y == 0 || y == defaultMapHeight - 1 || x== 0|| x == defaultMapWidth-1)) {
+			if(l == 'X' || l=='I') {
+					mapEditing[y][x] = l;
 
-	public boolean checkInsertion() {
-		if(findPers('O')) return false ;
-		if(findPers('H'))return false;
-		if(findPers('k')) return false;
-		if(findPers('I')) return false;
-		if (findPers('*')) return false;
-		return true;
+			}
+
+			else return ;
+		}
+		if (l == 'H' && searchHero()) return; 
+		if (l == 'O' && searchOgre()) return; 
+		if (l == 'k' && searchKey()) return; 
+		if (l == '*' && searchHeroClub()) return;
+
+		mapEditing[y][x] = l;		
 	}
 
-	public boolean findPers(char par){
+	public boolean searchHero() {
+		return findPers('H') == 1;
+	}
+	public boolean searchOgre() {
+		return findPers('O') == 1;
+	}
+
+	public boolean searchKey() {
+		return findPers('k') == 1;
+	}
+
+	public boolean searchHeroClub() {
+		return findPers('*') == 1;
+	}
+	public boolean searchDoor() {
+		return findPers('*') == 0;
+	}
+	public int findPers(char par){
 		int z = 0;
 		for(int i = 0; i < mapEditing.length; i++) {
 			for(int k = 0; k < mapEditing[i].length; k++)
 				if(mapEditing[i][k] == par) z++; 
 		}
-
-		if('I' != par)return z == 1;
-		else return z==0;
+		return z ;
 	}
 
 
@@ -77,8 +108,9 @@ public class Mapping extends MapRend  implements MouseListener{
 
 		int mouseX = (int) Math.floor((e.getX()/(this.getWidth() / defaultMapWidth)));//temos de retirar do text 
 		int mouseY = (int) Math.floor((e.getY()/(this.getHeight()/defaultMapHeight)));// temos de retirar do text
+		if(mouseX >= defaultMapWidth) return;
+		if(mouseY >= defaultMapHeight) return ;
 		this.setPositions(mouseX,mouseY, this.k);
-
 		repaintMap(mapEditing);
 
 	}
@@ -107,5 +139,9 @@ public class Mapping extends MapRend  implements MouseListener{
 
 	public char[][] getMapEditing(){
 		return mapEditing;
+	}
+
+	public ArrayList<Door> getDoors() {
+		return doors;
 	}
 }

@@ -101,21 +101,21 @@ public class MapEditor{
 
 	public boolean firstAction() {
 
-		String[] tamanhos = { "3", "4", "5", "6", "7", "8", "9", "10" };
+		String[] tamanhos = { "6", "7", "8", "9", "10", "11", "12" };
 
 		String n = (String) JOptionPane.showInputDialog(MapEditorframe, "             Width",
-				"", JOptionPane.PLAIN_MESSAGE, null, tamanhos, "3");
+				"", JOptionPane.PLAIN_MESSAGE, null, tamanhos, "6");
 
 		if (n == null) return false;
 
 		x = Integer.parseInt(n);
 		n = (String) JOptionPane.showInputDialog(MapEditorframe,
-				"             Height", "", JOptionPane.PLAIN_MESSAGE, null, tamanhos, "3");
+				"             Height", "", JOptionPane.PLAIN_MESSAGE, null, tamanhos, "6");
 		if(n == null) return false;
 		y = Integer.parseInt(n);
 
 		createPanel();
-		
+
 		return true;
 
 	}
@@ -229,16 +229,40 @@ public class MapEditor{
 
 	}
 
+	public boolean wall() {
+		char[][] p = mapPanel.getMapEditing();
+
+		for(int i = 0; i < p.length; i++) {
+			for(int k = 0; k < p[i].length ; k++) {
+				if(i == 0 || k == 0 || p.length-1 == i || k == p[i].length-1)
+					if(p[i][k] == 'X' || p[i][k] == 'I')
+						continue;
+					else return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean save() {
+		return (mapPanel.searchHero() && mapPanel.searchKey() && mapPanel.searchOgre() && mapPanel.searchHeroClub() && mapPanel.searchDoor() && wall());
+	}
+
 	public void createSaveButton(){
 
 		JButton SaveButton = new JButton("SAVE");
 		SaveButton.setBounds(500, 250, 117, 25);
 		SaveButton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
+				if(save()) {
+					GameMap m = new Keep(mapPanel.getMapEditing(), 2, mapPanel.getDoors());
+					GameWindow.getGame().addMap(m);
+					GameWindow.mapE.getFrame().setVisible(false);
+					GameWindow.frmDungeonKeep.setVisible(true);
+					GameWindow.menuPanel.setVisible(true);
 
-			//	GameMap m = new Keep(mapPanel.getMapEditing(), G);
+				}
 			}
-
+			
 		});
 
 		MapEditorframe.getContentPane().add(SaveButton);

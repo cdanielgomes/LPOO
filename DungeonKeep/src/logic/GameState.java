@@ -95,4 +95,9 @@ public class GameState {
 	public void setMap(GameMap map) {
 		this.map = map;
 	}
+
+	public void addMap(GameMap m) {
+		gameMaps.add(m);
+		
+	}
 }
