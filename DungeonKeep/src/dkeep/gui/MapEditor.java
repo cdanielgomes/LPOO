@@ -56,7 +56,7 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.setResizable(false);
 		
 		MapEditorframe.getContentPane().setLayout(null);
-
+		MapEditorframe.setContentPane();
 		createOgreButton();
 		createHeroButton();
 		createFloorButton();
@@ -70,9 +70,6 @@ public class MapEditor implements MouseListener{
 		createPanel(10,10);
 		getWidth();
 		getHeight();
-		
-		
-		
 	}
 
 	public void createOgreButton() {
@@ -83,7 +80,7 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(OgreButton);
 		OgreButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			
+			o = 'O';
 			
 			}
 		});
@@ -91,11 +88,8 @@ public class MapEditor implements MouseListener{
 	
 	public void createPanel(int x, int y) {
 		mapPanel = new Mapping(x,y);
-		
 		mapPanel.setBackground(Color.BLACK);
-		
 		mapPanel.setBounds(12, 60, 256, 214);
-		
 		MapEditorframe.getContentPane().add(mapPanel);
 		mapPanel.setVisible(false);
 	
@@ -109,8 +103,7 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(WallButton);
 		WallButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			
-			
+				o = 'X';
 			}
 		});
 
@@ -123,7 +116,7 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(HeroClub);
 		HeroClub.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			
+			o = '*';
 			
 			}
 		});
@@ -136,7 +129,7 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(FloorButton);	
 		FloorButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			
+			o = ' ';
 			}
 		});
 	}
@@ -149,7 +142,7 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(Herobutton);
 		Herobutton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			
+			o= 'H';
 			
 			}
 		});
@@ -164,7 +157,7 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(KeyButton);
 		KeyButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			
+			o = 'k';
 			
 			}
 		});
@@ -179,7 +172,7 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(DoorButton);
 		DoorButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			
+			o = 'I';
 			
 			}
 		});
@@ -217,8 +210,7 @@ public class MapEditor implements MouseListener{
 		SaveButton.setBounds(500, 250, 117, 25);
 		SaveButton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
-
-
+			
 			}
 
 		});
@@ -318,16 +310,20 @@ public class MapEditor implements MouseListener{
 	
 	}
 
+	
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
 
 	}
-
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
-	int mouseY =  e.getY();
-	int mouseX = e.getX();
+		
+	int mouseX = (int) Math.floor((e.getX()-100)/(256/x));//temos de retirar do text 
+	int mouseY = (int) Math.floor((e.getY()-100)/(214/y));// temos de retirar do text
+		panel.setPositions(mouseY,mouseX, o);
 
 	}
 
