@@ -69,8 +69,8 @@ public class Mapping extends MapRend  implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		
-	int mouseX = (int) Math.floor((e.getX()-25)/(this.getWidth()/defaultMapWidth));//temos de retirar do text 
-	int mouseY = (int) Math.floor((e.getY()-25)/(this.getHeight()/defaultMapHeight));// temos de retirar do text
+	int mouseX = (int) Math.floor((e.getX()-100)/(this.getWidth()/defaultMapWidth));//temos de retirar do text 
+	int mouseY = (int) Math.floor((e.getY()-100)/(this.getHeight()/defaultMapHeight));// temos de retirar do text
 		this.setPositions(mouseY,mouseX, this.k);
 		
 	repaintMap(mapEditing);
