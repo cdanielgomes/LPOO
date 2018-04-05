@@ -1,37 +1,43 @@
 package dkeep.gui;
 
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.border.EmptyBorder;
 
-public class Mapping extends MapRend {
+public class Mapping extends MapRend  implements MouseListener{
 
 	private static final long serialVersionUID = 7637590126641479471L;
 	private char[][] mapEditing;
-	private int x ,y;
+	private char k = ' ';
 	public Mapping(int x, int y) {
 		super(x,y);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setBackground(java.awt.Color.BLACK);
 		this.setLayout(new GridLayout(x,y));
 		this.setSize(400, 400);
-		this.setVisible(true);
-		//getImages();
+		getImages();
+		initialMap();
+	
+		addMouseListener(this);
 	}
 	
 	public void initialMap() {
 		
-		char[][] p = new char[y][x];
-		for(int i = 0; i < x; i++) {
-			for(int k = 0; k < y; k++)
-				p[k][i] = ' ';
+		char[][] p = new char[defaultMapHeight][defaultMapWidth];
+		for(int i = 0; i < defaultMapWidth; i++) {
+			for(int k = 0; k < defaultMapHeight; k++)
+				p[k][i] = 'X';
 		}
 		mapEditing = p;
+		
 	}
 
 	
 	void setPositions(int x, int y, char l) {	
-		if(checkInsertion()) mapEditing[y][x] = l;
+		//if(checkInsertion()) 
+			mapEditing[y][x] = l;
 	}
 	
 	public boolean checkInsertion() {
@@ -54,4 +60,43 @@ public class Mapping extends MapRend {
 	}
 
 	
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+		
+	int mouseX = (int) Math.floor((e.getX()-25)/(this.getWidth()/defaultMapWidth));//temos de retirar do text 
+	int mouseY = (int) Math.floor((e.getY()-25)/(this.getHeight()/defaultMapHeight));// temos de retirar do text
+		this.setPositions(mouseY,mouseX, this.k);
+		
+	repaintMap(mapEditing);
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public void setChar(char k) {
+		this.k = k;
+	}
 }

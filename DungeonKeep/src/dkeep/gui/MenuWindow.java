@@ -21,7 +21,7 @@ public class MenuWindow extends JPanel {
 
 	static PlayAux play;
 	private JFrame frmMazeGame = GameWindow.frmDungeonKeep;
-
+	
 
 	public MenuWindow() {
 
@@ -33,6 +33,8 @@ public class MenuWindow extends JPanel {
 		createMEButton();
 		MenuImageSet();
 
+		
+		
 
 	}
 
@@ -109,6 +111,7 @@ public class MenuWindow extends JPanel {
 		EMbutton.setIcon(new ImageIcon(MenuWindow.class.getResource("/dkeep/gui/img/mapedit.png")));
 		EMbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				GameWindow.mapE.firstAction();
 				GameWindow.frmDungeonKeep.setVisible(false);
 				GameWindow.mapE.getFrame().setVisible(true);
 

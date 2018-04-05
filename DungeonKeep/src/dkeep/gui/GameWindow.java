@@ -80,9 +80,6 @@ public class GameWindow {
 		frmDungeonKeep.setBounds(100, 100, 490, 450);
 		frmDungeonKeep.getContentPane().setLayout(null);
 
-		mapE = new MapEditor();
-		
-		
 		
 		
 		MultiplePane = new JLayeredPane();
@@ -93,7 +90,8 @@ public class GameWindow {
 		menuPanel = new MenuWindow();
 		menuPanel.setBounds(0, 12, 488, 412);
 		MultiplePane.add(menuPanel);
-		
+
+		mapE = new MapEditor();
 		
 		winPanel = new WinWindow();
 		winPanel.setBounds(0, 12, 488, 412);

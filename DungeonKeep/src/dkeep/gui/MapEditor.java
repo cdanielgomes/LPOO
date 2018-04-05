@@ -13,19 +13,21 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 
-public class MapEditor implements MouseListener{
-							
+public class MapEditor{
+
 	private JFrame MapEditorframe;
-	private char[][] mapEditing;
-	private JTextField h ,w;
+
+	private int x, y;
 	private Mapping mapPanel;
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -54,9 +56,9 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.setBounds(100, 100, 650, 350);
 		MapEditorframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MapEditorframe.setResizable(false);
-		
+
 		MapEditorframe.getContentPane().setLayout(null);
-		MapEditorframe.setContentPane();
+
 		createOgreButton();
 		createHeroButton();
 		createFloorButton();
@@ -66,11 +68,11 @@ public class MapEditor implements MouseListener{
 		createMenuButton();
 		createSaveButton();
 		createDoorButton();
-		
-		createPanel(10,10);
-		getWidth();
-		getHeight();
+
+
 	}
+
+
 
 	public void createOgreButton() {
 		JButton OgreButton = new JButton("");
@@ -79,20 +81,36 @@ public class MapEditor implements MouseListener{
 		OgreButton.setIcon(new ImageIcon(img.getScaledInstance(OgreButton.getWidth() , OgreButton.getHeight() , Image.SCALE_FAST)));
 		MapEditorframe.getContentPane().add(OgreButton);
 		OgreButton.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-			o = 'O';
-			
+			public void actionPerformed(ActionEvent e){ 	
+				mapPanel.setChar('O');
+
 			}
 		});
 	}
-	
-	public void createPanel(int x, int y) {
-		mapPanel = new Mapping(x,y);
+
+	public void createPanel() {
+		mapPanel = new Mapping(this.x,this.y);
 		mapPanel.setBackground(Color.BLACK);
 		mapPanel.setBounds(12, 60, 256, 214);
 		MapEditorframe.getContentPane().add(mapPanel);
-		mapPanel.setVisible(false);
-	
+		mapPanel.setVisible(true);
+
+	}
+
+	public void firstAction() {
+
+		String[] tamanhos = { "3", "4", "5", "6", "7", "8", "9", "10" };
+
+		String n = (String) JOptionPane.showInputDialog(MapEditorframe, "             Width",
+				"", JOptionPane.PLAIN_MESSAGE, null, tamanhos, "3");
+
+		x = Integer.parseInt(n);
+		n = (String) JOptionPane.showInputDialog(MapEditorframe,
+				"             Height", "", JOptionPane.PLAIN_MESSAGE, null, tamanhos, "3");
+
+		y = Integer.parseInt(n);
+		createPanel();
+
 	}
 
 	public void createWallButton() {
@@ -103,7 +121,7 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(WallButton);
 		WallButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				o = 'X';
+				mapPanel.setChar('X');
 			}
 		});
 
@@ -116,8 +134,8 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(HeroClub);
 		HeroClub.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			o = '*';
-			
+				mapPanel.setChar('*');
+
 			}
 		});
 	}
@@ -129,7 +147,7 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(FloorButton);	
 		FloorButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			o = ' ';
+				mapPanel.setChar(' ');
 			}
 		});
 	}
@@ -142,8 +160,8 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(Herobutton);
 		Herobutton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			o= 'H';
-			
+				mapPanel.setChar('H');
+
 			}
 		});
 	}
@@ -157,8 +175,8 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(KeyButton);
 		KeyButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			o = 'k';
-			
+				mapPanel.setChar('k');
+
 			}
 		});
 
@@ -172,8 +190,8 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(DoorButton);
 		DoorButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-			o = 'I';
-			
+				mapPanel.setChar('I');
+
 			}
 		});
 
@@ -210,7 +228,7 @@ public class MapEditor implements MouseListener{
 		SaveButton.setBounds(500, 250, 117, 25);
 		SaveButton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
-			
+
 			}
 
 		});
@@ -218,165 +236,4 @@ public class MapEditor implements MouseListener{
 		MapEditorframe.getContentPane().add(SaveButton);
 
 	}
-	
-	public void getWidth() {
-		JLabel width = new JLabel("Width");
-		width.setBounds(10 , 5 , 100,20);
-		MapEditorframe.getContentPane().add(width);
-		
-		w= new JTextField();
-		w.setBounds(105 , 5 , 100 , 20);
-		w.getDocument().addDocumentListener(new DocumentListener() {
-
-			@Override
-			public void changedUpdate(DocumentEvent arg0) {
-				int i = checkHeight();
-				int u = checkWidth();
-				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
-					mapPanel.setLayout(new GridLayout(u,i));
-					mapPanel.setVisible(true);
-				}
-				
-			}
-
-			@Override
-			public void insertUpdate(DocumentEvent arg0) {
-				int i = checkHeight();
-				int u = checkWidth();
-				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
-					mapPanel.setLayout(new GridLayout(u,i));
-					mapPanel.setVisible(true);
-				}			
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent arg0) {
-				int i = checkHeight();
-				int u = checkWidth();
-				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
-					mapPanel.setLayout(new GridLayout(u,i));
-					mapPanel.setVisible(true);
-				}
-			}
-			
-		});
-		MapEditorframe.getContentPane().add(w);
-		
-	}
-	
-	public void getHeight() {
-		
-		JLabel height = new JLabel("Heigth");
-		height.setBounds(10 , 25 , 100,20);
-		MapEditorframe.getContentPane().add(height);
-		
-		h = new JTextField();
-		h.setBounds(105 , 25 , 100 , 20);
-		h.getDocument().addDocumentListener(new DocumentListener() {
-
-			@Override
-			public void changedUpdate(DocumentEvent arg0) {
-				int i = checkHeight();
-				int u = checkWidth();
-				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
-					mapPanel.setLayout(new GridLayout(u,i));
-					mapPanel.setVisible(true);
-				}
-				
-			}
-
-			@Override
-			public void insertUpdate(DocumentEvent arg0) {
-				int i = checkHeight();
-				int u = checkWidth();
-				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
-					mapPanel.setLayout(new GridLayout(u,i));
-					mapPanel.setVisible(true);
-				}				
-			}
-
-			@Override
-			public void removeUpdate(DocumentEvent arg0) {
-				int i = checkHeight();
-				int u = checkWidth();
-				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
-					mapPanel.setLayout(new GridLayout(u,i));
-					mapPanel.setVisible(true);
-				}
-			}
-			
-		});
-		MapEditorframe.getContentPane().add(h);
-	
-	}
-
-	
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-		
-	int mouseX = (int) Math.floor((e.getX()-100)/(256/x));//temos de retirar do text 
-	int mouseY = (int) Math.floor((e.getY()-100)/(214/y));// temos de retirar do text
-		panel.setPositions(mouseY,mouseX, o);
-
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-	
-	
-	
-	
-	
-	public int checkWidth() {
-		int width;
-		try {
-			width = Integer.parseInt(w.getText());
-			
-		}catch(Exception e){
-			return 0;
-		}
-		
-		return (width);
-		
-	}
-	
-	public int checkHeight() {
-		int height;
-		try {
-			height = Integer.parseInt(h.getText());
-			
-		}catch(Exception e){
-			return 0;
-		}
-		
-		return ( height);
-		
-	}
-	
-
-	
-	
-	
 }
