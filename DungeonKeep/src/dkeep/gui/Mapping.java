@@ -15,7 +15,7 @@ public class Mapping extends MapRend {
 		this.setLayout(new GridLayout(x,y));
 		this.setSize(400, 400);
 		this.setVisible(true);
-		getImages();
+		//getImages();
 	}
 	
 }

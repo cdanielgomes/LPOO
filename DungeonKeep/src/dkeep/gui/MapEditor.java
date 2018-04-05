@@ -1,7 +1,9 @@
 package dkeep.gui;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,13 +15,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.ImageIcon;
 
 public class MapEditor implements MouseListener{
 							
 	private JFrame MapEditorframe;
-	private JTextField w, h;
 	private char[][] mapEditing;
+	private JTextField h ,w;
+	private Mapping mapPanel;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -61,9 +66,13 @@ public class MapEditor implements MouseListener{
 		createMenuButton();
 		createSaveButton();
 		createDoorButton();
-		w = readWidth();
-		h = readHeight();
-		checkTextFields();
+		
+		createPanel(10,10);
+		getWidth();
+		getHeight();
+		
+		
+		
 	}
 
 	public void createOgreButton() {
@@ -81,11 +90,15 @@ public class MapEditor implements MouseListener{
 	}
 	
 	public void createPanel(int x, int y) {
-		Mapping panel = new Mapping(x,y);
-		panel.setBackground(Color.BLACK);
-		panel.setForeground(Color.BLACK);
-		panel.setBounds(12, 60, 256, 214);
-		MapEditorframe.getContentPane().add(panel);
+		mapPanel = new Mapping(x,y);
+		
+		mapPanel.setBackground(Color.BLACK);
+		
+		mapPanel.setBounds(12, 60, 256, 214);
+		
+		MapEditorframe.getContentPane().add(mapPanel);
+		mapPanel.setVisible(false);
+	
 	}
 
 	public void createWallButton() {
@@ -185,7 +198,6 @@ public class MapEditor implements MouseListener{
 		Menubutton.setBounds(500, 20, 117, 25);
 		Menubutton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
-				System.out.println("1");
 				GameWindow.mapE.getFrame().setVisible(false);
 				GameWindow.frmDungeonKeep.setVisible(true);
 				GameWindow.menuPanel.setVisible(true);
@@ -215,28 +227,94 @@ public class MapEditor implements MouseListener{
 
 	}
 	
-	public JTextField  readWidth() {
+	public void getWidth() {
 		JLabel width = new JLabel("Width");
 		width.setBounds(10 , 5 , 100,20);
 		MapEditorframe.getContentPane().add(width);
 		
-		JTextField widthValue = new JTextField();
-		widthValue.setBounds(105 , 5 , 100 , 20);
-		MapEditorframe.getContentPane().add(widthValue);
+		w= new JTextField();
+		w.setBounds(105 , 5 , 100 , 20);
+		w.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void changedUpdate(DocumentEvent arg0) {
+				int i = checkHeight();
+				int u = checkWidth();
+				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
+					mapPanel.setLayout(new GridLayout(u,i));
+					mapPanel.setVisible(true);
+				}
+				
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent arg0) {
+				int i = checkHeight();
+				int u = checkWidth();
+				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
+					mapPanel.setLayout(new GridLayout(u,i));
+					mapPanel.setVisible(true);
+				}			
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent arg0) {
+				int i = checkHeight();
+				int u = checkWidth();
+				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
+					mapPanel.setLayout(new GridLayout(u,i));
+					mapPanel.setVisible(true);
+				}
+			}
+			
+		});
+		MapEditorframe.getContentPane().add(w);
 		
-		return widthValue;
 	}
 	
-	public JTextField readHeight() {
+	public void getHeight() {
+		
 		JLabel height = new JLabel("Heigth");
 		height.setBounds(10 , 25 , 100,20);
 		MapEditorframe.getContentPane().add(height);
 		
-		JTextField heightValue = new JTextField();
-		heightValue.setBounds(105 , 25 , 100 , 20);
-		MapEditorframe.getContentPane().add(heightValue);
-		
-		return heightValue;
+		h = new JTextField();
+		h.setBounds(105 , 25 , 100 , 20);
+		h.getDocument().addDocumentListener(new DocumentListener() {
+
+			@Override
+			public void changedUpdate(DocumentEvent arg0) {
+				int i = checkHeight();
+				int u = checkWidth();
+				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
+					mapPanel.setLayout(new GridLayout(u,i));
+					mapPanel.setVisible(true);
+				}
+				
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent arg0) {
+				int i = checkHeight();
+				int u = checkWidth();
+				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
+					mapPanel.setLayout(new GridLayout(u,i));
+					mapPanel.setVisible(true);
+				}				
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent arg0) {
+				int i = checkHeight();
+				int u = checkWidth();
+				if ((i >= 3 && i <= 10) && (u >= 3 && u <= 10)) {
+					mapPanel.setLayout(new GridLayout(u,i));
+					mapPanel.setVisible(true);
+				}
+			}
+			
+		});
+		MapEditorframe.getContentPane().add(h);
 	
 	}
 
@@ -272,19 +350,37 @@ public class MapEditor implements MouseListener{
 	}
 	
 	
-	public boolean fields(String l) {
+	
+	
+	
+	public int checkWidth() {
+		int width;
+		try {
+			width = Integer.parseInt(w.getText());
+			
+		}catch(Exception e){
+			return 0;
+		}
 		
-		if(l.equals(""))return true;
-		int s= Integer.parseInt(l);
-		if (s < 0 || s > 10) return true;
+		return (width);
 		
-		return false;
 	}
 	
-	public void checkTextFields() {
-		/*while(fields(w.getText()) || fields(h.getText()) )  {
+	public int checkHeight() {
+		int height;
+		try {
+			height = Integer.parseInt(h.getText());
 			
-		}*/
-		createPanel(2, 4);
+		}catch(Exception e){
+			return 0;
+		}
+		
+		return ( height);
+		
 	}
+	
+
+	
+	
+	
 }
