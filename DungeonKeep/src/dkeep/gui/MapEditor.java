@@ -18,6 +18,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import logic.GameMap;
+import logic.Keep;
+
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 
@@ -68,8 +72,6 @@ public class MapEditor{
 		createMenuButton();
 		createSaveButton();
 		createDoorButton();
-
-
 	}
 
 
@@ -97,19 +99,24 @@ public class MapEditor{
 
 	}
 
-	public void firstAction() {
+	public boolean firstAction() {
 
 		String[] tamanhos = { "3", "4", "5", "6", "7", "8", "9", "10" };
 
 		String n = (String) JOptionPane.showInputDialog(MapEditorframe, "             Width",
 				"", JOptionPane.PLAIN_MESSAGE, null, tamanhos, "3");
 
+		if (n == null) return false;
+
 		x = Integer.parseInt(n);
 		n = (String) JOptionPane.showInputDialog(MapEditorframe,
 				"             Height", "", JOptionPane.PLAIN_MESSAGE, null, tamanhos, "3");
-
+		if(n == null) return false;
 		y = Integer.parseInt(n);
+
 		createPanel();
+		
+		return true;
 
 	}
 
@@ -229,6 +236,7 @@ public class MapEditor{
 		SaveButton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
 
+			//	GameMap m = new Keep(mapPanel.getMapEditing(), G);
 			}
 
 		});
