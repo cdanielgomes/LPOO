@@ -12,10 +12,8 @@ public class Mapping extends MapRend {
 		super(x,y);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setBackground(java.awt.Color.BLACK);
-		this.setLayout(new GridLayout(x,y));
 		this.setSize(400, 400);
-		this.setVisible(true);
-		//getImages();
+		getImages();
 	}
 	
 }
