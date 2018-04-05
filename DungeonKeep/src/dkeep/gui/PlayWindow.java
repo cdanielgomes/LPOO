@@ -13,6 +13,7 @@ public class PlayWindow extends MapRend implements KeyListener{
 
 	private static final long serialVersionUID = 6659466331228348653L;
 
+	
 	public PlayWindow(){
 		super(10,10);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
