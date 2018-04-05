@@ -17,7 +17,6 @@ public class mainInterface {
 	public static void main(String[] args) {
 
 		GameState game = new GameState(numberOfOgres(),userChooseGuardType());		
-		game.start_game();
 		game.display();
 
 		while(!game.over()) {

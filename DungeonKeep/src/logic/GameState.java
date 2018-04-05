@@ -41,9 +41,13 @@ public class GameState {
 	public GameState(int numogres, String guard) {
 		this.nOgres = numogres;
 		this.guard = guard;
+	
+		initializeGame();
+	
 	};
 
-	public void start_game() {
+	public void initializeGame() {
+
 		char[] moves = { 'a', 's', 's', 's', 's', 'a', 'a', 'a', 'a', 'a', 'a', 's', 'd', 'd', 'd', 'd', 'd', 'd',
 				'd', 'w', 'w', 'w', 'w', 'w' };
 		ArrayList<Door> i = new ArrayList<Door>(); 
@@ -55,7 +59,10 @@ public class GameState {
 		gameMaps.add(m);
 		m = new Keep(map2,nOgres,s);
 		gameMaps.add(m);
-		map = gameMaps.get(level);	
+		map = gameMaps.get(level);
+	}
+	public void start_game() {
+		
 	}
 
 	public void movement(char hero) {

@@ -232,21 +232,31 @@ public class MapEditor{
 	public boolean wall() {
 		char[][] p = mapPanel.getMapEditing();
 
+
 		for(int i = 0; i < p.length; i++) {
 			for(int k = 0; k < p[i].length ; k++) {
 				if(i == 0 || k == 0 || p.length-1 == i || k == p[i].length-1)
-					if(p[i][k] == 'X' || p[i][k] == 'I')
+					if(p[i][k] == 'X' || p[i][k] == 'I') {
+
 						continue;
+					}
+
 					else return false;
 			}
 		}
+
 		return true;
 	}
 
-	public boolean save() {
-		return (mapPanel.searchHero() && mapPanel.searchKey() && mapPanel.searchOgre() && mapPanel.searchHeroClub() && mapPanel.searchDoor() && wall());
-	}
+	public boolean save(){
 
+		if(wall()){
+
+			return (mapPanel.searchHero() && mapPanel.searchKey() && mapPanel.searchOgre() && mapPanel.searchHeroClub() && !mapPanel.searchDoor());
+	
+		}
+		else return false;
+	}
 	public void createSaveButton(){
 
 		JButton SaveButton = new JButton("SAVE");
@@ -254,6 +264,7 @@ public class MapEditor{
 		SaveButton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
 				if(save()) {
+					System.out.println("Ines");	
 					GameMap m = new Keep(mapPanel.getMapEditing(), 2, mapPanel.getDoors());
 					GameWindow.getGame().addMap(m);
 					GameWindow.mapE.getFrame().setVisible(false);
@@ -261,8 +272,10 @@ public class MapEditor{
 					GameWindow.menuPanel.setVisible(true);
 
 				}
+
+				else System.out.println("Marques");	
 			}
-			
+
 		});
 
 		MapEditorframe.getContentPane().add(SaveButton);

@@ -84,7 +84,7 @@ public class Mapping extends MapRend  implements MouseListener{
 		return findPers('*') == 1;
 	}
 	public boolean searchDoor() {
-		return findPers('*') == 0;
+		return findPers('I') == 0;
 	}
 	public int findPers(char par){
 		int z = 0;
@@ -92,6 +92,7 @@ public class Mapping extends MapRend  implements MouseListener{
 			for(int k = 0; k < mapEditing[i].length; k++)
 				if(mapEditing[i][k] == par) z++; 
 		}
+	
 		return z ;
 	}
 
