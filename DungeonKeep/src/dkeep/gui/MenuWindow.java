@@ -54,7 +54,6 @@ public class MenuWindow extends JPanel {
 				String Guard;
 				String nogres;
 
-
 				String[] guardTypes = { "Rookie", "Drunken", "Suspicious" };
 
 				String[] Onumber = { "1", "2", "3", "4", "5" };
@@ -68,12 +67,14 @@ public class MenuWindow extends JPanel {
 				if(Guard== null || 	nogres== null)
 					return;
 
-				
+
 				GameWindow.createGame(new GameState(Integer.parseInt(nogres),Guard));
 				GameWindow.startTheGame();
 				if(GameWindow.costum) {
-				GameMap m = new Keep(editor,Integer.parseInt(nogres));
-				GameWindow.getGame().addMap(m);
+					char[][] p = GameWindow.mapE.getMapping().getMapEditing().clone();
+					editor = p;
+					GameMap m = new Keep(editor,Integer.parseInt(nogres));
+					GameWindow.getGame().addMap(m);
 				}
 				GameWindow.menuPanel.setVisible(false);
 
@@ -119,7 +120,7 @@ public class MenuWindow extends JPanel {
 				if(GameWindow.mapE.firstAction()) {
 					GameWindow.frmDungeonKeep.setVisible(false);
 					GameWindow.mapE.getFrame().setVisible(true);
-					
+
 				}
 
 			}

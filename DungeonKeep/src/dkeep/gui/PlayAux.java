@@ -1,6 +1,7 @@
 package dkeep.gui;
 
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.awt.Color;
 
 import java.awt.BorderLayout;
 import java.awt.ComponentOrientation;
+import java.awt.SystemColor;
 public class PlayAux extends JPanel{
 	
 	
@@ -26,6 +28,7 @@ public class PlayAux extends JPanel{
 		add(playPanel, BorderLayout.CENTER);
 		
 		Epanel = new JPanel();
+		Epanel.setAutoscrolls(true);
 		Epanel.setInheritsPopupMenu(true);
 		add(Epanel, BorderLayout.EAST);
 		Epanel.setLayout(new BorderLayout(0,0));
@@ -47,9 +50,14 @@ public class PlayAux extends JPanel{
 	}
 
 	public void createUpButton(JPanel p){
-
-		JButton button = new JButton("UP");
+		JButton button = new JButton("");
+		button.setAutoscrolls(true);
+		button.setBorderPainted(false);
+		
+		button.setBackground(SystemColor.inactiveCaption);
 		button.setBounds(200,200,50,50);
+
+		button.setIcon(new ImageIcon(MenuWindow.class.getResource("/dkeep/gui/img/arrowup.png")));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameWindow.update('w');
@@ -65,7 +73,11 @@ public class PlayAux extends JPanel{
 
 	public void createRightButton(JPanel p){
 
-		JButton button = new JButton("RIGHT");
+		JButton button = new JButton("");
+		button.setBorderPainted(false);
+		button.setBackground(SystemColor.inactiveCaption);
+
+		button.setIcon(new ImageIcon(MenuWindow.class.getResource("/dkeep/gui/img/arrowr.png")));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameWindow.update('d');
@@ -81,7 +93,11 @@ public class PlayAux extends JPanel{
 
 	public void createLeftButton(JPanel p){
 
-		JButton button = new JButton("LEFT");
+		JButton button = new JButton();
+		button.setBackground(SystemColor.inactiveCaption);
+		button.setBorderPainted(false);
+
+		button.setIcon(new ImageIcon(MenuWindow.class.getResource("/dkeep/gui/img/arrowl.png")));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameWindow.update('a');
@@ -97,7 +113,11 @@ public class PlayAux extends JPanel{
 
 	public void createDownButton(JPanel p){
 
-		JButton button = new JButton("DOWN");
+		JButton button = new JButton();
+		button.setBackground(SystemColor.inactiveCaption);
+		button.setBorderPainted(false);
+
+		button.setIcon(new ImageIcon(MenuWindow.class.getResource("/dkeep/gui/img/arrowd.png")));
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GameWindow.update('s');

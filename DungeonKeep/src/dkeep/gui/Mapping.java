@@ -29,8 +29,6 @@ public class Mapping extends MapRend  implements MouseListener{
 	}
 	
 	
-	
-	
 	public Mapping() {
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setBackground(java.awt.Color.BLACK);

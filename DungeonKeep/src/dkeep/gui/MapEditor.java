@@ -280,11 +280,10 @@ public class MapEditor{
 				if(save()) {
 					
 					GameWindow.costum = true;
-					GameWindow.menuPanel.setEditor(mapPanel.getMapEditing());
+					GameWindow.menuPanel.setEditor(mapPanel.getMapEditing().clone());
 					GameWindow.mapE.getFrame().setVisible(false);
 					GameWindow.frmDungeonKeep.setVisible(true);
 					GameWindow.menuPanel.setVisible(true);
-
 				}
 
 			}
@@ -293,5 +292,9 @@ public class MapEditor{
 
 		MapEditorframe.getContentPane().add(SaveButton);
 
+	}
+	
+	public Mapping getMapping() {
+		return mapPanel;
 	}
 }
