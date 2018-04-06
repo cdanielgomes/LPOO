@@ -123,7 +123,6 @@ public class MapEditor{
 		y = Integer.parseInt(n.substring(0 , n.indexOf('x')));
 
 		createPanel();
-
 		return true;
 
 	}

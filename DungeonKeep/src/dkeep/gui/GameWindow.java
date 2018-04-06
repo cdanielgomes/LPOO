@@ -263,7 +263,7 @@ public class GameWindow {
 
 	
 	public static void  update(char move) {
-		
+	
 		game.movement(move);
 		play.playPanel.repaintMap(game.getMap().getmap());
 		if(game.getMap().endOfGame()){

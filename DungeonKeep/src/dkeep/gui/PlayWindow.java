@@ -21,14 +21,11 @@ public class PlayWindow extends MapRend implements KeyListener{
 		this.setLayout(new GridLayout(10,10));
 		this.setSize(400, 400);
 		this.setVisible(true);
-		
+
 		getImages();
 		addKeyListener(this);
-	
+
 	}
-	
-	
-	
 	
 
 	@Override

@@ -122,7 +122,6 @@ public class MenuWindow extends JPanel {
 					GameWindow.mapE.getFrame().setVisible(true);
 
 				}
-
 			}
 		});
 		add(EMbutton);

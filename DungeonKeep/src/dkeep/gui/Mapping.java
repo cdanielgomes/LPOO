@@ -28,7 +28,6 @@ public class Mapping extends MapRend  implements MouseListener{
 		addMouseListener(this);
 	}
 	
-	
 	public Mapping() {
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setBackground(java.awt.Color.BLACK);
@@ -52,13 +51,7 @@ public class Mapping extends MapRend  implements MouseListener{
 	}
 
 
-	void updateDoors(int x, int y) {
-		Door p = new Door(new Position(x,y));
-		if(doors.contains(p)) {
-			
-		}
-		
-	}
+	
 	
 	void setPositions(int x, int y, char l) {	
 		if((y == 0 || y == defaultMapHeight - 1 || x== 0|| x == defaultMapWidth-1)) {
