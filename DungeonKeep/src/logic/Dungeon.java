@@ -9,7 +9,18 @@ public class Dungeon extends GameMap {
 	public Dungeon(char[][] map, String i, ArrayList<Door> door, char[] guardMove) {
 		super(map);
 		this.door = door;
+		setGuard(i, guardMove);
+
+	}
+
+	public Dungeon(Dungeon d) {
+		super(d);
+		this.door = d.door;
+		this.guard = d.guard;
+	}
 	
+	public void setGuard(String i, char[] guardMove) {
+
 		switch(i) {
 		case "Rookie":
 			guard = new Rookie(this.getCharc('G'), "Rookie", guardMove);
@@ -21,13 +32,6 @@ public class Dungeon extends GameMap {
 			guard = new Drunken(this.getCharc('G'), "Drunken", guardMove);
 			break;
 		}
-
-	}
-
-	public Dungeon(Dungeon d) {
-		super(d);
-		this.door = d.door;
-		this.guard = d.guard;
 	}
 	
 	public Guard getGuard() {

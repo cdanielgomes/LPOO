@@ -18,6 +18,8 @@ public class Keep extends GameMap{
 		this.door = k.door;
 		this.hordOfOgres = k.hordOfOgres;
 	}
+	
+	
 
 
 	@Override

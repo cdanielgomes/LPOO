@@ -24,19 +24,6 @@ public class GameState {
 	};
 
 
-
-	private char[][] copy2 = {{'X','X','X','X','X','X','X','X','X','X'},
-			{'I',' ',' ','O',' ',' ',' ',' ','k','X'},
-			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'X','H',' ',' ','*',' ',' ',' ',' ','X'},
-			{'X','X','X','X','X','X','X','X','X','X'}
-	};	
-
 	private char[][] map2 = {{'X','X','X','X','X','X','X','X','X','X'},
 			{'I',' ',' ','O',' ',' ',' ',' ','k','X'},
 			{'X',' ',' ',' ',' ',' ',' ',' ',' ','X'},
@@ -90,20 +77,19 @@ public class GameState {
 	public void setGuard(String guard) {
 		this.guard = guard;
 	}
-
-	public void setnOgres(int nOgres) {
-		this.nOgres = nOgres;
+	public void setnOgres(int i ) {
+		this.nOgres = i;
 	}
 
-/*
+	/*
 	public char[][] restart(char[][] m) {
 		char[][] p = new char[m.length][m[0].length];
 		for(int i = 0; i < m.length; i++) {
 			p[i] = m[i].clone();
 		}
 		return p;
-	}*/
-	
+	}*/ 
+
 	public void start_game() {
 		//gameMaps = (ArrayList<GameMap>) gameMapsCopy.clone(); 
 		this.won = false;

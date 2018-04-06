@@ -265,7 +265,7 @@ public class MapEditor{
 			public void actionPerformed(ActionEvent e){
 				if(save()) {
 					System.out.println("Ines");	
-					GameMap m = new Keep(mapPanel.getMapEditing(), 2, mapPanel.getDoors());
+					GameMap m = new Keep(mapPanel.getMapEditing(), 1, mapPanel.getDoors());
 					GameWindow.getGame().addMap(m);
 					GameWindow.mapE.getFrame().setVisible(false);
 					GameWindow.frmDungeonKeep.setVisible(true);
