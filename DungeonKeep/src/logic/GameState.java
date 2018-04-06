@@ -78,10 +78,10 @@ public class GameState {
 		GameMap m =  new Dungeon(map1,guard, i, moves); 
 		GameMap copy = new Dungeon((Dungeon)m);
 		gameMaps.add(m);
-		gameMaps.add(copy);
+		gameMapsCopy.add(copy);
 		m = new Keep(map2,nOgres,s);
 		copy = new Keep((Keep)m);
-		gameMapsCopy.add(copy);
+		gameMaps.add(m);
 		gameMapsCopy.add(copy);
 		this.map = gameMaps.get(level);
 
@@ -95,14 +95,15 @@ public class GameState {
 		this.nOgres = nOgres;
 	}
 
-
+/*
 	public char[][] restart(char[][] m) {
 		char[][] p = new char[m.length][m[0].length];
 		for(int i = 0; i < m.length; i++) {
 			p[i] = m[i].clone();
 		}
 		return p;
-	}
+	}*/
+	
 	public void start_game() {
 		//gameMaps = (ArrayList<GameMap>) gameMapsCopy.clone(); 
 		this.won = false;
