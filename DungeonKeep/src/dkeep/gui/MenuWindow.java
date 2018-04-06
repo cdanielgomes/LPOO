@@ -76,6 +76,7 @@ public class MenuWindow extends JPanel {
 					GameMap m = new Keep(editor,Integer.parseInt(nogres));
 					GameWindow.getGame().addMap(m);
 				}
+				
 				GameWindow.menuPanel.setVisible(false);
 
 

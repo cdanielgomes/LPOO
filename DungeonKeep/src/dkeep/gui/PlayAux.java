@@ -20,11 +20,9 @@ public class PlayAux extends JPanel{
 	private JPanel Npanel;
 	
 	public PlayAux(){
-
 		
 		setLayout(new BorderLayout(0, 0));
 	
-		//char[][] l = GameWindow.getGame().getMap().getmap();
 		
 		playPanel = new PlayWindow();
 		add(playPanel, BorderLayout.CENTER);

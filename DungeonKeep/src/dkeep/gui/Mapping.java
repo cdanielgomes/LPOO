@@ -16,6 +16,7 @@ public class Mapping extends MapRend  implements MouseListener{
 	private char[][] mapEditing;
 	private char k = 'X';
 	private ArrayList<Door> doors = new ArrayList<Door>();
+	
 	public Mapping(int x, int y) {
 		super(x,y);
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
