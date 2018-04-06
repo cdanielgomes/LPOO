@@ -57,7 +57,8 @@ public class MapEditor{
 	 */
 	private void initialize() {
 		MapEditorframe = new JFrame();
-		MapEditorframe.setBounds(100, 100, 650, 350);
+		MapEditorframe.getContentPane().setBackground(Color.DARK_GRAY);
+		MapEditorframe.setBounds(100, 100, 650, 400);
 		MapEditorframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MapEditorframe.setResizable(false);
 
@@ -93,7 +94,7 @@ public class MapEditor{
 	public void createPanel() {
 		mapPanel = new Mapping(this.x,this.y);
 		mapPanel.setBackground(Color.BLACK);
-		mapPanel.setBounds(12, 10, 400,200 );
+		mapPanel.setBounds(12, 10, 350,350);
 		MapEditorframe.getContentPane().add(mapPanel);
 		mapPanel.setVisible(true);
 
