@@ -2,6 +2,11 @@ package logic;
 
 import java.util.Random;
 
+/**
+ * 	Abstract class that represents the Guard of the game,
+ * 	extends Character
+ */
+
 public abstract class Guard extends Character{
 
 
@@ -13,7 +18,13 @@ public abstract class Guard extends Character{
 	private int m = 0;
 
 
-
+	/**
+	 * Constructor of class Guard
+	 * @param position position of the guard
+	 * @param name type of the guard
+	 * @param moves pre defined moves of the guard
+	 *
+	 */
 	public Guard(Position position, String name, char[] moves) {
 		super(position);
 		this.symbol = 'G';
@@ -22,11 +33,17 @@ public abstract class Guard extends Character{
 
 	}
 
-
+	/**
+	 * Returns name type of the Guard
+	 * @return variable name of type String
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Computes next move of the guard
+	 */
 
 	public void guardMoves() {
 		
@@ -49,6 +66,9 @@ public abstract class Guard extends Character{
 	}
 	public abstract void movement();
 
+	/** Returns flag of asleep
+	 * @return asleep value 
+	 */
 	public boolean getasleep() {
 		return this.asleep;
 	}

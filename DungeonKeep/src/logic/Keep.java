@@ -2,10 +2,26 @@ package logic;
 
 import java.util.ArrayList;
 
+/**
+ * Represents the second level of the game (Keep level)
+ */
+
 public class Keep extends GameMap{
 	private ArrayList<Ogre> hordOfOgres = new ArrayList<Ogre>();
 
+<<<<<<< Updated upstream
 	public Keep(char[][] map, int numberofogres) {
+=======
+	/**
+	 * Constructor of class Keep
+	 * @param map map of the level
+	 * @param numberofogres number of ogres in the level
+	 * @param j exit doors in type ArrayList<Door>
+	 * 
+	 */
+
+	public Keep(char[][] map, int numberofogres, ArrayList<Door> j) {
+>>>>>>> Stashed changes
 		super(map);
 		ArrayList<Door> p = new ArrayList<Door>(); 
 		p.add(new Door(getCharc('I')));
@@ -14,9 +30,17 @@ public class Keep extends GameMap{
 			hordOfOgres.add(new Ogre(getCharc('O')));
 		}
 	}
+<<<<<<< Updated upstream
 
 
 
+=======
+	
+	/**
+	 * Makes the moves of all the ogres and hero
+	 * @param heromove new move direction of hero
+	 */
+>>>>>>> Stashed changes
 
 
 	@Override
@@ -28,6 +52,10 @@ public class Keep extends GameMap{
 			i.calculateNextPos(this);
 	}
 
+	/**
+	 * Checks if game is over
+	 * @return true if game is over , false if not
+	 */
 
 	@Override
 	public boolean endOfGame() {
@@ -48,6 +76,9 @@ public class Keep extends GameMap{
 		return false;
 	}
 
+	/**
+	 * Deletes old Position of the ogres and hero
+	 */
 	@Override
 	void deleteOldPositions() {
 		deleteCell(hero);
@@ -57,6 +88,9 @@ public class Keep extends GameMap{
 		}
 	}
 
+	/**
+	 * Sets new Positions of the map Characters
+	 */
 	@Override
 	void setNewPositions() {
 
@@ -71,6 +105,10 @@ public class Keep extends GameMap{
 
 	}
 
+	/**
+	 * Returns the hord of ogres
+	 * @return variable hordOfOgres of type ArrayList<Ogre>
+	 */
 
 	public ArrayList<Ogre> getHordOfOgres() {
 		return hordOfOgres;

@@ -2,6 +2,9 @@ package logic;
 
 import java.util.Random;
 
+/**
+ * Class that represents the Ogre type in the game
+ */
 public class Ogre extends Character {
 
 	private Character weapon;
@@ -10,12 +13,18 @@ public class Ogre extends Character {
 	private boolean stun = false;
 	private int countdown = 2;
 
+	/**
+	 * Constructor of class Ogre
+	 * @param position position of the Ogre in the map
+	 * 
+	 */
 	public Ogre(Position position) {
 		super(position);
 		this.symbol = 'O';
 		weapon = new Character(position);
 		weapon.symbol = '*';
 	}	
+	
 	
 	int randomTo4(GameMap map) {
 		int indexMove = rand.nextInt(4);
@@ -58,13 +67,27 @@ public class Ogre extends Character {
 		if(this.weapon.position.equals(map.leverPos())) this.weapon.setSymbol('$');
 	}
 
+	/**
+	 * Gets the variable weapon
+	 * @return variable of type Character (weapon)
+	 */
 	public Character getWeapon() {
 		return this.weapon;
 	}
 
+	/**	
+	 * Checks if ogre is stunned
+	 * @return value of variable stunS
+	 */
+
 	public boolean isStun() {
 		return this.stun;
 	}
+
+	/**
+	 * Changes the value of stun variable 
+	 * @param s new value for the variable stun
+	 */
 	
 	public void setStun(boolean s) {
 		this.stun = s;

@@ -2,14 +2,31 @@ package logic;
 
 import java.util.Random;
 
+/**
+ *  Class used to represent the Drunken type of guard,
+ *  Extends Guard
+ */
+
 public class Drunken extends Guard {
 
 	private int sleepCounter= 4;
 
-
+	/**
+	 * Constructor of the class Drunken
+	 * 
+	 * @param pos Position 
+	 * @param name name of the guard type (in this case always "Drunken")
+	 * @param moves char array with all the pre defined moves of the guard
+	 * 
+	 */
 	public Drunken(Position pos , String name, char[] moves) {
 		super(pos, name, moves);
 	}
+
+	/**
+	 * Computes the movement of the guard  and can make the
+	 *  guard fall asleep (with 10 % chance) 
+	 */
 
 	@Override
 	public void movement() {

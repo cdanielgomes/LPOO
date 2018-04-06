@@ -97,6 +97,7 @@ public class MapEditor{
 	
 	
 
+	
 	public void createPanel() {
 		mapPanel.setDefaultValues(this.x, this.y);
 		mapPanel.getImages();
