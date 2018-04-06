@@ -10,6 +10,13 @@ public class Dungeon extends GameMap {
 		super(map);
 		this.door = door;
 		setGuard(i, guardMove);
+
+	}
+
+	public Dungeon(Dungeon d) {
+		super(d);
+		this.door = d.door;
+		this.guard = d.guard;
 	}
 	
 	public void setGuard(String i, char[] guardMove) {

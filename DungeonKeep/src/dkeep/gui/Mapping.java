@@ -35,6 +35,8 @@ public class Mapping extends MapRend  implements MouseListener{
 		addMouseListener(this);
 	}
 
+	public void initialMap() {
+
 		char[][] p = new char[defaultMapHeight][defaultMapWidth];
 		for(int i = 0; i < defaultMapHeight; i++) {
 			for(int k = 0; k < defaultMapWidth; k++)
@@ -51,8 +53,7 @@ public class Mapping extends MapRend  implements MouseListener{
 
 	void updateDoors(int x, int y) {
 		Door p = new Door(new Position(x,y));
-		if(!doors.contains(p)) {
-			
+		if(doors.contains(p)) {
 			
 		}
 		
@@ -81,6 +82,7 @@ public class Mapping extends MapRend  implements MouseListener{
 	public boolean searchOgre() {
 		return findPers('O') == 1;
 	}
+
 	public boolean searchKey() {
 		return findPers('k') == 1;
 	}
@@ -100,6 +102,8 @@ public class Mapping extends MapRend  implements MouseListener{
 	
 		return z ;
 	}
+
+
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -148,6 +152,4 @@ public class Mapping extends MapRend  implements MouseListener{
 	public ArrayList<Door> getDoors() {
 		return doors;
 	}
-	
-	
 }

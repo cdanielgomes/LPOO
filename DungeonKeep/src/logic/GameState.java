@@ -1,22 +1,16 @@
 package logic;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GameState implements Serializable {
-	
-	
-	private static final long serialVersionUID = -1473666951067359647L;
-	
+public class GameState {
 	private ArrayList<GameMap> gameMaps = new ArrayList<GameMap>(); 
 	private GameMap map;
+	private ArrayList<GameMap> gameMapsCopy = new ArrayList<GameMap>(); 
 	private String guard;
 	private int nOgres;
 	private boolean won = false;
 	private int level = 0;
 
-	private char[][] editor;
-	
 	private char[][] map1 = {{'X','X','X','X','X','X','X','X','X','X'},
 			{'X','H',' ',' ','I',' ','X',' ','G','X'},
 			{'X','X','X',' ','X','X','X',' ',' ','X'},
@@ -50,21 +44,32 @@ public class GameState implements Serializable {
 
 	};
 
-	public  GameState() {
-		this.nOgres = 1;
-		
+
+	public char[][] cloning(char[][] m) {
+		char[][] p = new char[m.length][m[0].length];
+		for(int i = 0; i<10; i++) {
+			p[i] = map1[i].clone();
+		}
+		return p;
 	}
-	
+
+
 	public void initializeGame() {
 		ArrayList<Door> i = new ArrayList<Door>(); 
+		ArrayList<Door> s = new ArrayList<Door>();
 		char[] moves = { 'a', 's', 's', 's', 's', 'a', 'a', 'a', 'a', 'a', 'a', 's', 'd', 'd', 'd', 'd', 'd', 'd',
 				'd', 'w', 'w', 'w', 'w', 'w' };
 		i.add(new Door(new Position(0,5)));
 		i.add(new Door(new Position(0,6)));
+		s.add(new Door(new Position(0,1)));
 		GameMap m =  new Dungeon(map1,guard, i, moves); 
+		GameMap copy = new Dungeon((Dungeon)m);
 		gameMaps.add(m);
-		m = new Keep(map2,nOgres);
+		gameMapsCopy.add(copy);
+		m = new Keep(map2,nOgres,s);
+		copy = new Keep((Keep)m);
 		gameMaps.add(m);
+		gameMapsCopy.add(copy);
 		this.map = gameMaps.get(level);
 
 	}
@@ -76,11 +81,20 @@ public class GameState implements Serializable {
 		this.nOgres = i;
 	}
 
-	
+	/*
+	public char[][] restart(char[][] m) {
+		char[][] p = new char[m.length][m[0].length];
+		for(int i = 0; i < m.length; i++) {
+			p[i] = m[i].clone();
+		}
+		return p;
+	}*/ 
+
 	public void start_game() {
-		
+		//gameMaps = (ArrayList<GameMap>) gameMapsCopy.clone(); 
 		this.won = false;
 		this.level = 0;
+
 		this.map = gameMaps.get(level);
 
 	}
@@ -100,6 +114,7 @@ public class GameState implements Serializable {
 				won = true;
 		}
 	}
+
 
 	public void display() {
 		System.out.println(map.tostring());
@@ -122,10 +137,8 @@ public class GameState implements Serializable {
 		this.map = map;
 	}
 
-	public int getNOgres() {
-		return nOgres;
+	public void addMap(GameMap m) {
+		gameMaps.add(m);
+
 	}
-	
-
-
 }

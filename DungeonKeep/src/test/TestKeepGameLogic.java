@@ -26,7 +26,7 @@ public class TestKeepGameLogic {
 	public void testgetHeroNextToOgre() {
 		ArrayList<Door> j = new ArrayList<Door>();
 		j.add(new Door(new Position(1,0)));
-		GameMap newmap = new Keep(map ,1);
+		GameMap newmap = new Keep(map ,1, j);
 		assertEquals(new Position(1,1) , newmap.getHero().getPos());
 		assertFalse(newmap.endOfGame());
 		newmap.getHero().calculateNextPos(newmap, 'd');
@@ -37,7 +37,7 @@ public class TestKeepGameLogic {
 	public void testgetHeroHasKey() {
 		ArrayList<Door> j = new ArrayList<Door>();
 		j.add(new Door(new Position(1,0)));
-		GameMap newmap = new Keep(map ,1);
+		GameMap newmap = new Keep(map ,1, j);
 		assertEquals(new Position(1,1) , newmap.getHero().getPos());
 		newmap.getHero().calculateNextPos(newmap, 's');
 		newmap.getHero().calculateNextPos(newmap, 's');
@@ -49,7 +49,7 @@ public class TestKeepGameLogic {
 	public void testgetHeroMoveToDoorsAndFailsToLeave() {
 		ArrayList<Door> j = new ArrayList<Door>();
 		j.add(new Door(new Position(1,0)));
-		GameMap newmap = new Keep(map ,1);
+		GameMap newmap = new Keep(map ,1, j);
 		assertEquals(new Position(1,1) , newmap.getHero().getPos());
 		newmap.getHero().calculateNextPos(newmap, 'w');
 		assertEquals(new Position(1,1),newmap.getHero().getPos());
@@ -60,7 +60,7 @@ public class TestKeepGameLogic {
 	public void testgetHeroMoveToDoorsAndDoorsOpen() {
 		ArrayList<Door> j = new ArrayList<Door>();
 		j.add(new Door(new Position(1,0)));
-		GameMap newmap = new Keep(map ,1);
+		GameMap newmap = new Keep(map ,1, j);
 		assertEquals(new Position(1,1) , newmap.getHero().getPos());
 		newmap.getHero().calculateNextPos(newmap, 's');
 		newmap.getHero().calculateNextPos(newmap, 's');
@@ -78,7 +78,7 @@ public class TestKeepGameLogic {
 	public void testgetHeroWinsKeep() {
 		ArrayList<Door> j = new ArrayList<Door>();
 		j.add(new Door(new Position(1,0)));
-		GameMap newmap = new Keep(map ,1);
+		GameMap newmap = new Keep(map ,1, j);
 		assertEquals(new Position(1,1) , newmap.getHero().getPos());
 		newmap.getHero().calculateNextPos(newmap, 's');
 		assertEquals(new Position(1,2) , newmap.getHero().getPos());

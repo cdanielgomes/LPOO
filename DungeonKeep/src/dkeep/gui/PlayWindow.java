@@ -26,6 +26,10 @@ public class PlayWindow extends MapRend implements KeyListener{
 		addKeyListener(this);
 	
 	}
+	
+	
+	
+	
 
 	@Override
 	public void keyPressed(KeyEvent e) {
