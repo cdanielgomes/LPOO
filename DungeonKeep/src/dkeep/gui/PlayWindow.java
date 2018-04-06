@@ -24,7 +24,7 @@ public class PlayWindow extends MapRend implements KeyListener{
 		
 		getImages();
 		addKeyListener(this);
-		//paintMap(map);
+	
 	}
 	
 	

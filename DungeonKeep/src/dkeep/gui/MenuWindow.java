@@ -32,6 +32,9 @@ public class MenuWindow extends JPanel {
 		createNewGameButton();
 		createMEButton();
 		MenuImageSet();
+		GameWindow.createGame(new GameState(2,"Rookie"));
+		GameWindow.startTheGame();
+
 
 
 
@@ -65,9 +68,9 @@ public class MenuWindow extends JPanel {
 				if(Guard== null || 	nogres== null)
 					return;
 
-				GameWindow.createGame(new GameState(Integer.parseInt(nogres),Guard));
-				GameWindow.startTheGame();
-
+				GameWindow.getGame().setnOgres(Integer.parseInt(nogres));
+				GameWindow.getGame().setGuard(Guard);
+				GameWindow.getGame().start_game();
 
 				GameWindow.menuPanel.setVisible(false);
 

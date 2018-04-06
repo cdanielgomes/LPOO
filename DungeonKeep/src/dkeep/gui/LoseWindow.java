@@ -28,6 +28,7 @@ public class LoseWindow extends JPanel {
 
 		LooseImageSet();
 		
+		
 	}
 
 
@@ -39,6 +40,8 @@ public class LoseWindow extends JPanel {
 			public void actionPerformed(ActionEvent e){
 				GameWindow.losePanel.setVisible(false);
 				GameWindow.menuPanel.setVisible(true);
+				GameWindow.getGame().display();
+				
 			}
 
 		});
