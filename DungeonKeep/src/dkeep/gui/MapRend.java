@@ -149,6 +149,7 @@ public class MapRend extends JPanel{
 		revalidate();
 
 	}
+
 	
 	public void setDefaultValues(int x , int y) {
 		this.defaultMapWidth = x;

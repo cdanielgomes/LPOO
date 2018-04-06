@@ -12,7 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
+import logic.GameMap;
 import logic.GameState;
+import logic.Keep;
+
 import javax.swing.border.MatteBorder;
 
 public class MenuWindow extends JPanel {
@@ -21,7 +25,7 @@ public class MenuWindow extends JPanel {
 
 	static PlayAux play;
 	private JFrame frmMazeGame = GameWindow.frmDungeonKeep;
-
+	private char[][] editor;
 
 	public MenuWindow() {
 
@@ -67,7 +71,10 @@ public class MenuWindow extends JPanel {
 				
 				GameWindow.createGame(new GameState(Integer.parseInt(nogres),Guard));
 				GameWindow.startTheGame();
-
+				if(GameWindow.costum) {
+				GameMap m = new Keep(editor,Integer.parseInt(nogres));
+				GameWindow.getGame().addMap(m);
+				}
 				GameWindow.menuPanel.setVisible(false);
 
 
@@ -77,7 +84,6 @@ public class MenuWindow extends JPanel {
 				GameWindow.play.playPanel.requestFocusInWindow();
 
 			} 
-
 		}); 
 
 		add(NGbutton);
@@ -131,6 +137,9 @@ public class MenuWindow extends JPanel {
 		p.add(new JLabel(new ImageIcon(MenuWindow.class.getResource("/dkeep/gui/img/menu2.jpg"))));
 		add(p);
 
+	}
+	public void setEditor(char[][] ed) {
+		this.editor = ed; 
 	}
 
 

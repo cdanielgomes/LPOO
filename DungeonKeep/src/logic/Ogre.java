@@ -38,7 +38,7 @@ public class Ogre extends Character {
 				this.stun = false;
 			}
 		}
-		if(this.position.equals(map.leverPos())) this.setSymbol('$');
+		if(this.position.equals(map.leverPos()) && !map.getHero().hasLever()) this.setSymbol('$');
 		calculateNextPosWeapon(map);
 	}
 

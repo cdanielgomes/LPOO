@@ -266,7 +266,7 @@ public class MapEditor{
 
 		if(wall()){
 
-			return (mapPanel.searchHero() && mapPanel.searchKey() && mapPanel.searchOgre() && mapPanel.searchHeroClub() && !mapPanel.searchDoor());
+			return (mapPanel.searchHero() && mapPanel.searchKey() && mapPanel.searchOgre() && mapPanel.searchHeroClub() && mapPanel.searchDoor());
 	
 		}
 		else return false;
@@ -278,16 +278,15 @@ public class MapEditor{
 		SaveButton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
 				if(save()) {
-					System.out.println("Ines");	
-					GameMap m = new Keep(mapPanel.getMapEditing(), 1, mapPanel.getDoors());
-					GameWindow.getGame().addMap(m);
+					
+					GameWindow.costum = true;
+					GameWindow.menuPanel.setEditor(mapPanel.getMapEditing());
 					GameWindow.mapE.getFrame().setVisible(false);
 					GameWindow.frmDungeonKeep.setVisible(true);
 					GameWindow.menuPanel.setVisible(true);
 
 				}
 
-				else System.out.println("Marques");	
 			}
 
 		});

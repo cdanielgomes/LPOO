@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class GameState {
 	private ArrayList<GameMap> gameMaps = new ArrayList<GameMap>(); 
 	private GameMap map;
-	private ArrayList<GameMap> gameMapsCopy = new ArrayList<GameMap>(); 
 	private String guard;
 	private int nOgres;
 	private boolean won = false;
@@ -44,32 +43,16 @@ public class GameState {
 
 	};
 
-
-	public char[][] cloning(char[][] m) {
-		char[][] p = new char[m.length][m[0].length];
-		for(int i = 0; i<10; i++) {
-			p[i] = map1[i].clone();
-		}
-		return p;
-	}
-
-
 	public void initializeGame() {
 		ArrayList<Door> i = new ArrayList<Door>(); 
-		ArrayList<Door> s = new ArrayList<Door>();
 		char[] moves = { 'a', 's', 's', 's', 's', 'a', 'a', 'a', 'a', 'a', 'a', 's', 'd', 'd', 'd', 'd', 'd', 'd',
 				'd', 'w', 'w', 'w', 'w', 'w' };
 		i.add(new Door(new Position(0,5)));
 		i.add(new Door(new Position(0,6)));
-		s.add(new Door(new Position(0,1)));
-		GameMap m =  new Dungeon(map1,guard, i, moves); 
-		GameMap copy = new Dungeon((Dungeon)m);
+		GameMap m =  new Dungeon(map1,guard, i, moves);
 		gameMaps.add(m);
-		gameMapsCopy.add(copy);
-		m = new Keep(map2,nOgres,s);
-		copy = new Keep((Keep)m);
+		m = new Keep(map2,nOgres);
 		gameMaps.add(m);
-		gameMapsCopy.add(copy);
 		this.map = gameMaps.get(level);
 
 	}
@@ -81,17 +64,8 @@ public class GameState {
 		this.nOgres = i;
 	}
 
-	/*
-	public char[][] restart(char[][] m) {
-		char[][] p = new char[m.length][m[0].length];
-		for(int i = 0; i < m.length; i++) {
-			p[i] = m[i].clone();
-		}
-		return p;
-	}*/ 
 
 	public void start_game() {
-		//gameMaps = (ArrayList<GameMap>) gameMapsCopy.clone(); 
 		this.won = false;
 		this.level = 0;
 
@@ -123,7 +97,7 @@ public class GameState {
 	public boolean over() {
 		return map.endOfGame() || won;
 	}
-
+	
 	public boolean hasWon() {
 		return this.won;
 	}
@@ -138,7 +112,7 @@ public class GameState {
 	}
 
 	public void addMap(GameMap m) {
-		gameMaps.add(m);
+		gameMaps.set(1, m);
 
 	}
 }

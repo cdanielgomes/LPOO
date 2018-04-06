@@ -36,6 +36,7 @@ public class GameWindow {
 	static PlayAux play;
 	static LoseWindow losePanel;
 	static MapEditor mapE;
+	static boolean costum = false; 
 
 	private static GameState game;
 

@@ -28,6 +28,9 @@ public class Mapping extends MapRend  implements MouseListener{
 		addMouseListener(this);
 	}
 	
+	
+	
+	
 	public Mapping() {
 		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setBackground(java.awt.Color.BLACK);
@@ -86,12 +89,12 @@ public class Mapping extends MapRend  implements MouseListener{
 	public boolean searchKey() {
 		return findPers('k') == 1;
 	}
-
+	
 	public boolean searchHeroClub() {
 		return findPers('*') == 1;
 	}
 	public boolean searchDoor() {
-		return findPers('I') == 0;
+		return findPers('I') == 1;
 	}
 	public int findPers(char par){
 		int z = 0;
