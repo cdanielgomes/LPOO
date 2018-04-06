@@ -12,6 +12,12 @@ public class Keep extends GameMap{
 			hordOfOgres.add(new Ogre(getCharc('O')));
 		}
 	}
+	
+	public Keep(Keep k) {
+		super(k);
+		this.door = k.door;
+		this.hordOfOgres = k.hordOfOgres;
+	}
 
 
 	@Override

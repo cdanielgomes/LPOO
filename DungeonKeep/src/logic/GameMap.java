@@ -20,6 +20,15 @@ public abstract class GameMap {
 		this.lever = new Lever(getCharc('k'));
 
 	}
+	
+	public GameMap(GameMap t) {
+		this.map = t.map;
+		this.collum = t.collum;
+		this.lines = t.lines;
+		this.hero = t.hero;
+		this.lever = t.lever;
+
+	}
 
 
 

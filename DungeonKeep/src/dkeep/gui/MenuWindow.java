@@ -27,7 +27,6 @@ public class MenuWindow extends JPanel {
 
 		super();
 		setBackground(Color.DARK_GRAY);
-		//Sthis.add(new JLabel(new ImageIcon(MenuWindow.class.getResource("/dkeep/gui/img/menu2.jpg"))));
 		createExitButton();
 		createNewGameButton();
 		createMEButton();

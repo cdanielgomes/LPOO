@@ -3,30 +3,14 @@ package logic;
 import java.util.ArrayList;
 
 public class GameState {
-
-	ArrayList<Door> i = new ArrayList<Door>(); 
-	ArrayList<Door> s = new ArrayList<Door>();
-	private char[] moves = { 'a', 's', 's', 's', 's', 'a', 'a', 'a', 'a', 'a', 'a', 's', 'd', 'd', 'd', 'd', 'd', 'd',
-			'd', 'w', 'w', 'w', 'w', 'w' };
 	private ArrayList<GameMap> gameMaps = new ArrayList<GameMap>(); 
 	private GameMap map;
+	private ArrayList<GameMap> gameMapsCopy = new ArrayList<GameMap>(); 
 	private String guard;
 	private int nOgres;
 	private boolean won = false;
 	private int level = 0;
 
-	private char[][] copy1 = {{'X','X','X','X','X','X','X','X','X','X'},
-			{'X','H',' ',' ','I',' ','X',' ','G','X'},
-			{'X','X','X',' ','X','X','X',' ',' ','X'},
-			{'X',' ','I',' ','I',' ','X',' ',' ','X'},
-			{'X','X','X',' ','X','X','X',' ',' ','X'},
-			{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'I',' ',' ',' ',' ',' ',' ',' ',' ','X'},
-			{'X','X','X',' ','X','X','X','X',' ','X'},
-			{'X',' ','I',' ','I',' ','X','k',' ','X'},
-			{'X','X','X','X','X','X','X','X','X','X'}
-	};
- 
 	private char[][] map1 = {{'X','X','X','X','X','X','X','X','X','X'},
 			{'X','H',' ',' ','I',' ','X',' ','G','X'},
 			{'X','X','X',' ','X','X','X',' ',' ','X'},
@@ -68,12 +52,12 @@ public class GameState {
 	public GameState(int numogres, String guard) {
 		this.nOgres = numogres;
 		this.guard = guard;
-	
+
 		initializeGame();
-	
+
 	};
 
-	
+
 	public char[][] cloning(char[][] m) {
 		char[][] p = new char[m.length][m[0].length];
 		for(int i = 0; i<10; i++) {
@@ -81,19 +65,28 @@ public class GameState {
 		}
 		return p;
 	}
-	
-	
+
+
 	public void initializeGame() {
+		ArrayList<Door> i = new ArrayList<Door>(); 
+		ArrayList<Door> s = new ArrayList<Door>();
+		char[] moves = { 'a', 's', 's', 's', 's', 'a', 'a', 'a', 'a', 'a', 'a', 's', 'd', 'd', 'd', 'd', 'd', 'd',
+				'd', 'w', 'w', 'w', 'w', 'w' };
 		i.add(new Door(new Position(0,5)));
 		i.add(new Door(new Position(0,6)));
 		s.add(new Door(new Position(0,1)));
 		GameMap m =  new Dungeon(map1,guard, i, moves); 
+		GameMap copy = new Dungeon((Dungeon)m);
 		gameMaps.add(m);
+		gameMaps.add(copy);
 		m = new Keep(map2,nOgres,s);
-		gameMaps.add(m);
-		map = gameMaps.get(level);
+		copy = new Keep((Keep)m);
+		gameMapsCopy.add(copy);
+		gameMapsCopy.add(copy);
+		this.map = gameMaps.get(level);
+
 	}
-	
+
 	public void setGuard(String guard) {
 		this.guard = guard;
 	}
@@ -102,24 +95,21 @@ public class GameState {
 		this.nOgres = nOgres;
 	}
 
-	
+
 	public char[][] restart(char[][] m) {
 		char[][] p = new char[m.length][m[0].length];
 		for(int i = 0; i < m.length; i++) {
 			p[i] = m[i].clone();
 		}
-	return p;
+		return p;
 	}
 	public void start_game() {
-	
+		//gameMaps = (ArrayList<GameMap>) gameMapsCopy.clone(); 
 		this.won = false;
 		this.level = 0;
-		//map1 = cloning(copy1);
-		//map2 = cloning(copy2);
-		//gameMaps.set(0,new Dungeon(map1,guard,i , moves));
-		//gameMaps.set(1, new Keep(map2,nOgres,s));
+
 		this.map = gameMaps.get(level);
-	
+
 	}
 
 	public void movement(char hero) {
@@ -162,6 +152,6 @@ public class GameState {
 
 	public void addMap(GameMap m) {
 		gameMaps.add(m);
-		
+
 	}
 }

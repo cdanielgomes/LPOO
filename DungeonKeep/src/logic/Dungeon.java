@@ -24,9 +24,12 @@ public class Dungeon extends GameMap {
 
 	}
 
-	/**
-	 * @return the guard
-	 */
+	public Dungeon(Dungeon d) {
+		super(d);
+		this.door = d.door;
+		this.guard = d.guard;
+	}
+	
 	public Guard getGuard() {
 		return guard;
 	}
