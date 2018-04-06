@@ -93,7 +93,7 @@ public class MapEditor{
 	public void createPanel() {
 		mapPanel = new Mapping(this.x,this.y);
 		mapPanel.setBackground(Color.BLACK);
-		mapPanel.setBounds(12, 60, 256, 214);
+		mapPanel.setBounds(12, 10, 400,200 );
 		MapEditorframe.getContentPane().add(mapPanel);
 		mapPanel.setVisible(true);
 
