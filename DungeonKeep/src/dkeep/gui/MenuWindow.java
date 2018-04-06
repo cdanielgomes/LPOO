@@ -113,6 +113,7 @@ public class MenuWindow extends JPanel {
 				if(GameWindow.mapE.firstAction()) {
 					GameWindow.frmDungeonKeep.setVisible(false);
 					GameWindow.mapE.getFrame().setVisible(true);
+					
 				}
 
 			}

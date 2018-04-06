@@ -24,13 +24,14 @@ import logic.Keep;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.border.MatteBorder;
 
 public class MapEditor{
 
 	private JFrame MapEditorframe;
 
 	private int x, y;
-	private Mapping mapPanel;
+	private Mapping mapPanel = new Mapping();
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -57,10 +58,12 @@ public class MapEditor{
 	 */
 	private void initialize() {
 		MapEditorframe = new JFrame();
+		MapEditorframe.setTitle("MAP EDITOR");
 		MapEditorframe.getContentPane().setBackground(Color.DARK_GRAY);
 		MapEditorframe.setBounds(100, 100, 650, 400);
 		MapEditorframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MapEditorframe.setResizable(false);
+		MapEditorframe.getContentPane().add(mapPanel);
 
 		MapEditorframe.getContentPane().setLayout(null);
 
@@ -79,6 +82,7 @@ public class MapEditor{
 
 	public void createOgreButton() {
 		JButton OgreButton = new JButton("");
+		OgreButton.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		OgreButton.setBounds(580, 60, 35, 35);
 		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/ogre.png"))).getImage();
 		OgreButton.setIcon(new ImageIcon(img.getScaledInstance(OgreButton.getWidth() , OgreButton.getHeight() , Image.SCALE_FAST)));
@@ -90,30 +94,33 @@ public class MapEditor{
 			}
 		});
 	}
+	
+	
 
 	public void createPanel() {
-		mapPanel = new Mapping(this.x,this.y);
+		mapPanel.setDefaultValues(this.x, this.y);
+		mapPanel.getImages();
+		mapPanel.initialMap();
 		mapPanel.setBackground(Color.BLACK);
 		mapPanel.setBounds(12, 10, 350,350);
-		MapEditorframe.getContentPane().add(mapPanel);
+		mapPanel.setLayout(new GridLayout(x,y));
 		mapPanel.setVisible(true);
 
 	}
 
 	public boolean firstAction() {
 
-		String[] tamanhos = { "6", "7", "8", "9", "10", "11", "12" };
+		String[] res = { "6x6", "7x7", "8x8", "9x9", "10x10", "11x11", "12x12" };
 
-		String n = (String) JOptionPane.showInputDialog(MapEditorframe, "             Width",
-				"", JOptionPane.PLAIN_MESSAGE, null, tamanhos, "6");
-
+		String n = (String) JOptionPane.showInputDialog(MapEditorframe, "             Map Resolution",
+				"", JOptionPane.PLAIN_MESSAGE, null, res, "6x6");
+		
+		
 		if (n == null) return false;
-
-		x = Integer.parseInt(n);
-		n = (String) JOptionPane.showInputDialog(MapEditorframe,
-				"             Height", "", JOptionPane.PLAIN_MESSAGE, null, tamanhos, "6");
-		if(n == null) return false;
-		y = Integer.parseInt(n);
+		
+		
+		x = Integer.parseInt(n.substring(0 , n.indexOf('x')));
+		y = Integer.parseInt(n.substring(0 , n.indexOf('x')));
 
 		createPanel();
 
@@ -123,6 +130,7 @@ public class MapEditor{
 
 	public void createWallButton() {
 		JButton WallButton = new JButton("");
+		WallButton.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		WallButton.setBounds(540, 210, 35, 35);
 		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/wall.png"))).getImage();
 		WallButton.setIcon(new ImageIcon(img.getScaledInstance(WallButton.getWidth() , WallButton.getHeight() , Image.SCALE_FAST)));
@@ -136,6 +144,7 @@ public class MapEditor{
 	}
 	public void createHeroClubButton() {
 		JButton HeroClub = new JButton("");
+		HeroClub.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		HeroClub.setBounds(580, 160, 35, 35);
 		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/club.png"))).getImage();
 		HeroClub.setIcon(new ImageIcon(img.getScaledInstance(HeroClub.getWidth() , HeroClub.getHeight() , Image.SCALE_FAST)));
@@ -149,6 +158,7 @@ public class MapEditor{
 	}
 	public void createFloorButton() {
 		JButton FloorButton = new JButton("");
+		FloorButton.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		FloorButton.setBounds(500, 160,  35, 35);
 		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/cell.png"))).getImage();
 		FloorButton.setIcon(new ImageIcon(img.getScaledInstance(FloorButton.getWidth() , FloorButton.getHeight() , Image.SCALE_FAST)));
@@ -162,6 +172,7 @@ public class MapEditor{
 
 	public void createHeroButton() {
 		JButton Herobutton = new JButton("");
+		Herobutton.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		Herobutton.setBounds(500, 60, 35, 35);
 		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/hero1.png"))).getImage();
 		Herobutton.setIcon(new ImageIcon(img.getScaledInstance(Herobutton.getWidth() , Herobutton.getHeight() , Image.SCALE_FAST)));
@@ -177,6 +188,7 @@ public class MapEditor{
 
 	public void createKeyButton() {
 		JButton KeyButton = new JButton("");
+		KeyButton.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		KeyButton.setBounds(500, 110,  35, 35);
 		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/key.png"))).getImage();
 		KeyButton.setIcon(new ImageIcon(img.getScaledInstance(KeyButton.getWidth() , KeyButton.getHeight() , Image.SCALE_FAST)));
@@ -192,6 +204,7 @@ public class MapEditor{
 
 	public void createDoorButton() {
 		JButton DoorButton = new JButton("");
+		DoorButton.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		DoorButton.setBounds(580, 110,  35, 35);
 		Image img = (new ImageIcon(MapEditor.class.getResource("/dkeep/gui/img/door.png"))).getImage();
 		DoorButton.setIcon(new ImageIcon(img.getScaledInstance(DoorButton.getWidth() , DoorButton.getHeight() , Image.SCALE_FAST)));

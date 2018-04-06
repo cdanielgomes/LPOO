@@ -27,6 +27,13 @@ public class Mapping extends MapRend  implements MouseListener{
 
 		addMouseListener(this);
 	}
+	
+	public Mapping() {
+		this.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.setBackground(java.awt.Color.BLACK);
+		this.setSize(360, 360);
+		addMouseListener(this);
+	}
 
 	public void initialMap() {
 
@@ -38,7 +45,7 @@ public class Mapping extends MapRend  implements MouseListener{
 				else 
 					p[i][k] = ' ';
 		}
-		mapEditing = p;
+		this.mapEditing = p;
 
 		paintMap(mapEditing);
 	}

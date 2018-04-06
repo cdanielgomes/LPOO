@@ -35,6 +35,11 @@ public class MapRend extends JPanel{
 		defaultMapHeight = height;
 		defaultMapWidth = width;
 	}
+	public MapRend() {
+		super();
+		defaultMapWidth = 1;
+		defaultMapHeight = 1;
+	}
 
 	protected  void getImages(){
 
@@ -143,6 +148,11 @@ public class MapRend extends JPanel{
 
 		revalidate();
 
+	}
+	
+	public void setDefaultValues(int x , int y) {
+		this.defaultMapWidth = x;
+		this.defaultMapHeight = y;
 	}
 
 	
