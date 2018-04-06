@@ -37,9 +37,10 @@ public class TestRandomBehavior {
 	@Test
 	public void printMap() {
 		GameState game = new GameState(1,"Rookie");
+		game.start_game();
 		ArrayList<Door> j = new ArrayList<Door>();
 		j.add(new Door(new Position(0,1)));
-		game.setMap(new Keep(map, 1, j));
+		game.setMap(new Keep(map, 1));
 
 		assertEquals(game.getMap().tostring(),"XXXXXXXXXX\n"
 				+ "I   O    X\n"
@@ -59,7 +60,7 @@ public class TestRandomBehavior {
 		GameState g = new GameState(1,"Rookie");
 		ArrayList<Door> j = new ArrayList<Door>();
 		j.add(new Door(new Position(0,1)));
-		g.setMap(new Keep(map,1, j));
+		g.setMap(new Keep(map,1));
 		int x;
 		char[] moving = {'a', 's', 'd', 'w'};
 
@@ -119,7 +120,7 @@ public class TestRandomBehavior {
 		GameState g = new GameState(1,"Rookie");
 		ArrayList<Door> j = new ArrayList<Door>();
 		j.add(new Door(new Position(0,1)));
-		g.setMap(new Keep(map,1, j));
+		g.setMap(new Keep(map,1));
 		Random rand = new Random();
 		char[] moving = {'a', 's', 'd', 'w'};
 		boolean left= false;

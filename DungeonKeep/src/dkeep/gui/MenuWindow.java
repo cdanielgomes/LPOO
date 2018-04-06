@@ -4,9 +4,13 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import logic.GameState;
 import javax.swing.border.MatteBorder;
+import java.awt.SystemColor;
 
 public class MenuWindow extends JPanel {
 
@@ -22,7 +27,6 @@ public class MenuWindow extends JPanel {
 	static PlayAux play;
 	private JFrame frmMazeGame = GameWindow.frmDungeonKeep;
 
-
 	public MenuWindow() {
 
 		super();
@@ -30,6 +34,7 @@ public class MenuWindow extends JPanel {
 		createExitButton();
 		createNewGameButton();
 		createMEButton();
+		createLoadButton();
 		MenuImageSet();
 
 
@@ -46,6 +51,7 @@ public class MenuWindow extends JPanel {
 		NGbutton.setIcon(new ImageIcon(MenuWindow.class.getResource("/dkeep/gui/img/newgame.png")));
 		NGbutton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+
 
 				String Guard;
 				String nogres;
@@ -65,9 +71,10 @@ public class MenuWindow extends JPanel {
 					return;
 
 				
-				GameWindow.createGame(new GameState(Integer.parseInt(nogres),Guard));
-				GameWindow.startTheGame();
+		//		GameWindow.createGame(new GameState(Integer.parseInt(nogres),Guard));
+			//	GameWindow.startTheGame();
 
+			
 				GameWindow.menuPanel.setVisible(false);
 
 
@@ -119,6 +126,33 @@ public class MenuWindow extends JPanel {
 			}
 		});
 		add(EMbutton);
+
+
+	}
+
+	public void createLoadButton() {
+		JButton Loadbutton = new JButton("Load");
+		Loadbutton.setBorder(null);
+		Loadbutton.setBackground(SystemColor.inactiveCaptionBorder);
+		Loadbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser fileChooser = new JFileChooser();
+				int res = fileChooser.showOpenDialog(frmMazeGame);
+				if(res == JFileChooser.APPROVE_OPTION) {
+					//
+					try {
+						FileInputStream fis = new FileInputStream(fileChooser.getSelectedFile());
+						ObjectInputStream ois = new ObjectInputStream(fis);						
+						GameWindow.setGame((GameState) ois.readObject());
+						ois.close();
+						fis.close();
+					} catch(IOException | ClassNotFoundException exc) {
+						exc.printStackTrace();
+					}
+				}
+			}
+		});
+		add(Loadbutton);
 
 
 	}

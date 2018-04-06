@@ -5,22 +5,25 @@ import java.util.ArrayList;
 public class Keep extends GameMap{
 	private ArrayList<Ogre> hordOfOgres = new ArrayList<Ogre>();
 
-	public Keep(char[][] map, int numberofogres, ArrayList<Door> j) {
+	public Keep(char[][] map, int numberofogres) {
 		super(map);
-		this.door = j;
-		for (int i = 0 ; i < numberofogres; i++) {
-			hordOfOgres.add(new Ogre(getCharc('O')));
-		}
+		hordOfOgres = setnogres(numberofogres);
+		door = setDoors();
 	}
-	
-	public Keep(Keep k) {
-		super(k);
-		this.door = k.door;
-		this.hordOfOgres = k.hordOfOgres;
-	}
-	
-	
 
+	public ArrayList<Ogre> setnogres(int numberofogres) {
+		ArrayList<Ogre> kapa = new ArrayList<Ogre>();
+		for (int i = 0 ; i < numberofogres; i++) {
+			kapa.add(new Ogre(getCharc('O')));
+		}
+		return kapa;
+	}
+
+	public ArrayList<Door> setDoors() {
+		ArrayList<Door> kapa = new ArrayList<Door>();
+		kapa.add(new Door(getCharc('I')));
+		return kapa;
+	}
 
 	@Override
 	public	void autoMoves(char heromove) {

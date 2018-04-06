@@ -234,7 +234,6 @@ public class MapEditor{
 				GameWindow.frmDungeonKeep.setVisible(true);
 				GameWindow.menuPanel.setVisible(true);
 
-
 			}
 
 		});
@@ -277,17 +276,15 @@ public class MapEditor{
 		SaveButton.setBounds(500, 250, 117, 25);
 		SaveButton.addActionListener(new ActionListener (){
 			public void actionPerformed(ActionEvent e){
+	
 				if(save()) {
-					System.out.println("Ines");	
-					GameMap m = new Keep(mapPanel.getMapEditing(), 1, mapPanel.getDoors());
+					GameMap m = new Keep(mapPanel.getMapEditing(), GameWindow.getGame().getNOgres());
 					GameWindow.getGame().addMap(m);
 					GameWindow.mapE.getFrame().setVisible(false);
 					GameWindow.frmDungeonKeep.setVisible(true);
 					GameWindow.menuPanel.setVisible(true);
-
 				}
 
-				else System.out.println("Marques");	
 			}
 
 		});

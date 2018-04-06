@@ -1,8 +1,11 @@
 package logic;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class GameMap {
+public abstract class GameMap implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	protected char[][] map;
 	protected int collum;
 	protected int lines;
@@ -31,14 +34,13 @@ public abstract class GameMap {
 	}
 
 
-
 	public Position getCharc(char charac) {
 		for (int i = 0; i < collum; i++) {
 			for (int b = 0; b < lines; b++) {
 				if(this.map[i][b] == charac){
 					return new Position(b,i);
 				}
-			}
+			}	
 		}
 		return new Position(-1,-1);
 	}
@@ -62,17 +64,6 @@ public abstract class GameMap {
 		return lever.position;
 	}
 
-	public void printmap() {
-
-		for(int a = 0 ; a < collum  ; a++ ) {
-			//System.out.print("|");
-			for(int b = 0 ; b < lines ; b++) {
-				System.out.print(this.map[a][b] );
-
-			}
-			System.out.print('\n');
-		}
-	}
 
 	public String tostring() {
 		String map = "";
