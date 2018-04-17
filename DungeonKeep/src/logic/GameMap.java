@@ -29,9 +29,6 @@ public abstract class GameMap {
 		this.lever = new Lever(getCharc('k'));
 
 	}
-<<<<<<< Updated upstream
-=======
-
 
 	// no used
 	
@@ -41,8 +38,7 @@ public abstract class GameMap {
 		this.lines = t.lines;
 		this.hero = t.hero;
 		this.lever = t.lever;
->>>>>>> Stashed changes
-
+	}
 
 
 	/**

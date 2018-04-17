@@ -26,9 +26,6 @@ public class Dungeon extends GameMap {
 
 	}
 
-<<<<<<< Updated upstream
-
-=======
 	// not using
 	public Dungeon(Dungeon d) {
 		super(d);
@@ -41,7 +38,6 @@ public class Dungeon extends GameMap {
 	 * @param i name of the guard type
 	 * @param guardMove	char array with the moves of the guard
 	 */
->>>>>>> Stashed changes
 	
 	public void setGuard(String i, char[] guardMove) {
 

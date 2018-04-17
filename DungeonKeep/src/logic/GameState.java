@@ -53,28 +53,12 @@ public class GameState {
 
 	};
 
-<<<<<<< Updated upstream
-=======
-	/**
-	 * Returns a copy of the map
-	 * @param m map
-	 * @return new clone of type char[][]
-	 */
-
-	public char[][] cloning(char[][] m) {
-		char[][] p = new char[m.length][m[0].length];
-		for(int i = 0; i<10; i++) {
-			p[i] = map1[i].clone();
-		}
-		return p;
-	}
 
 	/**
 	 * Sets all the variables for the game 
 	 * and starts the game
 	 */
 
->>>>>>> Stashed changes
 	public void initializeGame() {
 		ArrayList<Door> i = new ArrayList<Door>(); 
 		char[] moves = { 'a', 's', 's', 's', 's', 'a', 'a', 'a', 'a', 'a', 'a', 's', 'd', 'd', 'd', 'd', 'd', 'd',
@@ -105,14 +89,9 @@ public class GameState {
 		this.nOgres = i;
 	}
 
-<<<<<<< Updated upstream
-
-=======
-	
 	/**
 	 * Starts the game , resets the level
 	 */
->>>>>>> Stashed changes
 	public void start_game() {
 		this.won = false;
 		this.level = 0;
@@ -156,16 +135,12 @@ public class GameState {
 	public boolean over() {
 		return map.endOfGame() || won;
 	}
-<<<<<<< Updated upstream
-	
-=======
 
 	/**
 	 * Returns won flag
 	 * @return true if won , false if not
 	 */
 
->>>>>>> Stashed changes
 	public boolean hasWon() {
 		return this.won;
 	}
