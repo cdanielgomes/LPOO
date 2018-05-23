@@ -1,5 +1,6 @@
 package view.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.mygdx.game.MyFruitGame;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -19,7 +20,7 @@ public abstract class EntityView {
         /**
          * The sprite representing this entity view.
          */
-        private Sprite sprite;
+        Sprite sprite;
 
         /**
          * Creates a view belonging to a game.
@@ -37,7 +38,7 @@ public abstract class EntityView {
          * @param batch The sprite batch to be used for drawing.
          */
         public void draw(SpriteBatch batch) {
-            sprite.draw(batch);
+           sprite.draw(batch);
         }
 
         /**
@@ -57,7 +58,7 @@ public abstract class EntityView {
          * @param model the model used to update this view
          */
         public void update(EntityModel model) {
-            sprite.setCenter(model.getX() / 0.04f, model.getY() / 0.04f);
-            sprite.setRotation((float) Math.toDegrees(model.getRotation()));
+            sprite.setCenter(model.getX(), model.getY());
+           //sprite.setRotation((float) Math.toDegrees(model.getRotation()));
         }
 }

@@ -4,7 +4,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.MyFruitGame;
 
-public class WatermelonView extends EntityView {
+public class FruitView extends EntityView {
+
+    private final Texture texture;
 
     /**
      * Constructs a bullet view.
@@ -12,8 +14,9 @@ public class WatermelonView extends EntityView {
      * @param game the game this view belongs to. Needed to access the
      *             asset manager to get textures.
      */
-    public WatermelonView(MyFruitGame game) {
+    public FruitView(MyFruitGame game, Texture texture) {
         super(game);
+        this.texture = texture;
     }
 
     /**
@@ -27,8 +30,6 @@ public class WatermelonView extends EntityView {
      */
     @Override
     public Sprite createSprite(MyFruitGame game) {
-
-        Texture texture = game.getAssetManager().get("watermelon.png");
-        return new Sprite(texture, texture.getWidth(), texture.getHeight());
+        return new Sprite(this.texture, this.texture.getWidth(), this.texture.getHeight());
     }
 }

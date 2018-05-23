@@ -7,7 +7,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 
-import controller.entities.WatermelonBody;
+import controller.entities.FruitBody;
 import model.GameModel;
 
 
@@ -44,13 +44,13 @@ public class GameController implements ContactListener {
      */
     private final World world;
 
-    private final WatermelonBody watermelon;
+    private final FruitBody watermelon;
 
 
     private GameController(){
         world = new World(new Vector2(0,-2), true);
 
-        watermelon = new WatermelonBody(world, GameModel.getInstance().getWatermelon());
+        watermelon = new FruitBody(world, GameModel.getInstance().getFruit());
 
 
         world.setContactListener(this);

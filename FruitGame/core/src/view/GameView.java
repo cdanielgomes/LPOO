@@ -13,8 +13,8 @@ import com.mygdx.game.MyFruitGame;
 import controller.GameController;
 
 import model.GameModel;
-import model.entities.WatermelonModel;
-import view.entities.WatermelonView;
+import model.entities.FruitModel;
+import view.entities.FruitView;
 
 public class GameView extends ScreenAdapter{
 
@@ -41,7 +41,7 @@ private final MyFruitGame game;
     /**
      * The camera used to show the viewport.
      */
-//    private final OrthographicCamera camera;
+ private final OrthographicCamera camera;
 
     /**
      * A renderer used to debug the physical fixtures.
@@ -59,7 +59,7 @@ public GameView(MyFruitGame game){
 
     loadAssets();
 
-  //  camera = createCamera();
+   camera = createCamera();
 
 }
 
@@ -68,8 +68,16 @@ public GameView(MyFruitGame game){
 
     this.game.getAssetManager().load("watermelon.png", Texture.class);
     this.game.getAssetManager().load("background.png",Texture.class);
+        this.game.getAssetManager().load("banana.png", Texture.class);
+        this.game.getAssetManager().load("lemon.png",Texture.class);
+        this.game.getAssetManager().load("red-apple.png", Texture.class);
+        this.game.getAssetManager().load("strawberry.png",Texture.class);
+        this.game.getAssetManager().load("peach.png", Texture.class);
+        this.game.getAssetManager().load("plum.png",Texture.class);
+        this.game.getAssetManager().load("orange.png", Texture.class);
 
-    this.game.getAssetManager().finishLoading();
+
+        this.game.getAssetManager().finishLoading();
     }
 
     /**
@@ -110,11 +118,10 @@ public GameView(MyFruitGame game){
     }
 
     private void drawEntities(){
-        WatermelonView view = new WatermelonView(this.game);
-        WatermelonModel water = GameModel.getInstance().getWatermelon();
-      view.update(water);
+        FruitView view = new FruitView(this.game, this.game.getAssetManager().get("watermelon.png", Texture.class));
+        FruitModel water = GameModel.getInstance().getFruit();
+        view.update(water);
         view.draw(game.getBatch());
-
     }
 
     /**
@@ -122,7 +129,6 @@ public GameView(MyFruitGame game){
      */
     private void drawBackground() {
         Texture background = game.getAssetManager().get("background.png", Texture.class);
-        background.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
-        game.getBatch().draw(background, 0, 0, 0, 0, (int)(100/ PIXEL_TO_METER), (int) (50 / PIXEL_TO_METER));
+        game.getBatch().draw(background, 0, 0, Gdx.graphics.getWidth() , Gdx.graphics.getHeight());
     }
 }

@@ -1,7 +1,7 @@
 package model;
 
 
-import model.entities.WatermelonModel;
+import model.entities.FruitModel;
 
 /**
  * A model representing a game.
@@ -14,7 +14,7 @@ public class GameModel {
      */
     private static GameModel instance;
 
-    private WatermelonModel watermelon;
+    private FruitModel watermelon;
 
     /**
      * Returns a singleton instance of the game model
@@ -30,10 +30,10 @@ public class GameModel {
 
     private GameModel(){
 
-        watermelon = new WatermelonModel(50,50,10);
+        watermelon = new FruitModel(300,300,10);
     }
 
-    public WatermelonModel getWatermelon() {
+    public FruitModel getFruit() {
         return watermelon;
     }
 }
