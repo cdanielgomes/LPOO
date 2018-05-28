@@ -6,6 +6,9 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
+
+import java.util.ArrayList;
 
 import controller.entities.FruitBody;
 import model.GameModel;
@@ -44,13 +47,13 @@ public class GameController implements ContactListener {
      */
     private final World world;
 
-    private final FruitBody watermelon;
+    //private final FruitBody watermelon;
 
 
     private GameController(){
         world = new World(new Vector2(0,-2), true);
 
-        watermelon = new FruitBody(world, GameModel.getInstance().getFruit());
+
 
 
         world.setContactListener(this);

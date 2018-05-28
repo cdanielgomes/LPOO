@@ -10,6 +10,10 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.mygdx.game.MyFruitGame;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import controller.GameController;
 
 import model.GameModel;
@@ -37,7 +41,6 @@ private final MyFruitGame game;
      * automatically calculated using the screen ratio.
      */
     private static final float VIEWPORT_WIDTH = 30;
-
 
     /**
      * The camera used to show the viewport.
@@ -122,10 +125,15 @@ public GameView(MyFruitGame game){
      */
 
     private void drawEntities(){
-        FruitView view = new FruitView(this.game, EntityView.Fruits.APPLE);
-        FruitModel water = GameModel.getInstance().getFruit();
-        view.update(water);
-        view.draw(game.getBatch());
+        List<FruitModel> fruitModels = new ArrayList<FruitModel>();
+        fruitModels = GameModel.getInstance().getFruits();
+
+        for(FruitModel fruit : fruitModels) {
+            FruitView view = new FruitView(this.game, fruit.getFruit());
+            view.update(fruit);
+            view.draw(game.getBatch());
+        }
+
     }
 
     /**
