@@ -1,6 +1,7 @@
 package view.entities;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyFruitGame;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +17,9 @@ import model.entities.EntityModel;
 
 public abstract class EntityView {
 
+    public enum Fruits{
+        WATERMELON, BANANA, LEMON, ORANGE, PEACH, PLUM, APPLE, STRAW
+    }
 
         /**
          * The sprite representing this entity view.
@@ -28,8 +32,8 @@ public abstract class EntityView {
          * @param game the game this view belongs to. Needed to access the
          *             asset manager to get textures.
          */
-       public EntityView(MyFruitGame game) {
-            sprite = createSprite(game);
+       public EntityView(MyFruitGame game, Fruits fruits) {
+            sprite = createSprite(game, fruits);
         }
 
         /**
@@ -37,8 +41,9 @@ public abstract class EntityView {
          *
          * @param batch The sprite batch to be used for drawing.
          */
+
         public void draw(SpriteBatch batch) {
-           sprite.draw(batch);
+              sprite.draw(batch);   
         }
 
         /**
@@ -50,7 +55,7 @@ public abstract class EntityView {
          *             asset manager to get textures.
          * @return the sprite representing this view.
          */
-        public abstract Sprite createSprite(MyFruitGame game);
+        public abstract Sprite createSprite(MyFruitGame game, Fruits fruits);
 
         /**
          * Updates this view based on a certain model.

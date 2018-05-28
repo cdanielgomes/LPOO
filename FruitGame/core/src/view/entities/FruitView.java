@@ -6,7 +6,7 @@ import com.mygdx.game.MyFruitGame;
 
 public class FruitView extends EntityView {
 
-    private final Texture texture;
+    Texture texture;
 
     /**
      * Constructs a bullet view.
@@ -14,9 +14,8 @@ public class FruitView extends EntityView {
      * @param game the game this view belongs to. Needed to access the
      *             asset manager to get textures.
      */
-    public FruitView(MyFruitGame game, Texture texture) {
-        super(game);
-        this.texture = texture;
+    public FruitView(MyFruitGame game, Fruits fruits) {
+        super(game, fruits);
     }
 
     /**
@@ -29,7 +28,40 @@ public class FruitView extends EntityView {
      * @return the sprite representing this view.
      */
     @Override
-    public Sprite createSprite(MyFruitGame game) {
-        return new Sprite(this.texture, this.texture.getWidth(), this.texture.getHeight());
+    public Sprite createSprite(MyFruitGame game, Fruits fruits) {
+        switch(fruits){
+            case PLUM:
+                texture = game.getAssetManager().get("plum.png", Texture.class);
+                break;
+            case APPLE:
+                texture = game.getAssetManager().get("apple.png", Texture.class);
+                break;
+
+            case PEACH:
+                texture = game.getAssetManager().get("peach.png", Texture.class);
+                break;
+
+            case LEMON:
+                texture = game.getAssetManager().get("lemon.png", Texture.class);
+                break;
+
+            case STRAW:
+                texture = game.getAssetManager().get("strawberry.png", Texture.class);
+                break;
+
+            case BANANA:
+                texture = game.getAssetManager().get("banana.png", Texture.class);
+                break;
+
+            case ORANGE:
+                texture = game.getAssetManager().get("orange.png", Texture.class);
+                break;
+
+            default:
+                texture = game.getAssetManager().get("watermelon.png", Texture.class);
+                break;
+        }
+
+        return new Sprite(texture, texture.getWidth(), texture.getHeight());
     }
 }

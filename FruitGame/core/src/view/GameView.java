@@ -14,6 +14,7 @@ import controller.GameController;
 
 import model.GameModel;
 import model.entities.FruitModel;
+import view.entities.EntityView;
 import view.entities.FruitView;
 
 public class GameView extends ScreenAdapter{
@@ -66,16 +67,15 @@ public GameView(MyFruitGame game){
 
     private void loadAssets(){
 
-    this.game.getAssetManager().load("watermelon.png", Texture.class);
-    this.game.getAssetManager().load("background.png",Texture.class);
+         this.game.getAssetManager().load("watermelon.png", Texture.class);
+         this.game.getAssetManager().load("background.png",Texture.class);
         this.game.getAssetManager().load("banana.png", Texture.class);
         this.game.getAssetManager().load("lemon.png",Texture.class);
-        this.game.getAssetManager().load("red-apple.png", Texture.class);
+        this.game.getAssetManager().load("apple.png", Texture.class);
         this.game.getAssetManager().load("strawberry.png",Texture.class);
         this.game.getAssetManager().load("peach.png", Texture.class);
         this.game.getAssetManager().load("plum.png",Texture.class);
         this.game.getAssetManager().load("orange.png", Texture.class);
-
 
         this.game.getAssetManager().finishLoading();
     }
@@ -117,8 +117,12 @@ public GameView(MyFruitGame game){
         game.getBatch().end();
     }
 
+    /**
+     * How much meters does a pixel represent.
+     */
+
     private void drawEntities(){
-        FruitView view = new FruitView(this.game, this.game.getAssetManager().get("watermelon.png", Texture.class));
+        FruitView view = new FruitView(this.game, EntityView.Fruits.APPLE);
         FruitModel water = GameModel.getInstance().getFruit();
         view.update(water);
         view.draw(game.getBatch());
