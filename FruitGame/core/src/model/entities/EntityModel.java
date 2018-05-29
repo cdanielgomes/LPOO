@@ -22,10 +22,7 @@ public abstract class EntityModel {
      */
     private float rotation;
 
-    /**
-     * Has this model been flagged for removal?
-     */
-    private boolean flaggedForRemoval = false;
+
 
     /**
      * Constructs a model with a position and a rotation.
@@ -87,21 +84,4 @@ public abstract class EntityModel {
         this.rotation = rotation;
     }
 
-    /**
-     * Returns if this entity has been flagged for removal
-     *
-     * @return
-     */
-    public boolean isFlaggedToBeRemoved() {
-        return flaggedForRemoval;
-    }
-
-    /**
-     * Makes this model flagged for removal on next step
-     */
-    public void setFlaggedForRemoval(boolean flaggedForRemoval) {
-        this.flaggedForRemoval = flaggedForRemoval;
-    }
-
-  //  public abstract ModelType getType();
 }

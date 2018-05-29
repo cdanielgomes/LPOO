@@ -134,4 +134,8 @@ public class EntityBody {
     public Object getUserData() {
         return body.getUserData();
     }
+
+    public Body getBody(){
+        return body;
+    }
 }

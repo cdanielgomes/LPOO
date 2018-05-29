@@ -111,6 +111,7 @@ public GameView(MyFruitGame game){
     @Override
     public void render(float delta) {
 
+        GameController.getInstance().update(delta);
         Gdx.gl.glClearColor( 103/255f, 69/255f, 117/255f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
 
@@ -125,11 +126,12 @@ public GameView(MyFruitGame game){
      */
 
     private void drawEntities(){
-        List<FruitModel> fruitModels = new ArrayList<FruitModel>();
+        List<FruitModel> fruitModels;
         fruitModels = GameModel.getInstance().getFruits();
 
         for(FruitModel fruit : fruitModels) {
             FruitView view = new FruitView(this.game, fruit.getFruit());
+            System.out.print("x = " + fruit.getX() + "  y=" + fruit.getY() + "  ");
             view.update(fruit);
             view.draw(game.getBatch());
         }
