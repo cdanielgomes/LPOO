@@ -9,9 +9,12 @@ import com.badlogic.gdx.physics.box2d.ContactImpulse;
 import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.ui.List;
+import com.badlogic.gdx.utils.Array;
 
-import java.lang.reflect.Array;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
+import java.util.List;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -30,21 +33,14 @@ public class GameController implements ContactListener {
      * Accumulator used to calculate the simulation step.
      */
     private float accumulator;
-    /**
-     * The arena width in meters.
-     */
-    public static final int ARENA_WIDTH = 100;
 
-    /**
-     * The arena height in meters.
-     */
-    public static final int ARENA_HEIGHT = 50;
-
+    private float GRAVITY = -9.8f;
     /**
      * The rotation speed in radians per second.
      */
     private static final float ROTATION_SPEED = 5f;
 
+    private boolean throwElem = false;
 
     /**
      * The singleton instance of this controller
@@ -63,9 +59,9 @@ public class GameController implements ContactListener {
 
 
     private GameController(){
-        world = new World(new Vector2(0,-9.8f), true);
+        world = new World(new Vector2(0,GRAVITY), true);
+        List<FruitModel> kapa = GameModel.getInstance().getFruits();
 
-        java.util.List<FruitModel> kapa = GameModel.getInstance().getFruits();
 
         for (FruitModel fruits : kapa){
             new FruitBody(world, fruits);
@@ -85,19 +81,32 @@ public class GameController implements ContactListener {
         return instance;
     }
 
+/*private Vector2 impulse(Body body){
+        float x, y;
+
+        y = 2*GRAVITY*(random.nextInt(Gdx.graphics.getHeight()) - Gdx.graphics.getHeight()/2  - 23 - body.getPosition().y);
+
+        if(Gdx.graphics.getWidth()/2 < bod)
+
+  return  new Vector2(, y);
+}*/
+
 
 private void bodyMove(Body body){
 
-    Vector2 impulse = new Vector2(0,20);
-
-    Random n = new Random();
-
-    body.applyLinearImpulse(impulse, body.getWorldCenter(), true);
+    Vector2 impulse = new Vector2(32f,31f);
+    body.setLinearVelocity(impulse);
 
 }
 
 
    public void update(float delta){
+
+
+       Array<Body> bodies = new Array<Body>();
+
+       world.getBodies(bodies);
+
 
        float frameTime = Math.min(delta, 0.25f);
        accumulator += frameTime;
@@ -106,22 +115,25 @@ private void bodyMove(Body body){
            accumulator -= 1/60f;
        }
 
-      com.badlogic.gdx.utils.Array<Body> bodies = new com.badlogic.gdx.utils.Array<Body>();
-        world.getBodies(bodies);
-
         for(Body b : bodies){
-            remove(b);
-            bodyMove(b);
-            ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
+           // remove(b);
+        if(!throwElem)
+                bodyMove(b);
+
+            ((EntityModel) b.getUserData()).setPosition(b.getPosition().x /0.1f, b.getPosition().y/0.2f);
             ((EntityModel) b.getUserData()).setRotation(b.getAngle());
 
-        }
 
-        if(GameModel.getInstance().getFruits().isEmpty()){
+
+        }
+        throwElem = true;
+
+
+      /*  if(GameModel.getInstance().getFruits().isEmpty()){
             createNewFruits();
             GameModel.getInstance().setFruitModels(fruits);
             fruits.clear();
-        }
+        }*/
 
    }
 

@@ -17,6 +17,8 @@ import java.util.Random;
 
 public class GameModel {
 
+    private int MAX_FRUITS = 5;
+
     Random rand = new Random();
     /**
      * The singleton instance of the game model
@@ -39,8 +41,9 @@ public class GameModel {
 
     private GameModel(){
 
-        for(int i = 0; i < 5; i++){
-            fruitModels.add(new FruitModel(rand.nextInt(Gdx.graphics.getWidth()), 300, 12,type()));
+        for(int i = 0; i < MAX_FRUITS; i++){
+            int x = rand.nextInt(Gdx.graphics.getWidth());
+            fruitModels.add(new FruitModel(31, 7, 2,type()));
         }
 
 
@@ -48,24 +51,24 @@ public class GameModel {
 
     public EntityView.Fruits type(){
 
-        switch (rand.nextInt(9)){
+        switch (rand.nextInt(8)){
             case 0:
                 return EntityView.Fruits.WATERMELON;
-            case 4:
+            case 1:
                 return EntityView.Fruits.APPLE;
-            case 2:
+            case 3:
                 return EntityView.Fruits.BANANA;
 
-            case 3:
+            case 2:
                 return EntityView.Fruits.LEMON;
 
             case 5:
                 return EntityView.Fruits.ORANGE;
 
-            case 6:
+            case 4:
                 return EntityView.Fruits.PEACH;
 
-            case 7:
+            case 6:
                 return EntityView.Fruits.PLUM;
 
         }

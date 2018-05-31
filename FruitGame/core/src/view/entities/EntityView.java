@@ -26,6 +26,7 @@ public abstract class EntityView {
          */
         Sprite sprite;
 
+
         /**
          * Creates a view belonging to a game.
          *

@@ -39,10 +39,8 @@ public class EntityBody {
      * @param body The body the fixture is to be attached to.
      *                 easier to get them from a bitmap image.
      * @param density The density of the fixture. How heavy it is in relation to its area.
-     * @param friction The friction of the fixture. How slippery it is.
-     * @param restitution The restitution of the fixture. How much it bounces.
      */
-    final void createFixture(Body body, float radius, float density, float friction, float restitution) {
+    final void createFixture(Body body, float radius, float density) {
 
         CircleShape polygon = new CircleShape();
         polygon.setRadius(radius);
@@ -51,8 +49,8 @@ public class EntityBody {
         fixtureDef.shape = polygon;
 
         fixtureDef.density = density;
-        fixtureDef.friction = friction;
-        fixtureDef.restitution = restitution;
+        fixtureDef.restitution = 0.7f;
+        fixtureDef.friction = 0.5f;
 
         body.createFixture(fixtureDef);
 

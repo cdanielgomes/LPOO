@@ -29,7 +29,7 @@ private final MyFruitGame game;
     /**
      * Used to debug the position of the physics fixtures
      */
-    private static final boolean DEBUG_PHYSICS = false;
+    private static final boolean DEBUG_PHYSICS = true;
 
     /**
      * How much meters does a pixel represent.
@@ -45,7 +45,7 @@ private final MyFruitGame game;
     /**
      * The camera used to show the viewport.
      */
- private final OrthographicCamera camera;
+ //private final OrthographicCamera camera;
 
     /**
      * A renderer used to debug the physical fixtures.
@@ -63,7 +63,7 @@ public GameView(MyFruitGame game){
 
     loadAssets();
 
-   camera = createCamera();
+   //camera = createCamera();
 
 }
 
@@ -119,6 +119,8 @@ public GameView(MyFruitGame game){
         drawBackground();
         drawEntities();
         game.getBatch().end();
+
+
     }
 
     /**
@@ -131,7 +133,8 @@ public GameView(MyFruitGame game){
 
         for(FruitModel fruit : fruitModels) {
             FruitView view = new FruitView(this.game, fruit.getFruit());
-            System.out.print("x = " + fruit.getX() + "  y=" + fruit.getY() + "  ");
+
+
             view.update(fruit);
             view.draw(game.getBatch());
         }
@@ -144,5 +147,9 @@ public GameView(MyFruitGame game){
     private void drawBackground() {
         Texture background = game.getAssetManager().get("background.png", Texture.class);
         game.getBatch().draw(background, 0, 0, Gdx.graphics.getWidth() , Gdx.graphics.getHeight());
+    }
+
+    private void backButton (){
+
     }
 }
