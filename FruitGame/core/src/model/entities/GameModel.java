@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class GameModel {
 
-    private int MAX_FRUITS = 5;
+    private int MAX_FRUITS = 1;
 
 
     Random rand = new Random();
