@@ -155,7 +155,7 @@ private void bodyMove(Body body){
                     ((FruitModel)b.getUserData()).setThrowned();
                 }
 
-                ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
+               ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
                 ((EntityModel) b.getUserData()).setRotation(b.getAngle());
 
             if ( ((FruitModel)b.getUserData()).getY() < -50) {

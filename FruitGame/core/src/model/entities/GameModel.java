@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class GameModel {
 
-    private int MAX_FRUITS = 20;
+    private int MAX_FRUITS = 1;
 
 
     Random rand = new Random();
@@ -58,6 +58,7 @@ public class GameModel {
         for(int i = fruitModels.size(); i < MAX_FRUITS; i++){
             int x = rand.nextInt(Gdx.graphics.getWidth());
             fruitModels.add(new FruitModel(x, 30, 2,type()));
+
         }
 
     }

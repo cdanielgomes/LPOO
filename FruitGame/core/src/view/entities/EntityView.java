@@ -69,6 +69,6 @@ public abstract class EntityView {
          */
         public void update(EntityModel model) {
             sprite.setCenter(model.getX()/ PPM, model.getY()/PPM);
-           //sprite.setRotation((float) Math.toDegrees(model.getRotation()));
+            sprite.setRotation((float) Math.toDegrees(model.getRotation()));
         }
 }
