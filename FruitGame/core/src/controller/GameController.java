@@ -20,6 +20,7 @@ import controller.entities.FruitBody;
 import model.GameModel;
 import model.entities.EntityModel;
 import model.entities.FruitModel;
+import model.entities.LimitModel;
 
 import static view.GameView.PPM;
 
@@ -34,9 +35,9 @@ public class GameController implements ContactListener {
      */
     private float accumulator;
 
-    private float GRAVITY = -9f;
+    private float GRAVITY = -18f;
 
-    private  int MAXVELOCITY = 7;
+    private  int MAXVELOCITY = 13;
     /**
      * The rotation speed in radians per second.
      */
@@ -104,7 +105,7 @@ private Vector2 impulse(Body body){
         }
 
 
-            y = random.nextInt(23-2) + 2;
+            y = random.nextInt(40-2) + 5;
 
 
 
@@ -138,14 +139,14 @@ private void bodyMove(Body body){
         }
 
         for(Body b : bodies) {
-
-            if (!throwElem)
-                bodyMove(b);
-            ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
-            ((EntityModel) b.getUserData()).setRotation(b.getAngle());
+            if (!(b.getUserData() instanceof LimitModel)) {
+                if (!throwElem)
+                    bodyMove(b);
+                ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
+                ((EntityModel) b.getUserData()).setRotation(b.getAngle());
+            }
         }
        throwElem = true;
-
 
 
     }

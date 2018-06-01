@@ -35,12 +35,10 @@ public abstract class EntityView {
         /**
          * Creates a view belonging to a game.
          *
-         * @param game the game this view belongs to. Needed to access the
-         *             asset manager to get textures.
          */
-       public EntityView(MyFruitGame game, Fruits fruits) {
-            sprite = createSprite(game, fruits);
-            sprite.setScale(0.7f);
+       public EntityView() {
+
+
         }
 
         /**
@@ -62,7 +60,7 @@ public abstract class EntityView {
          *             asset manager to get textures.
          * @return the sprite representing this view.
          */
-        public abstract Sprite createSprite(MyFruitGame game, Fruits fruits);
+        public abstract Sprite createSprite(MyFruitGame game);
 
         /**
          * Updates this view based on a certain model.

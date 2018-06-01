@@ -9,6 +9,7 @@ import static view.GameView.PPM;
 public class FruitView extends EntityView {
 
     Texture texture;
+    Fruits fruits;
 
     /**
      * Constructs a bullet view.
@@ -17,7 +18,14 @@ public class FruitView extends EntityView {
      *             asset manager to get textures.
      */
     public FruitView(MyFruitGame game, Fruits fruits) {
-        super(game, fruits);
+        super();
+        System.out.println("construtor fruit1");
+
+        this.fruits = fruits;
+        System.out.println("construtor fruit2");
+
+        sprite = createSprite(game);
+        sprite.setScale(1f);
     }
 
     /**
@@ -30,8 +38,9 @@ public class FruitView extends EntityView {
      * @return the sprite representing this view.
      */
     @Override
-    public Sprite createSprite(MyFruitGame game, Fruits fruits) {
-        switch(fruits){
+    public Sprite createSprite(MyFruitGame game) {
+        System.out.println(this.fruits);
+        switch(this.fruits){
             case PLUM:
                 texture = game.getAssetManager().get("plum.png", Texture.class);
                 break;

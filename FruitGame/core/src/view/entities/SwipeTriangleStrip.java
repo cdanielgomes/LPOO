@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.Color;
 
 import view.GameView;
 
+import static view.GameView.PPM;
+
 
 public class SwipeTriangleStrip {
 
@@ -42,10 +44,7 @@ public class SwipeTriangleStrip {
 
         gl20.begin(cam.combined, GL20.GL_TRIANGLE_STRIP);
         for (int i=0; i<triangleStrip.size; i++) {
-            /*if (i==batchSize) {
-                //gl20.end();
-                gl20.begin(cam.combined, GL20.GL_TRIANGLE_STRIP);
-            }*/
+
             Vector2 point = triangleStrip.get(i);
             Vector2 tc = texcoord.get(i);
             //gl20.color(color.r, color.g, color.b, color.a);

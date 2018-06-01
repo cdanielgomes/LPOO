@@ -9,6 +9,7 @@ import java.util.List;
 
 import model.entities.EntityModel;
 import model.entities.FruitModel;
+import model.entities.LimitModel;
 import view.entities.EntityView;
 
 import java.util.Random;
@@ -28,7 +29,9 @@ public class GameModel {
     private static GameModel instance;
 
     private List<FruitModel>  fruitModels = new ArrayList<FruitModel>();
-
+    private final LimitModel top;
+    private final LimitModel left;
+    private final LimitModel right;
     /**
      * Returns a singleton instance of the game model
      *
@@ -42,6 +45,11 @@ public class GameModel {
 
 
     private GameModel(){
+
+        top = new LimitModel(0,Gdx.graphics.getHeight(), 0);
+        left = new LimitModel(0,0, 0);
+        right = new LimitModel(Gdx.graphics.getWidth(),0, 0);
+
         createFruits();
 
     }
@@ -85,6 +93,18 @@ public class GameModel {
 
     public List<FruitModel> getFruits() {
         return fruitModels;
+    }
+
+    public LimitModel getLeft() {
+        return left;
+    }
+
+    public LimitModel getTop() {
+        return top;
+    }
+
+    public LimitModel getRight() {
+        return right;
     }
 
     public void setFruitModels(List<FruitModel> l){

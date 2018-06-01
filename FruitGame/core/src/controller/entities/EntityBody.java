@@ -27,6 +27,7 @@ public class EntityBody {
      * @param model The model representing the body.
      */
     EntityBody(World world, EntityModel model) {
+
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(model.getX()*PPM, model.getY()*PPM);
@@ -54,7 +55,8 @@ public class EntityBody {
         fixtureDef.density = density;
         fixtureDef.restitution = 0.7f;
         fixtureDef.friction = 0.5f;
-
+        fixtureDef.filter.categoryBits = 2;
+        fixtureDef.filter.maskBits = 1;
         body.createFixture(fixtureDef);
 
         polygon.dispose();
