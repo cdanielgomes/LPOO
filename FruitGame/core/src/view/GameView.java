@@ -157,9 +157,12 @@ public class GameView extends ScreenAdapter {
         List<FruitModel> fruitModels;
 
         fruitModels = GameModel.getInstance().getFruits();
+<<<<<<< HEAD
 
         GameModel.getInstance().checkBounds();
 
+=======
+>>>>>>> 649c0a7cf4bb65316faf7b2844c8861d2ef3ec48
         for (FruitModel fruit : fruitModels) {
 
             FruitView view = new FruitView(this.game, fruit.getFruit());
@@ -167,6 +170,28 @@ public class GameView extends ScreenAdapter {
             view.draw(game.getBatch());
 
         }
+<<<<<<< HEAD
+
+=======
+System.out.println("added");
+        LimitView limitView = new LimitView(this.game);
+
+
+        limitView.update(GameModel.getInstance().getTop());
+
+        limitView.draw(game.getBatch());
+
+
+        limitView.update(GameModel.getInstance().getLeft());
+
+
+        limitView.draw(game.getBatch());
+
+
+        limitView.update(GameModel.getInstance().getRight());
+        limitView.draw(game.getBatch());
+   */
+>>>>>>> 649c0a7cf4bb65316faf7b2844c8861d2ef3ec48
 
 
 
@@ -219,8 +244,6 @@ public class GameView extends ScreenAdapter {
 
         shapes = new ShapeRenderer();
 
-//        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-
         Gdx.input.setInputProcessor(cut);
 
     }
@@ -230,15 +253,18 @@ public class GameView extends ScreenAdapter {
         World world = GameController.getInstance().getWorld();
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
+
+        Array<Fixture> fixtures ;
+        float radius;
+
         // get the radius of the shape of the body
-         Array<Fixture> f = bodies.get(0).getFixtureList();
-         float radius = f.get(0).getShape().getRadius();
-        //System.out.println(f.get(0).getShape().getRadius());
+        // Array<Fixture> f = bodies.get(0).getFixtureList();
+        // float radius = f.get(0).getShape().getRadius();
+        // System.out.println(f.get(0).getShape().getRadius());
 
+        // distSq(swipeTS.getTriangleStrip().get(0) , fruit.getWorldCenter()) < (radius*radius)
 
-
-        for (Body fruit : bodies) {
-
+<<<<<<< HEAD
             if (swipeTS.getTriangleStrip().size != 0) {
 
                 if (distSq(swipeTS.getTriangleStrip().get(0) , fruit.getWorldCenter()) < (radius*radius)){
@@ -246,6 +272,23 @@ public class GameView extends ScreenAdapter {
                 }
             }
 
+=======
+        if (swipeTS.getTriangleStrip().size < 2)
+            return ;
+
+        Vector2 v1 = swipeTS.getTriangleStrip().get(0);
+        Vector2 v2 = swipeTS.getTriangleStrip().get(1);
+
+
+        for (Body fruit : bodies) {
+
+            fixtures = fruit.getFixtureList();
+            radius = fixtures.get(0).getShape().getRadius();
+
+            if (Cut(v1 ,v2 , fruit , radius)){
+                System.out.println("HIT FRUIT");
+            }
+>>>>>>> 649c0a7cf4bb65316faf7b2844c8861d2ef3ec48
         }
 
 
@@ -254,6 +297,14 @@ public class GameView extends ScreenAdapter {
     public static float distSq(Vector2 p1, Vector2 p2) {
         float dx = p1.x - p2.x, dy = p1.y - p2.y;
         return dx * dx + dy * dy;
+    }
+
+    public static boolean Cut(Vector2 v1 , Vector2 v2 , Body b , float r){
+        if ((distSq(v1.scl(PPM) , b.getWorldCenter()) < (r*r)) && (distSq(v2.scl(PPM) , b.getWorldCenter()) < (r*r))){
+            return true;
+        }
+
+        return false;
     }
 }
 
