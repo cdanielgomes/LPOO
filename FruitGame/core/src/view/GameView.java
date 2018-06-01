@@ -8,17 +8,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
 import com.mygdx.game.MyFruitGame;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import controller.GameController;
 
 import model.GameModel;
 import model.entities.FruitModel;
-import view.entities.EntityView;
 import view.entities.FruitView;
 
 public class GameView extends ScreenAdapter{
@@ -34,7 +30,7 @@ private final MyFruitGame game;
     /**
      * How much meters does a pixel represent.
      */
-    public final static float PIXEL_TO_METER = 0.04f;
+    public final static float PPM = 0.04f;
 
     /**
      * The width of the viewport in meters. The height is
@@ -45,7 +41,7 @@ private final MyFruitGame game;
     /**
      * The camera used to show the viewport.
      */
- //private final OrthographicCamera camera;
+ private final OrthographicCamera camera;
 
     /**
      * A renderer used to debug the physical fixtures.
@@ -63,7 +59,7 @@ public GameView(MyFruitGame game){
 
     loadAssets();
 
-   //camera = createCamera();
+   camera = createCamera();
 
 }
 
@@ -89,7 +85,7 @@ public GameView(MyFruitGame game){
      * @return the camera
      */
     private OrthographicCamera createCamera() {
-        OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
+        OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PPM, VIEWPORT_WIDTH / PPM * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
 
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
         camera.update();
@@ -97,7 +93,7 @@ public GameView(MyFruitGame game){
         if (DEBUG_PHYSICS) {
             debugRenderer = new Box2DDebugRenderer();
             debugCamera = camera.combined.cpy();
-            debugCamera.scl(1 / PIXEL_TO_METER);
+            debugCamera.scl(1 / PPM);
         }
 
         return camera;
@@ -112,14 +108,26 @@ public GameView(MyFruitGame game){
     public void render(float delta) {
 
         GameController.getInstance().update(delta);
-        Gdx.gl.glClearColor( 103/255f, 69/255f, 117/255f, 1 );
+
+        //camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
+
+        camera.update();
+        game.getBatch().setProjectionMatrix(camera.combined);
+
+        Gdx.gl.glClearColor( 0f, 0f, 0f, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+
 
         game.getBatch().begin();
         drawBackground();
         drawEntities();
         game.getBatch().end();
 
+        if (DEBUG_PHYSICS) {
+            debugCamera = camera.combined.cpy();
+            debugCamera.scl(1 / PPM);
+            debugRenderer.render(GameController.getInstance().getWorld(), debugCamera);
+        }
 
     }
 
@@ -129,15 +137,27 @@ public GameView(MyFruitGame game){
 
     private void drawEntities(){
         List<FruitModel> fruitModels;
+
+       /// GameModel.getInstance().checkBounds();
         fruitModels = GameModel.getInstance().getFruits();
 
         for(FruitModel fruit : fruitModels) {
+
+           // System.out.println("posicao Antes " + fruit.getX() + "," + fruit.getY());
+
             FruitView view = new FruitView(this.game, fruit.getFruit());
 
 
             view.update(fruit);
             view.draw(game.getBatch());
+
         }
+
+
+
+//       GameModel.getInstance().checkBounds();
+
+        System.out.print(GameModel.getInstance().getFruits().size());
 
     }
 
@@ -146,7 +166,7 @@ public GameView(MyFruitGame game){
      */
     private void drawBackground() {
         Texture background = game.getAssetManager().get("background.png", Texture.class);
-        game.getBatch().draw(background, 0, 0, Gdx.graphics.getWidth() , Gdx.graphics.getHeight());
+        game.getBatch().draw(background, 0, 0, camera.viewportWidth, camera.viewportHeight);
     }
 
     private void backButton (){

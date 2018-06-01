@@ -4,6 +4,7 @@ package model;
 import com.badlogic.gdx.Gdx;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import model.entities.EntityModel;
@@ -18,6 +19,7 @@ import java.util.Random;
 public class GameModel {
 
     private int MAX_FRUITS = 5;
+
 
     Random rand = new Random();
     /**
@@ -40,12 +42,16 @@ public class GameModel {
 
 
     private GameModel(){
+        createFruits();
 
-        for(int i = 0; i < MAX_FRUITS; i++){
+    }
+
+  private void createFruits(){
+
+        for(int i = fruitModels.size(); i < MAX_FRUITS; i++){
             int x = rand.nextInt(Gdx.graphics.getWidth());
-            fruitModels.add(new FruitModel(31, 7, 2,type()));
+            fruitModels.add(new FruitModel(x, 0, 2,type()));
         }
-
 
     }
 
@@ -76,10 +82,6 @@ public class GameModel {
     }
 
 
-    public void checkOutOfBounds(){
-
-
-    }
 
     public List<FruitModel> getFruits() {
         return fruitModels;
@@ -89,8 +91,17 @@ public class GameModel {
         fruitModels = l;
     }
 
-    public void removeFruit(EntityModel fruit){
-        fruitModels.remove(fruit);
-    }
+  public void checkBounds() {
+      Iterator<FruitModel> iterator = fruitModels.iterator();
+
+      while (iterator.hasNext()) {
+          FruitModel fruit = iterator.next();
+          if (fruit.getX() > Gdx.graphics.getWidth() || fruit.getX() < 0 ){
+              if(fruit.getY() < 0)
+              iterator.remove();
+          }
+      }
+      createFruits();
+  }
 }
 

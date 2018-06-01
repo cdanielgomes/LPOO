@@ -64,7 +64,7 @@ public class MainMenuScreen implements Screen {
         TextButton newGame = new TextButton("New Game", style);
         TextButton preferences = new TextButton("Preferences", style);
         TextButton exit = new TextButton("Exit", style);
-        Label title  = new Label("pp game", new Label.LabelStyle(TitleFont, Color.SKY));
+        Label title  = new Label("frut game", new Label.LabelStyle(TitleFont, Color.SKY));
         newGame.setPosition(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/5);
         // create button listeners
         preferences.setPosition(newGame.getX() + newGame.getWidth() +34, newGame.getY());

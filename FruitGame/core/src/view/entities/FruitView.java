@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.MyFruitGame;
 
+import static view.GameView.PPM;
+
 public class FruitView extends EntityView {
 
     Texture texture;
@@ -61,6 +63,7 @@ public class FruitView extends EntityView {
                 texture = game.getAssetManager().get("watermelon.png", Texture.class);
                 break;
         }
+
 
         return new Sprite(texture, texture.getWidth(), texture.getHeight());
     }

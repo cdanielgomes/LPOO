@@ -5,7 +5,12 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.MyFruitGame;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import javax.print.attribute.standard.PagesPerMinute;
+
 import model.entities.EntityModel;
+
+import static view.GameView.PPM;
 
 
 /**
@@ -35,6 +40,7 @@ public abstract class EntityView {
          */
        public EntityView(MyFruitGame game, Fruits fruits) {
             sprite = createSprite(game, fruits);
+            sprite.setScale(0.7f);
         }
 
         /**
@@ -64,7 +70,7 @@ public abstract class EntityView {
          * @param model the model used to update this view
          */
         public void update(EntityModel model) {
-            sprite.setCenter(model.getX(), model.getY());
+            sprite.setCenter(model.getX()/ PPM, model.getY()/PPM);
            //sprite.setRotation((float) Math.toDegrees(model.getRotation()));
         }
 }

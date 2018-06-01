@@ -7,6 +7,8 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.World;
 
+import static view.GameView.PPM;
+
 /**
  * Wrapper class that represents an abstract physical
  * body supported by a Box2D body.
@@ -27,7 +29,7 @@ public class EntityBody {
     EntityBody(World world, EntityModel model) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(model.getX(), model.getY());
+        bodyDef.position.set(model.getX()*PPM, model.getY()*PPM);
         bodyDef.angle = model.getRotation();
 
         body = world.createBody(bodyDef);
@@ -51,6 +53,7 @@ public class EntityBody {
         fixtureDef.density = density;
         fixtureDef.restitution = 0.7f;
         fixtureDef.friction = 0.5f;
+        fixtureDef.filter.categoryBits = 1;
 
         body.createFixture(fixtureDef);
 
