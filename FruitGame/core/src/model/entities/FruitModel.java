@@ -9,7 +9,8 @@ import view.entities.EntityView;
 public class FruitModel extends EntityModel{
 
     private final EntityView.Fruits fruit;
-private boolean throwned = true;
+    private boolean throwned = false;
+
     public FruitModel(float x, float y, float rotation, EntityView.Fruits fruit){
         super(x,y,rotation);
         this.fruit = fruit;
@@ -22,5 +23,6 @@ public EntityView.Fruits getFruit(){
 public  boolean isThrowned(){
         return throwned;
 }
+public void setThrowned() {throwned = true;}
 
 }

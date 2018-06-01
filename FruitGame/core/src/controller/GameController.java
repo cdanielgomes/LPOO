@@ -63,12 +63,8 @@ public class GameController implements ContactListener {
 
     private GameController(){
         world = new World(new Vector2(0,GRAVITY), true);
-        List<FruitModel> kapa = GameModel.getInstance().getFruits();
 
-
-        for (FruitModel fruits : kapa){
-            new FruitBody(world, fruits);
-        }
+        createBodies();
 
         new LimitBody(world, GameModel.getInstance().getTop(), Gdx.graphics.getWidth(), 1);
         new LimitBody(world, GameModel.getInstance().getRight(), 1, Gdx.graphics.getHeight());
@@ -76,6 +72,15 @@ public class GameController implements ContactListener {
 
 
         world.setContactListener(this);
+    }
+
+    private void createBodies(){
+        List<FruitModel> kapa = GameModel.getInstance().getFruits();
+
+        for (FruitModel fruits : kapa){
+            if(!fruits.isThrowned())
+            new FruitBody(world, fruits);
+        }
     }
 
     /**
@@ -92,7 +97,7 @@ public class GameController implements ContactListener {
 private Vector2 impulse(Body body){
         float x, y;
 
-        System.out.println("X,Y =  " + body.getPosition());
+
         if((Gdx.graphics.getWidth() /2)*PPM > body.getPosition().x)
             x =MAXVELOCITY  + random.nextInt(MAXVELOCITY );
 
@@ -110,7 +115,7 @@ private Vector2 impulse(Body body){
         }
 
 
-            y = random.nextInt(40-2) + 5;
+            y = random.nextInt(60-30) + 30;
 
 
 
@@ -145,15 +150,22 @@ private void bodyMove(Body body){
 
         for(Body b : bodies) {
             if (!(b.getUserData() instanceof LimitModel)) {
-                if (!throwElem)
+                if (!((FruitModel)b.getUserData()).isThrowned()){
                     bodyMove(b);
+                    ((FruitModel)b.getUserData()).setThrowned();
+                }
+
                 ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
                 ((EntityModel) b.getUserData()).setRotation(b.getAngle());
+
+            if ( ((FruitModel)b.getUserData()).getY() < -50) {
+                world.destroyBody(b);
+
+
+            }
             }
         }
-       throwElem = true;
-
-
+        createBodies();
     }
 
 

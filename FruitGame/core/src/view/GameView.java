@@ -124,11 +124,11 @@ public class GameView extends ScreenAdapter {
     @Override
     public void render(float delta) {
 
-        GameController.getInstance().update(delta);
 
         game.getBatch().begin();
         drawBackground();
         drawEntities();
+ ;
 
         game.getBatch().setProjectionMatrix(camera.combined);
 
@@ -137,6 +137,7 @@ public class GameView extends ScreenAdapter {
 
         game.getBatch().end();
 
+        GameController.getInstance().update(delta);
 
         if (DEBUG_PHYSICS) {
             debugCamera = camera.combined.cpy();
@@ -154,33 +155,19 @@ public class GameView extends ScreenAdapter {
     private void drawEntities() {
 
         List<FruitModel> fruitModels;
-       /// GameModel.getInstance().checkBounds();
+
         fruitModels = GameModel.getInstance().getFruits();
-        System.out.println(fruitModels.size());
+
+        GameModel.getInstance().checkBounds();
+
         for (FruitModel fruit : fruitModels) {
 
             FruitView view = new FruitView(this.game, fruit.getFruit());
-        //System.out.print("x = " + fruit.getX() + "  y=" + fruit.getY() + "  ");
-
-            view.update(fruit);
+           view.update(fruit);
             view.draw(game.getBatch());
 
         }
-        /*
-        LimitView limitView = new LimitView(this.game);
 
-
-        limitView.update(GameModel.getInstance().getTop());
-
-        limitView.draw(game.getBatch());
-
-        limitView.update(GameModel.getInstance().getLeft());
-
-        limitView.draw(game.getBatch());
-
-        limitView.update(GameModel.getInstance().getRight());
-        limitView.draw(game.getBatch());
-   */
 
 
 //       GameModel.getInstance().checkBounds();
@@ -199,12 +186,6 @@ public class GameView extends ScreenAdapter {
 
 
     public void SwipeRender(OrthographicCamera camera) {
-
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //camera.update();
-        //game.getBatch().setProjectionMatrix(camera.combined);
-        //Gdx.gl.glEnable(GL20.GL_BLEND);
-        //Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 
 
         tex.bind();
@@ -259,21 +240,12 @@ public class GameView extends ScreenAdapter {
         for (Body fruit : bodies) {
 
             if (swipeTS.getTriangleStrip().size != 0) {
-              //  System.out.println("DIST : " + distSq(swipeTS.getTriangleStrip().get(0) , fruit.getWorldCenter()));
-                //System.out.println("FIRST POINT : " + " x : " + (int)swipeTS.getTriangleStrip().get(0).x + " y : " + (int)swipeTS.getTriangleStrip().get(0).y);
 
                 if (distSq(swipeTS.getTriangleStrip().get(0) , fruit.getWorldCenter()) < (radius*radius)){
-                  //  System.out.println("IN FRUIT");
+
                 }
             }
 
-            /*for (Vector2 cut : swipeTS.getTriangleStrip()) {
-
-                if ((fruit.getPosition().x == cut.x) && (fruit.getPosition().y == cut.y)) {
-                    System.out.println("touch the fruit");
-
-                }
-            }*/
         }
 
 

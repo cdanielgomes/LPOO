@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import model.entities.EntityModel;
 import model.entities.FruitModel;
 import model.entities.LimitModel;
 import view.entities.EntityView;
@@ -19,7 +18,7 @@ import java.util.Random;
 
 public class GameModel {
 
-    private int MAX_FRUITS = 5;
+    private int MAX_FRUITS = 1;
 
 
     Random rand = new Random();
@@ -48,7 +47,7 @@ public class GameModel {
 
         top = new LimitModel(0,Gdx.graphics.getHeight(), 0);
         left = new LimitModel(0,0, 0);
-        right = new LimitModel(Gdx.graphics.getWidth(),0, 0);
+        right = new LimitModel(Gdx.graphics.getWidth(),-5, 0);
 
         createFruits();
 
@@ -58,7 +57,7 @@ public class GameModel {
 
         for(int i = fruitModels.size(); i < MAX_FRUITS; i++){
             int x = rand.nextInt(Gdx.graphics.getWidth());
-            fruitModels.add(new FruitModel(x, 0, 2,type()));
+            fruitModels.add(new FruitModel(x, 30, 2,type()));
         }
 
     }
@@ -107,21 +106,17 @@ public class GameModel {
         return right;
     }
 
-    public void setFruitModels(List<FruitModel> l){
-        fruitModels = l;
-    }
-
   public void checkBounds() {
+
       Iterator<FruitModel> iterator = fruitModels.iterator();
 
       while (iterator.hasNext()) {
           FruitModel fruit = iterator.next();
-          if (fruit.getX() > Gdx.graphics.getWidth() || fruit.getX() < 0 ){
-              if(fruit.getY() < 0)
-              iterator.remove();
+              if(0 > fruit.getY()) {
+                  iterator.remove();
+              }
           }
-      }
-      createFruits();
+         createFruits();
   }
 }
 

@@ -4,8 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.MyFruitGame;
 
-import static view.GameView.PPM;
-
 public class FruitView extends EntityView {
 
     Texture texture;
@@ -19,11 +17,8 @@ public class FruitView extends EntityView {
      */
     public FruitView(MyFruitGame game, Fruits fruits) {
         super();
-        System.out.println("construtor fruit1");
 
         this.fruits = fruits;
-        System.out.println("construtor fruit2");
-
         sprite = createSprite(game);
         sprite.setScale(1f);
     }
@@ -39,7 +34,6 @@ public class FruitView extends EntityView {
      */
     @Override
     public Sprite createSprite(MyFruitGame game) {
-        System.out.println(this.fruits);
         switch(this.fruits){
             case PLUM:
                 texture = game.getAssetManager().get("plum.png", Texture.class);
