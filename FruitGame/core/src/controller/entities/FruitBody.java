@@ -18,7 +18,7 @@ public class FruitBody extends EntityBody {
                     createFixture(body, 1, 0.2f);
                     break;
                 case BANANA:
-                    createFixture(body, 5, 0.54f);
+                    createFixture(body, 1, 0.54f);
                     break;
                 case STRAW:
                     createFixture(body, 1, 0.3f);
@@ -30,7 +30,7 @@ public class FruitBody extends EntityBody {
                     createFixture(body, 1, 0.45f);
                     break;
                 case APPLE:
-                    createFixture(body, 5, 0.4f);
+                    createFixture(body, 1, 0.4f);
                     break;
                 case PLUM:
                     createFixture(body, 1, 0.35f);

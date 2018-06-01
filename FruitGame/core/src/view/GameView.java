@@ -248,8 +248,11 @@ public class GameView extends ScreenAdapter {
 
         for (Body fruit : bodies) {
 
+           System.out.println("First Point : " + v1);
+           System.out.println("world center : " + fruit.getWorldCenter());
+
             fixtures = fruit.getFixtureList();
-            radius = fixtures.get(0).getShape().getRadius();
+           radius = fixtures.get(0).getShape().getRadius();
 
             if (Cut(v1 ,v2 , fruit , radius)){
                 System.out.println("HIT FRUIT");
@@ -257,15 +260,16 @@ public class GameView extends ScreenAdapter {
         }
 
 
+
     }
 
     public static float distSq(Vector2 p1, Vector2 p2) {
-        float dx = p1.x - p2.x, dy = p1.y - p2.y;
+        float dx = p1.x*PPM - p2.x*PPM, dy = p1.y*PPM - p2.y*PPM;
         return dx * dx + dy * dy;
     }
 
-    public static boolean Cut(Vector2 v1 , Vector2 v2 , Body b , float r){
-        if ((distSq(v1.scl(PPM) , b.getWorldCenter()) < (r*r)) && (distSq(v2.scl(PPM) , b.getWorldCenter()) < (r*r))){
+    public boolean Cut(Vector2 v1 , Vector2 v2 , Body b , float r){
+        if ((distSq(v1 , b.getWorldCenter()) < (r*r)) && (distSq(v2 , b.getWorldCenter()) < (r*r))){
             return true;
         }
 
