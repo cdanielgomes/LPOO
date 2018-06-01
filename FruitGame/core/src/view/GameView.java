@@ -2,6 +2,7 @@ package view;
 
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,6 +14,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyFruitGame;
 
 import java.util.ArrayList;
@@ -102,9 +106,9 @@ public class GameView extends ScreenAdapter {
      * @return the camera
      */
     private OrthographicCamera createCamera() {
-        // OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PIXEL_TO_METER, VIEWPORT_WIDTH / PIXEL_TO_METER * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
+         OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PPM, VIEWPORT_WIDTH / PPM * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
 
-        OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        //OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
         camera.update();
 
@@ -138,15 +142,10 @@ public class GameView extends ScreenAdapter {
 
         game.getBatch().end();
 
-        if (DEBUG_PHYSICS) {
-            debugCamera = camera.combined.cpy();
-            debugCamera.scl(1 / PPM);
-            debugRenderer.render(GameController.getInstance().getWorld(), debugCamera);
-        }
 
         if (DEBUG_PHYSICS) {
             debugCamera = camera.combined.cpy();
-            debugCamera.scl(1 / PIXEL_TO_METER);
+            debugCamera.scl(1 / PPM);
             debugRenderer.render(GameController.getInstance().getWorld(), debugCamera);
         }
 
@@ -251,11 +250,11 @@ public class GameView extends ScreenAdapter {
         for (Body fruit : bodies) {
 
             if (swipeTS.getTriangleStrip().size != 0) {
-                System.out.println("DIST : " + distSq(swipeTS.getTriangleStrip().get(0) , fruit.getWorldCenter()));
-                System.out.println("FIRST POINT : " + " x : " + (int)swipeTS.getTriangleStrip().get(0).x + " y : " + (int)swipeTS.getTriangleStrip().get(0).y);
+              //  System.out.println("DIST : " + distSq(swipeTS.getTriangleStrip().get(0) , fruit.getWorldCenter()));
+                //System.out.println("FIRST POINT : " + " x : " + (int)swipeTS.getTriangleStrip().get(0).x + " y : " + (int)swipeTS.getTriangleStrip().get(0).y);
 
                 if (distSq(swipeTS.getTriangleStrip().get(0) , fruit.getWorldCenter()) < (radius*radius)){
-                    System.out.println("IN FRUIT");
+                  //  System.out.println("IN FRUIT");
                 }
             }
 

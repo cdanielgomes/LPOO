@@ -111,9 +111,6 @@ private Vector2 impulse(Body body){
     return  new Vector2(x, y);
 }
 
-public World getWorld(){
-        return  world;
-}
 
 private void bodyMove(Body body){
 
@@ -136,7 +133,7 @@ private void bodyMove(Body body){
         float frameTime = Math.min(delta, 0.25f);
         accumulator += frameTime;
         while (accumulator >= 1/60f) {
-          // world.step(1/60f, 6, 2);
+          world.step(1/60f, 6, 2);
             accumulator -= 1/60f;
         }
 
