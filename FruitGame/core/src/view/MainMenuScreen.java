@@ -64,14 +64,14 @@ public class MainMenuScreen implements Screen {
         TextButton newGame = new TextButton("New Game", style);
         TextButton preferences = new TextButton("Preferences", style);
         TextButton exit = new TextButton("Exit", style);
-        Label title  = new Label("frut game", new Label.LabelStyle(TitleFont, Color.SKY));
+        Label title  = new Label("FRUiT GAME", new Label.LabelStyle(TitleFont, Color.SKY));
         newGame.setPosition(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/5);
         // create button listeners
         preferences.setPosition(newGame.getX() + newGame.getWidth() +34, newGame.getY());
         exit.setPosition(preferences.getX() + preferences.getWidth() + 34, preferences.getY());
 
 
-        title.setPosition(Gdx.graphics.getWidth()/2 -title.getWidth()/2, Gdx.graphics.getHeight() - title.getHeight() - 20);
+        title.setPosition(Gdx.graphics.getWidth()/2 -title.getWidth()/2, Gdx.graphics.getHeight() - title.getHeight() - 30);
 
         exit.addListener(new ClickListener() {
             @Override

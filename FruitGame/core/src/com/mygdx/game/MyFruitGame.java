@@ -2,9 +2,16 @@ package com.mygdx.game;
 
 
 import com.badlogic.gdx.Game;
+
+import controller.CutHandler;
+import model.GameModel;
 import view.GameView;
 import view.MainMenuScreen;
 
+
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 
@@ -13,12 +20,15 @@ public class MyFruitGame extends Game {
 	public enum Menus {MAIN, GAME, PREFERENCES, ENDGAME}
 	private SpriteBatch batch;
 	private AssetManager assetManager;
+	private GameView gameView;
+
+
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 		assetManager = new AssetManager();
-
+		gameView = new GameView(this);
 		startGame();
 	}
 
@@ -26,7 +36,7 @@ public class MyFruitGame extends Game {
      * Starts the game.
      */
     private void startGame() {
-        setScreen(new GameView(this));
+        setScreen(new MainMenuScreen(this));
     }
 
 	@Override
@@ -54,6 +64,7 @@ public class MyFruitGame extends Game {
         return batch;
     }
 
+
 	public void changeScreen(Menus screen){
 		switch(screen){
 			case MAIN:
@@ -72,4 +83,7 @@ public class MyFruitGame extends Game {
 				break;
 		}
 	}
+
+    public GameView getGameView(){return this.gameView;}
+
 }

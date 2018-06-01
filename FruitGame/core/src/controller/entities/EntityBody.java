@@ -36,16 +36,7 @@ public class EntityBody {
         body.setUserData(model);
     }
 
-    /**
-     * Helper method to create a polygon fixture represented by a set of vertexes.
-     * @param body The body the fixture is to be attached to.
-     *                 easier to get them from a bitmap image.
-     * @param density The density of the fixture. How heavy it is in relation to its area.
-     */
-    final void createFixture(Body body, float radius, float density) {
 
-        CircleShape polygon = new CircleShape();
-        polygon.setRadius(radius);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = polygon;

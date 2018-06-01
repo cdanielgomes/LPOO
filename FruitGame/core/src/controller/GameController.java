@@ -125,20 +125,20 @@ private void bodyMove(Body body){
 }
 
 
-   public void update(float delta){
+    public void update(float delta){
 
 
-       Array<Body> bodies = new Array<Body>();
+        Array<Body> bodies = new Array<Body>();
 
-       world.getBodies(bodies);
+        world.getBodies(bodies);
 
 
-       float frameTime = Math.min(delta, 0.25f);
-       accumulator += frameTime;
-       while (accumulator >= 1/60f) {
-           world.step(1/60f, 6, 2);
-           accumulator -= 1/60f;
-       }
+        float frameTime = Math.min(delta, 0.25f);
+        accumulator += frameTime;
+        while (accumulator >= 1/60f) {
+          // world.step(1/60f, 6, 2);
+            accumulator -= 1/60f;
+        }
 
         for(Body b : bodies) {
 
@@ -151,7 +151,7 @@ private void bodyMove(Body body){
 
 
 
-   }
+    }
 
 
     /**
@@ -182,5 +182,9 @@ private void bodyMove(Body body){
     @Override
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
+    }
+
+    public World getWorld(){
+        return this.world;
     }
 }
