@@ -17,16 +17,8 @@ public class FruitView extends EntityView {
      */
     public FruitView(MyFruitGame game, Fruits fruits) {
         super();
-<<<<<<< HEAD
 
         this.fruits = fruits;
-=======
-       // System.out.println("construtor fruit1");
-
-        this.fruits = fruits;
-        //System.out.println("construtor fruit2");
-
->>>>>>> 649c0a7cf4bb65316faf7b2844c8861d2ef3ec48
         sprite = createSprite(game);
         sprite.setScale(1f);
     }
@@ -42,10 +34,6 @@ public class FruitView extends EntityView {
      */
     @Override
     public Sprite createSprite(MyFruitGame game) {
-<<<<<<< HEAD
-=======
-        //System.out.println(this.fruits);
->>>>>>> 649c0a7cf4bb65316faf7b2844c8861d2ef3ec48
         switch(this.fruits){
             case PLUM:
                 texture = game.getAssetManager().get("plum.png", Texture.class);

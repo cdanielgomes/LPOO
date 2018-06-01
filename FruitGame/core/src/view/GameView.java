@@ -157,12 +157,9 @@ public class GameView extends ScreenAdapter {
         List<FruitModel> fruitModels;
 
         fruitModels = GameModel.getInstance().getFruits();
-<<<<<<< HEAD
 
         GameModel.getInstance().checkBounds();
 
-=======
->>>>>>> 649c0a7cf4bb65316faf7b2844c8861d2ef3ec48
         for (FruitModel fruit : fruitModels) {
 
             FruitView view = new FruitView(this.game, fruit.getFruit());
@@ -170,28 +167,6 @@ public class GameView extends ScreenAdapter {
             view.draw(game.getBatch());
 
         }
-<<<<<<< HEAD
-
-=======
-System.out.println("added");
-        LimitView limitView = new LimitView(this.game);
-
-
-        limitView.update(GameModel.getInstance().getTop());
-
-        limitView.draw(game.getBatch());
-
-
-        limitView.update(GameModel.getInstance().getLeft());
-
-
-        limitView.draw(game.getBatch());
-
-
-        limitView.update(GameModel.getInstance().getRight());
-        limitView.draw(game.getBatch());
-   */
->>>>>>> 649c0a7cf4bb65316faf7b2844c8861d2ef3ec48
 
 
 
@@ -264,15 +239,6 @@ System.out.println("added");
 
         // distSq(swipeTS.getTriangleStrip().get(0) , fruit.getWorldCenter()) < (radius*radius)
 
-<<<<<<< HEAD
-            if (swipeTS.getTriangleStrip().size != 0) {
-
-                if (distSq(swipeTS.getTriangleStrip().get(0) , fruit.getWorldCenter()) < (radius*radius)){
-
-                }
-            }
-
-=======
         if (swipeTS.getTriangleStrip().size < 2)
             return ;
 
@@ -288,7 +254,6 @@ System.out.println("added");
             if (Cut(v1 ,v2 , fruit , radius)){
                 System.out.println("HIT FRUIT");
             }
->>>>>>> 649c0a7cf4bb65316faf7b2844c8861d2ef3ec48
         }
 
 
