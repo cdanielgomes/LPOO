@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import controller.entities.FruitBody;
+import controller.entities.LimitBody;
 import model.GameModel;
 import model.entities.EntityModel;
 import model.entities.FruitModel;
@@ -29,15 +30,14 @@ import static view.GameView.PPM;
  * Controls the physics aspect of the game.
  */
 public class GameController implements ContactListener {
-    float rend = 0.5f;
     /**
      * Accumulator used to calculate the simulation step.
      */
     private float accumulator;
 
-    private float GRAVITY = -18f;
+    private float GRAVITY = -13f;
 
-    private  int MAXVELOCITY = 13;
+    private  int MAXVELOCITY = 17;
     /**
      * The rotation speed in radians per second.
      */
@@ -69,6 +69,11 @@ public class GameController implements ContactListener {
         for (FruitModel fruits : kapa){
             new FruitBody(world, fruits);
         }
+
+        new LimitBody(world, GameModel.getInstance().getTop(), Gdx.graphics.getWidth(), 1);
+        new LimitBody(world, GameModel.getInstance().getRight(), 1, Gdx.graphics.getHeight());
+        new LimitBody(world, GameModel.getInstance().getLeft(), 1, Gdx.graphics.getHeight());
+
 
         world.setContactListener(this);
     }

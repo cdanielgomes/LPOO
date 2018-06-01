@@ -55,8 +55,8 @@ public class EntityBody {
         fixtureDef.density = density;
         fixtureDef.restitution = 0.7f;
         fixtureDef.friction = 0.5f;
-        fixtureDef.filter.categoryBits = 2;
-        fixtureDef.filter.maskBits = 1;
+      //  fixtureDef.filter.categoryBits = 2;
+        //fixtureDef.filter.maskBits = 1;
         body.createFixture(fixtureDef);
 
         polygon.dispose();

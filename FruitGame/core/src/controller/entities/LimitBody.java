@@ -20,11 +20,11 @@ public class LimitBody {
      * @param world The world this body lives on.
      * @param model The model representing the body.
      */
-    LimitBody(World world, EntityModel model, float width, float height) {
+    public LimitBody(World world, EntityModel model, float width, float height) {
 
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(model.getX(), model.getY());
+        bodyDef.position.set(model.getX()*PPM, model.getY()*PPM);
         bodyDef.angle = model.getRotation();
 
         body = world.createBody(bodyDef);
@@ -32,15 +32,15 @@ public class LimitBody {
 
         PolygonShape rectangle = new PolygonShape();
 
-        rectangle.setAsBox(width,height);
+        rectangle.setAsBox(width*PPM,height*PPM);
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = rectangle;
         fixtureDef.density = .5f;      // how heavy is the ground
         fixtureDef.friction =  .5f;    // how slippery is the ground
         fixtureDef.restitution =  .5f; // how bouncy is the ground
-        fixtureDef.filter.categoryBits = 2;
-        fixtureDef.filter.maskBits = 1;
+      //  fixtureDef.filter.categoryBits = 2;
+       // fixtureDef.filter.maskBits = 1;
 
         body.createFixture(fixtureDef);
 

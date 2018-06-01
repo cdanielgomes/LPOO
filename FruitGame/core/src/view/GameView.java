@@ -47,12 +47,6 @@ public class GameView extends ScreenAdapter {
     public final static float PPM = 0.04f;
 
     /**
-     * The width of the viewport in meters. The height is
-     * automatically calculated using the screen ratio.
-     */
-    private static final float VIEWPORT_WIDTH = 30;
-
-    /**
      * The camera used to show the viewport.
      */
     private final OrthographicCamera camera;
@@ -108,7 +102,6 @@ public class GameView extends ScreenAdapter {
      * @return the camera
      */
     private OrthographicCamera createCamera() {
-         //OrthographicCamera camera = new OrthographicCamera(VIEWPORT_WIDTH / PPM, VIEWPORT_WIDTH / PPM * ((float) Gdx.graphics.getHeight() / (float)Gdx.graphics.getWidth()));
 
         OrthographicCamera camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
@@ -134,9 +127,7 @@ public class GameView extends ScreenAdapter {
         GameController.getInstance().update(delta);
 
         game.getBatch().begin();
-System.out.println("begin draw");
         drawBackground();
-        System.out.println("bckg");
         drawEntities();
 
         game.getBatch().setProjectionMatrix(camera.combined);
@@ -161,41 +152,35 @@ System.out.println("begin draw");
      */
 
     private void drawEntities() {
-        int i = 0;
+
         List<FruitModel> fruitModels;
        /// GameModel.getInstance().checkBounds();
         fruitModels = GameModel.getInstance().getFruits();
         System.out.println(fruitModels.size());
         for (FruitModel fruit : fruitModels) {
-            System.out.println("Poças" + i);
-            FruitView view = new FruitView(this.game, fruit.getFruit());
 
-i++;
-            //System.out.print("x = " + fruit.getX() + "  y=" + fruit.getY() + "  ");
+            FruitView view = new FruitView(this.game, fruit.getFruit());
+        //System.out.print("x = " + fruit.getX() + "  y=" + fruit.getY() + "  ");
 
             view.update(fruit);
             view.draw(game.getBatch());
 
         }
-System.out.println("added");
+        /*
         LimitView limitView = new LimitView(this.game);
-        System.out.println("1");
+
 
         limitView.update(GameModel.getInstance().getTop());
-        System.out.println("2");
 
         limitView.draw(game.getBatch());
-        System.out.println("3");
 
         limitView.update(GameModel.getInstance().getLeft());
-        System.out.println("4");
 
         limitView.draw(game.getBatch());
-        System.out.println("5");
 
         limitView.update(GameModel.getInstance().getRight());
         limitView.draw(game.getBatch());
-        System.out.println("added");
+   */
 
 
 //       GameModel.getInstance().checkBounds();
