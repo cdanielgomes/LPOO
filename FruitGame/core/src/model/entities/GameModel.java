@@ -7,18 +7,20 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import model.entities.CutFruitModel;
 import model.entities.FruitModel;
 import model.entities.LimitModel;
 import view.entities.EntityView;
 
 import java.util.Random;
+
 /**
  * A model representing a game.
  */
 
 public class GameModel {
 
-    private int MAX_FRUITS = 1;
+    private int MAX_FRUITS = 4;
 
 
     Random rand = new Random();
@@ -27,10 +29,13 @@ public class GameModel {
      */
     private static GameModel instance;
 
-    private List<FruitModel>  fruitModels = new ArrayList<FruitModel>();
+    private List<FruitModel> fruitModels = new ArrayList<FruitModel>();
+    private List<CutFruitModel> cutModels = new ArrayList<CutFruitModel>();
+
     private final LimitModel top;
     private final LimitModel left;
     private final LimitModel right;
+
     /**
      * Returns a singleton instance of the game model
      *
@@ -43,29 +48,29 @@ public class GameModel {
     }
 
 
-    private GameModel(){
+    private GameModel() {
 
-        top = new LimitModel(0,Gdx.graphics.getHeight(), 0);
-        left = new LimitModel(0,0, 0);
-        right = new LimitModel(Gdx.graphics.getWidth(),-5, 0);
+        top = new LimitModel(0, Gdx.graphics.getHeight(), 0);
+        left = new LimitModel(0, 0, 0);
+        right = new LimitModel(Gdx.graphics.getWidth(), -5, 0);
 
         createFruits();
 
     }
 
-  private void createFruits(){
+    private void createFruits() {
 
-        for(int i = fruitModels.size(); i < MAX_FRUITS; i++){
+        for (int i = fruitModels.size(); i < MAX_FRUITS; i++) {
             int x = rand.nextInt(Gdx.graphics.getWidth());
-            fruitModels.add(new FruitModel(x, 30, 2,type()));
+            fruitModels.add(new FruitModel(x, 30, 2, type()));
 
         }
 
     }
 
-    public EntityView.Fruits type(){
+    public EntityView.Fruits type() {
 
-        switch (rand.nextInt(8)){
+        switch (rand.nextInt(8)) {
             case 0:
                 return EntityView.Fruits.WATERMELON;
             case 1:
@@ -90,9 +95,12 @@ public class GameModel {
     }
 
 
-
     public List<FruitModel> getFruits() {
         return fruitModels;
+    }
+
+    public List<CutFruitModel> getCutFruits() {
+        return cutModels;
     }
 
     public LimitModel getLeft() {
@@ -107,17 +115,38 @@ public class GameModel {
         return right;
     }
 
-  public void checkBounds() {
+    public void addCutFruit(CutFruitModel x, CutFruitModel y) {
+        cutModels.add(x);
+        cutModels.add(y);
 
-      Iterator<FruitModel> iterator = fruitModels.iterator();
+    }
 
-      while (iterator.hasNext()) {
-          FruitModel fruit = iterator.next();
-              if(0 > fruit.getY()) {
-                  iterator.remove();
-              }
-          }
-         createFruits();
-  }
+    public void checkBounds() {
+
+        Iterator<FruitModel> iterator = fruitModels.iterator();
+
+        while (iterator.hasNext()) {
+
+            FruitModel fruit = iterator.next();
+            if (0 > fruit.getY() || fruit.isCut()) {
+                iterator.remove();
+            }
+        }
+
+        createFruits();
+    }
+
+    public void deleteCutFruits() {
+        Iterator<CutFruitModel> iterator = cutModels.iterator();
+
+        while (iterator.hasNext()) {
+
+            CutFruitModel fruit = iterator.next();
+            if (0 > fruit.getY()) {
+                iterator.remove();
+            }
+        }
+    }
 }
+
 

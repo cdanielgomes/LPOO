@@ -26,10 +26,10 @@ public class EntityBody {
      * @param world The world this body lives on.
      * @param model The model representing the body.
      */
-    EntityBody(World world, EntityModel model) {
+    EntityBody(World world, EntityModel model, BodyDef.BodyType type) {
 
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.type = type;
         bodyDef.position.set(model.getX()*PPM, model.getY()*PPM);
         bodyDef.angle = model.getRotation();
 

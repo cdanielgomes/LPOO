@@ -13,23 +13,21 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyFruitGame;
-import com.sun.corba.se.impl.resolver.FileResolverImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import controller.CutHandler;
 import controller.GameController;
 
 import model.GameModel;
+import model.entities.CutFruitModel;
 import model.entities.FruitModel;
+import view.entities.CutFruitView;
 import view.entities.FruitView;
-import view.entities.LimitView;
 import view.entities.SwipeTriangleStrip;
 
 public class GameView extends ScreenAdapter {
@@ -83,16 +81,36 @@ public class GameView extends ScreenAdapter {
 
     private void loadAssets() {
 
+        this.game.getAssetManager().load("half1_watermelon.png", Texture.class);
+        this.game.getAssetManager().load("half2_watermelon.png", Texture.class);
         this.game.getAssetManager().load("watermelon.png", Texture.class);
         this.game.getAssetManager().load("background.png", Texture.class);
+
+        this.game.getAssetManager().load("half1_banana.png", Texture.class);
+        this.game.getAssetManager().load("half2_banana.png", Texture.class);
         this.game.getAssetManager().load("banana.png", Texture.class);
+        this.game.getAssetManager().load("half1_lemon.png", Texture.class);
+        this.game.getAssetManager().load("half2_lemon.png", Texture.class);
         this.game.getAssetManager().load("lemon.png", Texture.class);
+
+        this.game.getAssetManager().load("half1_apple.png", Texture.class);
+        this.game.getAssetManager().load("half2_apple.png", Texture.class);
         this.game.getAssetManager().load("apple.png", Texture.class);
+        this.game.getAssetManager().load("half2_strawberry.png", Texture.class);
+        this.game.getAssetManager().load("half1_strawberry.png", Texture.class);
         this.game.getAssetManager().load("strawberry.png", Texture.class);
+
+        this.game.getAssetManager().load("half1_peach.png", Texture.class);
+        this.game.getAssetManager().load("half2_peach.png", Texture.class);
         this.game.getAssetManager().load("peach.png", Texture.class);
+
         this.game.getAssetManager().load("plum.png", Texture.class);
         this.game.getAssetManager().load("orange.png", Texture.class);
-        this.game.getAssetManager().load("wall.png", Texture.class);
+        this.game.getAssetManager().load("half1_orange.png", Texture.class);
+        this.game.getAssetManager().load("half2_orange.png", Texture.class);
+
+        this.game.getAssetManager().load("half1_plum.png", Texture.class);
+        this.game.getAssetManager().load("half2_plum.png", Texture.class);
 
         this.game.getAssetManager().finishLoading();
     }
@@ -129,7 +147,6 @@ public class GameView extends ScreenAdapter {
         game.getBatch().begin();
         drawBackground();
         drawEntities();
- ;
 
         game.getBatch().setProjectionMatrix(camera.combined);
 
@@ -139,6 +156,7 @@ public class GameView extends ScreenAdapter {
         game.getBatch().end();
 
         GameController.getInstance().update(delta);
+
 
         if (DEBUG_PHYSICS) {
             debugCamera = camera.combined.cpy();
@@ -156,24 +174,30 @@ public class GameView extends ScreenAdapter {
     private void drawEntities() {
 
         List<FruitModel> fruitModels;
+        List<CutFruitModel> cutfruitModels;
 
         fruitModels = GameModel.getInstance().getFruits();
+        cutfruitModels = GameModel.getInstance().getCutFruits();
 
         GameModel.getInstance().checkBounds();
+        GameModel.getInstance().deleteCutFruits();
 
         for (FruitModel fruit : fruitModels) {
 
             FruitView view = new FruitView(this.game, fruit.getFruit());
-           view.update(fruit);
+            view.update(fruit);
             view.draw(game.getBatch());
+
 
         }
 
+        for (CutFruitModel cut : cutfruitModels) {
 
+            CutFruitView view = new CutFruitView(this.game, cut.getFruits());
 
-//       GameModel.getInstance().checkBounds();
-
-      //  System.out.print(GameModel.getInstance().getFruits().size());
+            view.update(cut);
+            view.draw(game.getBatch());
+        }
 
     }
 
@@ -230,18 +254,12 @@ public class GameView extends ScreenAdapter {
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
 
-        Array<Fixture> fixtures ;
+        Array<Fixture> fixtures;
         float radius;
 
-        // get the radius of the shape of the body
-        // Array<Fixture> f = bodies.get(0).getFixtureList();
-        // float radius = f.get(0).getShape().getRadius();
-        // System.out.println(f.get(0).getShape().getRadius());
-
-        // distSq(swipeTS.getTriangleStrip().get(0) , fruit.getWorldCenter()) < (radius*radius)
 
         if (swipeTS.getTriangleStrip().size < 2)
-            return ;
+            return;
 
         Vector2 v1 = swipeTS.getTriangleStrip().get(0);
         Vector2 v2 = swipeTS.getTriangleStrip().get(1);
@@ -250,31 +268,32 @@ public class GameView extends ScreenAdapter {
         for (Body fruit : bodies) {
 
 
-    if(fruit.getUserData() instanceof FruitModel) {
-        System.out.println("----------Between bodies----------");
-        System.out.println("world center : " + fruit.getWorldCenter());
-        fixtures = fruit.getFixtureList();
-        radius = fixtures.get(0).getShape().getRadius();
+            if (fruit.getUserData() instanceof FruitModel) {
+                fixtures = fruit.getFixtureList();
+                radius = fixtures.get(0).getShape().getRadius();
 
-        if (Cut(v1, v2, fruit, radius)) {
-            System.out.println("HIT FRUIT");
+                if (Cut(v1, v2, fruit, radius)) {
+                    FruitModel v = ((FruitModel) fruit.getUserData());
+                    ((FruitModel) fruit.getUserData()).setCut(true);
+                    GameModel.getInstance().addCutFruit(new CutFruitModel(v.getX()/PPM - 7, v.getY()/PPM, v.getRotation(), v.getFruit()), new CutFruitModel(v.getX()/PPM + 7, v.getY()/PPM, v.getRotation(), v.getFruit()));
+
+
+                }
+
+            }
         }
-
-    }
-        }
-
 
 
     }
 
     public static float distSq(Vector2 p1, Vector2 p2) {
-        float dx = p1.x*PPM - p2.x, dy = p1.y*PPM - p2.y;
+        float dx = p1.x * PPM - p2.x, dy = p1.y * PPM - p2.y;
         return dx * dx + dy * dy;
     }
 
-    public boolean Cut(Vector2 v1 , Vector2 v2 , Body b , float r){
+    public boolean Cut(Vector2 v1, Vector2 v2, Body b, float r) {
 
-        if ((distSq(v1 , b.getWorldCenter()) < (r*r)) && (distSq(v2 , b.getWorldCenter()) < (r*r))){
+        if ((distSq(v1, b.getWorldCenter()) < (r * r)) && (distSq(v2, b.getWorldCenter()) < (r * r))) {
             return true;
         }
 

@@ -16,9 +16,13 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.text.html.parser.Entity;
+
+import controller.entities.CutFruitBody;
 import controller.entities.FruitBody;
 import controller.entities.LimitBody;
 import model.GameModel;
+import model.entities.CutFruitModel;
 import model.entities.EntityModel;
 import model.entities.FruitModel;
 import model.entities.LimitModel;
@@ -37,7 +41,7 @@ public class GameController implements ContactListener {
 
     private float GRAVITY = -13f;
 
-    private  int MAXVELOCITY = 17;
+    private int MAXVELOCITY = 10;
     /**
      * The rotation speed in radians per second.
      */
@@ -51,7 +55,7 @@ public class GameController implements ContactListener {
     private static GameController instance;
 
 
-    private  ArrayList<FruitModel> fruits = new ArrayList<FruitModel>();
+    private ArrayList<FruitModel> fruits = new ArrayList<FruitModel>();
 
     Random random = new Random();
 
@@ -61,8 +65,8 @@ public class GameController implements ContactListener {
     private final World world;
 
 
-    private GameController(){
-        world = new World(new Vector2(0,GRAVITY), true);
+    private GameController() {
+        world = new World(new Vector2(0, GRAVITY), true);
 
         createBodies();
 
@@ -74,12 +78,12 @@ public class GameController implements ContactListener {
         world.setContactListener(this);
     }
 
-    private void createBodies(){
+    private void createBodies() {
         List<FruitModel> kapa = GameModel.getInstance().getFruits();
 
-        for (FruitModel fruits : kapa){
-            if(!fruits.isThrowned())
-            new FruitBody(world, fruits);
+        for (FruitModel fruits : kapa) {
+            if (!fruits.isThrowned())
+                new FruitBody(world, fruits);
         }
     }
 
@@ -94,46 +98,50 @@ public class GameController implements ContactListener {
         return instance;
     }
 
-private Vector2 impulse(Body body){
+    private Vector2 impulse(Body body) {
         float x, y;
 
 
-        if((Gdx.graphics.getWidth() /2)*PPM > body.getPosition().x)
-            x =MAXVELOCITY  + random.nextInt(MAXVELOCITY );
+        if ((Gdx.graphics.getWidth() / 2) * PPM > body.getPosition().x)
+            x = MAXVELOCITY + random.nextInt(MAXVELOCITY);
 
-        else if((Gdx.graphics.getWidth()/2)*PPM < body.getPosition().x)
-            x = (MAXVELOCITY + random.nextInt(MAXVELOCITY )) * -1;
+        else if ((Gdx.graphics.getWidth() / 2) * PPM < body.getPosition().x)
+            x = (MAXVELOCITY + random.nextInt(MAXVELOCITY)) * -1;
 
-        else{
+        else {
 
-           if(random.nextBoolean())
-               x =  (random.nextInt(MAXVELOCITY) + MAXVELOCITY) * -1;
+            if (random.nextBoolean())
+                x = (random.nextInt(MAXVELOCITY) + MAXVELOCITY) * -1;
 
-           else
-               x = 2 + random.nextInt(MAXVELOCITY);
+            else
+                x = 2 + random.nextInt(MAXVELOCITY);
 
         }
 
 
-            y = random.nextInt(60-30) + 30;
+      //  y = random.nextInt(60 - 30) + 30;
+        y =30 ;
 
 
+        return new Vector2(x, y);
+    }
 
-    return  new Vector2(x, y);
-}
+    private void cutMove(Body body) {
+        Vector2 impulse = new Vector2(0, -12);
+        body.setLinearVelocity(impulse);
+    }
 
-
-private void bodyMove(Body body){
-
-
-    Vector2 impulse = new Vector2(impulse(body));
-    body.setLinearVelocity(impulse);
-
-
-}
+    private void bodyMove(Body body) {
 
 
-    public void update(float delta){
+        Vector2 impulse = new Vector2(impulse(body));
+        body.setLinearVelocity(impulse);
+
+
+    }
+
+
+    public void update(float delta) {
 
 
         Array<Body> bodies = new Array<Body>();
@@ -143,29 +151,67 @@ private void bodyMove(Body body){
 
         float frameTime = Math.min(delta, 0.25f);
         accumulator += frameTime;
-        while (accumulator >= 1/60f) {
-          world.step(1/60f, 6, 2);
-            accumulator -= 1/60f;
+        while (accumulator >= 1 / 60f) {
+            world.step(1 / 60f, 6, 2);
+            accumulator -= 1 / 60f;
         }
 
-        for(Body b : bodies) {
-            if (!(b.getUserData() instanceof LimitModel)) {
-                if (!((FruitModel)b.getUserData()).isThrowned()){
-                    bodyMove(b);
-                    ((FruitModel)b.getUserData()).setThrowned();
-                }
 
-               ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
+        for (Body b : bodies) {
+
+
+
+            if ((b.getUserData() instanceof CutFruitModel)) {
+                cutMove(b);
+
+                ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
                 ((EntityModel) b.getUserData()).setRotation(b.getAngle());
 
-            if ( ((FruitModel)b.getUserData()).getY() < -50) {
-                world.destroyBody(b);
-
-
+                if (((CutFruitModel)b.getUserData()).getY() < -50) {
+                    world.destroyBody(b);
+                }
             }
+
+            if ((b.getUserData() instanceof FruitModel)) {
+                FruitModel f = (FruitModel) b.getUserData();
+                if (!(f.isThrowned())) {
+                    bodyMove(b);
+                    f.setThrowned();
+                }
+
+                ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
+                ((EntityModel) b.getUserData()).setRotation(b.getAngle());
+
+                if (f.getY() < -50) {
+                    world.destroyBody(b);
+                }
+
+                if (f.isCut()) {
+                    createCutBodies(b);
+                    world.destroyBody(b);
+                }
             }
         }
+
+
         createBodies();
+    }
+
+    private void createCutBodies(Body b) {
+
+        List<CutFruitModel> kapa = GameModel.getInstance().getCutFruits();
+
+        for (CutFruitModel fruits : kapa) {
+
+            System.out.println("X = " + fruits.getX());
+            System.out.println("Y = " + fruits.getY());
+
+            new CutFruitBody(world, fruits, b.getFixtureList().get(0).getShape().getRadius(), b.getFixtureList().get(0).getDensity());
+            new CutFruitBody(world, fruits, b.getFixtureList().get(0).getShape().getRadius(), b.getFixtureList().get(0).getDensity());
+
+
+        }
+
     }
 
 
@@ -199,7 +245,7 @@ private void bodyMove(Body body){
 
     }
 
-    public World getWorld(){
+    public World getWorld() {
         return this.world;
     }
 }

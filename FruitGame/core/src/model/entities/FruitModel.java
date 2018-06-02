@@ -1,22 +1,20 @@
 package model.entities;
 
 
-import com.badlogic.gdx.Gdx;
-
-import model.GameModel;
-import view.entities.EntityView;
+import view.entities.EntityView.Fruits;
 
 public class FruitModel extends EntityModel{
 
-    private final EntityView.Fruits fruit;
+    private final Fruits fruit;
     private boolean throwned = false;
+    private boolean cut = false;
 
-    public FruitModel(float x, float y, float rotation, EntityView.Fruits fruit){
+    public FruitModel(float x, float y, float rotation, Fruits fruit){
         super(x,y,rotation);
         this.fruit = fruit;
     }
 
-public EntityView.Fruits getFruit(){
+public Fruits getFruit(){
         return fruit;
 }
 
@@ -24,5 +22,6 @@ public  boolean isThrowned(){
         return throwned;
 }
 public void setThrowned() {throwned = true;}
-
+public void setCut(boolean cut){ this.cut = cut; }
+public boolean isCut() {return cut;}
 }
