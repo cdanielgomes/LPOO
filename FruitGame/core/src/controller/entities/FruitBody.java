@@ -36,6 +36,8 @@ public class FruitBody extends EntityBody {
                 case PLUM:
                     createFixture(body, 2, 0.35f);
                     break;
+                case BOMB:
+                    createFixture(body, 2, 1f);
                     default:
                         break;
 

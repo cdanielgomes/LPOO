@@ -4,25 +4,22 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.MyFruitGame;
 
+import model.entities.CutFruitModel;
+
 public class CutFruitView extends EntityView {
 
     private final Fruits fruits;
+    private final boolean half;
 
-    Texture half1,half2;
 
-   public CutFruitView(MyFruitGame game, Fruits fruits){
+    public CutFruitView(MyFruitGame game, CutFruitModel cut) {
         super();
-        this.fruits = fruits;
+        this.fruits = cut.getFruits();
         sprite = createSprite(game);
         sprite.setScale(1.3f);
-        if(sprite2 != null){
+        this.half = cut.getHalf();
 
-            sprite2.setScale(1.3f);
-
-
-        }
-
-   }
+    }
 
 
     /**
@@ -36,51 +33,65 @@ public class CutFruitView extends EntityView {
      */
     @Override
     public Sprite createSprite(MyFruitGame game) {
-        switch(this.fruits){
+        Texture texture;
+        switch (this.fruits) {
             case PLUM:
-                half1 = game.getAssetManager().get("half1_plum.png", Texture.class);
-                half2 = game.getAssetManager().get("half2_plum.png", Texture.class);
+                if (half)
+                    texture = game.getAssetManager().get("half1_plum.png", Texture.class);
+                else texture = game.getAssetManager().get("half2_plum.png", Texture.class);
                 break;
             case APPLE:
-                half1 = game.getAssetManager().get("half1_apple.png", Texture.class);
-                half2 = game.getAssetManager().get("half1_apple.png", Texture.class);
+                if (half)
+                    texture = game.getAssetManager().get("half1_apple.png", Texture.class);
+                else
+                    texture = game.getAssetManager().get("half2_apple.png", Texture.class);
                 break;
 
             case PEACH:
-                half1 = game.getAssetManager().get("half1_peach.png", Texture.class);
-                half2 = game.getAssetManager().get("half2_peach.png", Texture.class);
+                if (half)
+                    texture = game.getAssetManager().get("half1_peach.png", Texture.class);
+                else
+                    texture = game.getAssetManager().get("half2_peach.png", Texture.class);
                 break;
 
             case LEMON:
-                half1 = game.getAssetManager().get("half1_lemon.png", Texture.class);
-                half2 = game.getAssetManager().get("half2_lemon.png", Texture.class);
+                if (half)
+                    texture = game.getAssetManager().get("half1_lemon.png", Texture.class);
+                else
+                    texture = game.getAssetManager().get("half2_lemon.png", Texture.class);
                 break;
 
             case STRAW:
-                half1 = game.getAssetManager().get("half1_strawberry.png", Texture.class);
-                half2 = game.getAssetManager().get("half2_strawberry.png", Texture.class);
+                if (half)
+                    texture = game.getAssetManager().get("half1_strawberry.png", Texture.class);
+                else
+                    texture = game.getAssetManager().get("half2_strawberry.png", Texture.class);
                 break;
 
             case BANANA:
-                half1 = game.getAssetManager().get("half1_banana.png", Texture.class);
-                half2 = game.getAssetManager().get("half2_banana.png", Texture.class);
+                if (half)
+                    texture = game.getAssetManager().get("half1_banana.png", Texture.class);
+                else
+                    texture = game.getAssetManager().get("half2_banana.png", Texture.class);
                 break;
 
             case ORANGE:
-                half1 = game.getAssetManager().get("half1_orange.png", Texture.class);
-                half2 = game.getAssetManager().get("half2_orange.png", Texture.class);
+                if (half)
+                    texture = game.getAssetManager().get("half1_orange.png", Texture.class);
+                else
+                    texture = game.getAssetManager().get("half2_orange.png", Texture.class);
                 break;
 
             default:
-                half1 = game.getAssetManager().get("half1_watermelon.png", Texture.class);
-                half2 = game.getAssetManager().get("half2_watermelon.png", Texture.class);
+                if (half)
+                    texture = game.getAssetManager().get("half1_watermelon.png", Texture.class);
+                else
+                    texture = game.getAssetManager().get("half2_watermelon.png", Texture.class);
                 break;
         }
 
-        sprite2 = new Sprite(half1, half1.getWidth(), half1.getHeight());
 
-
-        return new Sprite(half2, half2.getWidth(), half2.getHeight());
+        return new Sprite(texture, texture.getWidth(), texture.getHeight());
     }
 
 }

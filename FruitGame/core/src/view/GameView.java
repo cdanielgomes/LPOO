@@ -3,10 +3,8 @@ package view;
 
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -111,6 +109,7 @@ public class GameView extends ScreenAdapter {
 
         this.game.getAssetManager().load("half1_plum.png", Texture.class);
         this.game.getAssetManager().load("half2_plum.png", Texture.class);
+        this.game.getAssetManager().load("bomb.png", Texture.class);
 
         this.game.getAssetManager().finishLoading();
     }
@@ -193,7 +192,7 @@ public class GameView extends ScreenAdapter {
 
         for (CutFruitModel cut : cutfruitModels) {
 
-            CutFruitView view = new CutFruitView(this.game, cut.getFruits());
+            CutFruitView view = new CutFruitView(this.game, cut);
 
             view.update(cut);
             view.draw(game.getBatch());
@@ -274,8 +273,11 @@ public class GameView extends ScreenAdapter {
 
                 if (Cut(v1, v2, fruit, radius)) {
                     FruitModel v = ((FruitModel) fruit.getUserData());
+                   // if(v.getFruit() == EntityView.Fruits.BOMB)
+                        //ENDGAME
                     ((FruitModel) fruit.getUserData()).setCut(true);
-                    GameModel.getInstance().addCutFruit(new CutFruitModel(v.getX()/PPM - 7, v.getY()/PPM, v.getRotation(), v.getFruit()), new CutFruitModel(v.getX()/PPM + 7, v.getY()/PPM, v.getRotation(), v.getFruit()));
+                    GameModel.getInstance().addCutFruit(new CutFruitModel(true,(v.getX() - 2)/PPM, v.getY()/PPM, v.getRotation(), v.getFruit()),
+                            new CutFruitModel(false,(2 + v.getX())/PPM , v.getY()/PPM, v.getRotation(), v.getFruit()));
 
 
                 }

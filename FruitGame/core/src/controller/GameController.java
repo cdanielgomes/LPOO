@@ -101,7 +101,6 @@ public class GameController implements ContactListener {
     private Vector2 impulse(Body body) {
         float x, y;
 
-
         if ((Gdx.graphics.getWidth() / 2) * PPM > body.getPosition().x)
             x = MAXVELOCITY + random.nextInt(MAXVELOCITY);
 
@@ -129,6 +128,7 @@ public class GameController implements ContactListener {
     private void cutMove(Body body) {
         Vector2 impulse = new Vector2(0, -12);
         body.setLinearVelocity(impulse);
+        body.setAngularVelocity(12);
     }
 
     private void bodyMove(Body body) {

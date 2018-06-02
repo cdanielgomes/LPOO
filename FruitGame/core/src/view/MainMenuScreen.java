@@ -2,6 +2,8 @@ package view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,11 +29,13 @@ public class MainMenuScreen implements Screen {
     FreeTypeFontGenerator generator;
     TextButton.TextButtonStyle Title;
     BitmapFont TitleFont;
-
+    Music music;
     public MainMenuScreen(MyFruitGame game){
        this.game = game;
        this.batch = new SpriteBatch();
        this.game.getAssetManager().load("menubackground.jpg", Texture.class);
+        this.game.getAssetManager().load("music.mp3", Music.class);
+        this.music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
         stage = new Stage (new ScreenViewport());
         Gdx.input.setInputProcessor(this.stage);
         generator = new FreeTypeFontGenerator(Gdx.files.internal("myfont.ttf"));
@@ -96,6 +100,7 @@ public class MainMenuScreen implements Screen {
             }
         });
 
+        music.play();
         stage.addActor(newGame);
         stage.addActor(exit);
         stage.addActor(preferences);

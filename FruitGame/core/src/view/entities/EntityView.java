@@ -23,14 +23,14 @@ import static view.GameView.PPM;
 public abstract class EntityView {
 
     public enum Fruits{
-        WATERMELON, BANANA, LEMON, ORANGE, PEACH, PLUM, APPLE, STRAW
+        WATERMELON, BANANA, LEMON, ORANGE, PEACH, PLUM, APPLE, STRAW, BOMB
     }
 
         /**
          * The sprite representing this entity view.
          */
         Sprite sprite;
-        Sprite sprite2;
+
 
 
         /**
@@ -50,8 +50,6 @@ public abstract class EntityView {
 
         public void draw(SpriteBatch batch) {
               sprite.draw(batch);
-              if(sprite2 != null)
-                  sprite2.draw(batch);
         }
 
         /**
@@ -71,12 +69,8 @@ public abstract class EntityView {
          * @param model the model used to update this view
          */
         public void update(EntityModel model) {
-            sprite.setCenter(model.getX()/ PPM, model.getY()/PPM);
+            sprite.setCenter((model.getX())/ PPM, model.getY()/PPM);
             sprite.setRotation((float) Math.toDegrees(model.getRotation()));
-            if(sprite2!= null){
-                sprite2.setCenter(model.getX()/ PPM, model.getY()/PPM);
-                sprite2.setRotation((float) Math.toDegrees(model.getRotation()));
 
-            }
         }
 }

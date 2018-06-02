@@ -11,8 +11,15 @@ import model.entities.CutFruitModel;
 import model.entities.FruitModel;
 import model.entities.LimitModel;
 import view.entities.EntityView;
-
 import java.util.Random;
+import static view.entities.EntityView.Fruits.APPLE;
+import static view.entities.EntityView.Fruits.BANANA;
+import static view.entities.EntityView.Fruits.BOMB;
+import static view.entities.EntityView.Fruits.LEMON;
+import static view.entities.EntityView.Fruits.ORANGE;
+import static view.entities.EntityView.Fruits.PEACH;
+import static view.entities.EntityView.Fruits.PLUM;
+import static view.entities.EntityView.Fruits.WATERMELON;
 
 /**
  * A model representing a game.
@@ -62,7 +69,7 @@ public class GameModel {
 
         for (int i = fruitModels.size(); i < MAX_FRUITS; i++) {
             int x = rand.nextInt(Gdx.graphics.getWidth());
-            fruitModels.add(new FruitModel(x, 30, 2, type()));
+            fruitModels.add(new FruitModel(x, 10, 2, type()));
 
         }
 
@@ -72,23 +79,25 @@ public class GameModel {
 
         switch (rand.nextInt(8)) {
             case 0:
-                return EntityView.Fruits.WATERMELON;
+                return WATERMELON;
             case 1:
-                return EntityView.Fruits.APPLE;
+                return APPLE;
             case 3:
-                return EntityView.Fruits.BANANA;
+                return BANANA;
 
             case 2:
-                return EntityView.Fruits.LEMON;
+                return LEMON;
 
             case 5:
-                return EntityView.Fruits.ORANGE;
+                return ORANGE;
 
             case 4:
-                return EntityView.Fruits.PEACH;
+                return PEACH;
 
             case 6:
-                return EntityView.Fruits.PLUM;
+                return PLUM;
+            case 7:
+                return BOMB;
 
         }
         return EntityView.Fruits.STRAW;

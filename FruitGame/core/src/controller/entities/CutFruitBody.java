@@ -16,5 +16,6 @@ public class CutFruitBody extends EntityBody {
         super(world, model, BodyDef.BodyType.KinematicBody);
 
         createFixture(body, radius, density);
+
     }
 }
