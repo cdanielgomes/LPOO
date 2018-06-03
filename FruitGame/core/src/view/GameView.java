@@ -102,7 +102,6 @@ public class GameView extends ScreenAdapter {
         camera = createCamera();
 
 
-
         createScore();
 
     }
@@ -175,7 +174,7 @@ public class GameView extends ScreenAdapter {
     @Override
     public void render(float delta) {
 
-        if (GameModel.getInstance().getLife().isEmpty()){
+        if (GameModel.getInstance().getLife().isEmpty()) {
             game.changeScreen(MyFruitGame.Menus.ENDGAME);
         }
 
@@ -183,20 +182,24 @@ public class GameView extends ScreenAdapter {
 
         drawBackground();
         drawEntities();
- ;
         yourBitmapFontName.draw(game.getBatch(), yourScoreName, 180, Gdx.graphics.getHeight() - 10);
 
         DrawLife();
         game.getBatch().setProjectionMatrix(camera.combined);
 
+        SwipeRender(camera);
+        game.getBatch().end();
 
-            game.getBatch().end();
-
-        if(special) {
+        if (special) {
             this.delta += delta;
 
             float accelerationX = Gdx.input.getAccelerometerX();
             score += Math.abs(accelerationX) * 0.1;
+            if (this.delta >= 3) {
+                special = false;
+                this.delta = 0;
+            }
+        } else GameController.getInstance().update(delta);
 
         stage.draw();
 
@@ -208,6 +211,7 @@ public class GameView extends ScreenAdapter {
 
 
     }
+
 
     private void DrawLife() {
         List<Life> l = GameModel.getInstance().getLife();
@@ -320,7 +324,6 @@ public class GameView extends ScreenAdapter {
         for (Body fruit : bodies) {
 
 
-
             if (fruit.getUserData() instanceof FruitModel) {
                 fixtures = fruit.getFixtureList();
                 radius = fixtures.get(0).getShape().getRadius();
@@ -337,9 +340,9 @@ public class GameView extends ScreenAdapter {
                         special = true;
                     }
                     ((FruitModel) fruit.getUserData()).setCut(true);
-                    GameModel.getInstance().addCutFruit(new CutFruitModel(true,(v.getX() - 2)/PPM, v.getY()/PPM, v.getRotation(), v.getFruit()),
-                            new CutFruitModel(false,(2 + v.getX())/PPM , v.getY()/PPM, v.getRotation(), v.getFruit()));
-                    if (scoreValue == 0){
+                    GameModel.getInstance().addCutFruit(new CutFruitModel(true, (v.getX() - 2) / PPM, v.getY() / PPM, v.getRotation(), v.getFruit()),
+                            new CutFruitModel(false, (2 + v.getX()) / PPM, v.getY() / PPM, v.getRotation(), v.getFruit()));
+                    if (scoreValue == 0) {
                         yourScoreName = "";
                     }
                     scoreValue++;
@@ -359,7 +362,7 @@ public class GameView extends ScreenAdapter {
         return dx * dx + dy * dy;
     }
 
-    public boolean Cut(Vector2 v1 , Vector2 v2 , Body b , float r){
+    public boolean Cut(Vector2 v1, Vector2 v2, Body b, float r) {
 
         if ((distSq(v1, b.getWorldCenter()) < (r * r)) && (distSq(v2, b.getWorldCenter()) < (r * r))) {
             return true;
@@ -368,7 +371,7 @@ public class GameView extends ScreenAdapter {
         return false;
     }
 
-    public void createScore(){
+    public void createScore() {
 
         stage = new Stage(new ScreenViewport());
 
@@ -386,8 +389,8 @@ public class GameView extends ScreenAdapter {
 
     @Override
     public void show() {
-        Label scoreB =  new Label("SCORE : " , new Label.LabelStyle(ScoreFont, Color.SKY));
-        scoreB.setPosition(0, Gdx.graphics.getHeight() - scoreB.getHeight() );
+        Label scoreB = new Label("SCORE : ", new Label.LabelStyle(ScoreFont, Color.SKY));
+        scoreB.setPosition(0, Gdx.graphics.getHeight() - scoreB.getHeight());
         stage.addActor(scoreB);
 
     }
