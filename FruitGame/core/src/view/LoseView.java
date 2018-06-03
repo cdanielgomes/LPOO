@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -29,7 +30,6 @@ public class LoseView implements Screen {
 
         this.game = game;
         this.batch = new SpriteBatch();
-        this.game.getAssetManager().load("defeatBG.jpg", Texture.class);
 
         this.background = new Texture("defeatBG.jpg");
 
@@ -61,9 +61,14 @@ public class LoseView implements Screen {
 
         TextButton menu = new TextButton("MENU", style);
         TextButton exit = new TextButton("EXIT", style);
+        Label score = new Label( "SCORE: " + GameView.getScoreValue(),new Label.LabelStyle(font12, Color.GOLD));
+        Label gameOver = new Label( "GAME OVER",new Label.LabelStyle(font12, Color.GREEN));
 
         menu.setPosition(Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 5);
-        exit.setPosition(menu.getX() + menu.getWidth() + 100, menu.getY());
+        exit.setPosition(Gdx.graphics.getWidth() -30 - exit.getWidth(), menu.getY());
+
+        score.setPosition(Gdx.graphics.getWidth() / 2 - score.getWidth(), Gdx.graphics.getHeight() / 2);
+        gameOver.setPosition(Gdx.graphics.getWidth() / 2- gameOver.getWidth()/2, Gdx.graphics.getHeight() - gameOver.getHeight());
 
         exit.addListener(new ClickListener() {
             @Override
@@ -80,7 +85,9 @@ public class LoseView implements Screen {
                 game.changeScreen(MyFruitGame.Menus.MAIN);
             }
         });
+        stage.addActor(gameOver);
 
+        stage.addActor(score);
         stage.addActor(menu);
         stage.addActor(exit);
 

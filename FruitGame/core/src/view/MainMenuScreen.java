@@ -31,14 +31,14 @@ public class MainMenuScreen implements Screen {
     private FreeTypeFontGenerator generator;
     private TextButton.TextButtonStyle Title;
     private BitmapFont TitleFont;
-    public Music music;
+    static public Music music;
+    static public Sound sound;
 
     public MainMenuScreen(MyFruitGame game) {
         this.game = game;
         this.batch = new SpriteBatch();
         this.game.getAssetManager().load("menubackground.jpg", Texture.class);
-        this.game.getAssetManager().load("sound.mp3", Sound.class);
-
+        this.sound = Gdx.audio.newSound(Gdx.files.internal("sound.mp3"));
         this.music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
         stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(this.stage);
@@ -61,6 +61,8 @@ public class MainMenuScreen implements Screen {
         Title = new TextButton.TextButtonStyle();
         TitleFont = generator.generateFont(title);
         Title.font = TitleFont;
+        music.play();
+
 
     }
 
@@ -103,7 +105,7 @@ public class MainMenuScreen implements Screen {
             }
         });
 
-        music.play();
+
         stage.addActor(newGame);
         stage.addActor(exit);
         stage.addActor(preferences);
@@ -181,4 +183,11 @@ public class MainMenuScreen implements Screen {
 
     }
 
+    public static Music getMusic(){
+        return music;
+    }
+
+    public static Sound getSound(){
+        return sound;
+    }
 }

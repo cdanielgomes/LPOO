@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyFruitGame;
 
 
+import java.util.Iterator;
 import java.util.List;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import model.entities.CutFruitModel;
 import model.entities.EntityModel;
 import model.entities.FruitModel;
 import model.entities.LimitModel;
+import view.entities.EntityView;
 
 import static view.GameView.PPM;
 
@@ -43,27 +45,18 @@ public class GameController implements ContactListener {
     private float GRAVITY = -13f;
 
     private int MAXVELOCITY = 10;
-    /**
-     * The rotation speed in radians per second.
-     */
-    private static final float ROTATION_SPEED = 5f;
-
-    private boolean throwElem = false;
 
     /**
      * The singleton instance of this controller
      */
     private static GameController instance;
 
-
-    private ArrayList<FruitModel> fruits = new ArrayList<FruitModel>();
-
     Random random = new Random();
 
     /**
      * The physics world controlled by this controller.
      */
-    private final World world;
+    private World world;
 
 
     private GameController() {
@@ -74,7 +67,6 @@ public class GameController implements ContactListener {
         new LimitBody(world, GameModel.getInstance().getTop(), Gdx.graphics.getWidth(), 1);
         new LimitBody(world, GameModel.getInstance().getRight(), 1, Gdx.graphics.getHeight());
         new LimitBody(world, GameModel.getInstance().getLeft(), 1, Gdx.graphics.getHeight());
-
 
         world.setContactListener(this);
     }
@@ -119,8 +111,8 @@ public class GameController implements ContactListener {
         }
 
 
-      //  y = random.nextInt(60 - 30) + 30;
-        y = 30 ;
+        //  y = random.nextInt(60 - 30) + 30;
+        y = 30;
 
 
         return new Vector2(x, y);
@@ -160,21 +152,20 @@ public class GameController implements ContactListener {
 
         for (Body b : bodies) {
 
-
-
             if ((b.getUserData() instanceof CutFruitModel)) {
                 cutMove(b);
 
                 ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
                 ((EntityModel) b.getUserData()).setRotation(b.getAngle());
 
-                if (((CutFruitModel)b.getUserData()).getY() < -20) {
+                if (((CutFruitModel) b.getUserData()).getY() < -5) {
                     world.destroyBody(b);
                 }
             }
 
             if ((b.getUserData() instanceof FruitModel)) {
                 FruitModel f = (FruitModel) b.getUserData();
+
                 if (!(f.isThrowned())) {
                     bodyMove(b);
                     f.setThrowned();
@@ -184,7 +175,8 @@ public class GameController implements ContactListener {
                 ((EntityModel) b.getUserData()).setRotation(b.getAngle());
 
                 if (f.getY() < -5) {
-                    GameModel.getInstance().deleteLife();
+                    if (!(f.getFruit() == EntityView.Fruits.BOMB || f.getFruit() == EntityView.Fruits.SPECIAL))
+                        GameModel.getInstance().deleteLife();
                     world.destroyBody(b);
                 }
 
@@ -248,7 +240,8 @@ public class GameController implements ContactListener {
         return this.world;
     }
 
-    public void dispose(){
-        world.dispose();
+    public void dispose() {
+
+        instance = null;
     }
 }

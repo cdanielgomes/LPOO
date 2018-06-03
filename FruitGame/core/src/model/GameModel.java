@@ -47,9 +47,9 @@ public class GameModel {
     private List<CutFruitModel> cutModels = new ArrayList<CutFruitModel>();
     private List<Life> life = new ArrayList<Life>();
 
-    private final LimitModel top;
-    private final LimitModel left;
-    private final LimitModel right;
+    private LimitModel top;
+    private LimitModel left;
+    private LimitModel right;
 
     /**
      * Returns a singleton instance of the game model
@@ -195,10 +195,13 @@ public class GameModel {
     }
 
     public void resetArrays() {
-        fruitModels.clear();
+      instance = null;
+       /* fruitModels.clear();
         cutModels.clear();
         life.clear();
-    }
+        createLife();
+        createFruits();
+*/    }
 }
 
 

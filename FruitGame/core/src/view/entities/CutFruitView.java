@@ -33,6 +33,7 @@ public class CutFruitView extends EntityView {
      */
     @Override
     public Sprite createSprite(MyFruitGame game) {
+
         Texture texture;
         switch (this.fruits) {
             case PLUM:
@@ -82,12 +83,21 @@ public class CutFruitView extends EntityView {
                     texture = game.getAssetManager().get("half2_orange.png", Texture.class);
                 break;
 
+           case SPECIAL:
+            if (half)
+                texture = game.getAssetManager().get("half1_special.png", Texture.class);
+            else
+                texture = game.getAssetManager().get("half2_special.png", Texture.class);
+            break;
+
             default:
                 if (half)
                     texture = game.getAssetManager().get("half1_watermelon.png", Texture.class);
                 else
                     texture = game.getAssetManager().get("half2_watermelon.png", Texture.class);
                 break;
+
+
         }
 
 

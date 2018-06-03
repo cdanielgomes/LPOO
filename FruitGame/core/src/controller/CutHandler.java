@@ -56,7 +56,7 @@ public class CutHandler extends InputAdapter {
 
         inputPoints.clear();
 
-        startingPoint = new Vector2( screenX ,   Gdx.graphics.getHeight() - screenY);
+        startingPoint = new Vector2( screenX , Gdx.graphics.getHeight() - screenY);
 
         inputPoints.insert(startingPoint);
 

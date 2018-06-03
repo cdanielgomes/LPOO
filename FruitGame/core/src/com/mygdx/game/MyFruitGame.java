@@ -23,6 +23,7 @@ public class MyFruitGame extends Game {
 	private SpriteBatch batch;
 	private AssetManager assetManager;
 	private GameView gameView;
+	private MainMenuScreen mainMenuScreen;
 
 
 	
@@ -35,6 +36,7 @@ public class MyFruitGame extends Game {
 		batch = new SpriteBatch();
 		assetManager = new AssetManager();
 		gameView = new GameView(this);
+		mainMenuScreen = new MainMenuScreen(this);
 		startGame();
 	}
 
@@ -42,7 +44,7 @@ public class MyFruitGame extends Game {
      * Starts the game.
      */
     private void startGame() {
-        setScreen(new GameView(this));
+        setScreen(mainMenuScreen);
     }
 
 	@Override
@@ -74,7 +76,7 @@ public class MyFruitGame extends Game {
 	public void changeScreen(Menus screen){
 		switch(screen){
 			case MAIN:
-				this.setScreen( new MainMenuScreen(this));
+				this.setScreen(new MainMenuScreen(this));
 				break;
 
 			case PREFERENCES:
