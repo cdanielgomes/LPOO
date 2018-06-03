@@ -8,6 +8,7 @@ Instalar a APK
 
 ## UML
 
+![alt tag](https://github.com/DanielGanso/LPOO1718_T3_G10/edit/finalRealese/-UML-/UMLdiagram.png "UML")
 
 ## Design Patterns
 
