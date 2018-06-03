@@ -27,3 +27,14 @@ Instalar a APK
 
 
 ## Manual do Utilizador
+![alt tag](https://github.com/DanielGanso/LPOO1718_T3_G10/blob/finalRealese/menu.png "main menu")
+
+No menu de utilizador tem o botão NEW GAME , PREFERENCES e EXIT. O exit serve, tal como ele diz, para sair do jogo. O NEWGAME inicia um novo jogo. O Preferences dá para ativar ou desligar a musica de fundo e o efeito sonoro do cutter
+
+![alt tag](https://github.com/DanielGanso/LPOO1718_T3_G10/blob/finalRealese/foto1.png "jogo")
+
+O objetivo do jogo consiste em cortar o maior numero possivel de frutas. Ao cortar a fruta o score é aumentado. Depois existem bombas que aparecem com a mesma probabilidade que qualquer tipo de fruta. Caso a bomba seja cortada o jogador perde automáticamente. Por último existe uma fruta especial que quando é cortada o jogador tem 3 segundos para abanar o telémovel o mais rápido possível e quanto mais abanar mais pontos o jogador conseguirá.
+
+![alt tag](https://github.com/DanielGanso/LPOO1718_T3_G10/blob/finalRealese/lose.png "main menu")
+
+Quando o jogador perde o score é apresentado no ecrã e tem a opção de voltar para o menu principal ou sair do jogo.
