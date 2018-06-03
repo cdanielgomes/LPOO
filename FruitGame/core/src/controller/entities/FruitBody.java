@@ -38,8 +38,9 @@ public class FruitBody extends EntityBody {
                     break;
                 case BOMB:
                     createFixture(body, 2, 1f);
-                    default:
-                        break;
+                case SPECIAL:
+                    createFixture(body, 2, 1f);
+                    break;
 
             }
         }

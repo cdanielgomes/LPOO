@@ -94,6 +94,10 @@ public class GameModel {
 
     public EntityView.Fruits type() {
 
+        if (rand.nextInt(40) == 20)
+            return SPECIAL;
+
+
         switch (rand.nextInt(9)) {
             case 0:
                 return WATERMELON;
@@ -110,7 +114,6 @@ public class GameModel {
 
             case 4:
                 return PEACH;
-
             case 6:
                 return PLUM;
             case 7:
@@ -118,9 +121,6 @@ public class GameModel {
             case 8:
                 return STRAW;
         }
-
-        if (rand.nextInt(1000) == 20)
-            return SPECIAL;
 
         return PLUM;
 

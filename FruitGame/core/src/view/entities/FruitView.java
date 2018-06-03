@@ -37,7 +37,7 @@ public class FruitView extends EntityView {
      */
     @Override
     public Sprite createSprite(MyFruitGame game) {
-        switch(this.fruits){
+        switch (this.fruits) {
             case PLUM:
                 texture = game.getAssetManager().get("plum.png", Texture.class);
                 break;
@@ -55,7 +55,7 @@ public class FruitView extends EntityView {
 
             case STRAW:
                 texture = game.getAssetManager().get("strawberry.png", Texture.class);
-               break;
+                break;
 
             case BANANA:
                 texture = game.getAssetManager().get("banana.png", Texture.class);
@@ -67,15 +67,16 @@ public class FruitView extends EntityView {
 
             case WATERMELON:
                 texture = game.getAssetManager().get("watermelon.png", Texture.class);
-               break;
+                break;
             case BOMB:
                 texture = game.getAssetManager().get("bomb.png", Texture.class);
-
+                break;
             case SPECIAL:
                 texture = game.getAssetManager().get("special.png", Texture.class);
+                break;
         }
 
-        return  new Sprite(texture, texture.getWidth(), texture.getHeight());
+        return new Sprite(texture, texture.getWidth(), texture.getHeight());
 
     }
 }

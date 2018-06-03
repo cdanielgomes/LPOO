@@ -41,7 +41,7 @@ public class MyFruitGame extends Game {
      * Starts the game.
      */
     private void startGame() {
-        setScreen(new MainMenuScreen(this));
+        setScreen(new GameView(this));
     }
 
 	@Override

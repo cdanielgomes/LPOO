@@ -167,7 +167,7 @@ public class GameController implements ContactListener {
                 ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
                 ((EntityModel) b.getUserData()).setRotation(b.getAngle());
 
-                if (((CutFruitModel)b.getUserData()).getY() < -50) {
+                if (((CutFruitModel)b.getUserData()).getY() < -20) {
                     world.destroyBody(b);
                 }
             }
@@ -182,7 +182,7 @@ public class GameController implements ContactListener {
                 ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
                 ((EntityModel) b.getUserData()).setRotation(b.getAngle());
 
-                if (f.getY() < -50) {
+                if (f.getY() < -20) {
                     GameModel.getInstance().deleteLife();
                     world.destroyBody(b);
                 }

@@ -34,7 +34,9 @@ import view.entities.SwipeTriangleStrip;
 
 public class GameView extends ScreenAdapter {
 
+    static int score = 0;
 
+    private boolean special = false;
     private final MyFruitGame game;
 
     /**
@@ -66,7 +68,7 @@ public class GameView extends ScreenAdapter {
     private CutHandler cut;
     private SwipeTriangleStrip swipeTS;
     ShapeRenderer shapes;
-
+    float delta = 0;
 
     Texture tex;
 
@@ -148,20 +150,29 @@ public class GameView extends ScreenAdapter {
     @Override
     public void render(float delta) {
 
+            game.getBatch().begin();
+            drawBackground();
+            drawEntities();
+            DrawLife();
+            game.getBatch().setProjectionMatrix(camera.combined);
 
-        game.getBatch().begin();
-        drawBackground();
-        drawEntities();
-        DrawLife();
-        game.getBatch().setProjectionMatrix(camera.combined);
-
-        SwipeRender(camera);
+            SwipeRender(camera);
 
 
-        game.getBatch().end();
+            game.getBatch().end();
 
-        GameController.getInstance().update(delta);
+        if(special) {
+            this.delta += delta;
 
+            float accelerationX = Gdx.input.getAccelerometerX();
+            score += Math.abs(accelerationX) * 0.1;
+
+            if(this.delta >= 3){
+                special = false;
+                this.delta = 0;
+            }
+        }
+        else GameController.getInstance().update(delta);
 
         if (DEBUG_PHYSICS) {
             debugCamera = camera.combined.cpy();
@@ -296,7 +307,9 @@ public class GameView extends ScreenAdapter {
                         //show score and back to the main menu
 
                     }
-
+                    if (v.getFruit() == EntityView.Fruits.SPECIAL) {
+                        special = true;
+                    }
                     ((FruitModel) fruit.getUserData()).setCut(true);
                     GameModel.getInstance().addCutFruit(new CutFruitModel(true, (v.getX() - 2) / PPM, v.getY() / PPM, v.getRotation(), v.getFruit()),
                             new CutFruitModel(false, (2 + v.getX()) / PPM, v.getY() / PPM, v.getRotation(), v.getFruit()));
