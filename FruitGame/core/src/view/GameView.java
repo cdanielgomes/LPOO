@@ -6,6 +6,9 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -14,8 +17,15 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyFruitGame;
+import com.sun.corba.se.impl.resolver.FileResolverImpl;
 
 import java.util.List;
 
@@ -70,6 +80,17 @@ public class GameView extends ScreenAdapter {
     ShapeRenderer shapes;
     float delta = 0;
 
+    //score variables
+    Stage stage;
+    FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("myfont.ttf"));
+    BitmapFont ScoreFont;
+    public Integer scoreValue = 0;
+
+    private String yourScoreName = "0";
+    BitmapFont yourBitmapFontName;
+    //
+
+
     Texture tex;
 
 
@@ -79,6 +100,10 @@ public class GameView extends ScreenAdapter {
         loadAssets();
         CreateSwipe();
         camera = createCamera();
+
+
+
+        createScore();
 
     }
 
@@ -150,13 +175,19 @@ public class GameView extends ScreenAdapter {
     @Override
     public void render(float delta) {
 
-            game.getBatch().begin();
-            drawBackground();
-            drawEntities();
-            DrawLife();
-            game.getBatch().setProjectionMatrix(camera.combined);
+        if (GameModel.getInstance().getLife().isEmpty()){
+            game.changeScreen(MyFruitGame.Menus.ENDGAME);
+        }
 
-            SwipeRender(camera);
+        game.getBatch().begin();
+
+        drawBackground();
+        drawEntities();
+ ;
+        yourBitmapFontName.draw(game.getBatch(), yourScoreName, 180, Gdx.graphics.getHeight() - 10);
+
+        DrawLife();
+        game.getBatch().setProjectionMatrix(camera.combined);
 
 
             game.getBatch().end();
@@ -167,12 +198,7 @@ public class GameView extends ScreenAdapter {
             float accelerationX = Gdx.input.getAccelerometerX();
             score += Math.abs(accelerationX) * 0.1;
 
-            if(this.delta >= 3){
-                special = false;
-                this.delta = 0;
-            }
-        }
-        else GameController.getInstance().update(delta);
+        stage.draw();
 
         if (DEBUG_PHYSICS) {
             debugCamera = camera.combined.cpy();
@@ -284,15 +310,15 @@ public class GameView extends ScreenAdapter {
         Array<Fixture> fixtures;
         float radius;
 
-
         if (swipeTS.getTriangleStrip().size < 2)
             return;
 
-        Vector2 v1 = swipeTS.getTriangleStrip().get(0);
-        Vector2 v2 = swipeTS.getTriangleStrip().get(1);
+        Vector2 v1 = swipeTS.getTriangleStrip().get(0);  // first point of swipe
+        Vector2 v2 = swipeTS.getTriangleStrip().get(1);  // second point of swipe
 
 
         for (Body fruit : bodies) {
+
 
 
             if (fruit.getUserData() instanceof FruitModel) {
@@ -311,8 +337,13 @@ public class GameView extends ScreenAdapter {
                         special = true;
                     }
                     ((FruitModel) fruit.getUserData()).setCut(true);
-                    GameModel.getInstance().addCutFruit(new CutFruitModel(true, (v.getX() - 2) / PPM, v.getY() / PPM, v.getRotation(), v.getFruit()),
-                            new CutFruitModel(false, (2 + v.getX()) / PPM, v.getY() / PPM, v.getRotation(), v.getFruit()));
+                    GameModel.getInstance().addCutFruit(new CutFruitModel(true,(v.getX() - 2)/PPM, v.getY()/PPM, v.getRotation(), v.getFruit()),
+                            new CutFruitModel(false,(2 + v.getX())/PPM , v.getY()/PPM, v.getRotation(), v.getFruit()));
+                    if (scoreValue == 0){
+                        yourScoreName = "";
+                    }
+                    scoreValue++;
+                    yourScoreName = scoreValue.toString();
 
 
                 }
@@ -328,13 +359,37 @@ public class GameView extends ScreenAdapter {
         return dx * dx + dy * dy;
     }
 
-    public boolean Cut(Vector2 v1, Vector2 v2, Body b, float r) {
+    public boolean Cut(Vector2 v1 , Vector2 v2 , Body b , float r){
 
         if ((distSq(v1, b.getWorldCenter()) < (r * r)) && (distSq(v2, b.getWorldCenter()) < (r * r))) {
             return true;
         }
 
         return false;
+    }
+
+    public void createScore(){
+
+        stage = new Stage(new ScreenViewport());
+
+        FreeTypeFontGenerator.FreeTypeFontParameter title = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        title.size = 50;
+        title.shadowColor = Color.BLUE;
+        title.shadowOffsetY = 3;
+        title.shadowOffsetX = 3;
+
+        ScoreFont = generator.generateFont(title);
+        yourBitmapFontName = generator.generateFont(title);
+
+
+    }
+
+    @Override
+    public void show() {
+        Label scoreB =  new Label("SCORE : " , new Label.LabelStyle(ScoreFont, Color.SKY));
+        scoreB.setPosition(0, Gdx.graphics.getHeight() - scoreB.getHeight() );
+        stage.addActor(scoreB);
+
     }
 }
 

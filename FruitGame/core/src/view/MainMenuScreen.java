@@ -22,6 +22,7 @@ import com.mygdx.game.MyFruitGame;
 
 
 public class MainMenuScreen implements Screen {
+
     private SpriteBatch batch;
     private final MyFruitGame game;
     private Stage stage;

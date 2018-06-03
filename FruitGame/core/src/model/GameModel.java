@@ -11,6 +11,7 @@ import model.entities.CutFruitModel;
 import model.entities.FruitModel;
 import model.entities.Life;
 import model.entities.LimitModel;
+import view.GameView;
 import view.entities.EntityView;
 
 import java.util.Random;
@@ -33,7 +34,7 @@ import static view.entities.EntityView.Fruits.WATERMELON;
 
 public class GameModel {
 
-    private int MAX_FRUITS = 4;
+    private int MAX_FRUITS = 2;
     private int MAX_LIFE = 5;
 
     Random rand = new Random();
@@ -190,7 +191,6 @@ public class GameModel {
     }
 
     public boolean gameOver() {
-
         return life.size() == 0;
     }
 

@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.MyFruitGame;
 
 
 import java.util.List;
@@ -182,7 +183,7 @@ public class GameController implements ContactListener {
                 ((EntityModel) b.getUserData()).setPosition(b.getPosition().x, b.getPosition().y);
                 ((EntityModel) b.getUserData()).setRotation(b.getAngle());
 
-                if (f.getY() < -20) {
+                if (f.getY() < -5) {
                     GameModel.getInstance().deleteLife();
                     world.destroyBody(b);
                 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.Game;
 import controller.CutHandler;
 import model.GameModel;
 import view.GameView;
+import view.LoseView;
 import view.MainMenuScreen;
 import view.SettingsMenu;
 
@@ -75,15 +76,17 @@ public class MyFruitGame extends Game {
 			case MAIN:
 				this.setScreen( new MainMenuScreen(this));
 				break;
-			case PREFERENCES:
 
+			case PREFERENCES:
 				this.setScreen(new SettingsMenu(this));
 				break;
-			case GAME:
-			this.setScreen(new GameView(this));
-				break;
-			case ENDGAME:
 
+			case GAME:
+				this.setScreen(new GameView(this));
+				break;
+
+			case ENDGAME:
+				this.setScreen(new LoseView(this));
 				break;
 		}
 	}
