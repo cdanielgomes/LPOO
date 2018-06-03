@@ -2,6 +2,7 @@ package view;
 
 
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -24,8 +25,11 @@ import controller.GameController;
 import model.GameModel;
 import model.entities.CutFruitModel;
 import model.entities.FruitModel;
+import model.entities.Life;
 import view.entities.CutFruitView;
+import view.entities.EntityView;
 import view.entities.FruitView;
+import view.entities.LifeView;
 import view.entities.SwipeTriangleStrip;
 
 public class GameView extends ScreenAdapter {
@@ -110,6 +114,8 @@ public class GameView extends ScreenAdapter {
         this.game.getAssetManager().load("half1_plum.png", Texture.class);
         this.game.getAssetManager().load("half2_plum.png", Texture.class);
         this.game.getAssetManager().load("bomb.png", Texture.class);
+        this.game.getAssetManager().load("special.png", Texture.class);
+        this.game.getAssetManager().load("life.png", Texture.class);
 
         this.game.getAssetManager().finishLoading();
     }
@@ -146,7 +152,7 @@ public class GameView extends ScreenAdapter {
         game.getBatch().begin();
         drawBackground();
         drawEntities();
-
+        DrawLife();
         game.getBatch().setProjectionMatrix(camera.combined);
 
         SwipeRender(camera);
@@ -165,6 +171,17 @@ public class GameView extends ScreenAdapter {
 
 
     }
+
+    private void DrawLife() {
+        List<Life> l = GameModel.getInstance().getLife();
+
+        for (Life life : l) {
+            LifeView view = new LifeView(this.game);
+            view.update(life);
+            view.draw(game.getBatch());
+        }
+    }
+
 
     /**
      * How much meters does a pixel represent.
@@ -273,11 +290,16 @@ public class GameView extends ScreenAdapter {
 
                 if (Cut(v1, v2, fruit, radius)) {
                     FruitModel v = ((FruitModel) fruit.getUserData());
-                   // if(v.getFruit() == EntityView.Fruits.BOMB)
-                        //ENDGAME
+                    if (v.getFruit() == EntityView.Fruits.BOMB) {
+                        GameController.getInstance().dispose();
+                        GameModel.getInstance().resetArrays();
+                        //show score and back to the main menu
+
+                    }
+
                     ((FruitModel) fruit.getUserData()).setCut(true);
-                    GameModel.getInstance().addCutFruit(new CutFruitModel(true,(v.getX() - 2)/PPM, v.getY()/PPM, v.getRotation(), v.getFruit()),
-                            new CutFruitModel(false,(2 + v.getX())/PPM , v.getY()/PPM, v.getRotation(), v.getFruit()));
+                    GameModel.getInstance().addCutFruit(new CutFruitModel(true, (v.getX() - 2) / PPM, v.getY() / PPM, v.getRotation(), v.getFruit()),
+                            new CutFruitModel(false, (2 + v.getX()) / PPM, v.getY() / PPM, v.getRotation(), v.getFruit()));
 
 
                 }

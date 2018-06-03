@@ -23,7 +23,7 @@ import static view.GameView.PPM;
 public abstract class EntityView {
 
     public enum Fruits{
-        WATERMELON, BANANA, LEMON, ORANGE, PEACH, PLUM, APPLE, STRAW, BOMB
+        WATERMELON, BANANA, LEMON, ORANGE, PEACH, PLUM, APPLE, STRAW, BOMB, SPECIAL
     }
 
         /**

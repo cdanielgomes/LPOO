@@ -71,6 +71,8 @@ public class FruitView extends EntityView {
             case BOMB:
                 texture = game.getAssetManager().get("bomb.png", Texture.class);
 
+            case SPECIAL:
+                texture = game.getAssetManager().get("special.png", Texture.class);
         }
 
         return  new Sprite(texture, texture.getWidth(), texture.getHeight());

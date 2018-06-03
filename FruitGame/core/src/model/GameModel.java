@@ -9,9 +9,13 @@ import java.util.List;
 
 import model.entities.CutFruitModel;
 import model.entities.FruitModel;
+import model.entities.Life;
 import model.entities.LimitModel;
 import view.entities.EntityView;
+
 import java.util.Random;
+
+import static view.GameView.PPM;
 import static view.entities.EntityView.Fruits.APPLE;
 import static view.entities.EntityView.Fruits.BANANA;
 import static view.entities.EntityView.Fruits.BOMB;
@@ -19,6 +23,8 @@ import static view.entities.EntityView.Fruits.LEMON;
 import static view.entities.EntityView.Fruits.ORANGE;
 import static view.entities.EntityView.Fruits.PEACH;
 import static view.entities.EntityView.Fruits.PLUM;
+import static view.entities.EntityView.Fruits.SPECIAL;
+import static view.entities.EntityView.Fruits.STRAW;
 import static view.entities.EntityView.Fruits.WATERMELON;
 
 /**
@@ -28,7 +34,7 @@ import static view.entities.EntityView.Fruits.WATERMELON;
 public class GameModel {
 
     private int MAX_FRUITS = 4;
-
+    private int MAX_LIFE = 5;
 
     Random rand = new Random();
     /**
@@ -38,6 +44,7 @@ public class GameModel {
 
     private List<FruitModel> fruitModels = new ArrayList<FruitModel>();
     private List<CutFruitModel> cutModels = new ArrayList<CutFruitModel>();
+    private List<Life> life = new ArrayList<Life>();
 
     private final LimitModel top;
     private final LimitModel left;
@@ -62,6 +69,16 @@ public class GameModel {
         right = new LimitModel(Gdx.graphics.getWidth(), -5, 0);
 
         createFruits();
+        createLife();
+
+    }
+
+    private void createLife() {
+        Life first = new Life(Gdx.graphics.getWidth() - 10, Gdx.graphics.getHeight() - 10, 0, 0);
+        life.add(first);
+        for (int i = 1; i < MAX_LIFE; i++) {
+            life.add(new Life((Gdx.graphics.getWidth() - 30 * (i + 1)) * PPM, (Gdx.graphics.getHeight() - 30) * PPM, 0, i));
+        }
 
     }
 
@@ -77,7 +94,7 @@ public class GameModel {
 
     public EntityView.Fruits type() {
 
-        switch (rand.nextInt(8)) {
+        switch (rand.nextInt(9)) {
             case 0:
                 return WATERMELON;
             case 1:
@@ -98,9 +115,15 @@ public class GameModel {
                 return PLUM;
             case 7:
                 return BOMB;
-
+            case 8:
+                return STRAW;
         }
-        return EntityView.Fruits.STRAW;
+
+        if (rand.nextInt(1000) == 20)
+            return SPECIAL;
+
+        return PLUM;
+
     }
 
 
@@ -155,6 +178,26 @@ public class GameModel {
                 iterator.remove();
             }
         }
+    }
+
+    public List<Life> getLife() {
+        return life;
+    }
+
+    public void deleteLife() {
+        if (!life.isEmpty())
+            life.remove(life.size() - 1);
+    }
+
+    public boolean gameOver() {
+
+        return life.size() == 0;
+    }
+
+    public void resetArrays() {
+        fruitModels.clear();
+        cutModels.clear();
+        life.clear();
     }
 }
 

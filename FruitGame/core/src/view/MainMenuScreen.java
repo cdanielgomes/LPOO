@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -23,29 +24,31 @@ import com.mygdx.game.MyFruitGame;
 public class MainMenuScreen implements Screen {
     private SpriteBatch batch;
     private final MyFruitGame game;
-    Stage stage;
-    BitmapFont font12;
-    TextButton.TextButtonStyle style;
-    FreeTypeFontGenerator generator;
-    TextButton.TextButtonStyle Title;
-    BitmapFont TitleFont;
-    Music music;
-    public MainMenuScreen(MyFruitGame game){
-       this.game = game;
-       this.batch = new SpriteBatch();
-       this.game.getAssetManager().load("menubackground.jpg", Texture.class);
-        this.game.getAssetManager().load("music.mp3", Music.class);
+    private Stage stage;
+    private BitmapFont font12;
+    private TextButton.TextButtonStyle style;
+    private FreeTypeFontGenerator generator;
+    private TextButton.TextButtonStyle Title;
+    private BitmapFont TitleFont;
+    public Music music;
+
+    public MainMenuScreen(MyFruitGame game) {
+        this.game = game;
+        this.batch = new SpriteBatch();
+        this.game.getAssetManager().load("menubackground.jpg", Texture.class);
+        this.game.getAssetManager().load("sound.mp3", Sound.class);
+
         this.music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
-        stage = new Stage (new ScreenViewport());
+        stage = new Stage(new ScreenViewport());
         Gdx.input.setInputProcessor(this.stage);
         generator = new FreeTypeFontGenerator(Gdx.files.internal("myfont.ttf"));
-        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = 75;
         parameter.color = Color.WHITE;
         parameter.shadowColor = Color.CHARTREUSE;
         parameter.shadowOffsetX = 3;
         parameter.shadowOffsetY = 3;
-        FreeTypeFontGenerator.FreeTypeFontParameter title = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        FreeTypeFontParameter title = new FreeTypeFontParameter();
         title.size = 150;
         title.shadowColor = Color.BLUE;
         title.shadowOffsetY = 3;
@@ -61,21 +64,20 @@ public class MainMenuScreen implements Screen {
     }
 
 
-
     @Override
     public void show() {
         //create buttons
         TextButton newGame = new TextButton("New Game", style);
         TextButton preferences = new TextButton("Preferences", style);
         TextButton exit = new TextButton("Exit", style);
-        Label title  = new Label("FRUiT GAME", new Label.LabelStyle(TitleFont, Color.SKY));
-        newGame.setPosition(Gdx.graphics.getWidth()/10, Gdx.graphics.getHeight()/5);
+        Label title = new Label("FRUiT GAME", new Label.LabelStyle(TitleFont, Color.SKY));
+        newGame.setPosition(Gdx.graphics.getWidth() / 10, Gdx.graphics.getHeight() / 5);
         // create button listeners
-        preferences.setPosition(newGame.getX() + newGame.getWidth() +34, newGame.getY());
+        preferences.setPosition(newGame.getX() + newGame.getWidth() + 34, newGame.getY());
         exit.setPosition(preferences.getX() + preferences.getWidth() + 34, preferences.getY());
 
 
-        title.setPosition(Gdx.graphics.getWidth()/2 -title.getWidth()/2, Gdx.graphics.getHeight() - title.getHeight() - 30);
+        title.setPosition(Gdx.graphics.getWidth() / 2 - title.getWidth() / 2, Gdx.graphics.getHeight() - title.getHeight() - 30);
 
         exit.addListener(new ClickListener() {
             @Override
@@ -95,7 +97,7 @@ public class MainMenuScreen implements Screen {
 
         preferences.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y)  {
+            public void clicked(InputEvent event, float x, float y) {
                 game.changeScreen(MyFruitGame.Menus.PREFERENCES);
             }
         });
@@ -105,7 +107,6 @@ public class MainMenuScreen implements Screen {
         stage.addActor(exit);
         stage.addActor(preferences);
         stage.addActor(title);
-
 
 
     }
@@ -172,10 +173,10 @@ public class MainMenuScreen implements Screen {
         generator.dispose();
     }
 
-    public void drawBackground(){
+    public void drawBackground() {
 
         Texture background = new Texture("menubackground.jpg");
-        batch.draw(background, 0, 0, Gdx.graphics.getWidth() , Gdx.graphics.getHeight());
+        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
     }
 

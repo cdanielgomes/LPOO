@@ -7,10 +7,11 @@ import controller.CutHandler;
 import model.GameModel;
 import view.GameView;
 import view.MainMenuScreen;
-
+import view.SettingsMenu;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
@@ -26,6 +27,10 @@ public class MyFruitGame extends Game {
 	
 	@Override
 	public void create () {
+        boolean available = Gdx.input.isPeripheralAvailable(Input.Peripheral.Accelerometer);
+		if (!available){
+            Gdx.app.exit();
+        }
 		batch = new SpriteBatch();
 		assetManager = new AssetManager();
 		gameView = new GameView(this);
@@ -71,15 +76,14 @@ public class MyFruitGame extends Game {
 				this.setScreen( new MainMenuScreen(this));
 				break;
 			case PREFERENCES:
-			//	if(preferencesScreen == null) preferencesScreen = new PreferencesScreen();
-			//	this.setScreen(preferencesScreen);
+
+				this.setScreen(new SettingsMenu(this));
 				break;
 			case GAME:
 			this.setScreen(new GameView(this));
 				break;
 			case ENDGAME:
-			//	if(endScreen == null) endScreen = new EndScreen();
-			//	this.setScreen(endScreen);
+
 				break;
 		}
 	}

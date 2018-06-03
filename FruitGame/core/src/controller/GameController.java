@@ -119,7 +119,7 @@ public class GameController implements ContactListener {
 
 
       //  y = random.nextInt(60 - 30) + 30;
-        y =30 ;
+        y = 30 ;
 
 
         return new Vector2(x, y);
@@ -183,6 +183,7 @@ public class GameController implements ContactListener {
                 ((EntityModel) b.getUserData()).setRotation(b.getAngle());
 
                 if (f.getY() < -50) {
+                    GameModel.getInstance().deleteLife();
                     world.destroyBody(b);
                 }
 
@@ -202,9 +203,6 @@ public class GameController implements ContactListener {
         List<CutFruitModel> kapa = GameModel.getInstance().getCutFruits();
 
         for (CutFruitModel fruits : kapa) {
-
-            System.out.println("X = " + fruits.getX());
-            System.out.println("Y = " + fruits.getY());
 
             new CutFruitBody(world, fruits, b.getFixtureList().get(0).getShape().getRadius(), b.getFixtureList().get(0).getDensity());
             new CutFruitBody(world, fruits, b.getFixtureList().get(0).getShape().getRadius(), b.getFixtureList().get(0).getDensity());
@@ -247,5 +245,9 @@ public class GameController implements ContactListener {
 
     public World getWorld() {
         return this.world;
+    }
+
+    public void dispose(){
+        world.dispose();
     }
 }
