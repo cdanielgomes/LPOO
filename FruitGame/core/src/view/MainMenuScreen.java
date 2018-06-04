@@ -23,17 +23,57 @@ import com.mygdx.game.MyFruitGame;
 
 public class MainMenuScreen implements Screen {
 
+      /**
+     * Batch instance
+     */
     private SpriteBatch batch;
+      /**
+     * Game instance
+     */
     private final MyFruitGame game;
+    /**
+     * Stage instance
+     */
     private Stage stage;
+      /**
+     * Bitmap font instance
+     *      
+     **/
     private BitmapFont font12;
+     /**
+     * Text BUtton Style
+     */
+    
     private TextButton.TextButtonStyle style;
+     /**
+     *  Free type font generator
+     */
     private FreeTypeFontGenerator generator;
+     /**
+     * Text BUtton Style
+     */
     private TextButton.TextButtonStyle Title;
+      /**
+     * Bitmap font instance
+     *      
+     **/
     private BitmapFont TitleFont;
+      /**
+     * Music instance
+     *      
+     **/
     static public Music music;
+      /**
+     * Sound effect instance
+     *      
+     **/
     static public Sound sound;
 
+      /**
+     *  Main Menu screen constructor
+     * Initialize all sprites, sounds and fonts
+     *      
+     **/
     public MainMenuScreen(MyFruitGame game) {
         this.game = game;
         this.batch = new SpriteBatch();
@@ -66,6 +106,10 @@ public class MainMenuScreen implements Screen {
 
     }
 
+      /**
+     * Create all buttons and labels
+     *      
+     **/
 
     @Override
     public void show() {
@@ -176,6 +220,10 @@ public class MainMenuScreen implements Screen {
         generator.dispose();
     }
 
+      /**
+     * Draw Background menu
+     *            
+     **/
     public void drawBackground() {
 
         Texture background = new Texture("menubackground.jpg");
@@ -183,10 +231,18 @@ public class MainMenuScreen implements Screen {
 
     }
 
+     /**
+     * 
+     * Return MUsic 
+     *  @return Music    
+     **/
     public static Music getMusic(){
         return music;
     }
-
+     /**
+     * Return sound effect
+     *  @return Sound effect    
+     **/
     public static Sound getSound(){
         return sound;
     }
