@@ -138,6 +138,11 @@ public class EntityBody {
         return body.getUserData();
     }
 
+    /**
+     * Gets the Body 
+     * 
+     * @return the body field
+     */
     public Body getBody(){
         return body;
     }

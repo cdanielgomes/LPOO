@@ -10,7 +10,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.graphics.Color;
 
-
+/**
+ *  Class used to represent the cut's view
+ */
 public class SwipeTriangleStrip {
 
     Array<Vector2> texcoord = new Array<Vector2>();
@@ -24,11 +26,18 @@ public class SwipeTriangleStrip {
     public Color color = new Color(Color.WHITE);
     ImmediateModeRenderer20 gl20;
 
+    /**
+     * Constructor
+     */
     public SwipeTriangleStrip() {
         gl20 = new ImmediateModeRenderer20(false, false, 1);
     }
 
 
+    /**
+     * Draws the cut in the viewport
+     * @param cam the game camera
+     */
 
     public void draw(Camera cam ) {
 
@@ -49,6 +58,13 @@ public class SwipeTriangleStrip {
         }
         gl20.end();
     }
+
+    /**
+     * Functions that generates the cut 
+     * @param  input InputPoints of the cut
+     * @param  mult  
+     * @return  
+     */
 
     private int generate(Array<Vector2> input, float mult) {
 
@@ -128,6 +144,10 @@ public class SwipeTriangleStrip {
         batchSize = generate(input, 1);
     }
 
+    /**
+     * Get func. for the triangleStrip
+     * @return triangleStrip field
+     */
     public Array<Vector2> getTriangleStrip (){
         return this.triangleStrip;
     }

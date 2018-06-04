@@ -5,6 +5,11 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 
 
+/**
+ * Class Resolver , implements CutResolver
+ *     Is used to create a Resolve for the Cut
+ */
+
 public class Resolver implements CutResolver{
 
     private Array<Vector2> tmp = new Array<Vector2>(Vector2.class);
@@ -12,6 +17,12 @@ public class Resolver implements CutResolver{
     public static int iterations = 5;
     public static float simplifyTolerance = 35f;
 
+    /**
+     * Resolves the old cut(group of points)
+     *   
+     * @param input  old InputPoints of the cut
+     * @param output new Resolved Points of the cut
+     */
     public void resolve(Array<Vector2> input, Array<Vector2> output) {
         output.clear();
         if (input.size<=2) { //simple copy
@@ -44,6 +55,12 @@ public class Resolver implements CutResolver{
         }
     }
 
+    /**
+     * Makes the cut smoother
+     * 
+     * @param input  old InputPoints of the Cut
+     * @param output new InputPoints of he Cut (improved)
+     */
     public static void smooth(Array<Vector2> input, Array<Vector2> output) {
         //expected size
         output.clear();
@@ -89,6 +106,13 @@ public class Resolver implements CutResolver{
         }
     }
 
+    /**
+     * Calculates the distance between points (squared)
+     * 
+     * @param  p1 point 1
+     * @param  p2 point 2
+     * @return the value of the distance
+     */
     public static float distSq(Vector2 p1, Vector2 p2) {
         float dx = p1.x - p2.x, dy = p1.y - p2.y;
         return dx * dx + dy * dy;

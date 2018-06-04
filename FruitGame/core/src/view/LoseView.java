@@ -125,7 +125,8 @@ public class LoseView implements Screen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
+        generator.dispose();
     }
 
     public void drawBackGround(){

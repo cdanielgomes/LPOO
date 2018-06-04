@@ -4,10 +4,20 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.MyFruitGame;
 
+/**
+ * Class used to represent the Life's entity view
+ * 
+ */
 public class LifeView extends EntityView {
 
 
     Texture texture;
+
+    /**
+     * Constructor
+     * @param  game current game
+     * 
+     */
 
     public LifeView(MyFruitGame game){
         super();

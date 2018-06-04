@@ -39,6 +39,11 @@ import view.entities.FruitView;
 import view.entities.LifeView;
 import view.entities.SwipeTriangleStrip;
 
+/**
+ * CLass used to represent the Game view 
+ *        extends ScreenAdapter
+ */
+
 public class GameView extends ScreenAdapter {
 
     private boolean special = false;
@@ -47,7 +52,7 @@ public class GameView extends ScreenAdapter {
     /**
      * Used to debug the position of the physics fixtures
      */
-    private static final boolean DEBUG_PHYSICS = true;
+    private static final boolean DEBUG_PHYSICS = false;
 
     /**
      * How much meters does a pixel represent.
@@ -89,6 +94,11 @@ public class GameView extends ScreenAdapter {
     Texture tex;
 
 
+    /**
+     * Constructor for GameView
+     * @param  game [description]
+     * @return      [description]
+     */
     public GameView(MyFruitGame game) {
         this.game = game;
         scoreValue = 0;
@@ -101,6 +111,9 @@ public class GameView extends ScreenAdapter {
 
     }
 
+    /**
+     * Load all the images
+     */
 
     private void loadAssets() {
 
@@ -218,7 +231,9 @@ public class GameView extends ScreenAdapter {
 
     }
 
-
+    /**
+     * Draws the Life (represented by hearts)
+     */
     private void DrawLife() {
         List<Life> l = GameModel.getInstance().getLife();
 
@@ -231,7 +246,7 @@ public class GameView extends ScreenAdapter {
 
 
     /**
-     * How much meters does a pixel represent.
+     * Draws all the fruits
      */
 
     private void drawEntities() {
@@ -272,6 +287,10 @@ public class GameView extends ScreenAdapter {
         game.getBatch().draw(background, 0, 0, camera.viewportWidth, camera.viewportHeight);
     }
 
+    /**
+     * Function used for the Cut rendering
+     * @param camera current camera of the game
+     */
 
     public void SwipeRender(OrthographicCamera camera) {
 
@@ -292,6 +311,9 @@ public class GameView extends ScreenAdapter {
 
     }
 
+    /**
+     * Creates the cut
+     */
     public void CreateSwipe() {
 
         swipeTS = new SwipeTriangleStrip();
@@ -310,6 +332,10 @@ public class GameView extends ScreenAdapter {
         Gdx.input.setInputProcessor(cut);
 
     }
+
+    /**
+     * Searches for the fruits that have been cut by the Cut
+     */
 
     private void checkForFruitsCut() {
 
@@ -373,11 +399,30 @@ public class GameView extends ScreenAdapter {
 
     }
 
+    /**
+     * Calculates the distance between 2 points (squared)
+     * @param  p1 point 1
+     * @param  p2 point2
+     * @return value of distance (squared)
+     */
+
     public static float distSq(Vector2 p1, Vector2 p2) {
         float dx = p1.x * PPM - p2.x, dy = p1.y * PPM - p2.y;
         return dx * dx + dy * dy;
     }
 
+    /**
+     * Checks if the fruit is cut,
+     * The fruit is cut if the first 2 points of the cut are inside the 
+     * area of the shape of the body 
+     *
+     * 
+     * @param  v1 First point of the cut
+     * @param  v2 Second point of the cut
+     * @param  b  body (fruit)
+     * @param  r  radius of the shape 
+     * @return true if fruit is cut , false if not
+     */
     public boolean Cut(Vector2 v1, Vector2 v2, Body b, float r) {
 
         if ((distSq(v1, b.getWorldCenter()) < (r * r)) && (distSq(v2, b.getWorldCenter()) < (r * r))) {
@@ -387,6 +432,9 @@ public class GameView extends ScreenAdapter {
         return false;
     }
 
+    /**
+     * Creates the platform to display the score in the current view
+     */
     public void createScore() {
 
         stage = new Stage(new ScreenViewport());
@@ -411,6 +459,10 @@ public class GameView extends ScreenAdapter {
 
     }
 
+    /**
+     * Get func. for scoreValue
+     * @return the scoreValue field
+     */
     static public Integer getScoreValue(){
         return scoreValue;
     }

@@ -5,8 +5,23 @@ import com.badlogic.gdx.physics.box2d.World;
 import model.entities.EntityModel;
 import model.entities.FruitModel;
 
+/**
+ *
+ *  FruitBody Body class , extends EntityBody
+ *
+ *
+ */
+
 public class FruitBody extends EntityBody {
 
+
+    /**
+     * Constructor of the class itself
+     * 
+     * @param  world the world this body lives on
+     * @param  model the model representing the body
+     * 
+     */
     public FruitBody(World world, EntityModel model ){
         super(world, model, BodyDef.BodyType.DynamicBody);
 

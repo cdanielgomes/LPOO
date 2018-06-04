@@ -6,12 +6,23 @@ import com.mygdx.game.MyFruitGame;
 
 import model.entities.CutFruitModel;
 
+/**
+ *
+ * Class used to represent the Cut fruits entity view
+ */
+
 public class CutFruitView extends EntityView {
 
     private final Fruits fruits;
     private final boolean half;
 
 
+    /**
+     * Constructor of CutFruitView
+     * @param  game current game
+     * @param  cut  model of cut
+     * 
+     */
     public CutFruitView(MyFruitGame game, CutFruitModel cut) {
         super();
         this.fruits = cut.getFruits();

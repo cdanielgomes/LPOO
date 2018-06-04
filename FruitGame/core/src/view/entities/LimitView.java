@@ -4,12 +4,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.mygdx.game.MyFruitGame;
 
+/**
+ *
+ * Class used to represent the Limit's entity view
+ */
 public class LimitView extends EntityView {
 
     Texture texture;
 
     /**
-     * Constructs a bullet view.
+     * Constructs a Limit view.
      *
      * @param game the game this view belongs to. Needed to access the
      *             asset manager to get textures.

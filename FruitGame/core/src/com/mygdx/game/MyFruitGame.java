@@ -17,15 +17,45 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.assets.AssetManager;
 
+/**
+ * The game class
+ *
+ * Takes care of the controller , model and view entities.
+ */
+
 public class MyFruitGame extends Game {
 
+
 	public enum Menus {MAIN, GAME, PREFERENCES, ENDGAME}
+
+	/**
+	 *  The batch
+	 */
 	private SpriteBatch batch;
+
+	/**
+	 *
+	 *	The assetManager field
+	 */
 	private AssetManager assetManager;
+
+	/**
+	 *
+	 *	The GameView field
+	 */
 	private GameView gameView;
+
+	/**
+	 * The MainMenuScreen field
+	 * 
+	 */
 	private MainMenuScreen mainMenuScreen;
 
 
+	/**
+	 * 
+	 * 	Creates the game
+	 */
 	
 	@Override
 	public void create () {
@@ -44,8 +74,12 @@ public class MyFruitGame extends Game {
      * Starts the game.
      */
     private void startGame() {
-        setScreen(mainMenuScreen);
+        setScreen(new MainMenuScreen(this));
     }
+
+    /**
+     * Disposes fields
+     */
 
 	@Override
 	public void dispose () {
@@ -73,6 +107,11 @@ public class MyFruitGame extends Game {
     }
 
 
+    /**
+     * 	Function that changes the screen
+     * 
+     * @param screen the screen
+     */
 	public void changeScreen(Menus screen){
 		switch(screen){
 			case MAIN:
@@ -92,6 +131,12 @@ public class MyFruitGame extends Game {
 				break;
 		}
 	}
+
+	/**
+	 *  Gets the GameView
+	 * 
+	 * @return returns the GameView field
+	 */
 
     public GameView getGameView(){return this.gameView;}
 

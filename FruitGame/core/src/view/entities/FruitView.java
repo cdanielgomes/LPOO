@@ -6,6 +6,11 @@ import com.mygdx.game.MyFruitGame;
 
 import java.nio.channels.spi.SelectorProvider;
 
+/**
+ * Class used to represent the Fruit entity view
+ * 
+ */
+
 public class FruitView extends EntityView {
 
     Texture texture;

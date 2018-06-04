@@ -11,7 +11,17 @@ import model.entities.EntityModel;
 
 import static view.GameView.PPM;
 
+/**
+ *
+ * LimitBody Body class 
+ * 
+ */
+
 public class LimitBody {
+
+    /**
+     * The Box2D body that supports this body.
+     */
     final Body body;
 
     /**

@@ -5,6 +5,11 @@ import com.badlogic.gdx.physics.box2d.World;
 
 import model.entities.EntityModel;
 
+/**
+ *
+ *  CutFruitBody Body class , extends the class EntityBody  
+ */
+
 public class CutFruitBody extends EntityBody {
     /**
      * Constructs a body representing a model in a certain world.
