@@ -3,7 +3,17 @@ package model.entities;
 import view.entities.EntityView.Fruits;
 
 public class CutFruitModel extends EntityModel {
+    
+    /**
+     * Fruit type
+     */
    Fruits fruits;
+
+   /**
+     * Boolean used to check which half 
+     * 
+     * */
+
    private final boolean i;
     /**
      * Constructs a model with a position and a rotation.
@@ -18,10 +28,17 @@ public class CutFruitModel extends EntityModel {
         this.i = i;
     }
 
+    /**
+     * Return the type of the fruit 
+     * @return type of the fruit
+     * */
     public Fruits getFruits() {
         return fruits;
     }
-
+   /**
+     * Return a boolean to choose a side of the fruit
+     * @return true for a side, fals for another
+     * */
     public boolean getHalf() {
         return i;
     }

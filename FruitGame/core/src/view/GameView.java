@@ -32,7 +32,6 @@ import model.GameModel;
 import model.entities.CutFruitModel;
 import model.entities.FruitModel;
 import model.entities.Life;
-import sun.applet.Main;
 import view.entities.CutFruitView;
 import view.entities.EntityView;
 import view.entities.FruitView;
@@ -41,13 +40,25 @@ import view.entities.SwipeTriangleStrip;
 
 public class GameView extends ScreenAdapter {
 
+    /**
+     * Tell if a special fruit was cut
+     */
+
     private boolean special = false;
+    
+    /**
+     * instance of the game
+     */
     private final MyFruitGame game;
+   /**
+     * Tell if the sound effect is assigned
+     */
+
     public boolean sound = true;
     /**
      * Used to debug the position of the physics fixtures
      */
-    private static final boolean DEBUG_PHYSICS = true;
+    private static final boolean DEBUG_PHYSICS = false;
 
     /**
      * How much meters does a pixel represent.
@@ -69,10 +80,19 @@ public class GameView extends ScreenAdapter {
      * pixels in order to show fixtures in their correct places.
      */
     private Matrix4 debugCamera;
+    /**
+     * CutHandler instance
+     */
 
     private CutHandler cut;
+    /**
+     * Tell if a special fruit was cut
+     */
+
     private SwipeTriangleStrip swipeTS;
+
     ShapeRenderer shapes;
+    
     float delta = 0;
 
     //score variables

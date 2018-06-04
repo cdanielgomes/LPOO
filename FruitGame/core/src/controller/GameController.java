@@ -41,16 +41,22 @@ public class GameController implements ContactListener {
      * Accumulator used to calculate the simulation step.
      */
     private float accumulator;
-
+     /**
+     * Gravity of the world
+     */
     private float GRAVITY = -13f;
-
+    /**
+     * Max velocity in the x-axis
+     */
     private int MAXVELOCITY = 10;
 
     /**
      * The singleton instance of this controller
      */
     private static GameController instance;
-
+ /**
+     * Variable used to calculate random values
+     */
     Random random = new Random();
 
     /**
@@ -58,6 +64,9 @@ public class GameController implements ContactListener {
      */
     private World world;
 
+    /**
+     * Game Controller constructor. Initialize the world and all bodies
+     */
 
     private GameController() {
         world = new World(new Vector2(0, GRAVITY), true);
@@ -70,6 +79,10 @@ public class GameController implements ContactListener {
 
         world.setContactListener(this);
     }
+
+    /**
+     * Create fruit bodies
+     */
 
     private void createBodies() {
         List<FruitModel> kapa = GameModel.getInstance().getFruits();
@@ -90,6 +103,14 @@ public class GameController implements ContactListener {
             instance = new GameController();
         return instance;
     }
+
+    /**
+     * 
+     * Calculate the impulse vector 
+     * 
+     * @param body Body that will gain velocity
+     * @return Vector with velocity to be applied
+     */
 
     private Vector2 impulse(Body body) {
         float x, y;
@@ -118,12 +139,22 @@ public class GameController implements ContactListener {
         return new Vector2(x, y);
     }
 
+     /**
+     * Apply a linear velocity and rotation the sliced fruit
+     * 
+     * @param body Body will gain velocity
+     */
     private void cutMove(Body body) {
         Vector2 impulse = new Vector2(0, -12);
         body.setLinearVelocity(impulse);
         body.setAngularVelocity(12);
     }
 
+    /**
+     * Apply a linear velocity to the body
+     * 
+     * @param body Body will gain velocity
+     */
     private void bodyMove(Body body) {
 
 
@@ -133,7 +164,12 @@ public class GameController implements ContactListener {
 
     }
 
-
+     /**
+     * Function that update all the bodies position in the world. Delete bodies if they are not 
+     * on the screen
+     * 
+     * @param delta time in seconds since the last render
+     */
     public void update(float delta) {
 
 
@@ -191,6 +227,11 @@ public class GameController implements ContactListener {
         createBodies();
     }
 
+    /**
+     * Create sliced fruit
+     * 
+     * @param b Body will gain velocity
+     */
     private void createCutBodies(Body b) {
 
         List<CutFruitModel> kapa = GameModel.getInstance().getCutFruits();
@@ -235,11 +276,18 @@ public class GameController implements ContactListener {
     public void postSolve(Contact contact, ContactImpulse impulse) {
 
     }
-
+     /**
+     * Return the world
+     *
+     * @return the world  
+     */
     public World getWorld() {
         return this.world;
     }
 
+    /**
+     * Null the controller instance
+     */
     public void dispose() {
 
         instance = null;
