@@ -20,14 +20,33 @@ import com.mygdx.game.MyFruitGame;
 import javax.xml.soap.Text;
 
 public class SettingsMenu implements Screen {
-
+   /**
+     * Game instance
+     */
     private MyFruitGame game;
+     /**
+     * Stage instance
+     */
     private Stage stage;
+      /**
+     * Bitmap fonts instance
+     *      
+     **/
     private BitmapFont settings, musicfont;
+      /**
+     *  Free type font generator
+     */
     private FreeTypeFontGenerator generator;
+     /**
+     * Text BUtton Style
+     */
+    
     TextButton.TextButtonStyle style;
 
-
+    /**
+     * Preferences Menu constructor. Incialize all necessary things
+     */
+    
     public SettingsMenu(MyFruitGame game) {
 
         this.game = game;
@@ -55,7 +74,8 @@ public class SettingsMenu implements Screen {
 
 
     /**
-     * Called when this screen becomes the current screen for a {@link MyFruitGame}.
+     * Called when this screen becomes the current screen
+     * Create all buttons and labels
      */
     @Override
     public void show() {
@@ -192,6 +212,10 @@ public class SettingsMenu implements Screen {
 
     }
 
+     /**
+     * Draw Preferences Menu Background
+     */
+    
     public void drawBG() {
         Texture t = game.getAssetManager().get("defeatBG.jpg", Texture.class);
         game.getBatch().draw(t, t.getWidth(), t.getHeight());

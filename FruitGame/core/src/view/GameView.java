@@ -96,8 +96,7 @@ public class GameView extends ScreenAdapter {
 
     /**
      * Constructor for GameView
-     * @param  game [description]
-     * @return      [description]
+     * @param  game Game 
      */
     public GameView(MyFruitGame game) {
         this.game = game;

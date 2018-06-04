@@ -64,7 +64,6 @@ public class CutHandler extends InputAdapter {
     /**
      * Constructor 
      * @param  maxPoints Maximum number of points of the cut
-     * @return a CutHandler
      */
 
     public CutHandler(int maxPoints){

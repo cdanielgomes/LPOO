@@ -17,15 +17,40 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyFruitGame;
 
 public class LoseView implements Screen {
-
+     /**
+     * Background texture
+     */
     private Texture background;
+    /**
+     * Game instance
+     */
     private final MyFruitGame game;
+   /**
+     * Batch instance
+     */
     private SpriteBatch batch;
+   /**
+     * Stage instance
+     */
     private Stage stage;
+    /**
+     *  Free type font generator
+     */
     private FreeTypeFontGenerator generator;
+    /**
+     * Text BUtton Style
+     */
     private TextButton.TextButtonStyle style;
+    /**
+     * Bitmap Font
+     */
     private BitmapFont font12;
 
+    /**
+     * Constructor of the loose menu
+     * 
+     * @param game Game  
+     */
     public LoseView(MyFruitGame game){
 
         this.game = game;
@@ -55,7 +80,9 @@ public class LoseView implements Screen {
 
 
 
-
+     /**
+     * Add all buttons to the stage
+     */
     @Override
     public void show() {
 
@@ -93,6 +120,11 @@ public class LoseView implements Screen {
 
     }
 
+    /**
+     * Image rendering 
+     * 
+     * @param delta Time in seconds since the last render
+     */
     @Override
     public void render(float delta) {
 
@@ -102,33 +134,48 @@ public class LoseView implements Screen {
         stage.draw();
     }
 
+
+     /**
+     * @param width
+     * @param height
+     */
     @Override
     public void resize(int width, int height) {
 
     }
-
+    /**
+     */
     @Override
     public void pause() {
 
     }
 
+     /**
+     */
     @Override
     public void resume() {
 
     }
 
+    /**
+     * Called when this screen is no longer the current screen for a
+     */
     @Override
     public void hide() {
 
     }
 
-
+ /**
+     * Called when this screen should release all resources.
+     */
     @Override
     public void dispose() {
-        stage.dispose();
-        generator.dispose();
+
     }
 
+    /**
+     * Draw background
+     */
     public void drawBackGround(){
         batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
