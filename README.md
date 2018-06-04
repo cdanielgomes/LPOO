@@ -23,6 +23,10 @@ Instalar a APK
 
 
 ## Uma Análise Global
+Quando começamos a desenvolver o projeto o nosso conhecimento de como tinhamos de desenvolver o jogo era pouquíssimo. Consequentemente não conseguimos desenvolver testes devido à utilização constante de funçoes Gdx.graphics.getWidth e Gdx.graphics.getHeight no projeto.
+Apesar do imenso tempo dado para fazer este projeto final, gerimos muito mal o nosso tempo e acabamos por ficar com pouquíssimo tempo para desenvolver o jogo. A nível de desenvolvimento a maior dificuldade que enfrentamos foi no desenvolvimento do cutter pois este tinha de fazer uma linha perfeita que seguida o input do utilizador no ecrã e uma sprite para demonstrar esta mesma linha. A falta de atenção também esteve presente na elaboração do projeto, pois foram perdidas muitas horas em erros que, no final se descobria, que era o path do ficheiro que estava incorreto.
+Outra enorme dificuldade que tivemos foi na conversão de pixeis para unidades usadas no mundo. Perdemos alguns dias neste parâmetro pois a não conversão estas unidades provocava ridicularidade no jogo.
+Apesar da não existência de testes pela razão que já foi explicada, utilizamos 2 pontos dos objetivos secundários: a física e Android.
 
 
 
